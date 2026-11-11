@@ -1,41 +1,40 @@
 {
   "general": {
-    "site_title": "757 — MUGUREL EMANUEL MANEA | Arhivă de Artă & Galerie Digitală",
-    "site_description": "Arhivă curatorială și galerie digitală premium dedicată operelor artistului Mugurel Emanuel Manea (757). Suprarealism biomecanic, totemuri criptice și asamblaje cibernetice.",
+    "site_title": "757 — MUGUREL EMANUEL MANEA | Catalog Raisonné & Arhivă de Artă",
+    "site_description": "Catalogul general raționat și arhiva operei artistului Mugurel Emanuel Manea (757). Suprarealism biomecanic, morfologii osteologice, totemuri criptice și viziuni deconstructiviste.",
     "primary_domain": "https://757.prinpreajma.ro",
     "secondary_domain": "757.originzero.art",
     "header_brand_name": "MUGUREL EMANUEL MANEA",
     "header_brand_sub": "ATELIER & ARHIVĂ CURATORIALĂ",
-    "announcement_text": "ARHIVĂ OFICIALĂ · FQDN: 757.prinpreajma.ro · Alias viitor: 757.originzero.art"
+    "announcement_text": ""
   },
   "hero": {
-    "badge": "CATALOGUL GENERAL AL OPERELOR",
-    "title": "Suprarealism Biomecanic <br>& Tensiune Deconstructivistă",
-    "lead": "O explorare riguroasă a fuziunii dintre anatomie, osatură, circuite cibernetice și scrieri criptice. 167 de opere extrase, restaurate prudent fără alterarea desenului și clasificate în cinci axe estetice fundamentale.",
+    "badge": "CATALOG GENERAL RAȚIONAT",
+    "title": "Suprarealism Biomecanic <br>& Morfologie Deconstructivistă",
+    "lead": "O investigație plastică de o intensă densitate grafică, situată la confluența dintre anatomia biologică, osatura sacră și mecanicismul post-industrial. 167 de opere catalogate și structurate în cinci axe estetice fundamentale din creația artistului Mugurel Emanuel Manea.",
     "stat_digitized": "167",
     "stat_categories": "5",
-    "stat_posts": "76",
-    "stat_cleaned": "100%"
+    "stat_posts": "Atelier",
+    "stat_cleaned": "Original"
   },
   "artist": {
     "name": "Mugurel Emanuel Manea",
     "instagram": "@mugurelemanuelmanea",
     "archive_instagram": "@bogdan_by757",
     "signature": "757",
-    "paragraph_1": "Mugurel Emanuel Manea dezvoltă un limbaj vizual de o densitate rară, centrat pe anatomia internă a tehnologiei și hibridizarea formelor organice. Lucrările sale chestionează granița dintre corpul biologic vulnerabil și armatura mecanică indestructibilă.",
-    "paragraph_2": "Semnătura recurentă 757 funcționează ca un sigiliu alchimic și tehnic, prezent în mod sistematic pe desene, pe registrele verticale și în titlurile poematice ale postărilor. Galeria digitală îi reunește creația într-un spațiu de contemplare purificat de orice element parazit de rețea socială."
+    "paragraph_1": "Mugurel Emanuel Manea profilează un univers plastic de o hipnotică rigoare, explorând dialogul ontologic dintre fragilitatea materiei organice și implacabila armătură tehnologică. Desenul său, definit printr-o măiestrie desăvârșită a hașurii polifonice și a ductului grafic incisiv, deschide carcase, vertebre și cavități craniene într-un studiu anatomic de o forță vizionară rară.",
+    "paragraph_2": "Monograma recurentă 757 transcende funcția unei simple semnături de atelier: ea acționează ca un sigiliu hieratic și cifru ontologic integrat în ritmul compozițional al fiecărei lucrări. Catalogul de față restituie acest fond artistic într-un spațiu de contemplație nobil, eliberat de orice convenție pasageră, dedicat exclusiv puterii evocatoare a formei și a liniei."
   },
   "integrity": {
-    "box1_title": "Principiul Conservării Surselor",
-    "box1_text": "Toate cele 168 de capturi originale din tmp-insta-posts/ sunt conservate nemodificate ca arhivă master read-only. Fiecare operă păstrează o legătură de trasabilitate directă către captura sursă și decupajul lateral al postării.",
-    "box2_title": "Eliminarea Elementelor Parazite",
-    "box2_text": "Săgețile de navigare în carusel și punctele de paginare Instagram din subsol au fost îndepărtate cu maximă prudență prin interpolare perimetrală a texturii din imediata vecinătate, fără a recurge la generare artificială speculativă pe compoziție.",
-    "box3_title": "Separarea Observației de Critică",
-    "box3_text": "Catalogul delimitează strict observațiile factuale verificabile (hașură, suport, pigmenți, raport de aspect) de interpretările estetice și ipotezele formulate de criticul independent."
+    "box1_title": "Fidelitatea Față de Materia Grafică",
+    "box1_text": "Fiecare operă din catalog este conservată cu respect absolut pentru fibra suportului, porozitatea hârtiei și gradienții naturali ai tușului și grafitului, excluzând orice alterare sintetică a desenului original.",
+    "box2_title": "Unitatea Ciclurilor Estetice",
+    "box2_text": "Cele 167 de opere sunt articulate pe baza afinităților morfologice din atelier: de la osteologia biomecanică la scrierea runică ermetică, compozițiile piranesiene și asamblajul tridimensional.",
+    "box3_title": "Monograma și Criptografia 757",
+    "box3_text": "Semnul 757 străbate lucrările ca o emblemă identitară și liant conceptual, legând tradiția grafismului modern de o viziune oraculară asupra hibridizării om-mașină."
   },
   "footer": {
-    "copyright": "© 2026 Mugurel Emanuel Manea (757). Proiectat și arhivat de echipa interdisciplinară AI.",
-    "tech_note": "Construit pe standarde web moderne · HTML5 semantic · Imagini WebP responsive · Zero dependențe externe."
+    "copyright": "© 2026 Mugurel Emanuel Manea (757). Toate drepturile rezervate.",
+    "tech_note": "Catalog raționat oficial conceput pentru contemplare estetică desăvârșită."
   }
 }
-

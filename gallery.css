@@ -1557,8 +1557,33 @@ a {
   font-family: var(--font-mono);
   font-size: 0.70rem;
   letter-spacing: 0.16em;
-  color: #ffffff;
+  color: var(--accent-gold);
   font-weight: 700;
+}
+
+.plaque-heading-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.plaque-category-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+}
+
+.plaque-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #f3f4f6;
+  letter-spacing: 0.02em;
+  margin: 0;
 }
 
 /* Info Sections & High Contrast Typography */
@@ -1572,7 +1597,7 @@ a {
   font-family: var(--font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.16em;
-  color: #ffffff;
+  color: #d4a359;
   text-transform: uppercase;
   font-weight: 700;
 }
@@ -1594,15 +1619,17 @@ a {
 }
 
 .info-val.medium-val {
-  color: #d1d5db;
+  color: #e5e7eb;
   font-style: italic;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
 }
 
 .info-text {
-  font-family: var(--font-sans);
-  font-size: 0.94rem;
-  line-height: 1.7;
-  color: #c5c9d6;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #e5e7eb;
   letter-spacing: 0.01em;
 }
 

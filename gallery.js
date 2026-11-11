@@ -400,23 +400,32 @@
     state.modalIndex = idx;
     const item = state.filteredItems[idx];
 
-    modalId.textContent = item.id;
-    modalTitle.textContent = item.title;
-    modalCategory.textContent = item.category_name;
-    modalCuratorial.textContent = item.curatorial_note;
-    modalCritic.textContent = item.critic_note;
-    modalMedium.textContent = item.medium_hypothesis;
-    modalStatus.textContent = item.cleaning_status === 'retouched' ? 'Restaurat Prudent (Master)' : 'Curățat (Master)';
-    modalPost.textContent = `${item.source_post_id} (${item.carousel_position}/${item.carousel_total})`;
-    modalRatio.textContent = item.aspect_ratio;
+    if (modalId) modalId.textContent = item.id;
+    if (modalTitle) modalTitle.textContent = item.title;
+    if (modalCategory) modalCategory.textContent = item.category_name;
+
+    const plaqueTitle = document.getElementById('modal-plaque-title');
+    if (plaqueTitle) plaqueTitle.textContent = item.title;
+    const plaqueWing = document.getElementById('modal-plaque-wing');
+    if (plaqueWing) plaqueWing.textContent = item.category_name;
+
+    if (modalCuratorial) {
+      modalCuratorial.textContent = item.curatorial_note || item.critic_note || '';
+    }
+    if (modalCritic) {
+      modalCritic.textContent = item.critic_note || '';
+    }
+    if (modalMedium) {
+      modalMedium.textContent = item.medium_hypothesis || 'Tehnică mixtă pe hârtie';
+    }
 
     if (modalCounterBadge) {
       modalCounterBadge.textContent = `${idx + 1} / ${state.filteredItems.length}`;
     }
 
-    modalTags.innerHTML = (item.visual_tags || []).map(t => `<span class="tag">#${t}</span>`).join('');
-    modalSourceFile.textContent = item.source_file;
-    modalSourceLink.href = `data/sidebar-crops/${item.sidebar_file}`;
+    if (modalTags) {
+      modalTags.innerHTML = (item.visual_tags || []).map(t => `<span class="tag">#${t}</span>`).join('');
+    }
 
     // Reset zoom state cleanly
     resetZoom();

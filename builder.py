@@ -173,32 +173,6 @@ def rebuild_site():
   <!-- Bleeding-Edge Ambient Magnetic Spotlight -->
   <div id="ambient-spotlight" aria-hidden="true"></div>
 
-  <!-- Top Announcement / FQDN Bar -->
-  <aside class="luxury-topbar" aria-label="Notă oficială">
-    <div class="topbar-inner">
-      <span class="topbar-tag">ARHIVĂ OFICIALĂ</span>
-      <span class="topbar-fqdn">FQDN: <a href="{prim_dom}" target="_blank" rel="noopener">{prim_dom.replace('https://', '')}</a> &middot; Alias viitor: <code>{sec_dom}</code></span>
-      <span class="topbar-status"><span class="pulse-dot"></span> {len(items)} Opere &middot; Restaurare Prudentă Activă</span>
-      <a href="/admin" class="topbar-admin-link" title="Panou de Administrare Curatorială" style="margin-left:auto; color:var(--text-primary); font-size:0.75rem; text-decoration:none; display:inline-flex; align-items:center; gap:4px; opacity:0.85;">🔒 Admin</a>
-    </div>
-  </aside>
-
-  <!-- Kinetic Infinite Marquee Ticker -->
-  <div class="kinetic-ticker" aria-hidden="true">
-    <div class="ticker-track">
-      <div class="ticker-item"><strong>757 ARCHIVE</strong> <span class="ticker-sep">//</span> MUGUREL EMANUEL MANEA</div>
-      <div class="ticker-item"><strong>167 MASTER OPERA</strong> <span class="ticker-sep">//</span> RESTAURARE PRUDENTĂ DEFINITIVĂ</div>
-      <div class="ticker-item"><strong>TENANT HD-001</strong> <span class="ticker-sep">//</span> HUNEDOARA RO</div>
-      <div class="ticker-item"><strong>5 CRITICAL WINGS</strong> <span class="ticker-sep">//</span> BIOMECHANICAL OSTEOLOGY &middot; CRYPTIC TOTEMS &middot; CYBER-SURREALISM &middot; MONUMENTAL AXIS</div>
-      <div class="ticker-item"><strong>FQDN</strong> <span class="ticker-sep">//</span> 757.PRINPREAJMA.RO &middot; 757.ORIGINZERO.ART</div>
-      <div class="ticker-item"><strong>757 ARCHIVE</strong> <span class="ticker-sep">//</span> MUGUREL EMANUEL MANEA</div>
-      <div class="ticker-item"><strong>167 MASTER OPERA</strong> <span class="ticker-sep">//</span> RESTAURARE PRUDENTĂ DEFINITIVĂ</div>
-      <div class="ticker-item"><strong>TENANT HD-001</strong> <span class="ticker-sep">//</span> HUNEDOARA RO</div>
-      <div class="ticker-item"><strong>5 CRITICAL WINGS</strong> <span class="ticker-sep">//</span> BIOMECHANICAL OSTEOLOGY &middot; CRYPTIC TOTEMS &middot; CYBER-SURREALISM &middot; MONUMENTAL AXIS</div>
-      <div class="ticker-item"><strong>FQDN</strong> <span class="ticker-sep">//</span> 757.PRINPREAJMA.RO &middot; 757.ORIGINZERO.ART</div>
-    </div>
-  </div>
-
   <!-- Main Navigation Header -->
   <header class="luxury-header" id="site-header">
     <div class="header-container">
@@ -212,9 +186,9 @@ def rebuild_site():
 
       <nav class="main-nav" aria-label="Navigare principală">
         <a href="#galerie" class="nav-item active">Colecție</a>
-        <a href="#directii" class="nav-item">Direcții Critice</a>
+        <a href="#directii" class="nav-item">Direcții Estetice</a>
         <a href="#artist" class="nav-item">Despre Artist</a>
-        <a href="#raport" class="nav-item">Raport Critic</a>
+        <a href="#raport" class="nav-item">Notă Curatorială</a>
       </nav>
 
       <div class="header-controls">
@@ -224,7 +198,7 @@ def rebuild_site():
           <span id="amb-label">SOUND: OFF</span>
         </button>
 
-        <!-- Ambience Switcher (TIP Recomandarea Echipei) -->
+        <!-- Ambience Switcher -->
         <button id="theme-toggle" class="btn-control" title="Comutare ambianță (Tasta T)" aria-label="Comutare temă">
           <span class="theme-icon icon-dark">🌘 Obsidian</span>
           <span class="theme-icon icon-light">◻ White Cube</span>
@@ -337,8 +311,8 @@ def rebuild_site():
     <!-- Active Result Count & Status -->
     <div class="gallery-feedback">
       <span id="results-count">Se afișează {len(items)} din {len(items)} de opere</span>
-      <span class="restoration-badge" title="Toate săgețile și punctele Instagram au fost eliminate în faza de curățare">
-        &check; Imagini Curățate &middot; Rezoluție Retina WebP
+      <span class="restoration-badge">
+        &check; Rezoluție Înaltă &middot; Fidelitate Originală
       </span>
     </div>
 
@@ -353,13 +327,13 @@ def rebuild_site():
     </div>
   </main>
 
-  <!-- Thematic Sections: Cele 5 Direcții Critice Detaliate -->
+  <!-- Thematic Sections: Cele 5 Direcții Estetice Detaliate -->
   <section class="section-directii" id="directii">
     <div class="section-container">
       <div class="section-header">
         <span class="section-subtitle">TAXONOMIE &amp; DIRECȚIE CURATORIALĂ</span>
         <h2 class="section-title">Cele Cinci Axe ale Universului 757</h2>
-        <p class="section-lead">Analiza criticului independent privind structura, tensiunea formei și materialitatea lucrărilor.</p>
+        <p class="section-lead">Analiză curatorială privind morfologia, tensiunea formei și materialitatea lucrărilor.</p>
       </div>
 
       <div class="directii-grid">
@@ -416,8 +390,8 @@ def rebuild_site():
   <section class="section-raport" id="raport">
     <div class="section-container">
       <div class="section-header">
-        <span class="section-subtitle">DOCUMENTAȚIE CURATORIALĂ &amp; CONTROL AL CALITĂȚII</span>
-        <h2 class="section-title">Integritatea Arhivei și Trasabilitatea Surselor</h2>
+        <span class="section-subtitle">NOTĂ CURATORIALĂ &amp; METODOLOGIE DE ATELIER</span>
+        <h2 class="section-title">Fundamentele Teoretice ale Catalogului Raisonné</h2>
       </div>
 
       <div class="raport-cards">
@@ -522,62 +496,37 @@ def rebuild_site():
             </div>
 
             <div class="plaque-top-meta">
-              <span class="plaque-stamp">OPUS 757 &middot; ARHIVĂ DE ARTĂ</span>
+              <span class="plaque-stamp">OPUS 757 &middot; CATALOG GENERAL</span>
               <span class="info-val code" id="modal-id">ART-0001</span>
             </div>
 
+            <div class="plaque-heading-group">
+              <span class="plaque-category-badge" id="modal-plaque-wing">Anatomie Biomecanică</span>
+              <h3 class="plaque-title" id="modal-plaque-title">Opus 757 — ART-0001</h3>
+            </div>
+
             <div class="info-section">
-              <span class="info-label">OBSERVAȚIE CURATORIALĂ (OBIECTIVĂ)</span>
+              <span class="info-label">TEHNICĂ &amp; SUPORT</span>
+              <span class="info-val medium-val" id="modal-medium"></span>
+            </div>
+
+            <div class="info-section">
+              <span class="info-label">COMENTARIU CURATORIAL</span>
               <p class="info-text" id="modal-curatorial"></p>
             </div>
 
             <div class="info-section">
-              <span class="info-label">ANALIZĂ CRITICĂ INDEPENDENTĂ</span>
-              <blockquote class="info-quote" id="modal-critic"></blockquote>
-            </div>
-
-            <div class="info-section">
-              <span class="info-label">IPOTEZĂ TEHNICĂ &amp; SUPORT</span>
-              <span class="info-val medium-val" id="modal-medium"></span>
-            </div>
-
-            <div class="info-grid">
-              <div class="grid-item">
-                <span class="info-label">STATUS RESTAURARE</span>
-                <span class="info-val status" id="modal-status">Curățat (Master)</span>
-              </div>
-              <div class="grid-item">
-                <span class="info-label">EVENIMENT POSTARE</span>
-                <span class="info-val" id="modal-post">POST-0001 (1/1)</span>
-              </div>
-              <div class="grid-item">
-                <span class="info-label">RAPORT ASPECT</span>
-                <span class="info-val code" id="modal-ratio">0.80</span>
-              </div>
-            </div>
-
-            <div class="info-section">
-              <span class="info-label">TAGURI VIZUALE</span>
+              <span class="info-label">MOTIVE &amp; VECTORI VIZUALI</span>
               <div class="tag-cloud" id="modal-tags"></div>
-            </div>
-
-            <div class="info-section provenance">
-              <span class="info-label">TRASABILITATE SURSĂ MASTER</span>
-              <div class="provenance-row">
-                <span class="prov-file" id="modal-source-file"></span>
-                <a href="#" target="_blank" id="modal-source-link" class="btn-prov" title="Vezi captura completă a postării Instagram cu bara laterală">
-                  Audit Captură &rarr;
-                </a>
-              </div>
             </div>
 
             <!-- Butoane Rapide Navigare Plăcuță -->
             <div class="modal-plaque-nav">
               <button id="modal-plaque-prev" class="btn-plaque-nav" title="Opera Anterioară">
-                &larr; Anterior
+                &larr; Opera Anterioară
               </button>
               <button id="modal-plaque-next" class="btn-plaque-nav" title="Opera Următoare">
-                Următor &rarr;
+                Opera Următoare &rarr;
               </button>
             </div>
           </div>
@@ -600,9 +549,9 @@ def rebuild_site():
           <h4>Navigare Arhivă</h4>
           <ul>
             <li><a href="#galerie">Colecția Completă</a></li>
-            <li><a href="#directii">Cele 5 Direcții Critice</a></li>
+            <li><a href="#directii">Cele 5 Axe Estetice</a></li>
             <li><a href="#artist">Despre Mugurel Emanuel Manea</a></li>
-            <li><a href="#raport">Integritate &amp; Metodologie</a></li>
+            <li><a href="#raport">Notă Curatorială</a></li>
           </ul>
         </div>
 
