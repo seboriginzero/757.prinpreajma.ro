@@ -38,18 +38,32 @@ Nu construiești o aplicație izolată, ci un **nod multi-tenant standardizat** 
 
 ---
 
-## 2. CELE 8 LEGI NON-NEGOCIABILE ALE PLATFORMEI
+## 2. CELE 9 LEGI NON-NEGOCIABILE ALE PLATFORMEI
 
 1. **STRICT RULE 1 — Zero Hardcodare:** Portul aplicației se citește din `process.env.PORT` (ex. default `3000` intern în container), iar URL-ul public din `process.env.NEXT_PUBLIC_SITE_URL` / `PUBLIC_URL`.
-2. **STRICT RULE 2 — GitHub-Only Sync (Zero-Local-Copy):** Livrarea codului în hosting se face **100% prin GitHub (`origin/main`)**. Zero `scp`/`rsync` de cod sursă sau build-uri.
-3. **STRICT RULE 3 — Secrete Izolate (`0600`):** Niciun secret, cheie API sau parolă SMTP/DB în cod sau în Git. Creezi doar `.env.example` în repo; valorile reale stau în `secrets/.env.<slug>` (`chmod 0600`) și se transmit exclusiv prin tunel SSH securizat.
+2. **STRICT RULE 2 — GitHub-Only Sync & HTTPS Autonomous Clone (Zero-Local-Copy):**
+   - **ESTE STRICT INTERZISĂ COPIEREA DIRECTĂ PE VM (`scp`, `rsync`, `docker cp` de cod sursă sau build-uri de pe mașina de dev).**
+   - Livrarea codului în hosting se face **100% prin GitHub (`origin/main`)**.
+   - **Pre-condiție critică:** Depozitul `seboriginzero/<slug>.prinpreajma.ro` TREBUIE creat pe GitHub (ca depozit public) ÎNAINTE de lansarea sincronizării.
+   - **Protocolul oficial de clonare pe VM:** Serverele de hosting (Hetzner / Proxmox VM1) clonează și actualizează exclusiv prin **HTTPS Public Origin** (`https://github.com/seboriginzero/<slug>.prinpreajma.ro.git`). Astfel, procesul GitOps rulează 100% autonom, fără configurare manuală de SSH Deploy Keys per tenant.
+   - Dezvoltatorul pe Mac efectuează push prin SSH (`git@github.com:seboriginzero/<slug>.prinpreajma.ro.git`), iar serverul de hosting execută `git fetch --prune origin && git reset --hard origin/main`.
+3. **STRICT RULE 3 — Secrete Izolate (`0600`):** Niciun secret, cheie API sau parolă SMTP/DB în cod sau în Git. Creezi doar `.env.example` în repo; valorile reale stau în `secrets/.env.<slug>` (`chmod 0600`) și se transmit exclusiv prin tunel SSH securizat (singura operațiune directă de transfer permisă).
 4. **STRICT RULE 4 — Înregistrare Obligatorie în Ethical Hacking:** Niciun subdomeniu nu intră în trafic live înainte de a fi adăugat în `ethicalHacking/.env` și certificat cu **`100 / 100`** la scanarea de securitate.
 5. **STRICT RULE 6 — Zero Pierderi de Date (`BKP PRIOR UPDATE`):** În `deploy-gitops.sh`, înainte de orice `git reset --hard origin/main`, migrare sau rebuild pe producție, se creează obligatoriu un backup timestampat imutabil (`.bak_<timestamp>` pentru SQLite/JSON sau `pg_dump` pentru PostgreSQL). Directorul `data/` are `chmod -R 0777` pe gazdă pentru ca userul non-root `node` (`UID 1000`) din container să nu primească niciodată `SQLITE_READONLY (1544)`.
 6. **STRICT RULE 7 — Zero Nginx Touch la Sync:** Reverse proxy-ul Nginx (pe Hetzner sau VM3) se configurează **o singură dată la provizionarea inițială**. Actualizările ulterioare de cod reconstruiesc doar containerul local.
 7. **STRICT RULE 8 — Standardul SEO Salon Sandy & Paritate 1:1 Googlebot WRS Chromium (`--dump-dom`):**
    - Sitemap curat la `/sitemap.xml` (`xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"`), cu **trailing slash obligatoriu pe rădăcină** (`https://<slug>.prinpreajma.ro/`), dată strict `YYYY-MM-DD`, zero `&` neevadat, zero `<image:image>`, zero `sitemap.xsl`.
    - **CRITIC PENTRU NEXT.JS / REACT:** Atât HTML-ul SSR, cât și DOM-ul hidratat în Headless Chromium (`self.__next_f.push` RSC Flight) **TREBUIE să emită exact 1 tag `<link rel="canonical">`** identic caracter-cu-caracter cu `<loc>` din `sitemap.xml` (cu `/` la final pe rădăcină: `https://<slug>.prinpreajma.ro/`, niciodată fără `/` și niciodată `/ro` pe `/`)! Două tag-uri canonical diferite anulează indexarea în Google!
+   - Fișierul `/robots.txt` este obligatoriu la rădăcină, indicând explicit sitemap-ul canonic.
 8. **BLUE TEAM / SECOPS HARDENING:** Container rootless (`USER node`, UID 1000), `cap_drop: [ALL]`, `security_opt: [no-new-privileges:true]`, rețea Docker bridge proprie (`<slug>-net`), dezactivare `X-Powered-By`, protecție anti-SQLi și sanitizare Zero-Trust a logurilor/inputurilor.
+9. **STRICT RULE 9 — Rigoare Lingvistică Românească & Puritate Curatorială UI (Muzeologie de Lux):**
+   - **Regula Românească „și”:** Simbolul `&` **NU există** în limba română literară. În toate titlurile, meniurile, denumirile de secțiuni/săli și textele curatoriale este OBLIGATORIE folosirea conjuncției `și`. Caracterul `&` este permis exclusiv în entități tehnice HTML standard (`&times;`, `&middot;`, `&rarr;`) sau ca operator boolean de cod (`&&`).
+   - **Zero Dubluri și Tripluri de Identificatori:** Fiecare operă/produs poartă un singur cod (`ART-XXXX`). Pe cardul de galerie pânza este 100% curată (fără etichete overlay), metadatele conțin doar categoria, iar identificatorul apare exact o singură dată ca titlu principal pe cartellino. În vizualizarea modală, identificatorul apare exclusiv pe plăcuța curatorială.
+   - **Fără Contoare Cantitative Publice:** Nicio afișare de tip "167 de opere" sau "1 / 167" către publicul larg; arta și serviciile se contemplă calitativ.
+   - **Fără Detalii Tehnice de Prelucrare:** Este interzisă afișarea de etichete tehnice precum „Curățat de interfață”, „Eveniment postare” sau „Restaurat prudent”.
+   - **Comutator Audio Minimalist:** Butonul de sunet/ambianță este un icon pur vizual (difuzor tăiat cu roșu la mute, unde sonore la activare), fără text redundant (`SOUND: OFF`).
+   - **Contrast Muzeal White Cube:** În tema deschisă (`[data-theme="light"]`), toate ramele au borduri distincte (`rgba(0,0,0,0.14)`), fundal passe-partout (`#f8fafc`) și drop shadow fin, iar textul este antracit nobil (`#0f172a` / `#334155`), garantând contrast WCAG AAA (15.5:1).
+   - **Antet Simplificat și Centrat:** Nume brand/monogramă curat în stânga, linkuri principale centrate matematic (`grid-template-columns: 1fr auto 1fr`), comenzi minimale în dreapta. Autentificarea de admin nu este semnalizată public în antet.
 
 ---
 
@@ -153,36 +167,58 @@ fi
 ```
 
 ### 4.4 Poarta 3: `deploy-gitops.sh` (`chmod 0755 deploy-gitops.sh`)
+> [!IMPORTANT]
+> **Zero-Direct-Copy Law & HTTPS GitOps:**
+> Este STRICT INTERZISĂ copierea directă a fișierelor de cod din mașina de dezvoltare pe serverul de hosting (`scp`, `rsync`, `docker cp`). Toate modificările se livrează prin `git push origin main`.
+> Serverul de hosting (Hetzner sau Proxmox VM1) clonează și actualizează repo-ul prin **HTTPS Public Origin** (`https://github.com/seboriginzero/<slug>.prinpreajma.ro.git`), permițând rularea 100% autonomă a scriptului fără probleme de chei SSH.
+
 ```bash
 #!/usr/bin/env bash
 set -euo pipefail
 
 TENANT_SLUG="<slug>"
 CONTAINER_NAME="originzero-tenant-${TENANT_SLUG}"
+TENANT_DIR="/home/antigravity/tenants/${TENANT_SLUG}"
+SOURCE_DIR="${TENANT_DIR}/source"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 
 echo "🚀 [GitOps Deploy] ${TENANT_SLUG}.prinpreajma.ro pornit la ${TIMESTAMP}..."
 
 # 1. Backup Tranzacțional Obligatoriu ÎNAINTE de update (STRICT RULE 6)
-mkdir -p data backups
-if ls data/*.db data/*.sqlite data/*.json >/dev/null 2>&1; then
-  tar -czf "backups/data_bak_${TIMESTAMP}.tar.gz" data/
-  echo "📦 Backup imutabil creat: backups/data_bak_${TIMESTAMP}.tar.gz"
+mkdir -p "${TENANT_DIR}/data" "${TENANT_DIR}/backups"
+if ls "${TENANT_DIR}/data"/*.db "${TENANT_DIR}/data"/*.sqlite "${TENANT_DIR}/data"/*.json >/dev/null 2>&1; then
+  tar -czf "${TENANT_DIR}/backups/data_bak_${TIMESTAMP}.tar.gz" -C "${TENANT_DIR}" data/
+  echo "📦 Backup imutabil creat: ${TENANT_DIR}/backups/data_bak_${TIMESTAMP}.tar.gz"
 fi
 
-# 2. Preluare cod din GitHub & Sanitizare Sitemap
-git fetch origin main
-git reset --hard origin/main
-if [[ -f /opt/originzero-gitops/enforce-sitemap-compliance.py ]]; then
-  python3 /opt/originzero-gitops/enforce-sitemap-compliance.py .
+# 2. Preluare cod din GitHub (HTTPS GitOps) & Sanitizare Sitemap
+if [[ -d "${SOURCE_DIR}/.git" ]]; then
+  cd "${SOURCE_DIR}"
+  git fetch --prune origin
+  git reset --hard origin/main
+  if [[ -f /opt/originzero-gitops/enforce-sitemap-compliance.py ]]; then
+    python3 /opt/originzero-gitops/enforce-sitemap-compliance.py .
+  fi
+  cd "${TENANT_DIR}"
+else
+  git fetch --prune origin
+  git reset --hard origin/main
+  if [[ -f /opt/originzero-gitops/enforce-sitemap-compliance.py ]]; then
+    python3 /opt/originzero-gitops/enforce-sitemap-compliance.py .
+  fi
 fi
 
 # 3. Permisiuni volum persistent pentru UID 1000 (previne SQLite error 1544)
-chmod -R 0777 data
+chmod -R 0777 "${TENANT_DIR}/data" 2>/dev/null || true
 
 # 4. Build multi-arch nativ & Recreare Atomică
-docker compose build --pull=false
-docker compose up -d --force-recreate --remove-orphans
+if [[ -d "${SOURCE_DIR}" ]]; then
+  docker build -t "${CONTAINER_NAME}:latest" -f "${SOURCE_DIR}/Dockerfile" "${SOURCE_DIR}"
+  docker compose up -d --force-recreate --remove-orphans
+else
+  docker compose build --pull=false
+  docker compose up -d --force-recreate --remove-orphans
+fi
 
 # 5. Poartă Healthcheck cu Rollback Automat
 for i in {1..20}; do
@@ -516,37 +552,55 @@ Toate subdomeniile găzduite pe Hetzner Cloud VM `cax21` (`2.31.102.36` / `2a01:
   dig +short AAAA <slug>.prinpreajma.ro @1.1.1.1     # Trebuie să returneze: 2a01:4f8:c016:f3bb::1
   ```
 
-### 7.2 Pasul 2 — Port Dinamic, Deploy Key GitHub, Secrete (`0600`), Container & Auto-Sync GitOps pe Hetzner (`2.31.102.36`)
+### 7.2 Pasul 2 — Port Dinamic, Standardul HTTPS GitOps (Zero Deploy Key Friction), Secrete (`0600`), Container & Auto-Sync pe Hetzner / Proxmox VM1
 ```bash
-# 1. Descoperire dinamică a primului port liber 127.0.0.1:30XX pe Hetzner (STRICT RULE 3):
+# 1. Descoperire dinamică a primului port liber 127.0.0.1:30XX pe server (STRICT RULE 3):
 ssh antigravity@2.31.102.36 "ss -tulnp | grep -E '127\.0\.0\.1:30[0-9]{2}' | sort"
-# -> Exemplu port liber alocat: 3040
+# -> Exemplu port liber alocat: 3040 (sau 3090 pe VM1)
 
-# 2. Generare GitHub Deploy Key dedicată per tenant pe Hetzner (STRICT RULE 2):
-ssh antigravity@2.31.102.36 "ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_<slug> -N '' -C 'gitops-<slug>@hetzner' && cat ~/.ssh/id_ed25519_<slug>.pub"
-# -> Cheia publică se adaugă ca Deploy Key (Read-Only) pe repo-ul GitHub seboriginzero/<slug>.prinpreajma.ro,
-#    iar în /home/antigravity/.ssh/config se adaugă host-ul alias:
-#    Host github-<slug>
-#      HostName github.com
-#      User git
-#      IdentityFile /home/antigravity/.ssh/id_ed25519_<slug>
-#      IdentitiesOnly yes
+# 2. Pre-condiție GitHub (OBLIGATORIE):
+# Depozitul seboriginzero/<slug>.prinpreajma.ro TREBUIE creat pe GitHub ca repo public (sau accesibil via HTTPS).
+# Dezvoltatorul de pe Mac efectuează push inițial prin SSH: git push -u origin main
 
 # 3. Livrare criptată a secretelor cu permisiuni stricte 0600 (mirror păstrat local în proxmox-hosting&staff/secrets/.env.<slug>):
 chmod 600 secrets/.env.<slug>
 cat secrets/.env.<slug> | ssh antigravity@2.31.102.36 "mkdir -p /home/antigravity/secrets && cat > /home/antigravity/secrets/.env.<slug> && chmod 600 /home/antigravity/secrets/.env.<slug>"
 
-# 4. Clonare GitHub & lansare container izolat pe loopback (127.0.0.1:<PORT>):
+# 4. Clonare directă prin HTTPS (Zero Deploy Key Friction, exact ca moneasa & cetateadeznei):
 ssh antigravity@2.31.102.36 "mkdir -p /home/antigravity/tenants/<slug>/{data,backups} && \
   chmod -R 0777 /home/antigravity/tenants/<slug>/data && \
-  git clone git@github-<slug>:seboriginzero/<slug>.prinpreajma.ro.git /home/antigravity/tenants/<slug>/source && \
-  cp /home/antigravity/tenants/<slug>/source/{deploy-gitops.sh,docker-compose.yml} /home/antigravity/tenants/<slug>/ && \
+  git clone https://github.com/seboriginzero/<slug>.prinpreajma.ro.git /home/antigravity/tenants/<slug>/source && \
+  cp /home/antigravity/tenants/<slug>/source/docker-compose.yml /home/antigravity/tenants/<slug>/ && \
+  cat << 'EOF' > /home/antigravity/tenants/<slug>/deploy-gitops.sh
+#!/usr/bin/env bash
+set -euo pipefail
+TENANT_DIR=\"/home/antigravity/tenants/<slug>\"
+SOURCE_DIR=\"\${TENANT_DIR}/source\"
+TIMESTAMP=\$(date +%Y%m%d_%H%M%S)
+
+echo \"🚀 [GitOps Deploy] <slug> deployment started at \${TIMESTAMP}...\"
+cd \"\${SOURCE_DIR}\"
+git fetch --prune origin
+git reset --hard origin/main
+
+cd \"\${TENANT_DIR}\"
+docker build -t originzero-tenant-<slug>:latest -f \"\${SOURCE_DIR}/Dockerfile\" \"\${SOURCE_DIR}\"
+chmod -R 0777 \"\${TENANT_DIR}/data\" 2>/dev/null || true
+docker compose up -d --force-recreate
+echo \"✅ [GitOps Deploy] <slug> deployed successfully via GitOps.\"
+EOF
   chmod +x /home/antigravity/tenants/<slug>/deploy-gitops.sh && \
-  cd /home/antigravity/tenants/<slug> && HOST_PORT=<PORT> BIND_IP=127.0.0.1 ./deploy-gitops.sh"
+  cd /home/antigravity/tenants/<slug> && ./deploy-gitops.sh"
 
 # 5. Verificare locală a containerului ÎNAINTE de expunerea în Nginx:
 ssh antigravity@2.31.102.36 "curl -fsS -i http://127.0.0.1:<PORT>/api/health"
 ```
+
+> [!IMPORTANT]
+> **De ce HTTPS și nu SSH Deploy Keys pe serverul de hosting?**
+> Depozitele de prezentare/frontend din ecosistemul PrinPreajma.ro au codul public pe GitHub (toate datele confidențiale, parolele și cheile API fiind 100% izolate pe server în `/home/antigravity/secrets/.env.<slug>` cu permisiuni `chmod 0600`).
+> Utilizarea clonării prin HTTPS permite ca `deploy-gitops.sh` și `git-watcher.sh` să execute `git fetch` și `git reset --hard origin/main` în regim **complet autonom**, fără blocaje de tipul `Permission denied (publickey)` sau pași manuali pe interfața GitHub Settings -> Deploy Keys.
+> Dezvoltatorul împinge codul de pe Mac prin SSH (`git@github.com:seboriginzero/<slug>.prinpreajma.ro.git`), iar serverul preia instantaneu prin HTTPS. Zero copiere directă prin SCP, 100% GitOps pur!
 
 - **Înregistrare în Motoarele Autonome GitOps de pe Hetzner (`/opt/originzero-gitops/`):**
   1. În `/opt/originzero-gitops/webhook-server.py` (`127.0.0.1:9099`, validare `HMAC-SHA256` `X-Hub-Signature-256`), se adaugă în `TENANT_SCRIPTS`:
@@ -805,7 +859,8 @@ ORIGINZERO_NEW_TENANT_HANDOFF:
   dns_records:
     apex_cname: "<slug>.prinpreajma.ro -> hetzner1.banszky.men (2.31.102.36 / 2a01:4f8:c016:f3bb::1)"
     www_cname: "www.<slug>.prinpreajma.ro -> <slug>.prinpreajma.ro"
-  github_repo: "git@github.com:seboriginzero/<slug>.prinpreajma.ro.git"
+  github_repo_ssh: "git@github.com:seboriginzero/<slug>.prinpreajma.ro.git"
+  github_repo_https_clone: "https://github.com/seboriginzero/<slug>.prinpreajma.ro.git"
   branch: "main"
   internal_container_port: 3000
   requires_websocket: true
@@ -821,4 +876,7 @@ ORIGINZERO_NEW_TENANT_HANDOFF:
     https_base_url: "https://media-hostico.prinpreajma.ro/tenants/<slug>/"
     https_validation_passed: true
   gitops_7_gates_verified: true
+  zero_direct_copy_verified: true
+  linguistic_romanian_si_verified: true
+  non_redundant_identifiers_verified: true
 ```
