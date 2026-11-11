@@ -1,2057 +1,1556 @@
 {
   "ART-0001": {
-    "id": "ART-0001",
     "source_file": "Pasted 2026-11-11 at 11.15.31 AM.png",
-    "size": [
-      1378,
-      1728
-    ],
+    "master_dimensions": "1378x1728",
+    "aspect_ratio": 0.797,
     "operations": [
       "crop_dialog_(0,8,1378,1736)",
-      "inpaint_right_button_at_(1331,857)",
-      "inpaint_dots_at_y1658"
-    ]
+      "inpaint_right_nav_btn_(1331,857)"
+    ],
+    "status": "retouched"
   },
   "ART-0002": {
-    "id": "ART-0002",
     "source_file": "Pasted 2026-11-11 at 11.16.06 AM.png",
-    "size": [
-      1376,
-      1716
-    ],
+    "master_dimensions": "1376x1716",
+    "aspect_ratio": 0.802,
     "operations": [
-      "inpaint_right_button_at_(1307,788)",
-      "inpaint_left_button_at_(49,857)",
-      "inpaint_dots_at_y1646"
-    ]
+      "inpaint_left_nav_btn_(49,857)",
+      "inpaint_bottom_right_btn_(1343,1590)"
+    ],
+    "status": "retouched"
   },
   "ART-0003": {
-    "id": "ART-0003",
     "source_file": "Pasted 2026-11-11 at 11.16.54 AM.png",
-    "size": [
-      1720,
-      1718
-    ],
+    "master_dimensions": "1720x1718",
+    "aspect_ratio": 1.001,
     "operations": [
       "crop_dialog_(0,6,1720,1724)",
-      "inpaint_right_button_at_(1690,840)",
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_chevron_right_(1663,847)",
+      "inpaint_pagination_dots_4_at_y1679"
+    ],
+    "status": "retouched"
   },
   "ART-0004": {
-    "id": "ART-0004",
     "source_file": "Pasted 2026-11-11 at 11.17.22 AM.png",
-    "size": [
-      1344,
-      1714
-    ],
+    "master_dimensions": "1344x1714",
+    "aspect_ratio": 0.784,
     "operations": [
       "crop_dialog_(0,0,1344,1714)",
-      "inpaint_left_button_at_(63,787)",
-      "inpaint_dots_at_y1678"
-    ]
+      "inpaint_bottom_right_btn_(1269,1569)"
+    ],
+    "status": "retouched"
   },
   "ART-0005": {
-    "id": "ART-0005",
     "source_file": "Pasted 2026-11-11 at 11.17.56 AM.png",
-    "size": [
-      1366,
-      1716
-    ],
+    "master_dimensions": "1366x1716",
+    "aspect_ratio": 0.796,
     "operations": [
       "crop_dialog_(0,0,1366,1716)",
-      "inpaint_left_button_at_(66,788)",
-      "inpaint_dots_at_y1676"
-    ]
+      "inpaint_bottom_right_btn_(1346,1571)"
+    ],
+    "status": "retouched"
   },
   "ART-0006": {
-    "id": "ART-0006",
     "source_file": "Pasted 2026-11-11 at 11.18.22 AM.png",
-    "size": [
-      1724,
-      1718
-    ],
+    "master_dimensions": "1724x1718",
+    "aspect_ratio": 1.003,
     "operations": [
       "crop_dialog_(0,4,1724,1722)",
-      "inpaint_right_button_at_(1676,894)",
-      "inpaint_left_button_at_(39,810)",
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_left_nav_btn_(53,857)",
+      "inpaint_bottom_right_btn_(1649,1581)"
+    ],
+    "status": "retouched"
   },
   "ART-0007": {
-    "id": "ART-0007",
     "source_file": "Pasted 2026-11-11 at 11.18.56 AM.png",
-    "size": [
-      1373,
-      1720
-    ],
+    "master_dimensions": "1373x1720",
+    "aspect_ratio": 0.798,
     "operations": [
-      "crop_dialog_(1,0,1374,1720)",
-      "inpaint_dots_at_y1650"
-    ]
+      "crop_dialog_(1,0,1374,1720)"
+    ],
+    "status": "retouched"
   },
   "ART-0008": {
-    "id": "ART-0008",
     "source_file": "Pasted 2026-11-11 at 11.19.37 AM.png",
-    "size": [
-      1211,
-      1716
-    ],
+    "master_dimensions": "1211x1716",
+    "aspect_ratio": 0.706,
     "operations": [
       "crop_dialog_(152,0,1363,1716)",
-      "inpaint_dots_at_y1686"
-    ]
+      "inpaint_pagination_dots_2_at_y1688"
+    ],
+    "status": "retouched"
   },
   "ART-0009": {
-    "id": "ART-0009",
     "source_file": "Pasted 2026-11-11 at 11.20.15 AM.png",
-    "size": [
-      1382,
-      1714
-    ],
+    "master_dimensions": "1382x1714",
+    "aspect_ratio": 0.806,
     "operations": [
       "crop_dialog_(0,4,1382,1718)",
-      "inpaint_right_button_at_(1325,787)",
-      "inpaint_left_button_at_(21,787)",
-      "inpaint_dots_at_y1644"
-    ]
+      "inpaint_chevron_right_(1310,826)",
+      "inpaint_left_nav_btn_(36,909)"
+    ],
+    "status": "retouched"
   },
   "ART-0010": {
-    "id": "ART-0010",
     "source_file": "Pasted 2026-11-11 at 11.20.35 AM.png",
-    "size": [
-      1348,
-      1712
-    ],
+    "master_dimensions": "1348x1712",
+    "aspect_ratio": 0.787,
     "operations": [
-      "crop_dialog_(0,2,1348,1714)",
-      "inpaint_left_button_at_(42,786)",
-      "inpaint_dots_at_y1642"
-    ]
+      "crop_dialog_(0,2,1348,1714)"
+    ],
+    "status": "retouched"
   },
   "ART-0011": {
-    "id": "ART-0011",
     "source_file": "Pasted 2026-11-11 at 11.21.04 AM.png",
-    "size": [
-      1335,
-      1684
-    ],
+    "master_dimensions": "1335x1684",
+    "aspect_ratio": 0.793,
     "operations": [
-      "inpaint_right_button_at_(1288,825)",
-      "inpaint_left_button_at_(66,784)",
-      "inpaint_dots_at_y1614"
-    ]
+      "inpaint_right_nav_btn_(1288,825)",
+      "inpaint_left_nav_btn_(61,880)",
+      "inpaint_pagination_dots_2_at_y1647"
+    ],
+    "status": "retouched"
   },
   "ART-0012": {
-    "id": "ART-0012",
     "source_file": "Pasted 2026-11-11 at 11.21.27 AM.png",
-    "size": [
-      1323,
-      1678
-    ],
+    "master_dimensions": "1323x1678",
+    "aspect_ratio": 0.788,
     "operations": [
-      "inpaint_right_button_at_(1276,813)",
-      "inpaint_left_button_at_(51,769)",
-      "inpaint_dots_at_y1608"
-    ]
+      "inpaint_right_nav_btn_(1276,813)"
+    ],
+    "status": "retouched"
   },
   "ART-0013": {
-    "id": "ART-0013",
     "source_file": "Pasted 2026-11-11 at 11.21.53 AM.png",
-    "size": [
-      1319,
-      1698
-    ],
-    "operations": [
-      "inpaint_dots_at_y1628"
-    ]
+    "master_dimensions": "1319x1698",
+    "aspect_ratio": 0.777,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0014": {
-    "id": "ART-0014",
     "source_file": "Pasted 2026-11-11 at 11.22.12 AM.png",
-    "size": [
-      1324,
-      1694
-    ],
-    "operations": []
+    "master_dimensions": "1324x1694",
+    "aspect_ratio": 0.782,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0015": {
-    "id": "ART-0015",
     "source_file": "Pasted 2026-11-11 at 11.22.30 AM.png",
-    "size": [
-      1292,
-      1630
-    ],
-    "operations": [
-      "inpaint_left_button_at_(66,745)"
-    ]
+    "master_dimensions": "1292x1630",
+    "aspect_ratio": 0.793,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0016": {
-    "id": "ART-0016",
     "source_file": "Pasted 2026-11-11 at 11.22.52 AM.png",
-    "size": [
-      1288,
-      1718
-    ],
+    "master_dimensions": "1288x1718",
+    "aspect_ratio": 0.75,
     "operations": [
       "crop_dialog_(56,6,1344,1724)",
-      "inpaint_right_button_at_(1261,837)",
-      "inpaint_left_button_at_(54,789)",
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_chevron_right_(1231,847)"
+    ],
+    "status": "retouched"
   },
   "ART-0017": {
-    "id": "ART-0017",
     "source_file": "Pasted 2026-11-11 at 11.23.22 AM.png",
-    "size": [
-      1373,
-      1714
-    ],
+    "master_dimensions": "1373x1714",
+    "aspect_ratio": 0.801,
     "operations": [
       "crop_dialog_(24,2,1397,1716)",
-      "inpaint_dots_at_y1662"
-    ]
+      "inpaint_right_nav_btn_(1304,782)",
+      "inpaint_pagination_dots_2_at_y1675"
+    ],
+    "status": "retouched"
   },
   "ART-0018": {
-    "id": "ART-0018",
     "source_file": "Pasted 2026-11-11 at 11.23.43 AM.png",
-    "size": [
-      1372,
-      1718
-    ],
+    "master_dimensions": "1372x1718",
+    "aspect_ratio": 0.799,
     "operations": [
       "crop_dialog_(23,2,1395,1720)",
-      "inpaint_left_button_at_(39,789)",
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_bottom_right_btn_(1297,1573)"
+    ],
+    "status": "retouched"
   },
   "ART-0019": {
-    "id": "ART-0019",
     "source_file": "Pasted 2026-11-11 at 11.24.05 AM.png",
-    "size": [
-      1100,
-      1710
-    ],
-    "operations": []
+    "master_dimensions": "1100x1710",
+    "aspect_ratio": 0.643,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0020": {
-    "id": "ART-0020",
     "source_file": "Pasted 2026-11-11 at 11.24.27 AM.png",
-    "size": [
-      1732,
-      1714
-    ],
+    "master_dimensions": "1732x1714",
+    "aspect_ratio": 1.011,
     "operations": [
-      "crop_dialog_(0,6,1732,1720)",
-      "inpaint_left_button_at_(18,787)",
-      "inpaint_dots_at_y1644"
-    ]
+      "crop_dialog_(0,6,1732,1720)"
+    ],
+    "status": "retouched"
   },
   "ART-0021": {
-    "id": "ART-0021",
     "source_file": "Pasted 2026-11-11 at 11.24.46 AM.png",
-    "size": [
-      1718,
-      1563
-    ],
+    "master_dimensions": "1718x1563",
+    "aspect_ratio": 1.099,
     "operations": [
-      "crop_dialog_(0,20,1718,1583)"
-    ]
+      "crop_dialog_(0,20,1718,1583)",
+      "inpaint_bottom_right_btn_(1649,1418)"
+    ],
+    "status": "retouched"
   },
   "ART-0022": {
-    "id": "ART-0022",
     "source_file": "Pasted 2026-11-11 at 11.25.11 AM.png",
-    "size": [
-      1378,
-      1718
-    ],
+    "master_dimensions": "1378x1718",
+    "aspect_ratio": 0.802,
     "operations": [
-      "crop_dialog_(0,6,1378,1724)"
-    ]
+      "crop_dialog_(0,6,1378,1724)",
+      "inpaint_right_nav_btn_(1306,788)"
+    ],
+    "status": "retouched"
   },
   "ART-0023": {
-    "id": "ART-0023",
     "source_file": "Pasted 2026-11-11 at 11.25.37 AM.png",
-    "size": [
-      1378,
-      1718
-    ],
+    "master_dimensions": "1378x1718",
+    "aspect_ratio": 0.802,
     "operations": [
-      "crop_dialog_(0,4,1378,1722)",
-      "inpaint_dots_at_y1648"
-    ]
+      "crop_dialog_(0,4,1378,1722)"
+    ],
+    "status": "retouched"
   },
   "ART-0024": {
-    "id": "ART-0024",
     "source_file": "Pasted 2026-11-11 at 11.25.59 AM.png",
-    "size": [
-      1526,
-      1718
-    ],
+    "master_dimensions": "1526x1718",
+    "aspect_ratio": 0.888,
     "operations": [
-      "inpaint_left_button_at_(63,846)",
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_bottom_right_btn_(1451,1573)"
+    ],
+    "status": "retouched"
   },
   "ART-0025": {
-    "id": "ART-0025",
     "source_file": "Pasted 2026-11-11 at 11.26.21 AM.png",
-    "size": [
-      1377,
-      1716
-    ],
+    "master_dimensions": "1377x1716",
+    "aspect_ratio": 0.802,
     "operations": [
       "crop_dialog_(0,8,1377,1724)",
-      "inpaint_dots_at_y1646"
-    ]
+      "inpaint_bottom_right_btn_(1302,1571)"
+    ],
+    "status": "retouched"
   },
   "ART-0026": {
-    "id": "ART-0026",
     "source_file": "Pasted 2026-11-11 at 11.26.44 AM.png",
-    "size": [
-      1376,
-      1716
-    ],
+    "master_dimensions": "1376x1716",
+    "aspect_ratio": 0.802,
     "operations": [
       "crop_dialog_(0,6,1376,1722)",
-      "inpaint_dots_at_y1646"
-    ]
+      "inpaint_bottom_right_btn_(1301,1571)"
+    ],
+    "status": "retouched"
   },
   "ART-0027": {
-    "id": "ART-0027",
     "source_file": "Pasted 2026-11-11 at 11.27.02 AM.png",
-    "size": [
-      1376,
-      1718
-    ],
+    "master_dimensions": "1376x1718",
+    "aspect_ratio": 0.801,
     "operations": [
       "crop_dialog_(0,6,1376,1724)",
-      "inpaint_right_button_at_(1301,864)",
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_chevron_right_(1295,868)",
+      "inpaint_bottom_right_btn_(1301,1573)"
+    ],
+    "status": "retouched"
   },
   "ART-0028": {
-    "id": "ART-0028",
     "source_file": "Pasted 2026-11-11 at 11.27.23 AM.png",
-    "size": [
-      1215,
-      1710
-    ],
+    "master_dimensions": "1215x1710",
+    "aspect_ratio": 0.711,
     "operations": [
-      "inpaint_right_button_at_(1152,794)",
-      "inpaint_left_button_at_(73,907)",
-      "inpaint_dots_at_y1676"
-    ]
+      "inpaint_right_nav_btn_(1150,928)"
+    ],
+    "status": "retouched"
   },
   "ART-0029": {
-    "id": "ART-0029",
     "source_file": "Pasted 2026-11-11 at 11.27.44 AM.png",
-    "size": [
-      1275,
-      1718
-    ],
+    "master_dimensions": "1275x1718",
+    "aspect_ratio": 0.742,
     "operations": [
       "crop_dialog_(0,4,1275,1722)",
-      "inpaint_left_button_at_(39,900)",
-      "inpaint_dots_at_y1678"
-    ]
+      "inpaint_left_nav_btn_(53,857)"
+    ],
+    "status": "retouched"
   },
   "ART-0030": {
-    "id": "ART-0030",
     "source_file": "Pasted 2026-11-11 at 11.28.11 AM.png",
-    "size": [
-      1185,
-      1718
-    ],
+    "master_dimensions": "1185x1718",
+    "aspect_ratio": 0.69,
     "operations": [
       "crop_dialog_(0,4,1185,1722)",
-      "inpaint_right_button_at_(1161,900)",
-      "inpaint_left_button_at_(49,857)",
-      "inpaint_dots_at_y1674"
-    ]
+      "inpaint_left_nav_btn_(49,857)",
+      "inpaint_pagination_dots_4_at_y1679"
+    ],
+    "status": "retouched"
   },
   "ART-0031": {
-    "id": "ART-0031",
     "source_file": "Pasted 2026-11-11 at 11.28.33 AM.png",
-    "size": [
-      1162,
-      1716
-    ],
+    "master_dimensions": "1162x1716",
+    "aspect_ratio": 0.677,
     "operations": [
       "crop_dialog_(0,4,1162,1720)",
-      "inpaint_right_button_at_(1144,806)",
-      "inpaint_left_button_at_(30,788)",
-      "inpaint_dots_at_y1674"
-    ]
+      "inpaint_chevron_right_(1125,815)",
+      "inpaint_left_nav_btn_(47,857)",
+      "inpaint_pagination_dots_4_at_y1679"
+    ],
+    "status": "retouched"
   },
   "ART-0032": {
-    "id": "ART-0032",
     "source_file": "Pasted 2026-11-11 at 11.28.56 AM.png",
-    "size": [
-      1708,
-      1714
-    ],
+    "master_dimensions": "1708x1714",
+    "aspect_ratio": 0.996,
     "operations": [
       "crop_dialog_(0,2,1708,1716)",
-      "inpaint_dots_at_y1644"
-    ]
+      "inpaint_pagination_dots_2_at_y1659"
+    ],
+    "status": "retouched"
   },
   "ART-0033": {
-    "id": "ART-0033",
     "source_file": "Pasted 2026-11-11 at 11.29.26 AM.png",
-    "size": [
-      1720,
-      1718
-    ],
+    "master_dimensions": "1720x1718",
+    "aspect_ratio": 1.001,
     "operations": [
       "crop_dialog_(0,4,1720,1722)"
-    ]
+    ],
+    "status": "retouched"
   },
   "ART-0034": {
-    "id": "ART-0034",
     "source_file": "Pasted 2026-11-11 at 11.29.46 AM.png",
-    "size": [
-      1363,
-      1679
-    ],
+    "master_dimensions": "1363x1679",
+    "aspect_ratio": 0.812,
     "operations": [
-      "crop_dialog_(0,0,1363,1679)",
-      "inpaint_right_button_at_(1345,769)",
-      "inpaint_dots_at_y1609"
-    ]
+      "crop_dialog_(0,0,1363,1679)"
+    ],
+    "status": "retouched"
   },
   "ART-0035": {
-    "id": "ART-0035",
     "source_file": "Pasted 2026-11-11 at 11.30.06 AM.png",
-    "size": [
-      1477,
-      1712
-    ],
+    "master_dimensions": "1477x1712",
+    "aspect_ratio": 0.863,
     "operations": [
-      "inpaint_right_button_at_(1426,792)",
-      "inpaint_dots_at_y1642"
-    ]
+      "inpaint_right_nav_btn_(1409,874)",
+      "inpaint_bottom_right_btn_(1402,1567)"
+    ],
+    "status": "retouched"
   },
   "ART-0036": {
-    "id": "ART-0036",
     "source_file": "Pasted 2026-11-11 at 11.30.25 AM.png",
-    "size": [
-      1693,
-      1706
-    ],
+    "master_dimensions": "1693x1706",
+    "aspect_ratio": 0.992,
     "operations": [
       "crop_dialog_(11,0,1704,1706)"
-    ]
+    ],
+    "status": "retouched"
   },
   "ART-0037": {
-    "id": "ART-0037",
     "source_file": "Pasted 2026-11-11 at 11.30.46 AM.png",
-    "size": [
-      1426,
-      1700
-    ],
-    "operations": [
-      "inpaint_right_button_at_(1390,780)",
-      "inpaint_dots_at_y1630"
-    ]
+    "master_dimensions": "1426x1700",
+    "aspect_ratio": 0.839,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0038": {
-    "id": "ART-0038",
     "source_file": "Pasted 2026-11-11 at 11.31.05 AM.png",
-    "size": [
-      1503,
-      1687
-    ],
+    "master_dimensions": "1503x1687",
+    "aspect_ratio": 0.891,
     "operations": [
       "crop_dialog_(0,0,1503,1687)"
-    ]
+    ],
+    "status": "retouched"
   },
   "ART-0039": {
-    "id": "ART-0039",
     "source_file": "Pasted 2026-11-11 at 11.31.28 AM.png",
-    "size": [
-      1370,
-      1716
-    ],
+    "master_dimensions": "1370x1716",
+    "aspect_ratio": 0.798,
     "operations": [
       "crop_dialog_(0,2,1370,1718)",
-      "inpaint_right_button_at_(1319,788)",
-      "inpaint_left_button_at_(72,824)",
-      "inpaint_dots_at_y1646"
-    ]
+      "inpaint_chevron_right_(1316,798)"
+    ],
+    "status": "retouched"
   },
   "ART-0040": {
-    "id": "ART-0040",
     "source_file": "Pasted 2026-11-11 at 11.31.51 AM.png",
-    "size": [
-      1400,
-      1718
-    ],
+    "master_dimensions": "1400x1718",
+    "aspect_ratio": 0.815,
     "operations": [
       "crop_dialog_(0,2,1400,1720)",
-      "inpaint_right_button_at_(1376,789)",
-      "inpaint_left_button_at_(45,789)",
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_chevron_right_(1353,799)",
+      "inpaint_bottom_right_btn_(1340,1573)"
+    ],
+    "status": "retouched"
   },
   "ART-0041": {
-    "id": "ART-0041",
     "source_file": "Pasted 2026-11-11 at 11.32.21 AM.png",
-    "size": [
-      1372,
-      1714
-    ],
+    "master_dimensions": "1372x1714",
+    "aspect_ratio": 0.8,
     "operations": [
       "crop_dialog_(0,2,1372,1716)",
-      "inpaint_left_button_at_(42,787)",
-      "inpaint_dots_at_y1694"
-    ]
+      "inpaint_bottom_right_btn_(1297,1569)"
+    ],
+    "status": "retouched"
   },
   "ART-0042": {
-    "id": "ART-0042",
     "source_file": "Pasted 2026-11-11 at 11.32.54 AM.png",
-    "size": [
-      1376,
-      1720
-    ],
+    "master_dimensions": "1376x1720",
+    "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_right_button_at_(1313,790)",
-      "inpaint_left_button_at_(69,913)",
-      "inpaint_dots_at_y1650"
-    ]
+      "inpaint_chevron_right_(1302,800)",
+      "inpaint_bottom_right_btn_(1345,1575)"
+    ],
+    "status": "retouched"
   },
   "ART-0043": {
-    "id": "ART-0043",
     "source_file": "Pasted 2026-11-11 at 11.33.18 AM.png",
-    "size": [
-      1374,
-      1724
-    ],
+    "master_dimensions": "1374x1724",
+    "aspect_ratio": 0.797,
     "operations": [
-      "inpaint_right_button_at_(1317,810)",
-      "inpaint_left_button_at_(45,792)"
-    ]
+      "inpaint_right_nav_btn_(1331,825)",
+      "inpaint_bottom_right_btn_(1331,1579)"
+    ],
+    "status": "retouched"
   },
   "ART-0044": {
-    "id": "ART-0044",
     "source_file": "Pasted 2026-11-11 at 11.33.40 AM.png",
-    "size": [
-      1378,
-      1720
-    ],
-    "operations": [
-      "inpaint_right_button_at_(1342,799)",
-      "inpaint_left_button_at_(18,790)",
-      "inpaint_dots_at_y1650"
-    ]
+    "master_dimensions": "1378x1720",
+    "aspect_ratio": 0.801,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0045": {
-    "id": "ART-0045",
     "source_file": "Pasted 2026-11-11 at 11.33.59 AM.png",
-    "size": [
-      1376,
-      1718
-    ],
-    "operations": [
-      "inpaint_right_button_at_(1301,822)",
-      "inpaint_left_button_at_(51,843)"
-    ]
+    "master_dimensions": "1376x1718",
+    "aspect_ratio": 0.801,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0046": {
-    "id": "ART-0046",
     "source_file": "Pasted 2026-11-11 at 11.34.23 AM.png",
-    "size": [
-      1376,
-      1722
-    ],
+    "master_dimensions": "1376x1722",
+    "aspect_ratio": 0.799,
     "operations": [
-      "inpaint_right_button_at_(1301,791)",
-      "inpaint_left_button_at_(45,791)",
-      "inpaint_dots_at_y1676"
-    ]
+      "inpaint_chevron_right_(1295,801)",
+      "inpaint_bottom_right_btn_(1355,1584)"
+    ],
+    "status": "retouched"
   },
   "ART-0047": {
-    "id": "ART-0047",
     "source_file": "Pasted 2026-11-11 at 11.34.44 AM.png",
-    "size": [
-      1376,
-      1724
-    ],
+    "master_dimensions": "1376x1724",
+    "aspect_ratio": 0.798,
     "operations": [
-      "inpaint_right_button_at_(1301,792)",
-      "inpaint_left_button_at_(21,792)",
-      "inpaint_dots_at_y1680"
-    ]
+      "inpaint_bottom_right_btn_(1308,1579)"
+    ],
+    "status": "retouched"
   },
   "ART-0048": {
-    "id": "ART-0048",
     "source_file": "Pasted 2026-11-11 at 11.35.10 AM.png",
-    "size": [
-      1374,
-      1716
-    ],
+    "master_dimensions": "1374x1716",
+    "aspect_ratio": 0.801,
     "operations": [
-      "inpaint_right_button_at_(1335,797)",
-      "inpaint_left_button_at_(72,788)"
-    ]
+      "inpaint_right_nav_btn_(1343,878)"
+    ],
+    "status": "retouched"
   },
   "ART-0049": {
-    "id": "ART-0049",
     "source_file": "Pasted 2026-11-11 at 11.35.33 AM.png",
-    "size": [
-      1374,
-      1720
-    ],
-    "operations": [
-      "inpaint_right_button_at_(1311,868)",
-      "inpaint_left_button_at_(27,817)",
-      "inpaint_dots_at_y1650"
-    ]
+    "master_dimensions": "1374x1720",
+    "aspect_ratio": 0.799,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0050": {
-    "id": "ART-0050",
     "source_file": "Pasted 2026-11-11 at 11.35.55 AM.png",
-    "size": [
-      1714,
-      1700
-    ],
+    "master_dimensions": "1714x1700",
+    "aspect_ratio": 1.008,
     "operations": [
-      "crop_dialog_(0,20,1714,1720)",
-      "inpaint_right_button_at_(1639,780)",
-      "inpaint_left_button_at_(24,780)"
-    ]
+      "crop_dialog_(0,20,1714,1720)"
+    ],
+    "status": "retouched"
   },
   "ART-0051": {
-    "id": "ART-0051",
     "source_file": "Pasted 2026-11-11 at 11.36.15 AM.png",
-    "size": [
-      1378,
-      1716
-    ],
+    "master_dimensions": "1378x1716",
+    "aspect_ratio": 0.803,
     "operations": [
-      "inpaint_right_button_at_(1345,842)",
-      "inpaint_left_button_at_(15,788)",
-      "inpaint_dots_at_y1646"
-    ]
+      "inpaint_right_nav_btn_(1356,853)"
+    ],
+    "status": "retouched"
   },
   "ART-0052": {
-    "id": "ART-0052",
     "source_file": "Pasted 2026-11-11 at 11.36.38 AM.png",
-    "size": [
-      1489,
-      1718
-    ],
+    "master_dimensions": "1489x1718",
+    "aspect_ratio": 0.867,
     "operations": [
       "crop_dialog_(0,0,1489,1718)",
-      "inpaint_right_button_at_(1462,810)",
-      "inpaint_left_button_at_(51,789)",
-      "inpaint_dots_at_y1660"
-    ]
+      "inpaint_bottom_right_btn_(1419,1576)"
+    ],
+    "status": "retouched"
   },
   "ART-0053": {
-    "id": "ART-0053",
     "source_file": "Pasted 2026-11-11 at 11.37.03 AM.png",
-    "size": [
-      1497,
-      1712
-    ],
-    "operations": [
-      "inpaint_dots_at_y1646"
-    ]
+    "master_dimensions": "1497x1712",
+    "aspect_ratio": 0.874,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0054": {
-    "id": "ART-0054",
     "source_file": "Pasted 2026-11-11 at 11.37.25 AM.png",
-    "size": [
-      1376,
-      1722
-    ],
+    "master_dimensions": "1376x1722",
+    "aspect_ratio": 0.799,
     "operations": [
-      "inpaint_right_button_at_(1343,791)",
-      "inpaint_left_button_at_(15,791)",
-      "inpaint_dots_at_y1652"
-    ]
+      "inpaint_right_nav_btn_(1340,788)",
+      "inpaint_bottom_right_btn_(1332,1585)"
+    ],
+    "status": "retouched"
   },
   "ART-0055": {
-    "id": "ART-0055",
     "source_file": "Pasted 2026-11-11 at 11.37.44 AM.png",
-    "size": [
-      1372,
-      1716
-    ],
+    "master_dimensions": "1372x1716",
+    "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_right_button_at_(1315,788)",
-      "inpaint_left_button_at_(42,797)",
-      "inpaint_dots_at_y1646"
-    ]
+      "inpaint_chevron_right_(1311,821)",
+      "inpaint_bottom_right_btn_(1325,1610)"
+    ],
+    "status": "retouched"
   },
   "ART-0056": {
-    "id": "ART-0056",
     "source_file": "Pasted 2026-11-11 at 11.38.08 AM.png",
-    "size": [
-      1722,
-      1738
-    ],
+    "master_dimensions": "1722x1738",
+    "aspect_ratio": 0.991,
     "operations": [
-      "inpaint_right_button_at_(1647,814)",
-      "inpaint_left_button_at_(54,799)",
-      "inpaint_dots_at_y1670"
-    ]
+      "inpaint_right_nav_btn_(1650,937)",
+      "inpaint_left_nav_btn_(55,840)",
+      "inpaint_bottom_right_btn_(1647,1593)"
+    ],
+    "status": "retouched"
   },
   "ART-0057": {
-    "id": "ART-0057",
     "source_file": "Pasted 2026-11-11 at 11.38.28 AM.png",
-    "size": [
-      1716,
-      1722
-    ],
-    "operations": [
-      "inpaint_left_button_at_(15,836)",
-      "inpaint_dots_at_y1652"
-    ]
+    "master_dimensions": "1716x1722",
+    "aspect_ratio": 0.997,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0058": {
-    "id": "ART-0058",
     "source_file": "Pasted 2026-11-11 at 11.38.49 AM.png",
-    "size": [
-      1372,
-      1716
-    ],
-    "operations": [
-      "inpaint_dots_at_y1646"
-    ]
+    "master_dimensions": "1372x1716",
+    "aspect_ratio": 0.8,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0059": {
-    "id": "ART-0059",
     "source_file": "Pasted 2026-11-11 at 11.39.11 AM.png",
-    "size": [
-      1374,
-      1718
-    ],
+    "master_dimensions": "1374x1718",
+    "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_left_button_at_(63,789)",
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_bottom_right_btn_(1299,1573)"
+    ],
+    "status": "retouched"
   },
   "ART-0060": {
-    "id": "ART-0060",
     "source_file": "Pasted 2026-11-11 at 11.39.35 AM.png",
-    "size": [
-      1374,
-      1716
-    ],
+    "master_dimensions": "1374x1716",
+    "aspect_ratio": 0.801,
     "operations": [
-      "inpaint_right_button_at_(1299,821)",
-      "inpaint_left_button_at_(60,842)",
-      "inpaint_dots_at_y1646"
-    ]
+      "inpaint_chevron_right_(1293,825)"
+    ],
+    "status": "retouched"
   },
   "ART-0061": {
-    "id": "ART-0061",
     "source_file": "Pasted 2026-11-11 at 11.39.57 AM.png",
-    "size": [
-      1375,
-      1718
-    ],
+    "master_dimensions": "1375x1718",
+    "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_right_button_at_(1315,915)",
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_chevron_right_(1313,916)"
+    ],
+    "status": "retouched"
   },
   "ART-0062": {
-    "id": "ART-0062",
     "source_file": "Pasted 2026-11-11 at 11.40.19 AM.png",
-    "size": [
-      1372,
-      1718
-    ],
-    "operations": [
-      "inpaint_dots_at_y1648"
-    ]
+    "master_dimensions": "1372x1718",
+    "aspect_ratio": 0.799,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0063": {
-    "id": "ART-0063",
     "source_file": "Pasted 2026-11-11 at 11.40.39 AM.png",
-    "size": [
-      1372,
-      1718
-    ],
+    "master_dimensions": "1372x1718",
+    "aspect_ratio": 0.799,
     "operations": [
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_bottom_right_btn_(1297,1573)"
+    ],
+    "status": "retouched"
   },
   "ART-0064": {
-    "id": "ART-0064",
     "source_file": "Pasted 2026-11-11 at 11.41.01 AM.png",
-    "size": [
-      1380,
-      1722
-    ],
+    "master_dimensions": "1380x1722",
+    "aspect_ratio": 0.801,
     "operations": [
       "crop_dialog_(0,0,1380,1722)",
-      "inpaint_right_button_at_(1356,791)",
-      "inpaint_left_button_at_(21,791)",
-      "inpaint_dots_at_y1652"
-    ]
+      "inpaint_chevron_right_(1348,839)",
+      "inpaint_bottom_right_btn_(1305,1577)"
+    ],
+    "status": "retouched"
   },
   "ART-0065": {
-    "id": "ART-0065",
     "source_file": "Pasted 2026-11-11 at 11.41.24 AM.png",
-    "size": [
-      1374,
-      1718
-    ],
+    "master_dimensions": "1374x1718",
+    "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_left_button_at_(36,789)",
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_bottom_right_btn_(1299,1573)"
+    ],
+    "status": "retouched"
   },
   "ART-0066": {
-    "id": "ART-0066",
     "source_file": "Pasted 2026-11-11 at 11.41.46 AM.png",
-    "size": [
-      1377,
-      1720
-    ],
+    "master_dimensions": "1377x1720",
+    "aspect_ratio": 0.801,
     "operations": [
-      "inpaint_left_button_at_(72,790)",
-      "inpaint_dots_at_y1650"
-    ]
+      "inpaint_bottom_right_btn_(1302,1575)"
+    ],
+    "status": "retouched"
   },
   "ART-0067": {
-    "id": "ART-0067",
     "source_file": "Pasted 2026-11-11 at 11.42.08 AM.png",
-    "size": [
-      1372,
-      1722
-    ],
+    "master_dimensions": "1372x1722",
+    "aspect_ratio": 0.797,
     "operations": [
-      "inpaint_right_button_at_(1348,887)",
-      "inpaint_left_button_at_(63,914)",
-      "inpaint_dots_at_y1652"
-    ]
+      "inpaint_chevron_right_(1340,891)",
+      "inpaint_bottom_right_btn_(1297,1577)"
+    ],
+    "status": "retouched"
   },
   "ART-0068": {
-    "id": "ART-0068",
     "source_file": "Pasted 2026-11-11 at 11.42.29 AM.png",
-    "size": [
-      1374,
-      1718
-    ],
+    "master_dimensions": "1374x1718",
+    "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_bottom_right_btn_(1299,1573)"
+    ],
+    "status": "retouched"
   },
   "ART-0069": {
-    "id": "ART-0069",
     "source_file": "Pasted 2026-11-11 at 11.42.51 AM.png",
-    "size": [
-      1372,
-      1716
-    ],
+    "master_dimensions": "1372x1716",
+    "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_right_button_at_(1297,788)",
-      "inpaint_left_button_at_(72,836)",
-      "inpaint_dots_at_y1646"
-    ]
+      "inpaint_chevron_right_(1294,798)",
+      "inpaint_bottom_right_btn_(1297,1571)"
+    ],
+    "status": "retouched"
   },
   "ART-0070": {
-    "id": "ART-0070",
     "source_file": "Pasted 2026-11-11 at 11.43.11 AM.png",
-    "size": [
-      1340,
-      1720
-    ],
+    "master_dimensions": "1340x1720",
+    "aspect_ratio": 0.779,
     "operations": [
       "crop_dialog_(30,0,1370,1720)",
-      "inpaint_right_button_at_(1283,790)",
-      "inpaint_left_button_at_(15,790)",
-      "inpaint_dots_at_y1650"
-    ]
+      "inpaint_right_nav_btn_(1293,859)"
+    ],
+    "status": "retouched"
   },
   "ART-0071": {
-    "id": "ART-0071",
     "source_file": "Pasted 2026-11-11 at 11.43.32 AM.png",
-    "size": [
-      1374,
-      1718
-    ],
+    "master_dimensions": "1374x1718",
+    "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_right_button_at_(1347,837)",
-      "inpaint_left_button_at_(69,789)",
-      "inpaint_dots_at_y1674"
-    ]
+      "inpaint_right_nav_btn_(1327,857)",
+      "inpaint_left_nav_btn_(31,918)",
+      "inpaint_pagination_dots_3_at_y1679"
+    ],
+    "status": "retouched"
   },
   "ART-0072": {
-    "id": "ART-0072",
     "source_file": "Pasted 2026-11-11 at 11.43.52 AM.png",
-    "size": [
-      1374,
-      1718
-    ],
+    "master_dimensions": "1374x1718",
+    "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_right_button_at_(1299,873)",
-      "inpaint_left_button_at_(15,882)",
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_chevron_right_(1293,877)"
+    ],
+    "status": "retouched"
   },
   "ART-0073": {
-    "id": "ART-0073",
     "source_file": "Pasted 2026-11-11 at 11.44.13 AM.png",
-    "size": [
-      1718,
-      1698
-    ],
+    "master_dimensions": "1718x1698",
+    "aspect_ratio": 1.012,
     "operations": [
       "crop_dialog_(0,20,1718,1718)",
-      "inpaint_right_button_at_(1649,809)"
-    ]
+      "inpaint_right_nav_btn_(1671,837)"
+    ],
+    "status": "retouched"
   },
   "ART-0074": {
-    "id": "ART-0074",
     "source_file": "Pasted 2026-11-11 at 11.44.32 AM.png",
-    "size": [
-      1714,
-      1704
-    ],
+    "master_dimensions": "1714x1704",
+    "aspect_ratio": 1.006,
     "operations": [
       "crop_dialog_(0,20,1714,1724)",
-      "inpaint_left_button_at_(43,837)"
-    ]
+      "inpaint_left_nav_btn_(43,837)"
+    ],
+    "status": "retouched"
   },
   "ART-0075": {
-    "id": "ART-0075",
     "source_file": "Pasted 2026-11-11 at 11.44.53 AM.png",
-    "size": [
-      1714,
-      1722
-    ],
-    "operations": []
+    "master_dimensions": "1714x1722",
+    "aspect_ratio": 0.995,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0076": {
-    "id": "ART-0076",
     "source_file": "Pasted 2026-11-11 at 11.45.12 AM.png",
-    "size": [
-      1374,
-      1718
-    ],
+    "master_dimensions": "1374x1718",
+    "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_left_button_at_(33,923)",
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_right_nav_btn_(1302,926)"
+    ],
+    "status": "retouched"
   },
   "ART-0077": {
-    "id": "ART-0077",
     "source_file": "Pasted 2026-11-11 at 11.45.33 AM.png",
-    "size": [
-      1374,
-      1718
-    ],
+    "master_dimensions": "1374x1718",
+    "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_right_button_at_(1299,840)",
-      "inpaint_left_button_at_(72,792)"
-    ]
+      "inpaint_chevron_right_(1296,841)"
+    ],
+    "status": "retouched"
   },
   "ART-0078": {
-    "id": "ART-0078",
     "source_file": "Pasted 2026-11-11 at 11.45.54 AM.png",
-    "size": [
-      1376,
-      1716
-    ],
+    "master_dimensions": "1376x1716",
+    "aspect_ratio": 0.802,
     "operations": [
-      "inpaint_right_button_at_(1349,839)",
-      "inpaint_dots_at_y1646"
-    ]
+      "inpaint_chevron_right_(1326,835)"
+    ],
+    "status": "retouched"
   },
   "ART-0079": {
-    "id": "ART-0079",
     "source_file": "Pasted 2026-11-11 at 11.46.18 AM.png",
-    "size": [
-      1374,
-      1720
-    ],
+    "master_dimensions": "1374x1720",
+    "aspect_ratio": 0.799,
     "operations": [
-      "inpaint_left_button_at_(39,808)",
-      "inpaint_dots_at_y1650"
-    ]
+      "inpaint_bottom_right_btn_(1304,1575)"
+    ],
+    "status": "retouched"
   },
   "ART-0080": {
-    "id": "ART-0080",
     "source_file": "Pasted 2026-11-11 at 11.46.39 AM.png",
-    "size": [
-      1374,
-      1718
-    ],
+    "master_dimensions": "1374x1718",
+    "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_chevron_right_(1318,847)",
+      "inpaint_bottom_right_btn_(1299,1573)"
+    ],
+    "status": "retouched"
   },
   "ART-0081": {
-    "id": "ART-0081",
     "source_file": "Pasted 2026-11-11 at 11.47.02 AM.png",
-    "size": [
-      1374,
-      1716
-    ],
+    "master_dimensions": "1374x1716",
+    "aspect_ratio": 0.801,
     "operations": [
-      "inpaint_dots_at_y1646"
-    ]
+      "inpaint_chevron_right_(1318,849)"
+    ],
+    "status": "retouched"
   },
   "ART-0082": {
-    "id": "ART-0082",
     "source_file": "Pasted 2026-11-11 at 11.47.21 AM.png",
-    "size": [
-      1374,
-      1718
-    ],
+    "master_dimensions": "1374x1718",
+    "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_right_button_at_(1326,789)",
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_right_nav_btn_(1313,785)",
+      "inpaint_bottom_right_btn_(1299,1573)"
+    ],
+    "status": "retouched"
   },
   "ART-0083": {
-    "id": "ART-0083",
     "source_file": "Pasted 2026-11-11 at 11.47.45 AM.png",
-    "size": [
-      1370,
-      1716
-    ],
+    "master_dimensions": "1370x1716",
+    "aspect_ratio": 0.798,
     "operations": [
       "crop_dialog_(1,0,1371,1716)",
-      "inpaint_right_button_at_(1295,788)",
-      "inpaint_left_button_at_(60,893)",
-      "inpaint_dots_at_y1676"
-    ]
+      "inpaint_right_nav_btn_(1324,859)",
+      "inpaint_left_nav_btn_(69,931)",
+      "inpaint_pagination_dots_10_at_y1681"
+    ],
+    "status": "retouched"
   },
   "ART-0084": {
-    "id": "ART-0084",
     "source_file": "Pasted 2026-11-11 at 11.48.17 AM.png",
-    "size": [
-      1341,
-      1713
-    ],
+    "master_dimensions": "1341x1713",
+    "aspect_ratio": 0.783,
     "operations": [
       "crop_dialog_(29,0,1370,1713)",
-      "inpaint_right_button_at_(1284,786)",
-      "inpaint_left_button_at_(18,786)",
-      "inpaint_dots_at_y1643"
-    ]
+      "inpaint_right_nav_btn_(1294,857)"
+    ],
+    "status": "retouched"
   },
   "ART-0085": {
-    "id": "ART-0085",
     "source_file": "Pasted 2026-11-11 at 11.48.34 AM.png",
-    "size": [
-      1376,
-      1716
-    ],
+    "master_dimensions": "1376x1716",
+    "aspect_ratio": 0.802,
     "operations": [
-      "inpaint_right_button_at_(1301,788)",
-      "inpaint_dots_at_y1676"
-    ]
+      "inpaint_right_nav_btn_(1342,805)"
+    ],
+    "status": "retouched"
   },
   "ART-0086": {
-    "id": "ART-0086",
     "source_file": "Pasted 2026-11-11 at 11.48.54 AM.png",
-    "size": [
-      1175,
-      1621
-    ],
+    "master_dimensions": "1175x1621",
+    "aspect_ratio": 0.725,
     "operations": [
       "crop_dialog_(181,0,1356,1621)",
-      "inpaint_right_button_at_(1128,857)",
-      "inpaint_left_button_at_(48,806)",
-      "inpaint_dots_at_y1551"
-    ]
+      "inpaint_right_nav_btn_(1128,857)"
+    ],
+    "status": "retouched"
   },
   "ART-0087": {
-    "id": "ART-0087",
     "source_file": "Pasted 2026-11-11 at 11.49.35 AM.png",
-    "size": [
-      1243,
-      1625
-    ],
+    "master_dimensions": "1243x1625",
+    "aspect_ratio": 0.765,
     "operations": [
-      "crop_dialog_(41,0,1284,1625)",
-      "inpaint_left_button_at_(72,835)",
-      "inpaint_dots_at_y1555"
-    ]
+      "crop_dialog_(41,0,1284,1625)"
+    ],
+    "status": "retouched"
   },
   "ART-0088": {
-    "id": "ART-0088",
     "source_file": "Pasted 2026-11-11 at 11.50.42 AM.png",
-    "size": [
-      1372,
-      1714
-    ],
+    "master_dimensions": "1372x1714",
+    "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_right_button_at_(1342,838)",
-      "inpaint_dots_at_y1644"
-    ]
+      "inpaint_right_nav_btn_(1325,855)"
+    ],
+    "status": "retouched"
   },
   "ART-0089": {
-    "id": "ART-0089",
     "source_file": "Pasted 2026-11-11 at 11.50.59 AM.png",
-    "size": [
-      1374,
-      1722
-    ],
+    "master_dimensions": "1374x1722",
+    "aspect_ratio": 0.798,
     "operations": [
-      "inpaint_right_button_at_(1302,863)",
-      "inpaint_dots_at_y1652"
-    ]
+      "inpaint_bottom_right_btn_(1333,1649)"
+    ],
+    "status": "retouched"
   },
   "ART-0090": {
-    "id": "ART-0090",
     "source_file": "Pasted 2026-11-11 at 11.51.19 AM.png",
-    "size": [
-      1376,
-      1720
-    ],
+    "master_dimensions": "1376x1720",
+    "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_right_button_at_(1346,877)",
-      "inpaint_dots_at_y1680"
-    ]
+      "inpaint_chevron_right_(1320,851)"
+    ],
+    "status": "retouched"
   },
   "ART-0091": {
-    "id": "ART-0091",
     "source_file": "Pasted 2026-11-11 at 11.51.40 AM.png",
-    "size": [
-      1372,
-      1718
-    ],
+    "master_dimensions": "1372x1718",
+    "aspect_ratio": 0.799,
     "operations": [
-      "inpaint_left_button_at_(45,837)",
-      "inpaint_dots_at_y1678"
-    ]
+      "inpaint_left_nav_btn_(45,857)",
+      "inpaint_bottom_right_btn_(1297,1573)"
+    ],
+    "status": "retouched"
   },
   "ART-0092": {
-    "id": "ART-0092",
     "source_file": "Pasted 2026-11-11 at 11.52.03 AM.png",
-    "size": [
-      1374,
-      1720
-    ],
+    "master_dimensions": "1374x1720",
+    "aspect_ratio": 0.799,
     "operations": [
-      "inpaint_right_button_at_(1299,790)",
-      "inpaint_left_button_at_(15,790)",
-      "inpaint_dots_at_y1650"
-    ]
+      "inpaint_right_nav_btn_(1312,836)",
+      "inpaint_left_nav_btn_(63,789)",
+      "inpaint_bottom_right_btn_(1340,1575)"
+    ],
+    "status": "retouched"
   },
   "ART-0093": {
-    "id": "ART-0093",
     "source_file": "Pasted 2026-11-11 at 11.52.24 AM.png",
-    "size": [
-      1718,
-      1718
-    ],
+    "master_dimensions": "1718x1718",
+    "aspect_ratio": 1.0,
     "operations": [
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_chevron_right_(1662,847)",
+      "inpaint_bottom_right_btn_(1643,1573)"
+    ],
+    "status": "retouched"
   },
   "ART-0094": {
-    "id": "ART-0094",
     "source_file": "Pasted 2026-11-11 at 11.52.48 AM.png",
-    "size": [
-      1718,
-      1720
-    ],
+    "master_dimensions": "1718x1720",
+    "aspect_ratio": 0.999,
     "operations": [
-      "inpaint_right_button_at_(1646,790)",
-      "inpaint_dots_at_y1650"
-    ]
+      "inpaint_chevron_right_(1662,849)",
+      "inpaint_bottom_right_btn_(1643,1575)"
+    ],
+    "status": "retouched"
   },
   "ART-0095": {
-    "id": "ART-0095",
     "source_file": "Pasted 2026-11-11 at 11.53.09 AM.png",
-    "size": [
-      1720,
-      1720
-    ],
+    "master_dimensions": "1720x1720",
+    "aspect_ratio": 1.0,
     "operations": [
-      "inpaint_right_button_at_(1645,847)",
-      "inpaint_dots_at_y1650"
-    ]
+      "inpaint_chevron_right_(1639,850)",
+      "inpaint_bottom_right_btn_(1645,1575)"
+    ],
+    "status": "retouched"
   },
   "ART-0096": {
-    "id": "ART-0096",
     "source_file": "Pasted 2026-11-11 at 11.53.35 AM.png",
-    "size": [
-      1718,
-      1720
-    ],
+    "master_dimensions": "1718x1720",
+    "aspect_ratio": 0.999,
     "operations": [
-      "inpaint_dots_at_y1650"
-    ]
+      "inpaint_chevron_right_(1662,868)",
+      "inpaint_bottom_right_btn_(1643,1575)"
+    ],
+    "status": "retouched"
   },
   "ART-0097": {
-    "id": "ART-0097",
     "source_file": "Pasted 2026-11-11 at 11.53.56 AM.png",
-    "size": [
-      1724,
-      1726
-    ],
+    "master_dimensions": "1724x1726",
+    "aspect_ratio": 0.999,
     "operations": [
-      "inpaint_right_button_at_(1649,811)",
-      "inpaint_dots_at_y1656"
-    ]
+      "inpaint_chevron_right_(1668,874)",
+      "inpaint_bottom_right_btn_(1649,1581)"
+    ],
+    "status": "retouched"
   },
   "ART-0098": {
-    "id": "ART-0098",
     "source_file": "Pasted 2026-11-11 at 11.54.16 AM.png",
-    "size": [
-      1718,
-      1722
-    ],
+    "master_dimensions": "1718x1722",
+    "aspect_ratio": 0.998,
     "operations": [
-      "inpaint_right_button_at_(1673,797)",
-      "inpaint_left_button_at_(57,791)",
-      "inpaint_dots_at_y1652"
-    ]
+      "inpaint_chevron_right_(1670,801)",
+      "inpaint_bottom_right_btn_(1643,1577)"
+    ],
+    "status": "retouched"
   },
   "ART-0099": {
-    "id": "ART-0099",
     "source_file": "Pasted 2026-11-11 at 11.54.35 AM.png",
-    "size": [
-      1716,
-      1720
-    ],
+    "master_dimensions": "1716x1720",
+    "aspect_ratio": 0.998,
     "operations": [
-      "inpaint_dots_at_y1650"
-    ]
+      "inpaint_bottom_right_btn_(1641,1575)"
+    ],
+    "status": "retouched"
   },
   "ART-0100": {
-    "id": "ART-0100",
     "source_file": "Pasted 2026-11-11 at 11.54.57 AM.png",
-    "size": [
-      1195,
-      1673
-    ],
+    "master_dimensions": "1195x1673",
+    "aspect_ratio": 0.714,
     "operations": [
-      "crop_dialog_(63,13,1258,1686)",
-      "inpaint_left_button_at_(15,766)",
-      "inpaint_dots_at_y1603"
-    ]
+      "crop_dialog_(63,13,1258,1686)"
+    ],
+    "status": "retouched"
   },
   "ART-0101": {
-    "id": "ART-0101",
     "source_file": "Pasted 2026-11-11 at 11.55.15 AM.png",
-    "size": [
-      1150,
-      1611
-    ],
+    "master_dimensions": "1150x1611",
+    "aspect_ratio": 0.714,
     "operations": [
       "crop_dialog_(41,20,1191,1631)",
-      "inpaint_right_button_at_(1075,735)",
-      "inpaint_left_button_at_(18,735)",
-      "inpaint_dots_at_y1541"
-    ]
+      "inpaint_right_nav_btn_(1080,850)"
+    ],
+    "status": "retouched"
   },
   "ART-0102": {
-    "id": "ART-0102",
     "source_file": "Pasted 2026-11-11 at 11.55.37 AM.png",
-    "size": [
-      1642,
-      1738
-    ],
+    "master_dimensions": "1642x1738",
+    "aspect_ratio": 0.945,
     "operations": [
-      "inpaint_left_button_at_(15,799)",
-      "inpaint_dots_at_y1668"
-    ]
+      "inpaint_bottom_right_btn_(1567,1593)"
+    ],
+    "status": "retouched"
   },
   "ART-0103": {
-    "id": "ART-0103",
     "source_file": "Pasted 2026-11-11 at 11.56.01 AM.png",
-    "size": [
-      1366,
-      1710
-    ],
+    "master_dimensions": "1366x1710",
+    "aspect_ratio": 0.799,
     "operations": [
-      "inpaint_dots_at_y1640"
-    ]
+      "inpaint_bottom_right_btn_(1291,1565)"
+    ],
+    "status": "retouched"
   },
   "ART-0104": {
-    "id": "ART-0104",
     "source_file": "Pasted 2026-11-11 at 11.56.23 AM.png",
-    "size": [
-      1372,
-      1716
-    ],
+    "master_dimensions": "1372x1716",
+    "aspect_ratio": 0.8,
     "operations": [
       "crop_dialog_(0,0,1372,1716)",
-      "inpaint_left_button_at_(15,878)",
-      "inpaint_dots_at_y1646"
-    ]
+      "inpaint_bottom_right_btn_(1297,1571)"
+    ],
+    "status": "retouched"
   },
   "ART-0105": {
-    "id": "ART-0105",
     "source_file": "Pasted 2026-11-11 at 11.56.45 AM.png",
-    "size": [
-      1373,
-      1720
-    ],
+    "master_dimensions": "1373x1720",
+    "aspect_ratio": 0.798,
     "operations": [
       "crop_dialog_(0,0,1373,1720)",
-      "inpaint_left_button_at_(72,841)",
-      "inpaint_dots_at_y1650"
-    ]
+      "inpaint_chevron_right_(1318,849)",
+      "inpaint_bottom_right_btn_(1298,1575)"
+    ],
+    "status": "retouched"
   },
   "ART-0106": {
-    "id": "ART-0106",
     "source_file": "Pasted 2026-11-11 at 11.57.09 AM.png",
-    "size": [
-      1374,
-      1718
-    ],
+    "master_dimensions": "1374x1718",
+    "aspect_ratio": 0.8,
     "operations": [
       "crop_dialog_(0,0,1374,1718)",
-      "inpaint_right_button_at_(1299,792)",
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_chevron_right_(1293,799)",
+      "inpaint_bottom_right_btn_(1299,1573)"
+    ],
+    "status": "retouched"
   },
   "ART-0107": {
-    "id": "ART-0107",
     "source_file": "Pasted 2026-11-11 at 11.57.33 AM.png",
-    "size": [
-      1373,
-      1716
-    ],
+    "master_dimensions": "1373x1716",
+    "aspect_ratio": 0.8,
     "operations": [
       "crop_dialog_(0,0,1373,1716)",
-      "inpaint_right_button_at_(1298,821)",
-      "inpaint_left_button_at_(15,893)",
-      "inpaint_dots_at_y1646"
-    ]
+      "inpaint_chevron_right_(1292,824)",
+      "inpaint_bottom_right_btn_(1298,1571)"
+    ],
+    "status": "retouched"
   },
   "ART-0108": {
-    "id": "ART-0108",
     "source_file": "Pasted 2026-11-11 at 11.57.55 AM.png",
-    "size": [
-      1376,
-      1718
-    ],
+    "master_dimensions": "1376x1718",
+    "aspect_ratio": 0.801,
     "operations": [
       "crop_dialog_(0,0,1376,1718)",
-      "inpaint_right_button_at_(1307,789)",
-      "inpaint_left_button_at_(45,789)",
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_chevron_right_(1343,872)",
+      "inpaint_bottom_right_btn_(1301,1573)"
+    ],
+    "status": "retouched"
   },
   "ART-0109": {
-    "id": "ART-0109",
     "source_file": "Pasted 2026-11-11 at 11.58.19 AM.png",
-    "size": [
-      1374,
-      1718
-    ],
-    "operations": []
+    "master_dimensions": "1374x1718",
+    "aspect_ratio": 0.8,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0110": {
-    "id": "ART-0110",
     "source_file": "Pasted 2026-11-11 at 11.58.38 AM.png",
-    "size": [
-      1714,
-      1655
-    ],
+    "master_dimensions": "1714x1655",
+    "aspect_ratio": 1.036,
     "operations": [
       "crop_dialog_(0,20,1714,1675)",
-      "inpaint_right_button_at_(1663,757)",
-      "inpaint_left_button_at_(15,757)"
-    ]
+      "inpaint_chevron_right_(1642,767)",
+      "inpaint_left_nav_btn_(72,772)"
+    ],
+    "status": "retouched"
   },
   "ART-0111": {
-    "id": "ART-0111",
     "source_file": "Pasted 2026-11-11 at 11.59.01 AM.png",
-    "size": [
-      1373,
-      1722
-    ],
+    "master_dimensions": "1373x1722",
+    "aspect_ratio": 0.797,
     "operations": [
       "crop_dialog_(0,0,1373,1722)",
-      "inpaint_right_button_at_(1322,848)",
-      "inpaint_left_button_at_(15,875)",
-      "inpaint_dots_at_y1652"
-    ]
+      "inpaint_chevron_right_(1326,861)",
+      "inpaint_bottom_right_btn_(1298,1577)"
+    ],
+    "status": "retouched"
   },
   "ART-0112": {
-    "id": "ART-0112",
     "source_file": "Pasted 2026-11-11 at 11.59.21 AM.png",
-    "size": [
-      1375,
-      1720
-    ],
+    "master_dimensions": "1375x1720",
+    "aspect_ratio": 0.799,
     "operations": [
       "crop_dialog_(0,0,1375,1720)",
-      "inpaint_right_button_at_(1342,832)",
-      "inpaint_left_button_at_(21,790)",
-      "inpaint_dots_at_y1650"
-    ]
+      "inpaint_right_nav_btn_(1329,861)",
+      "inpaint_left_nav_btn_(49,861)",
+      "inpaint_bottom_right_btn_(1300,1575)"
+    ],
+    "status": "retouched"
   },
   "ART-0113": {
-    "id": "ART-0113",
     "source_file": "Pasted 2026-11-11 at 11.59.49 AM.png",
-    "size": [
-      1232,
-      1644
-    ],
+    "master_dimensions": "1232x1644",
+    "aspect_ratio": 0.749,
     "operations": [
       "crop_dialog_(6,11,1238,1655)",
-      "inpaint_left_button_at_(29,844)",
-      "inpaint_dots_at_y1574"
-    ]
+      "inpaint_left_nav_btn_(31,844)",
+      "inpaint_bottom_right_btn_(1157,1499)"
+    ],
+    "status": "retouched"
   },
   "ART-0114": {
-    "id": "ART-0114",
     "source_file": "Pasted 2026-11-11 at 12.00.06 PM.png",
-    "size": [
-      1236,
-      1635
-    ],
+    "master_dimensions": "1236x1635",
+    "aspect_ratio": 0.756,
     "operations": [
       "crop_dialog_(0,0,1236,1635)",
-      "inpaint_right_button_at_(1167,747)",
-      "inpaint_left_button_at_(60,747)",
-      "inpaint_dots_at_y1565"
-    ]
+      "inpaint_bottom_right_btn_(1161,1490)"
+    ],
+    "status": "retouched"
   },
   "ART-0115": {
-    "id": "ART-0115",
     "source_file": "Pasted 2026-11-11 at 12.00.26 PM.png",
-    "size": [
-      1160,
-      1662
-    ],
+    "master_dimensions": "1160x1662",
+    "aspect_ratio": 0.698,
     "operations": [
       "crop_dialog_(0,0,1160,1662)",
-      "inpaint_left_button_at_(45,761)",
-      "inpaint_dots_at_y1592"
-    ]
+      "inpaint_bottom_right_btn_(1085,1517)"
+    ],
+    "status": "retouched"
   },
   "ART-0116": {
-    "id": "ART-0116",
     "source_file": "Pasted 2026-11-11 at 12.00.47 PM.png",
-    "size": [
-      1164,
-      1618
-    ],
+    "master_dimensions": "1164x1618",
+    "aspect_ratio": 0.719,
     "operations": [
       "crop_dialog_(0,0,1164,1618)",
-      "inpaint_dots_at_y1548"
-    ]
+      "inpaint_bottom_right_btn_(1089,1473)"
+    ],
+    "status": "retouched"
   },
   "ART-0117": {
-    "id": "ART-0117",
     "source_file": "Pasted 2026-11-11 at 12.01.07 PM.png",
-    "size": [
-      1372,
-      1720
-    ],
-    "operations": [
-      "inpaint_left_button_at_(48,790)",
-      "inpaint_dots_at_y1650"
-    ]
+    "master_dimensions": "1372x1720",
+    "aspect_ratio": 0.798,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0118": {
-    "id": "ART-0118",
     "source_file": "Pasted 2026-11-11 at 12.01.26 PM.png",
-    "size": [
-      1716,
-      1571
-    ],
+    "master_dimensions": "1716x1571",
+    "aspect_ratio": 1.092,
     "operations": [
       "crop_dialog_(0,20,1716,1591)",
-      "inpaint_right_button_at_(1641,715)",
-      "inpaint_left_button_at_(57,763)"
-    ]
+      "inpaint_chevron_right_(1669,738)",
+      "inpaint_bottom_right_btn_(1641,1426)"
+    ],
+    "status": "retouched"
   },
   "ART-0119": {
-    "id": "ART-0119",
     "source_file": "Pasted 2026-11-11 at 12.01.48 PM.png",
-    "size": [
-      1376,
-      1718
-    ],
+    "master_dimensions": "1376x1718",
+    "aspect_ratio": 0.801,
     "operations": [
-      "inpaint_right_button_at_(1301,792)",
-      "inpaint_left_button_at_(66,789)",
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_chevron_right_(1299,799)",
+      "inpaint_bottom_right_btn_(1301,1573)"
+    ],
+    "status": "retouched"
   },
   "ART-0120": {
-    "id": "ART-0120",
     "source_file": "Pasted 2026-11-11 at 12.02.28 PM.png",
-    "size": [
-      1348,
-      1722
-    ],
-    "operations": [
-      "inpaint_dots_at_y1652"
-    ]
+    "master_dimensions": "1348x1722",
+    "aspect_ratio": 0.783,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0121": {
-    "id": "ART-0121",
     "source_file": "Pasted 2026-11-11 at 12.02.45 PM.png",
-    "size": [
-      1372,
-      1728
-    ],
-    "operations": [
-      "inpaint_dots_at_y1658"
-    ]
+    "master_dimensions": "1372x1728",
+    "aspect_ratio": 0.794,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0122": {
-    "id": "ART-0122",
     "source_file": "Pasted 2026-11-11 at 12.03.04 PM.png",
-    "size": [
-      1372,
-      1720
-    ],
-    "operations": [
-      "inpaint_dots_at_y1650"
-    ]
+    "master_dimensions": "1372x1720",
+    "aspect_ratio": 0.798,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0123": {
-    "id": "ART-0123",
     "source_file": "Pasted 2026-11-11 at 12.03.23 PM.png",
-    "size": [
-      1309,
-      1718
-    ],
+    "master_dimensions": "1309x1718",
+    "aspect_ratio": 0.762,
     "operations": [
-      "inpaint_right_button_at_(1246,789)",
-      "inpaint_left_button_at_(69,914)",
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_chevron_right_(1251,804)",
+      "inpaint_left_nav_btn_(69,915)",
+      "inpaint_bottom_right_btn_(1291,1590)"
+    ],
+    "status": "retouched"
   },
   "ART-0124": {
-    "id": "ART-0124",
     "source_file": "Pasted 2026-11-11 at 12.03.42 PM.png",
-    "size": [
-      1438,
-      1718
-    ],
+    "master_dimensions": "1438x1718",
+    "aspect_ratio": 0.837,
     "operations": [
       "crop_dialog_(0,0,1438,1718)",
-      "inpaint_right_button_at_(1392,857)",
-      "inpaint_dots_at_y1678"
-    ]
+      "inpaint_right_nav_btn_(1392,857)"
+    ],
+    "status": "retouched"
   },
   "ART-0125": {
-    "id": "ART-0125",
     "source_file": "Pasted 2026-11-11 at 12.04.00 PM.png",
-    "size": [
-      1373,
-      1722
-    ],
+    "master_dimensions": "1373x1722",
+    "aspect_ratio": 0.797,
     "operations": [
       "crop_dialog_(22,0,1395,1722)",
-      "inpaint_left_button_at_(15,872)",
-      "inpaint_dots_at_y1652"
-    ]
+      "inpaint_bottom_right_btn_(1298,1577)"
+    ],
+    "status": "retouched"
   },
   "ART-0126": {
-    "id": "ART-0126",
     "source_file": "Pasted 2026-11-11 at 12.04.18 PM.png",
-    "size": [
-      1374,
-      1720
-    ],
+    "master_dimensions": "1374x1720",
+    "aspect_ratio": 0.799,
     "operations": [
-      "inpaint_dots_at_y1650"
-    ]
+      "inpaint_chevron_right_(1318,851)"
+    ],
+    "status": "retouched"
   },
   "ART-0127": {
-    "id": "ART-0127",
     "source_file": "Pasted 2026-11-11 at 12.04.38 PM.png",
-    "size": [
-      1372,
-      1720
-    ],
+    "master_dimensions": "1372x1720",
+    "aspect_ratio": 0.798,
     "operations": [
-      "inpaint_dots_at_y1650"
-    ]
+      "inpaint_pagination_dots_2_at_y1680"
+    ],
+    "status": "retouched"
   },
   "ART-0128": {
-    "id": "ART-0128",
     "source_file": "Pasted 2026-11-11 at 12.05.00 PM.png",
-    "size": [
-      1372,
-      1722
-    ],
-    "operations": [
-      "inpaint_dots_at_y1652"
-    ]
+    "master_dimensions": "1372x1722",
+    "aspect_ratio": 0.797,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0129": {
-    "id": "ART-0129",
     "source_file": "Pasted 2026-11-11 at 12.05.21 PM.png",
-    "size": [
-      1375,
-      1718
-    ],
+    "master_dimensions": "1375x1718",
+    "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_right_button_at_(1345,840)",
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_chevron_right_(1339,844)"
+    ],
+    "status": "retouched"
   },
   "ART-0130": {
-    "id": "ART-0130",
     "source_file": "Pasted 2026-11-11 at 12.05.43 PM.png",
-    "size": [
-      1372,
-      1720
-    ],
-    "operations": [
-      "inpaint_dots_at_y1650"
-    ]
+    "master_dimensions": "1372x1720",
+    "aspect_ratio": 0.798,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0131": {
-    "id": "ART-0131",
     "source_file": "Pasted 2026-11-11 at 12.06.01 PM.png",
-    "size": [
-      1279,
-      1710
-    ],
+    "master_dimensions": "1279x1710",
+    "aspect_ratio": 0.748,
     "operations": [
-      "crop_dialog_(0,0,1279,1710)",
-      "inpaint_right_button_at_(1261,785)",
-      "inpaint_left_button_at_(69,806)",
-      "inpaint_dots_at_y1640"
-    ]
+      "crop_dialog_(0,0,1279,1710)"
+    ],
+    "status": "retouched"
   },
   "ART-0132": {
-    "id": "ART-0132",
     "source_file": "Pasted 2026-11-11 at 12.06.21 PM.png",
-    "size": [
-      1370,
-      1716
-    ],
+    "master_dimensions": "1370x1716",
+    "aspect_ratio": 0.798,
     "operations": [
-      "inpaint_right_button_at_(1334,815)",
-      "inpaint_dots_at_y1646"
-    ]
+      "inpaint_chevron_right_(1291,912)"
+    ],
+    "status": "retouched"
   },
   "ART-0133": {
-    "id": "ART-0133",
     "source_file": "Pasted 2026-11-11 at 12.06.43 PM.png",
-    "size": [
-      1716,
-      1461
-    ],
+    "master_dimensions": "1716x1461",
+    "aspect_ratio": 1.175,
     "operations": [
-      "crop_dialog_(0,20,1716,1481)",
-      "inpaint_left_button_at_(15,660)",
-      "inpaint_dots_at_y1391"
-    ]
+      "crop_dialog_(0,20,1716,1481)"
+    ],
+    "status": "retouched"
   },
   "ART-0134": {
-    "id": "ART-0134",
     "source_file": "Pasted 2026-11-11 at 12.07.01 PM.png",
-    "size": [
-      1714,
-      1577
-    ],
+    "master_dimensions": "1714x1577",
+    "aspect_ratio": 1.087,
     "operations": [
       "crop_dialog_(0,20,1714,1597)",
-      "inpaint_right_button_at_(1687,805)"
-    ]
+      "inpaint_right_nav_btn_(1667,825)"
+    ],
+    "status": "retouched"
   },
   "ART-0135": {
-    "id": "ART-0135",
     "source_file": "Pasted 2026-11-11 at 12.07.21 PM.png",
-    "size": [
-      1584,
-      1405
-    ],
+    "master_dimensions": "1584x1405",
+    "aspect_ratio": 1.127,
     "operations": [
-      "crop_dialog_(27,20,1611,1425)",
-      "inpaint_left_button_at_(69,632)"
-    ]
+      "crop_dialog_(27,20,1611,1425)"
+    ],
+    "status": "retouched"
   },
   "ART-0136": {
-    "id": "ART-0136",
     "source_file": "Pasted 2026-11-11 at 12.07.40 PM.png",
-    "size": [
-      1710,
-      1451
-    ],
+    "master_dimensions": "1710x1451",
+    "aspect_ratio": 1.178,
     "operations": [
-      "crop_dialog_(0,20,1710,1471)",
-      "inpaint_right_button_at_(1644,793)"
-    ]
+      "crop_dialog_(0,20,1710,1471)"
+    ],
+    "status": "retouched"
   },
   "ART-0137": {
-    "id": "ART-0137",
     "source_file": "Pasted 2026-11-11 at 12.07.59 PM.png",
-    "size": [
-      1714,
-      1447
-    ],
+    "master_dimensions": "1714x1447",
+    "aspect_ratio": 1.185,
     "operations": [
-      "crop_dialog_(0,20,1714,1467)",
-      "inpaint_dots_at_y1377"
-    ]
+      "crop_dialog_(0,20,1714,1467)"
+    ],
+    "status": "retouched"
   },
   "ART-0138": {
-    "id": "ART-0138",
     "source_file": "Pasted 2026-11-11 at 12.08.18 PM.png",
-    "size": [
-      1712,
-      1445
-    ],
+    "master_dimensions": "1712x1445",
+    "aspect_ratio": 1.185,
     "operations": [
-      "crop_dialog_(0,20,1712,1465)",
-      "inpaint_right_button_at_(1637,778)",
-      "inpaint_dots_at_y1375"
-    ]
+      "crop_dialog_(0,20,1712,1465)"
+    ],
+    "status": "retouched"
   },
   "ART-0139": {
-    "id": "ART-0139",
     "source_file": "Pasted 2026-11-11 at 12.08.37 PM.png",
-    "size": [
-      1712,
-      1453
-    ],
+    "master_dimensions": "1712x1453",
+    "aspect_ratio": 1.178,
     "operations": [
-      "crop_dialog_(0,20,1712,1473)",
-      "inpaint_left_button_at_(15,692)",
-      "inpaint_dots_at_y1383"
-    ]
+      "crop_dialog_(0,20,1712,1473)"
+    ],
+    "status": "retouched"
   },
   "ART-0140": {
-    "id": "ART-0140",
     "source_file": "Pasted 2026-11-11 at 12.08.58 PM.png",
-    "size": [
-      1366,
-      1714
-    ],
+    "master_dimensions": "1366x1714",
+    "aspect_ratio": 0.797,
     "operations": [
-      "inpaint_right_button_at_(1309,793)",
-      "inpaint_left_button_at_(57,787)",
-      "inpaint_dots_at_y1644"
-    ]
+      "inpaint_chevron_right_(1303,864)",
+      "inpaint_bottom_right_btn_(1291,1569)"
+    ],
+    "status": "retouched"
   },
   "ART-0141": {
-    "id": "ART-0141",
     "source_file": "Pasted 2026-11-11 at 12.09.15 PM.png",
-    "size": [
-      1368,
-      1718
-    ],
+    "master_dimensions": "1368x1718",
+    "aspect_ratio": 0.796,
     "operations": [
-      "inpaint_right_button_at_(1329,789)",
-      "inpaint_dots_at_y1678"
-    ]
+      "inpaint_chevron_right_(1323,799)"
+    ],
+    "status": "retouched"
   },
   "ART-0142": {
-    "id": "ART-0142",
     "source_file": "Pasted 2026-11-11 at 12.09.36 PM.png",
-    "size": [
-      1370,
-      1718
-    ],
-    "operations": [
-      "inpaint_right_button_at_(1343,789)",
-      "inpaint_left_button_at_(27,840)",
-      "inpaint_dots_at_y1678"
-    ]
+    "master_dimensions": "1370x1718",
+    "aspect_ratio": 0.797,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0143": {
-    "id": "ART-0143",
     "source_file": "Pasted 2026-11-11 at 12.09.55 PM.png",
-    "size": [
-      1716,
-      1525
-    ],
+    "master_dimensions": "1716x1525",
+    "aspect_ratio": 1.125,
     "operations": [
       "crop_dialog_(0,20,1716,1545)",
-      "inpaint_right_button_at_(1641,731)"
-    ]
+      "inpaint_right_nav_btn_(1655,809)"
+    ],
+    "status": "retouched"
   },
   "ART-0144": {
-    "id": "ART-0144",
     "source_file": "Pasted 2026-11-11 at 12.10.15 PM.png",
-    "size": [
-      1712,
-      1553
-    ],
+    "master_dimensions": "1712x1553",
+    "aspect_ratio": 1.102,
     "operations": [
       "crop_dialog_(0,20,1712,1573)",
-      "inpaint_right_button_at_(1637,784)",
-      "inpaint_left_button_at_(48,706)"
-    ]
+      "inpaint_right_nav_btn_(1650,826)"
+    ],
+    "status": "retouched"
   },
   "ART-0145": {
-    "id": "ART-0145",
     "source_file": "Pasted 2026-11-11 at 12.10.34 PM.png",
-    "size": [
-      1371,
-      1720
-    ],
-    "operations": [
-      "inpaint_dots_at_y1650"
-    ]
+    "master_dimensions": "1371x1720",
+    "aspect_ratio": 0.797,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0146": {
-    "id": "ART-0146",
     "source_file": "Pasted 2026-11-11 at 12.10.54 PM.png",
-    "size": [
-      1716,
-      1507
-    ],
+    "master_dimensions": "1716x1507",
+    "aspect_ratio": 1.139,
     "operations": [
       "crop_dialog_(0,20,1716,1527)",
-      "inpaint_right_button_at_(1674,683)"
-    ]
+      "inpaint_bottom_right_btn_(1641,1381)"
+    ],
+    "status": "retouched"
   },
   "ART-0147": {
-    "id": "ART-0147",
     "source_file": "Pasted 2026-11-11 at 12.11.13 PM.png",
-    "size": [
-      1593,
-      1551
-    ],
+    "master_dimensions": "1593x1551",
+    "aspect_ratio": 1.027,
     "operations": [
-      "crop_dialog_(62,20,1655,1571)",
-      "inpaint_right_button_at_(1575,774)",
-      "inpaint_left_button_at_(18,705)"
-    ]
+      "crop_dialog_(62,20,1655,1571)"
+    ],
+    "status": "retouched"
   },
   "ART-0148": {
-    "id": "ART-0148",
     "source_file": "Pasted 2026-11-11 at 12.13.05 PM.png",
-    "size": [
-      1652,
-      1468
-    ],
-    "operations": [
-      "inpaint_right_button_at_(1607,688)"
-    ]
+    "master_dimensions": "1652x1468",
+    "aspect_ratio": 1.125,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0149": {
-    "id": "ART-0149",
     "source_file": "Pasted 2026-11-11 at 12.13.26 PM.png",
-    "size": [
-      1558,
-      1722
-    ],
-    "operations": []
+    "master_dimensions": "1558x1722",
+    "aspect_ratio": 0.905,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0150": {
-    "id": "ART-0150",
     "source_file": "Pasted 2026-11-11 at 12.13.54 PM.png",
-    "size": [
-      1576,
-      1664
-    ],
-    "operations": []
+    "master_dimensions": "1576x1664",
+    "aspect_ratio": 0.947,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0151": {
-    "id": "ART-0151",
     "source_file": "Pasted 2026-11-11 at 12.14.12 PM.png",
-    "size": [
-      1373,
-      1722
-    ],
+    "master_dimensions": "1373x1722",
+    "aspect_ratio": 0.797,
     "operations": [
-      "inpaint_right_button_at_(1298,791)",
-      "inpaint_left_button_at_(15,791)",
-      "inpaint_dots_at_y1652"
-    ]
+      "inpaint_chevron_right_(1306,855)",
+      "inpaint_bottom_right_btn_(1311,1586)"
+    ],
+    "status": "retouched"
   },
   "ART-0152": {
-    "id": "ART-0152",
     "source_file": "Pasted 2026-11-11 at 12.14.30 PM.png",
-    "size": [
-      1374,
-      1718
-    ],
+    "master_dimensions": "1374x1718",
+    "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_right_button_at_(1320,828)",
-      "inpaint_dots_at_y1648"
-    ]
+      "inpaint_chevron_right_(1318,832)",
+      "inpaint_bottom_right_btn_(1299,1573)"
+    ],
+    "status": "retouched"
   },
   "ART-0153": {
-    "id": "ART-0153",
     "source_file": "Pasted 2026-11-11 at 12.15.05 PM.png",
-    "size": [
-      1376,
-      1718
-    ],
-    "operations": [
-      "inpaint_dots_at_y1648"
-    ]
+    "master_dimensions": "1376x1718",
+    "aspect_ratio": 0.801,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0154": {
-    "id": "ART-0154",
     "source_file": "Pasted 2026-11-11 at 12.15.24 PM.png",
-    "size": [
-      1372,
-      1712
-    ],
+    "master_dimensions": "1372x1712",
+    "aspect_ratio": 0.801,
     "operations": [
-      "inpaint_right_button_at_(1303,807)",
-      "inpaint_left_button_at_(15,786)"
-    ]
+      "inpaint_right_nav_btn_(1304,781)"
+    ],
+    "status": "retouched"
   },
   "ART-0155": {
-    "id": "ART-0155",
     "source_file": "Pasted 2026-11-11 at 12.15.43 PM.png",
-    "size": [
-      1522,
-      1714
-    ],
-    "operations": [
-      "inpaint_left_button_at_(51,787)"
-    ]
+    "master_dimensions": "1522x1714",
+    "aspect_ratio": 0.888,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0156": {
-    "id": "ART-0156",
     "source_file": "Pasted 2026-11-11 at 12.16.01 PM.png",
-    "size": [
-      1511,
-      1712
-    ],
-    "operations": [
-      "inpaint_left_button_at_(57,825)"
-    ]
+    "master_dimensions": "1511x1712",
+    "aspect_ratio": 0.883,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0157": {
-    "id": "ART-0157",
     "source_file": "Pasted 2026-11-11 at 12.16.26 PM.png",
-    "size": [
-      1718,
-      1722
-    ],
+    "master_dimensions": "1718x1722",
+    "aspect_ratio": 0.998,
     "operations": [
-      "inpaint_right_button_at_(1649,887)",
-      "inpaint_left_button_at_(36,791)",
-      "inpaint_dots_at_y1652"
-    ]
+      "inpaint_left_nav_btn_(70,800)"
+    ],
+    "status": "retouched"
   },
   "ART-0158": {
-    "id": "ART-0158",
     "source_file": "Pasted 2026-11-11 at 12.16.48 PM.png",
-    "size": [
-      1372,
-      1714
-    ],
-    "operations": [
-      "inpaint_right_button_at_(1297,802)",
-      "inpaint_left_button_at_(72,790)",
-      "inpaint_dots_at_y1644"
-    ]
+    "master_dimensions": "1372x1714",
+    "aspect_ratio": 0.8,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0159": {
-    "id": "ART-0159",
     "source_file": "Pasted 2026-11-11 at 12.17.06 PM.png",
-    "size": [
-      1710,
-      1708
-    ],
+    "master_dimensions": "1710x1708",
+    "aspect_ratio": 1.001,
     "operations": [
-      "inpaint_left_button_at_(51,817)"
-    ]
+      "inpaint_bottom_right_btn_(1635,1563)"
+    ],
+    "status": "retouched"
   },
   "ART-0160": {
-    "id": "ART-0160",
     "source_file": "Pasted 2026-11-11 at 12.17.22 PM.png",
-    "size": [
-      1370,
-      1694
-    ],
+    "master_dimensions": "1370x1694",
+    "aspect_ratio": 0.809,
     "operations": [
       "crop_dialog_(0,20,1370,1714)"
-    ]
+    ],
+    "status": "retouched"
   },
   "ART-0161": {
-    "id": "ART-0161",
     "source_file": "Pasted 2026-11-11 at 12.17.40 PM.png",
-    "size": [
-      1374,
-      1714
-    ],
+    "master_dimensions": "1374x1714",
+    "aspect_ratio": 0.802,
     "operations": [
-      "inpaint_left_button_at_(66,802)",
-      "inpaint_dots_at_y1644"
-    ]
+      "inpaint_bottom_right_btn_(1299,1569)"
+    ],
+    "status": "retouched"
   },
   "ART-0162": {
-    "id": "ART-0162",
     "source_file": "Pasted 2026-11-11 at 12.18.04 PM.png",
-    "size": [
-      1368,
-      1705
-    ],
+    "master_dimensions": "1368x1705",
+    "aspect_ratio": 0.802,
     "operations": [
       "crop_dialog_(0,9,1368,1714)",
-      "inpaint_dots_at_y1635"
-    ]
+      "inpaint_bottom_right_btn_(1351,1644)"
+    ],
+    "status": "retouched"
   },
   "ART-0163": {
-    "id": "ART-0163",
     "source_file": "Pasted 2026-11-11 at 12.31.52 PM.png",
-    "size": [
-      1167,
-      1716
-    ],
+    "master_dimensions": "1167x1716",
+    "aspect_ratio": 0.68,
     "operations": [
       "crop_dialog_(0,4,1167,1720)",
-      "inpaint_right_button_at_(1137,791)",
-      "inpaint_left_button_at_(65,917)",
-      "inpaint_dots_at_y1646"
-    ]
+      "inpaint_left_nav_btn_(61,917)"
+    ],
+    "status": "retouched"
   },
   "ART-0164": {
-    "id": "ART-0164",
     "source_file": "Pasted 2026-11-11 at 12.32.15 PM.png",
-    "size": [
-      1195,
-      1716
-    ],
+    "master_dimensions": "1195x1716",
+    "aspect_ratio": 0.696,
     "operations": [
       "crop_dialog_(0,2,1195,1718)",
-      "inpaint_right_button_at_(1171,824)",
-      "inpaint_left_button_at_(54,788)"
-    ]
+      "inpaint_right_nav_btn_(1122,928)",
+      "inpaint_left_nav_btn_(31,857)"
+    ],
+    "status": "retouched"
   },
   "ART-0165": {
-    "id": "ART-0165",
     "source_file": "Pasted 2026-11-11 at 12.32.35 PM.png",
-    "size": [
-      1716,
-      1714
-    ],
-    "operations": [
-      "inpaint_right_button_at_(1644,808)",
-      "inpaint_left_button_at_(36,787)",
-      "inpaint_dots_at_y1644"
-    ]
+    "master_dimensions": "1716x1714",
+    "aspect_ratio": 1.001,
+    "operations": [],
+    "status": "clean"
   },
   "ART-0166": {
-    "id": "ART-0166",
     "source_file": "Pasted 2026-11-11 at 12.32.57 PM.png",
-    "size": [
-      1716,
-      1716
-    ],
+    "master_dimensions": "1716x1716",
+    "aspect_ratio": 1.0,
     "operations": [
       "crop_dialog_(0,2,1716,1718)",
-      "inpaint_right_button_at_(1683,842)",
-      "inpaint_left_button_at_(15,788)",
-      "inpaint_dots_at_y1646"
-    ]
+      "inpaint_right_nav_btn_(1649,821)",
+      "inpaint_left_nav_btn_(27,925)"
+    ],
+    "status": "retouched"
   },
   "ART-0167": {
-    "id": "ART-0167",
     "source_file": "Pasted 2026-11-11 at 12.33.18 PM.png",
-    "size": [
-      1284,
-      1714
-    ],
+    "master_dimensions": "1284x1714",
+    "aspect_ratio": 0.749,
     "operations": [
       "crop_dialog_(0,2,1284,1716)",
-      "inpaint_right_button_at_(1239,787)"
-    ]
+      "inpaint_bottom_right_btn_(1209,1569)"
+    ],
+    "status": "retouched"
   }
 }

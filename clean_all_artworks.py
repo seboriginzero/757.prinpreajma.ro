@@ -2,6 +2,7 @@ import os
 import json
 import math
 import glob
+from collections import deque
 from PIL import Image
 
 def find_separator(src):
@@ -14,11 +15,10 @@ def find_separator(src):
     return int(w * 0.58)
 
 def inpaint_circle(pix, w, h, cx, cy, R):
-    # Sample boundary at R + 3 to R + 7
     boundary = []
-    for a_deg in range(0, 360, 5):
+    for a_deg in range(0, 360, 8):
         rad = math.radians(a_deg)
-        for dr in [3, 6]:
+        for dr in [4, 8]:
             bx = int(cx + (R + dr) * math.cos(rad))
             by = int(cy + (R + dr) * math.sin(rad))
             if 0 <= bx < w and 0 <= by < h:
@@ -40,21 +40,26 @@ def inpaint_circle(pix, w, h, cx, cy, R):
                         int(sum(w * c[2] for w, (_, _, c) in zip(weights, boundary)) / tw)
                     )
 
-def inpaint_vertical_span(pix, w, h, x_min, x_max, y_min, y_max):
-    y_top = max(0, y_min - 2)
-    y_bot = min(h - 1, y_max + 2)
-    if y_bot <= y_top:
-        return
-    for py in range(y_min, y_max + 1):
-        t = (py - y_top) / (y_bot - y_top)
-        for px in range(max(0, x_min), min(w, x_max + 1)):
-            tp = pix[px, y_top]
-            bp = pix[px, y_bot]
-            pix[px, py] = (
-                int(tp[0] * (1 - t) + bp[0] * t),
-                int(tp[1] * (1 - t) + bp[1] * t),
-                int(tp[2] * (1 - t) + bp[2] * t)
-            )
+def find_components(pts_set):
+    visited = set()
+    components = []
+    for pt in pts_set:
+        if pt in visited:
+            continue
+        comp = []
+        q = deque([pt])
+        visited.add(pt)
+        while q:
+            cx, cy = q.popleft()
+            comp.append((cx, cy))
+            for dx in [-1, 0, 1]:
+                for dy in [-1, 0, 1]:
+                    nx, ny = cx + dx, cy + dy
+                    if (nx, ny) in pts_set and (nx, ny) not in visited:
+                        visited.add((nx, ny))
+                        q.append((nx, ny))
+        components.append(comp)
+    return components
 
 def clean_image(src_path):
     src = Image.open(src_path).convert('RGB')
@@ -102,108 +107,109 @@ def clean_image(src_path):
         
     cy = ch // 2
     
-    # 3. Detect and inpaint Right Button
-    # Search cx in [cw - 95 .. cw - 10], cy in [cy - 85 .. cy + 85]
-    right_btn = None
-    bright_pts_r = []
-    for dy in range(-80, 81, 2):
-        test_y = cy + dy
-        if test_y < 30 or test_y >= ch - 30: continue
-        for test_x in range(cw - 85, cw - 8, 2):
-            p = cpix[test_x, test_y]
-            if sum(p)/3 > 165:
-                bright_pts_r.append((test_x, test_y))
+    # 3. Detect and inpaint Right Navigation Button (y centered around cy +/- 85px)
+    bright_pts_r = set()
+    for y in range(cy - 85, cy + 85):
+        for x in range(cw - 85, cw - 10):
+            p = cpix[x, y]
+            if (p[0] + p[1] + p[2]) / 3 > 175:
+                bright_pts_r.add((x, y))
                 
-    if len(bright_pts_r) >= 120:
-        xs = [pt[0] for pt in bright_pts_r]
-        ys = [pt[1] for pt in bright_pts_r]
-        span_x = max(xs) - min(xs)
-        span_y = max(ys) - min(ys)
-        if 20 <= span_x <= 75 and 20 <= span_y <= 75:
-            cx_r = sum(xs) // len(xs)
-            cy_r = sum(ys) // len(ys)
-            right_btn = (cx_r, cy_r, max(36, max(span_x, span_y) // 2 + 5))
-            
-    if not right_btn:
-        # Check chevron contrast on light background
-        for dy in range(-70, 71, 3):
-            test_y = cy + dy
-            if test_y < 30 or test_y >= ch - 30: continue
-            for test_x in range(cw - 75, cw - 15, 3):
-                inner = [cpix[test_x + int(12*math.cos(a)), test_y + int(12*math.sin(a))] for a in [0, 1.57, 3.14, 4.71]]
-                avg_in = sum(sum(p)/3 for p in inner) / 4
-                if avg_in > 120:
-                    c_samples = [cpix[test_x+dx, test_y+dy_c] for dx in [-3, 0, 3] for dy_c in [-4, 0, 4]]
-                    min_c = min(sum(p)/3 for p in c_samples)
-                    outer = [cpix[test_x + int(32*math.cos(a)), test_y + int(32*math.sin(a))] for a in [0, 1.57, 3.14, 4.71] if 0<=test_x+int(32*math.cos(a))<cw and 0<=test_y+int(32*math.sin(a))<ch]
-                    if outer and (sum(sum(p)/3 for p in outer)/len(outer)) - min_c > 45:
-                        right_btn = (test_x, test_y, 36)
-                        break
-            if right_btn: break
-            
-    if right_btn:
-        inpaint_circle(cpix, cw, ch, right_btn[0], right_btn[1], right_btn[2])
-        ops.append(f"inpaint_right_button_at_({right_btn[0]},{right_btn[1]})")
-        
-    # 4. Detect and inpaint Left Button
-    left_btn = None
-    bright_pts_l = []
-    for dy in range(-80, 81, 2):
-        test_y = cy + dy
-        if test_y < 30 or test_y >= ch - 30: continue
-        for test_x in range(8, min(85, cw // 4), 2):
-            p = cpix[test_x, test_y]
-            if sum(p)/3 > 165:
-                bright_pts_l.append((test_x, test_y))
-                
-    if len(bright_pts_l) >= 120:
-        xs = [pt[0] for pt in bright_pts_l]
-        ys = [pt[1] for pt in bright_pts_l]
-        span_x = max(xs) - min(xs)
-        span_y = max(ys) - min(ys)
-        if 20 <= span_x <= 75 and 20 <= span_y <= 75:
-            cx_l = sum(xs) // len(xs)
-            cy_l = sum(ys) // len(ys)
-            left_btn = (cx_l, cy_l, max(36, max(span_x, span_y) // 2 + 5))
-            
-    if not left_btn:
-        for dy in range(-70, 71, 3):
-            test_y = cy + dy
-            if test_y < 30 or test_y >= ch - 30: continue
-            for test_x in range(15, min(75, cw // 4), 3):
-                inner = [cpix[test_x + int(12*math.cos(a)), test_y + int(12*math.sin(a))] for a in [0, 1.57, 3.14, 4.71]]
-                avg_in = sum(sum(p)/3 for p in inner) / 4
-                if avg_in > 120:
-                    c_samples = [cpix[test_x+dx, test_y+dy_c] for dx in [-3, 0, 3] for dy_c in [-4, 0, 4]]
-                    min_c = min(sum(p)/3 for p in c_samples)
-                    outer = [cpix[test_x + int(32*math.cos(a)), test_y + int(32*math.sin(a))] for a in [0, 1.57, 3.14, 4.71] if 0<=test_x+int(32*math.cos(a))<cw and 0<=test_y+int(32*math.sin(a))<ch]
-                    if outer and (sum(sum(p)/3 for p in outer)/len(outer)) - min_c > 45:
-                        left_btn = (test_x, test_y, 36)
-                        break
-            if left_btn: break
-            
-    if left_btn:
-        inpaint_circle(cpix, cw, ch, left_btn[0], left_btn[1], left_btn[2])
-        ops.append(f"inpaint_left_button_at_({left_btn[0]},{left_btn[1]})")
-        
-    # 5. Detect and inpaint Pagination Dots
-    dots_y = None
-    for y in range(ch - 70, ch - 15, 2):
-        row = [cpix[x, y] for x in range(cw // 4, 3 * cw // 4, 3)]
-        brights = [i for i, p in enumerate(row) if sum(p)/3 > 185]
-        if len(brights) >= 4:
-            dots_y = y
+    r_btn_found = False
+    for comp in find_components(bright_pts_r):
+        xs = [pt[0] for pt in comp]
+        ys = [pt[1] for pt in comp]
+        wb = max(xs) - min(xs)
+        hb = max(ys) - min(ys)
+        if 20 <= wb <= 65 and 20 <= hb <= 65 and abs(wb - hb) <= 20:
+            cx_r = (min(xs) + max(xs)) // 2
+            cy_r = (min(ys) + max(ys)) // 2
+            inpaint_circle(cpix, cw, ch, cx_r, cy_r, 36)
+            ops.append(f"inpaint_right_nav_btn_({cx_r},{cy_r})")
+            r_btn_found = True
             break
             
-    if dots_y:
-        row_full = [sum(cpix[x, dots_y])/3 for x in range(cw)]
-        bright_xs = [x for x, val in enumerate(row_full) if val > 175 and cw//4 < x < 3*cw//4]
-        if bright_xs:
-            min_x = max(0, min(bright_xs) - 20)
-            max_x = min(cw - 1, max(bright_xs) + 20)
-            inpaint_vertical_span(cpix, cw, ch, min_x, max_x, dots_y - 12, dots_y + 12)
-            ops.append(f"inpaint_dots_at_y{dots_y}")
+    if not r_btn_found:
+        for test_y in range(cy - 60, cy + 60):
+            for test_x in range(cw - 75, cw - 25):
+                c_val = sum(cpix[test_x, test_y])/3
+                surr = sum(sum(cpix[test_x + dx, test_y + dy][:3])/3 for dx in [-18, 18] for dy in [-18, 18]) / 4
+                if surr - c_val > 45 and surr > 190:
+                    inpaint_circle(cpix, cw, ch, test_x - 6, test_y, 36)
+                    ops.append(f"inpaint_chevron_right_({test_x-6},{test_y})")
+                    r_btn_found = True
+                    break
+            if r_btn_found: break
+
+    # 4. Detect and inpaint Left Navigation Button (y centered around cy +/- 85px)
+    bright_pts_l = set()
+    for y in range(cy - 85, cy + 85):
+        for x in range(10, min(85, cw // 4)):
+            p = cpix[x, y]
+            if (p[0] + p[1] + p[2]) / 3 > 175:
+                bright_pts_l.add((x, y))
+                
+    for comp in find_components(bright_pts_l):
+        xs = [pt[0] for pt in comp]
+        ys = [pt[1] for pt in comp]
+        wb = max(xs) - min(xs)
+        hb = max(ys) - min(ys)
+        if 20 <= wb <= 65 and 20 <= hb <= 65 and abs(wb - hb) <= 20:
+            cx_l = (min(xs) + max(xs)) // 2
+            cy_l = (min(ys) + max(ys)) // 2
+            inpaint_circle(cpix, cw, ch, cx_l, cy_l, 36)
+            ops.append(f"inpaint_left_nav_btn_({cx_l},{cy_l})")
+            break
+
+    # 5. Detect and inpaint Bottom-Right UI button (Audio/Tag icon at bottom right)
+    for y in range(ch - 145, ch - 60):
+        for x in range(cw - 75, cw - 15):
+            if sum(cpix[x, y])/3 > 195:
+                w_pts = sum(1 for dx in range(-12, 13, 3) for dy in range(-12, 13, 3) if sum(cpix[x+dx, y+dy])/3 > 180)
+                if w_pts > 45:
+                    inpaint_circle(cpix, cw, ch, x, y, 32)
+                    ops.append(f"inpaint_bottom_right_btn_({x},{y})")
+                    break
+        if any('bottom_right_btn' in o for o in ops): break
+
+    # 6. Detect and inpaint Pagination Dots (centered at cw/2, y in [ch - 75 .. ch - 25])
+    dot_pts = set()
+    for y in range(ch - 75, ch - 25):
+        for x in range(int(cw * 0.25), int(cw * 0.75)):
+            if sum(cpix[x, y])/3 > 175:
+                dot_pts.add((x, y))
+                
+    comps = find_components(dot_pts)
+    valid_dots = []
+    for c in comps:
+        xs = [pt[0] for pt in c]
+        ys = [pt[1] for pt in c]
+        wb = max(xs) - min(xs)
+        hb = max(ys) - min(ys)
+        if 4 <= wb <= 18 and 4 <= hb <= 18:
+            valid_dots.append(((min(xs) + max(xs)) // 2, (min(ys) + max(ys)) // 2))
             
+    dots_by_y = {}
+    for dx, dy_val in valid_dots:
+        matched = False
+        for gy in dots_by_y:
+            if abs(gy - dy_val) <= 3:
+                dots_by_y[gy].append((dx, dy_val))
+                matched = True
+                break
+        if not matched:
+            dots_by_y[dy_val] = [(dx, dy_val)]
+            
+    for gy, gdots in dots_by_y.items():
+        if len(gdots) >= 2:
+            gdots = sorted(gdots, key=lambda d: d[0])
+            spacings = [gdots[i+1][0] - gdots[i][0] for i in range(len(gdots)-1)]
+            if all(15 <= sp <= 26 for sp in spacings):
+                for d in gdots:
+                    inpaint_circle(cpix, cw, ch, d[0], d[1], 14)
+                ops.append(f"inpaint_pagination_dots_{len(gdots)}_at_y{gy}")
+                break
+                
     return cropped, ops
 
 def process_all():
@@ -214,63 +220,48 @@ def process_all():
     os.makedirs('data/web-images', exist_ok=True)
     
     restoration_log = {}
-    print(f"Starting restoration of {len(items)} artworks...")
+    print(f"Starting definitive restoration of {len(items)} artworks...")
     
     for idx, it in enumerate(items):
         aid = it['id']
-        sfile = it['source_file']
-        src_path = os.path.join('tmp-insta-posts', sfile)
+        src_path = os.path.join('tmp-insta-posts', it['source_file'])
+        if not os.path.exists(src_path):
+            print(f"[{idx+1}/{len(items)}] Missing source {src_path}")
+            continue
+            
+        clean_img, ops = clean_image(src_path)
         
-        cleaned_im, ops = clean_image(src_path)
+        # Save Master Clean PNG
+        out_png = os.path.join('data/clean-crops', f"{aid}.png")
+        clean_img.save(out_png, format="PNG", optimize=True)
         
-        # Save clean master PNG
-        png_path = os.path.join('data/clean-crops', f"{aid}.png")
-        cleaned_im.save(png_path, format='PNG')
+        # Save Web WebP full
+        out_webp = os.path.join('data/web-images', f"{aid}.webp")
+        clean_img.save(out_webp, format="WEBP", quality=92, method=6)
         
-        # Save WebP full (max 1600px)
-        cw, ch = cleaned_im.size
-        scale = min(1.0, 1600 / max(cw, ch))
-        if scale < 1.0:
-            full_w, full_h = int(cw * scale), int(ch * scale)
-            full_im = cleaned_im.resize((full_w, full_h), Image.Resampling.LANCZOS)
-        else:
-            full_im = cleaned_im
-        webp_path = os.path.join('data/web-images', f"{aid}.webp")
-        full_im.save(webp_path, format='WEBP', quality=90)
-        
-        # Save WebP thumb (max 520px)
-        t_scale = min(1.0, 520 / max(cw, ch))
-        tw, th = int(cw * t_scale), int(ch * t_scale)
-        thumb_im = cleaned_im.resize((tw, th), Image.Resampling.LANCZOS)
-        thumb_path = os.path.join('data/web-images', f"{aid}_thumb.webp")
-        thumb_im.save(thumb_path, format='WEBP', quality=84)
-        
-        # Update metadata
-        it['width'] = cw
-        it['height'] = ch
-        it['aspect_ratio'] = round(cw / ch, 3)
-        it['cleaning_status'] = 'clean' if not ops else 'retouched'
-        it['cleaning_operations'] = ops
-        it['cleaning_notes'] = f"Curățare prudentă efectuată: {', '.join(ops) if ops else 'decupaj curat'}"
+        # Save Web WebP thumbnail
+        out_thumb = os.path.join('data/web-images', f"{aid}_thumb.webp")
+        tw, th = clean_img.size
+        target_w = 640
+        target_h = int(th * (target_w / tw))
+        thumb_img = clean_img.resize((target_w, target_h), Image.Resampling.LANCZOS)
+        thumb_img.save(out_thumb, format="WEBP", quality=85, method=6)
         
         restoration_log[aid] = {
-            'id': aid,
-            'source_file': sfile,
-            'size': (cw, ch),
-            'operations': ops
+            "source_file": it['source_file'],
+            "master_dimensions": f"{clean_img.size[0]}x{clean_img.size[1]}",
+            "aspect_ratio": round(clean_img.size[0] / clean_img.size[1], 3),
+            "operations": ops,
+            "status": "clean" if not ops else "retouched"
         }
         
         if (idx + 1) % 25 == 0 or idx == len(items) - 1:
-            print(f"[{idx+1}/{len(items)}] Processed {aid} ({cw}x{ch}) - ops: {len(ops)}")
+            print(f"[{idx+1}/{len(items)}] Processed {aid} ({len(ops)} ops: {ops})")
             
-    # Save updated metadata
-    with open('data/collection-index.json', 'w') as f:
-        json.dump(items, f, indent=2, ensure_ascii=False)
-        
     with open('data/restoration-log.json', 'w') as f:
         json.dump(restoration_log, f, indent=2)
         
-    print("All 167 artworks cleaned and WebP files regenerated successfully!")
+    print(f"Completed! Restoration log saved to data/restoration-log.json")
 
 if __name__ == '__main__':
     process_all()

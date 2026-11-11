@@ -691,6 +691,11 @@
     modalNextBtn.addEventListener('click', nextModalItem);
     modalPrevBtn.addEventListener('click', prevModalItem);
 
+    const modalPlaquePrev = document.getElementById('modal-plaque-prev');
+    const modalPlaqueNext = document.getElementById('modal-plaque-next');
+    if (modalPlaquePrev) modalPlaquePrev.addEventListener('click', prevModalItem);
+    if (modalPlaqueNext) modalPlaqueNext.addEventListener('click', nextModalItem);
+
     if (modalFsTriggerBtn) {
       modalFsTriggerBtn.addEventListener('click', () => {
         openLuxuryFullscreen(state.modalIndex);

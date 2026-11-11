@@ -468,72 +468,105 @@ def rebuild_site():
             </div>
           </div>
 
-          <!-- Bottom Floating Navigation Toolbar (Completely separate from artwork) -->
-          <div class="modal-floating-nav">
-            <button id="modal-prev-btn" class="modal-nav-action prev" title="Opera Anterioară (Săgeată Stânga)">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
-              <span>Anterior</span>
-            </button>
-            <div class="modal-nav-status">
-              <span id="modal-counter-badge" class="modal-counter-pill">1 / 167</span>
-              <span class="modal-zoom-hint">Click / Lupă pt Zoom</span>
-            </div>
-            <button id="modal-next-btn" class="modal-nav-action next" title="Opera Următoare (Săgeată Dreapta)">
-              <span>Următor</span>
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </button>
+          <!-- Side Gutter Navigation Arrows (Never overlaying artwork) -->
+          <button id="modal-prev-btn" class="modal-canvas-arrow prev" title="Opera Anterioară (Săgeată Stânga)" aria-label="Opera Anterioară">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <button id="modal-next-btn" class="modal-canvas-arrow next" title="Opera Următoare (Săgeată Dreapta)" aria-label="Opera Următoare">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+
+          <!-- Bottom Discrete Status Pill -->
+          <div class="modal-canvas-status">
+            <span id="modal-counter-badge" class="modal-counter-pill">1 / 167</span>
+            <span class="status-divider">&middot;</span>
+            <span class="modal-zoom-hint">Click pe imagine pt Zoom</span>
           </div>
         </div>
 
-        <!-- Curatorial Dossier Column -->
+        <!-- Curatorial Dossier Column (3D Hanging Plaque on Studio Wall) -->
         <div class="modal-info">
-          <div class="info-section">
-            <span class="info-label">IDENTIFICATOR ARHIVĂ</span>
-            <span class="info-val code" id="modal-id">ART-0001</span>
-          </div>
-
-          <div class="info-section">
-            <span class="info-label">OBSERVAȚIE CURATORIALĂ (OBIECTIVĂ)</span>
-            <p class="info-text" id="modal-curatorial"></p>
-          </div>
-
-          <div class="info-section">
-            <span class="info-label">ANALIZĂ CRITICĂ INDEPENDENTĂ</span>
-            <blockquote class="info-quote" id="modal-critic"></blockquote>
-          </div>
-
-          <div class="info-section">
-            <span class="info-label">IPOTEZĂ TEHNICĂ &amp; SUPORT</span>
-            <span class="info-val" id="modal-medium"></span>
-          </div>
-
-          <div class="info-grid">
-            <div>
-              <span class="info-label">STATUS RESTAURARE</span>
-              <span class="info-val status" id="modal-status">Curățat (Master)</span>
+          
+          <!-- Mecanism de Atârnare: Cui Bătut în Perete + Sfoară 3D -->
+          <div class="modal-hanging-rig" aria-hidden="true">
+            <div class="wall-nail">
+              <span class="nail-shadow"></span>
+              <span class="nail-cap"></span>
             </div>
-            <div>
-              <span class="info-label">EVENIMENT POSTARE</span>
-              <span class="info-val" id="modal-post">POST-0001 (1/1)</span>
-            </div>
-            <div>
-              <span class="info-label">RAPORT ASPECT</span>
-              <span class="info-val code" id="modal-ratio">0.80</span>
-            </div>
+            <svg class="hanging-twine" viewBox="0 0 220 54" preserveAspectRatio="none">
+              <!-- Sfoară în V cu umbră 3D proiectată pe perete -->
+              <line x1="112" y1="12" x2="42" y2="54" class="twine-shadow" />
+              <line x1="112" y1="12" x2="178" y2="54" class="twine-shadow" />
+              <line x1="110" y1="10" x2="40" y2="52" class="twine-cord" />
+              <line x1="110" y1="10" x2="176" y2="52" class="twine-cord" />
+            </svg>
           </div>
 
-          <div class="info-section">
-            <span class="info-label">TAGURI VIZUALE</span>
-            <div class="tag-cloud" id="modal-tags"></div>
-          </div>
+          <!-- Plăcuța Curatorială 3D Atârnată de Cui -->
+          <div class="modal-plaque-card">
+            <div class="plaque-eyelets">
+              <span class="eyelet left"></span>
+              <span class="eyelet right"></span>
+            </div>
 
-          <div class="info-section provenance">
-            <span class="info-label">TRASABILITATE SURSĂ MASTER</span>
-            <div class="provenance-row">
-              <span class="prov-file" id="modal-source-file"></span>
-              <a href="#" target="_blank" id="modal-source-link" class="btn-prov" title="Vezi captura completă a postării Instagram cu bara laterală">
-                Audit Captură &rarr;
-              </a>
+            <div class="plaque-top-meta">
+              <span class="plaque-stamp">OPUS 757 &middot; ARHIVĂ DE ARTĂ</span>
+              <span class="info-val code" id="modal-id">ART-0001</span>
+            </div>
+
+            <div class="info-section">
+              <span class="info-label">OBSERVAȚIE CURATORIALĂ (OBIECTIVĂ)</span>
+              <p class="info-text" id="modal-curatorial"></p>
+            </div>
+
+            <div class="info-section">
+              <span class="info-label">ANALIZĂ CRITICĂ INDEPENDENTĂ</span>
+              <blockquote class="info-quote" id="modal-critic"></blockquote>
+            </div>
+
+            <div class="info-section">
+              <span class="info-label">IPOTEZĂ TEHNICĂ &amp; SUPORT</span>
+              <span class="info-val medium-val" id="modal-medium"></span>
+            </div>
+
+            <div class="info-grid">
+              <div class="grid-item">
+                <span class="info-label">STATUS RESTAURARE</span>
+                <span class="info-val status" id="modal-status">Curățat (Master)</span>
+              </div>
+              <div class="grid-item">
+                <span class="info-label">EVENIMENT POSTARE</span>
+                <span class="info-val" id="modal-post">POST-0001 (1/1)</span>
+              </div>
+              <div class="grid-item">
+                <span class="info-label">RAPORT ASPECT</span>
+                <span class="info-val code" id="modal-ratio">0.80</span>
+              </div>
+            </div>
+
+            <div class="info-section">
+              <span class="info-label">TAGURI VIZUALE</span>
+              <div class="tag-cloud" id="modal-tags"></div>
+            </div>
+
+            <div class="info-section provenance">
+              <span class="info-label">TRASABILITATE SURSĂ MASTER</span>
+              <div class="provenance-row">
+                <span class="prov-file" id="modal-source-file"></span>
+                <a href="#" target="_blank" id="modal-source-link" class="btn-prov" title="Vezi captura completă a postării Instagram cu bara laterală">
+                  Audit Captură &rarr;
+                </a>
+              </div>
+            </div>
+
+            <!-- Butoane Rapide Navigare Plăcuță -->
+            <div class="modal-plaque-nav">
+              <button id="modal-plaque-prev" class="btn-plaque-nav" title="Opera Anterioară">
+                &larr; Anterior
+              </button>
+              <button id="modal-plaque-next" class="btn-plaque-nav" title="Opera Următoare">
+                Următor &rarr;
+              </button>
             </div>
           </div>
         </div>
