@@ -1,0 +1,41 @@
+{
+  "general": {
+    "site_title": "757 — MUGUREL EMANUEL MANEA | Arhivă de Artă & Galerie Digitală",
+    "site_description": "Arhivă curatorială și galerie digitală premium dedicată operelor artistului Mugurel Emanuel Manea (757). Suprarealism biomecanic, totemuri criptice și asamblaje cibernetice.",
+    "primary_domain": "https://757.prinpreajma.ro",
+    "secondary_domain": "757.originzero.art",
+    "header_brand_name": "MUGUREL EMANUEL MANEA",
+    "header_brand_sub": "ATELIER & ARHIVĂ CURATORIALĂ",
+    "announcement_text": "ARHIVĂ OFICIALĂ · FQDN: 757.prinpreajma.ro · Alias viitor: 757.originzero.art"
+  },
+  "hero": {
+    "badge": "CATALOGUL GENERAL AL OPERELOR",
+    "title": "Suprarealism Biomecanic <br>& Tensiune Deconstructivistă",
+    "lead": "O explorare riguroasă a fuziunii dintre anatomie, osatură, circuite cibernetice și scrieri criptice. 167 de opere extrase, restaurate prudent fără alterarea desenului și clasificate în cinci axe estetice fundamentale.",
+    "stat_digitized": "167",
+    "stat_categories": "5",
+    "stat_posts": "76",
+    "stat_cleaned": "100%"
+  },
+  "artist": {
+    "name": "Mugurel Emanuel Manea",
+    "instagram": "@mugurelemanuelmanea",
+    "archive_instagram": "@bogdan_by757",
+    "signature": "757",
+    "paragraph_1": "Mugurel Emanuel Manea dezvoltă un limbaj vizual de o densitate rară, centrat pe anatomia internă a tehnologiei și hibridizarea formelor organice. Lucrările sale chestionează granița dintre corpul biologic vulnerabil și armatura mecanică indestructibilă.",
+    "paragraph_2": "Semnătura recurentă 757 funcționează ca un sigiliu alchimic și tehnic, prezent în mod sistematic pe desene, pe registrele verticale și în titlurile poematice ale postărilor. Galeria digitală îi reunește creația într-un spațiu de contemplare purificat de orice element parazit de rețea socială."
+  },
+  "integrity": {
+    "box1_title": "Principiul Conservării Surselor",
+    "box1_text": "Toate cele 168 de capturi originale din tmp-insta-posts/ sunt conservate nemodificate ca arhivă master read-only. Fiecare operă păstrează o legătură de trasabilitate directă către captura sursă și decupajul lateral al postării.",
+    "box2_title": "Eliminarea Elementelor Parazite",
+    "box2_text": "Săgețile de navigare în carusel și punctele de paginare Instagram din subsol au fost îndepărtate cu maximă prudență prin interpolare perimetrală a texturii din imediata vecinătate, fără a recurge la generare artificială speculativă pe compoziție.",
+    "box3_title": "Separarea Observației de Critică",
+    "box3_text": "Catalogul delimitează strict observațiile factuale verificabile (hașură, suport, pigmenți, raport de aspect) de interpretările estetice și ipotezele formulate de criticul independent."
+  },
+  "footer": {
+    "copyright": "© 2026 Mugurel Emanuel Manea (757). Proiectat și arhivat de echipa interdisciplinară AI.",
+    "tech_note": "Construit pe standarde web moderne · HTML5 semantic · Imagini WebP responsive · Zero dependențe externe."
+  }
+}
+

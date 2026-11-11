@@ -1,0 +1,24 @@
+{
+  "name": "757-prinpreajma-ro",
+  "version": "1.0.0",
+  "description": "757 — MUGUREL EMANUEL MANEA — Arhivă de Artă & Galerie Digitală Premium (OriginZero Multi-Tenant)",
+  "main": "server.py",
+  "scripts": {
+    "start": "python3 server.py",
+    "build": "python3 -c \"from builder import rebuild_site; rebuild_site()\"",
+    "gitops:sync": "./sync-gitops.sh",
+    "deploy": "./deploy-gitops.sh"
+  },
+  "keywords": [
+    "originzero",
+    "prinpreajma",
+    "art-archive",
+    "biomechanical-surrealism",
+    "757",
+    "hunedoara"
+  ],
+  "author": "OriginZero Multi-Tenant Fleet & Mugurel Emanuel Manea",
+  "license": "UNLICENSED",
+  "private": true
+}
+

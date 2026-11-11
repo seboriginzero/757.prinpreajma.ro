@@ -1,0 +1,15 @@
+# OriginZero GitOps Exclusions (STRICT RULE 3 & 6)
+.env
+.env.*
+!.env.example
+secrets/
+backups/
+*.bak*
+*.sqlite*
+*.db
+tmp-insta-posts/
+__pycache__/
+*.pyc
+.DS_Store
+node_modules/
+

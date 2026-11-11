@@ -1,0 +1,11 @@
+.git
+.env*
+!.env.example
+secrets/
+backups/
+tmp-insta-posts/
+__pycache__/
+*.pyc
+.DS_Store
+node_modules/
+
