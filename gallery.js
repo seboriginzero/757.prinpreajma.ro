@@ -7,36 +7,36 @@
     {
       id: 'biomechanical-osteology',
       badge: 'SALA I',
-      title: 'Anatomie Biomecanică & Osteologie Tehnologică',
-      animName: 'The Biomechanical Osteo-Pulse & Calipers',
+      title: 'Anatomie Biomecanică și Osteologie Tehnologică',
+      animName: 'Pulsul Osteo-Mecanic și Șublere',
       description: 'Explorare viscerală a osaturii organice fuzionate cu vertebre de titan, pistoane pneumatice și cablaje nervoase. Carnalitate sintetică de mare rigoare anatomică.'
     },
     {
       id: 'cryptic-totems',
       badge: 'SALA II',
-      title: 'Totemuri Criptice & Registre Runic-Arhitecturale',
-      animName: 'The Monolithic Ascension & Runic Reveal',
+      title: 'Totemuri Criptice și Registre Runic-Arhitecturale',
+      animName: 'Ascensiunea Monolitică și Rădăcina Runică',
       description: 'Structuri monolitice stratificate în registre verticale arhaice. Glife hermetice, alfabete oculte și geometrie sacră transpusă în tehno-arheologie.'
     },
     {
       id: 'chromatic-expressions',
       badge: 'SALA III',
-      title: 'Studii Cromatice & Guașă/Acrilic pe Hârtie',
-      animName: 'The Prismatic Pigment Bloom',
+      title: 'Studii Cromatice și Guașă/Acrilic pe Hârtie',
+      animName: 'Eflorescența Pigmentară Prismatică',
       description: 'Lucrări intime pe hârtie și carton. Explozii controlate de ocru mineral, oxid de cupru, roșu de cadmiu și negru de fum, marcate de gestualitate pură.'
     },
     {
       id: 'cybernetic-assemblages',
       badge: 'SALA IV',
-      title: 'Obiecte Sculpturale & Asamblaje Cyber-Surrealiste',
-      animName: 'The 3D Kinetic Hologram & Specular Gleam',
+      title: 'Obiecte Sculpturale și Asamblaje Cyber-Surrealiste',
+      animName: 'Holograma Cinetică 3D și Reflexii Speculare',
       description: 'Tensiunea tridimensională dintre ready-made tehnologic (platane hard disk, rulmenți, arcuri industriale) și încălțăminte de copil sau sfere reflectante.'
     },
     {
       id: 'monumental-perspectives',
       badge: 'SALA V',
-      title: 'Perspectivă Deconstructivistă & Arhitectură Monumentală',
-      animName: 'The Infinite Vanishing Point Zoom',
+      title: 'Perspectivă Deconstructivistă și Arhitectură Monumentală',
+      animName: 'Punctul de Fugă Infinit și Axonometrie',
       description: 'Volume arhitecturale masive, secțiuni transversale și axe axonometrice ce converg spre puncte de fugă infinite. Gravitație deconstructivistă.'
     }
   ];
@@ -68,7 +68,6 @@
 
   // Ambience Audio
   const ambienceToggle = document.getElementById('ambience-toggle');
-  const ambLabel = document.getElementById('amb-label');
 
   // Modal Elements
   const modal = document.getElementById('artwork-modal');
@@ -189,19 +188,17 @@
         droneMaster.gain.setTargetAtTime(0.12, audioCtx.currentTime, 1.2);
         isAmbiencePlaying = true;
         if (ambienceToggle) ambienceToggle.classList.add('active');
-        if (ambLabel) ambLabel.textContent = 'SOUND // ON';
       } else {
         droneMaster.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.8);
         isAmbiencePlaying = false;
         if (ambienceToggle) ambienceToggle.classList.remove('active');
-        if (ambLabel) ambLabel.textContent = 'SOUND: OFF';
       }
     } catch (err) {
       console.warn('Web Audio not allowed without user interaction:', err);
     }
   }
 
-  // Filter & Search Engine
+  // Filtrare și Motor de Căutare
   function filterItems() {
     const q = state.searchQuery.trim().toLowerCase();
     const cat = state.activeFilter;
@@ -233,6 +230,7 @@
       <article class="art-card" data-idx="${globalIdx}" role="button" tabindex="0" aria-label="Deschide ${item.title}">
         <!-- 1. Pictura înrămată pe perete -->
         <div class="art-frame">
+          <div class="card-specular-glare"></div>
           <div class="art-media">
             <span class="art-badge-overlay">${item.id}</span>
             <img src="${thumbSrc}" alt="${item.alt_text}" loading="lazy" decoding="async">
@@ -275,7 +273,9 @@
   // Render Gallery Views
   function renderGallery() {
     const total = state.filteredItems.length;
-    resultsCount.textContent = `Se afișează ${total} din 167 de opere`;
+    if (resultsCount) {
+      resultsCount.textContent = '';
+    }
 
     if (total === 0) {
       grid.innerHTML = `
@@ -300,10 +300,10 @@
     const visibleItems = state.filteredItems.slice(0, state.currentPage * state.pageSize);
     grid.innerHTML = visibleItems.map((item, idx) => renderCardHtml(item, idx)).join('');
 
-    // Pagination visibility
+    // Pagination visibility (Zero artwork counts)
     if (visibleItems.length < total) {
       paginationContainer.style.display = 'block';
-      loadMoreBtn.textContent = `Încarcă Mai Multe Opere (${total - visibleItems.length} rămase)`;
+      loadMoreBtn.textContent = 'Încarcă Mai Multe Opere';
     } else {
       paginationContainer.style.display = 'none';
     }
@@ -327,10 +327,9 @@
           <header class="wing-header">
             <div class="wing-header-top">
               <span class="wing-roman-badge">${wing.badge}</span>
-              <span class="wing-count-pill">${wingItems.length} Opere</span>
-              <button class="btn-wing-fullscreen" data-wing-cat="${wing.id}" title="Lansează Sala ${wing.badge} în Fullscreen Experiențial">
+              <button class="btn-wing-fullscreen" data-wing-cat="${wing.id}" title="Lansează ${wing.badge} în Fullscreen Experiențial">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
-                <span>Experiență Fullscreen Sala ${wing.badge}</span>
+                <span>Experiență Fullscreen ${wing.badge}</span>
               </button>
             </div>
             <h2 class="wing-title">${wing.title}</h2>
@@ -357,7 +356,7 @@
     });
   }
 
-  // Attach card click, keyboard handlers & 3D tilt physics
+  // Atașare click carduri, taste și fizică de înclinare 3D
   function attachCardEvents() {
     const cards = grid.querySelectorAll('.art-card');
     cards.forEach(card => {
@@ -373,7 +372,7 @@
         }
       });
 
-      // 3D Perspective Tilt & Specular Liquid Glare Physics
+      // Înclinare în perspectivă 3D și reflexii lichide speculare
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -392,9 +391,7 @@
     });
   }
 
-  // =========================================================================
-  // Modal Inspector Engine (Clean Canvas, Deep Zoom & Pan)
-  // =========================================================================
+  // Modal Inspector: Panoramare și Zoom Detaliat
   function openModal(idx) {
     if (idx < 0 || idx >= state.filteredItems.length) return;
     state.modalIndex = idx;
@@ -420,7 +417,7 @@
     }
 
     if (modalCounterBadge) {
-      modalCounterBadge.textContent = `${idx + 1} / ${state.filteredItems.length}`;
+      modalCounterBadge.textContent = '';
     }
 
     if (modalTags) {
@@ -595,7 +592,7 @@
     openLuxuryFullscreen(prevIdx);
   }
 
-  // 3D Parallax & Gyro Tilt Handler
+  // Efect Parallax 3D și Gyro Tilt
   let gyroHandler = null;
 
   function setupGyroTilt(catId) {

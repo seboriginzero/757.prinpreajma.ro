@@ -1,7 +1,7 @@
 # Raport Critic și Curatorial Intern
 **Artist:** Mugurel Emanuel Manea (`mugurelemanuelmanea` / `bogdan_by757` / monograma `757`)  
 **Site oficial (FQDN):** `https://757.prinpreajma.ro` | `757.originzero.art`  
-**Rol:** Critic Artistic Independent & Comitet Curatorial  
+**Rol:** Critic Artistic Independent și Comitet Curatorial  
 **Destinație:** Document intern de evaluare și fundamentare a colecției
 
 ---
@@ -21,27 +21,27 @@ Departe de a fi simple pastise după H.R. Giger sau Salvador Dalí, compozițiil
 
 Curatorul și criticul independent au grupat cele 167 de opere în 5 axe tematice majore, fiecare având o logică structurală și o materialitate distinctă:
 
-### Direcția I: Anatomie Biomecanică & Osteologie Tehnologică (107 opere)
+### Direcția I: Anatomie Biomecanică și Osteologie Tehnologică (107 opere)
 *Dominantă:* Grafit, cărbune fin, hașură academică pe hârtie grea de bumbac.  
 *Motive recurente:* Cranii deconstruite, vertebre cervicale metamorfozate în angrenaje, ochi centrali („vortexul privitor”), ligamente metalice, membrane perforate.  
 *Evaluare critică:* Această serie constituie nucleul dur al creației artistului. Forța acestor desene constă în senzația de funcționalitate biomecanică: privind o îmbinare de pistoane și os spongios, privitorul are certitudinea că acel mecanism anatomic ar putea pulsa și funcționa în realitate.
 
-### Direcția II: Totemuri Criptice & Registre Runic-Arhitecturale (16 opere)
+### Direcția II: Totemuri Criptice și Registre Runic-Arhitecturale (16 opere)
 *Dominantă:* Compoziții pe format vertical accentuat (raport 4:5 și 9:16), benzi orizontale suprapuse, tuș și pigmenți.  
 *Motive recurente:* Alfabete ermetice, inscripții tipografice („WRIGHT”, „MYSTERY”, „NEW AGE”, „757”), discuri de rotație cu subdiviziuni radiale, rețele de circuite imprimate albe pe fond negru.  
 *Evaluare critică:* Se manifestă aici o descendență din arta hieratică și din stelele arhaice. Registrele compoziționale creează o lectură stratificată: registrul terestru (circuitele oarbe), registrul de tranziție (discurile solare) și registrul spiritual (cuvintele-cheie suspendate în spațiu).
 
-### Direcția III: Studii Cromatice & Guașă/Acrilic pe Hârtie (30 opere)
+### Direcția III: Studii Cromatice și Guașă/Acrilic pe Hârtie (30 opere)
 *Dominantă:* Tehnici mixte pe hârtie și carton, guașă, pigmenți minerale, acrilic și tuș negru.  
 *Paletă:* Teracotă arsă, ocru auriu, oxid de fier, albastru cobalt, turcoaz celadon și alb de titan.  
 *Evaluare critică:* Culoarea la Mugurel Emanuel Manea nu îmblânzește duritatea formei, ci o intensifică. Împrumutând dinamismul cubismului analitic și al futurismului, planurile cromatice segmentează spațiul plastic, oferind o contrapunctare incendiară la rigoarea desenului monocrom.
 
-### Direcția IV: Obiecte Sculpturale & Asamblaje Cyber-Surrealiste (9 opere)
+### Direcția IV: Obiecte Sculpturale și Asamblaje Cyber-Surrealiste (9 opere)
 *Dominantă:* Instalații tridimensionale, ready-made asistat, deșeuri hardware, metal, cauciuc și textil.  
 *Piese cheie:* Ansambluri cu platane de hard disk, capete magnetice de citire/scriere, pistoane hidraulice auto, încălțăminte de copil și cuburi Rubik numerotate custom.  
 *Evaluare critică:* În mod brusc, universul bidimensional al desenului iese în spațiul real. Îmbinarea dintre un pantof de copil uzat și două pistoane mecanice ce susțin un hard disk demontat generează o metaforă tulburătoare despre memorie: memoria biologică, trecătoare, a pașilor umani, opusă memoriei magnetice, reci și indestructibile, a platanului de stocare digitală.
 
-### Direcția V: Perspectivă Deconstructivistă & Arhitectură Monumentală (5 opere)
+### Direcția V: Perspectivă Deconstructivistă și Arhitectură Monumentală (5 opere)
 *Dominantă:* Desen spațial, axonometrie, perspectivă forțată, unghiuri plonjante.  
 *Motive recurente:* Colonade subterane, arcuri gotice biomecanizate, tuneluri industriale dezafectate.  
 *Evaluare critică:* Lucrările din această serie dezvăluie formația de spațialitate și gândire arhitecturală a artistului. Spațiile imaginate sunt utopii negative, spații de tranzit între mașină și labirint organic.

@@ -429,7 +429,7 @@
     editArtworkModal.showModal();
   }
 
-  // 5. General & Hero Form
+  // 5. General și Hero Form
   function populateGeneralForm() {
     const sc = state.siteContent || {};
     const gen = sc.general || {};
@@ -489,7 +489,7 @@
           </div>
 
           <div class="form-group">
-            <label>Descriere Curatorială &amp; Teză Critică</label>
+            <label>Descriere Curatorială și Teză Critică</label>
             <textarea class="tax-desc" rows="3" required>${escapeHtml(cat.description || '')}</textarea>
           </div>
         </div>

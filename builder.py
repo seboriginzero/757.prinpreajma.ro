@@ -21,21 +21,21 @@ def rebuild_site():
     integ = sc.get('integrity', {})
     foot = sc.get('footer', {})
 
-    site_title = gen.get('site_title', '757 — MUGUREL EMANUEL MANEA | Arhivă de Artă & Galerie Digitală')
-    site_desc = gen.get('site_description', 'Arhivă curatorială și galerie digitală premium dedicată operelor artistului Mugurel Emanuel Manea (757). Suprarealism biomecanic, totemuri criptice și asamblaje cibernetice.')
+    site_title = gen.get('site_title', '757 — MUGUREL EMANUEL MANEA | Catalog Raisonné și Arhivă de Artă')
+    site_desc = gen.get('site_description', 'Catalogul general raționat și arhiva operei artistului Mugurel Emanuel Manea (757). Suprarealism biomecanic, morfologii osteologice, totemuri criptice și viziuni deconstructiviste.')
     prim_dom = gen.get('primary_domain', 'https://757.prinpreajma.ro')
     sec_dom = gen.get('secondary_domain', '757.originzero.art')
     brand_name = gen.get('header_brand_name', 'MUGUREL EMANUEL MANEA')
-    brand_sub = gen.get('header_brand_sub', 'ATELIER & ARHIVĂ CURATORIALĂ')
-    announcement = gen.get('announcement_text', 'ARHIVĂ OFICIALĂ · FQDN: 757.prinpreajma.ro · Alias viitor: 757.originzero.art')
+    brand_sub = gen.get('header_brand_sub', 'ATELIER ȘI ARHIVĂ CURATORIALĂ')
+    announcement = gen.get('announcement_text', '')
 
-    hero_badge = hero.get('badge', 'CATALOGUL GENERAL AL OPERELOR')
-    hero_title = hero.get('title', 'Suprarealism Biomecanic <br>& Tensiune Deconstructivistă')
-    hero_lead = hero.get('lead', 'O explorare riguroasă a fuziunii dintre anatomie, osatură, circuite cibernetice și scrieri criptice. 167 de opere extrase, restaurate prudent fără alterarea desenului și clasificate în cinci axe estetice fundamentale.')
-    stat_dig = hero.get('stat_digitized', '167')
+    hero_badge = hero.get('badge', 'CATALOG GENERAL RAȚIONAT')
+    hero_title = hero.get('title', 'Suprarealism Biomecanic <br>și Morfologie Deconstructivistă')
+    hero_lead = hero.get('lead', 'O investigație plastică de o intensă densitate grafică, situată la confluența dintre anatomia biologică, osatura sacră și mecanicismul post-industrial. Structurată în cinci axe estetice fundamentale din creația artistului Mugurel Emanuel Manea.')
+    stat_dig = hero.get('stat_digitized', '')
     stat_cats = hero.get('stat_categories', '5')
-    stat_posts = hero.get('stat_posts', '76')
-    stat_clean = hero.get('stat_cleaned', '100%')
+    stat_posts = hero.get('stat_posts', 'Atelier')
+    stat_clean = hero.get('stat_cleaned', 'Original')
 
     art_name = art.get('name', 'Mugurel Emanuel Manea')
     art_ig = art.get('instagram', '@mugurelemanuelmanea')
@@ -44,15 +44,15 @@ def rebuild_site():
     art_p1 = art.get('paragraph_1', 'Mugurel Emanuel Manea dezvoltă un limbaj vizual de o densitate rară, centrat pe anatomia internă a tehnologiei și hibridizarea formelor organice. Lucrările sale chestionează granița dintre corpul biologic vulnerabil și armatura mecanică indestructibilă.')
     art_p2 = art.get('paragraph_2', 'Semnătura recurentă 757 funcționează ca un sigiliu alchimic și tehnic, prezent în mod sistematic pe desene, pe registrele verticale și în titlurile poematice ale postărilor. Galeria digitală îi reunește creația într-un spațiu de contemplare purificat de orice element parazit de rețea socială.')
 
-    b1_t = integ.get('box1_title', 'Principiul Conservării Surselor')
-    b1_x = integ.get('box1_text', 'Toate cele 168 de capturi originale din tmp-insta-posts/ sunt conservate nemodificate ca arhivă master read-only. Fiecare operă păstrează o legătură de trasabilitate directă către captura sursă și decupajul lateral al postării.')
-    b2_t = integ.get('box2_title', 'Eliminarea Elementelor Parazite')
-    b2_x = integ.get('box2_text', 'Săgețile de navigare în carusel și punctele de paginare Instagram din subsol au fost îndepărtate cu maximă prudență prin interpolare perimetrală a texturii din imediata vecinătate, fără a recurge la generare artificială speculativă pe compoziție.')
-    b3_t = integ.get('box3_title', 'Separarea Observației de Critică')
-    b3_x = integ.get('box3_text', 'Catalogul delimitează strict observațiile factuale verificabile (hașură, suport, pigmenți, raport de aspect) de interpretările estetice și ipotezele formulate de criticul independent.')
+    b1_t = integ.get('box1_title', 'Fidelitatea Față de Materia Grafică')
+    b1_x = integ.get('box1_text', 'Fiecare operă din catalog este conservată cu respect absolut pentru fibra suportului, porozitatea hârtiei și gradienții naturali ai tușului și grafitului, excluzând orice alterare sintetică a desenului original.')
+    b2_t = integ.get('box2_title', 'Unitatea Ciclurilor Estetice')
+    b2_x = integ.get('box2_text', 'Corpusul operelor este articulat pe baza afinităților morfologice din atelier: de la osteologia biomecanică la scrierea runică ermetică, compozițiile piranesiene și asamblajul tridimensional.')
+    b3_t = integ.get('box3_title', 'Monograma și Criptografia 757')
+    b3_x = integ.get('box3_text', 'Semnul 757 străbate lucrările ca o emblemă identitară și liant conceptual, legând tradiția grafismului modern de o viziune oraculară asupra hibridizării om-mașină.')
 
-    copy_txt = foot.get('copyright', '© 2026 Mugurel Emanuel Manea (757). Proiectat și arhivat de echipa interdisciplinară AI.')
-    tech_txt = foot.get('tech_note', 'Construit pe standarde web moderne · HTML5 semantic · Imagini WebP responsive · Zero dependențe externe.')
+    copy_txt = foot.get('copyright', '© 2026 Mugurel Emanuel Manea (757). Toate drepturile rezervate.')
+    tech_txt = foot.get('tech_note', 'Catalog raționat oficial conceput pentru contemplare estetică desăvârșită.')
 
     # Category counts
     cat_counts = {}
@@ -60,22 +60,20 @@ def rebuild_site():
         for c in it.get('categories', []):
             cat_counts[c] = cat_counts.get(c, 0) + 1
 
-    # Render category pills
-    pill_html = [f'<button class="cat-pill active" data-filter="all" role="tab" aria-selected="true">Toate Lucrările <span class="pill-count">{len(items)}</span></button>']
+    # Render category pills (clean, zero artwork counts)
+    pill_html = ['<button class="cat-pill active" data-filter="all" role="tab" aria-selected="true">Toate Operele</button>']
     for cat in categories:
         cid = cat['id']
-        cnt = cat_counts.get(cid, 0)
         cname = cat.get('name_ro', cid)
-        short_name = cname.split('&')[0].strip()
-        pill_html.append(f'<button class="cat-pill" data-filter="{cid}" role="tab" aria-selected="false">{html.escape(short_name)} <span class="pill-count">{cnt}</span></button>')
+        short_name = cname.split(' și ')[0].strip() if ' și ' in cname else cname.split('&')[0].strip()
+        pill_html.append(f'<button class="cat-pill" data-filter="{cid}" role="tab" aria-selected="false">{html.escape(short_name)}</button>')
     pills_rendered = '\n        '.join(pill_html)
 
-    # Render directions section cards
+    # Render directions section cards (clean, zero artwork counts)
     roman_map = {0: 'I', 1: 'II', 2: 'III', 3: 'IV', 4: 'V'}
     directii_cards = []
     for idx, cat in enumerate(categories):
         cid = cat['id']
-        cnt = cat_counts.get(cid, 0)
         cname = cat.get('name_ro', cid)
         cdesc = cat.get('description', '')
         roman = roman_map.get(idx, str(idx+1))
@@ -86,8 +84,7 @@ def rebuild_site():
             {html.escape(cdesc)}
           </p>
           <div class="directie-meta">
-            <span class="badge">{cnt} Opere</span>
-            <button class="btn-quick-filter" data-category="{cid}">Filtrează &rarr;</button>
+            <button class="btn-quick-filter" data-category="{cid}">Explorează Axa &rarr;</button>
           </div>
         </article>''')
     directii_rendered = '\n\n'.join(directii_cards)
@@ -161,7 +158,7 @@ def rebuild_site():
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#07080b">
 
-  <!-- Google Fonts: Cinzel, Cormorant Garamond & JetBrains Mono -->
+  <!-- Google Fonts: Cinzel, Cormorant Garamond, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -178,10 +175,8 @@ def rebuild_site():
     <div class="header-container">
       <div class="brand-group">
         <a href="#hero" class="brand-link">
-          <span class="brand-sig">757</span>
           <span class="brand-name">{html.escape(brand_name)}</span>
         </a>
-        <span class="brand-sub">{html.escape(brand_sub)}</span>
       </div>
 
       <nav class="main-nav" aria-label="Navigare principală">
@@ -192,10 +187,19 @@ def rebuild_site():
       </nav>
 
       <div class="header-controls">
-        <!-- Ambience Synthesizer Toggle -->
-        <button id="ambience-toggle" class="btn-control btn-ambience" title="Comutare Ambianță Sonoră Biomecanică (Web Audio)">
-          <span class="amb-dot"></span>
-          <span id="amb-label">SOUND: OFF</span>
+        <!-- Ambience Synthesizer Toggle: Speaker with Red Slash (Off) / Waves (On) -->
+        <button id="ambience-toggle" class="btn-control btn-ambience-icon" title="Sunet Ambiental (Web Audio)" aria-label="Comutare Sunet">
+          <!-- Difuzor tăiat cu linie roșie (OFF) -->
+          <svg class="sound-svg sound-svg-off" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"></polygon>
+            <line x1="22" y1="2" x2="2" y2="22" stroke="#ef4444" stroke-width="2.2"></line>
+          </svg>
+          <!-- Difuzor activ cu unde sonore (ON) -->
+          <svg class="sound-svg sound-svg-on" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+          </svg>
         </button>
 
         <!-- Ambience Switcher -->
@@ -216,28 +220,6 @@ def rebuild_site():
       <p class="hero-lead">
         {html.escape(hero_lead)}
       </p>
-      
-      <div class="hero-stats">
-        <div class="stat-item">
-          <span class="stat-num">{stat_dig}</span>
-          <span class="stat-lbl">Opere Digitizate</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-num">{stat_cats}</span>
-          <span class="stat-lbl">Direcții Critice</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-num">{stat_posts}</span>
-          <span class="stat-lbl">Evenimente Postare</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-num">{stat_clean}</span>
-          <span class="stat-lbl">Curățat de Interfață</span>
-        </div>
-      </div>
 
       <div class="hero-actions">
         <a href="#galerie" class="btn-luxury primary">Explorează Galeria</a>
@@ -255,7 +237,7 @@ def rebuild_site():
         {pills_rendered}
       </div>
 
-      <!-- Action Row: Search & Luxury View Modes -->
+      <!-- Action Row: Căutare și Moduri de Afișare -->
       <div class="toolbar-actions">
         <!-- Live Search -->
         <div class="search-box">
@@ -308,14 +290,6 @@ def rebuild_site():
       </div>
     </div>
 
-    <!-- Active Result Count & Status -->
-    <div class="gallery-feedback">
-      <span id="results-count">Se afișează {len(items)} din {len(items)} de opere</span>
-      <span class="restoration-badge">
-        &check; Rezoluție Înaltă &middot; Fidelitate Originală
-      </span>
-    </div>
-
     <!-- Gallery Grid Container -->
     <div class="gallery-container view-editorial" id="gallery-grid">
 {initial_cards_rendered}
@@ -331,7 +305,7 @@ def rebuild_site():
   <section class="section-directii" id="directii">
     <div class="section-container">
       <div class="section-header">
-        <span class="section-subtitle">TAXONOMIE &amp; DIRECȚIE CURATORIALĂ</span>
+        <span class="section-subtitle">TAXONOMIE ȘI DIRECȚIE CURATORIALĂ</span>
         <h2 class="section-title">Cele Cinci Axe ale Universului 757</h2>
         <p class="section-lead">Analiză curatorială privind morfologia, tensiunea formei și materialitatea lucrărilor.</p>
       </div>
@@ -390,7 +364,7 @@ def rebuild_site():
   <section class="section-raport" id="raport">
     <div class="section-container">
       <div class="section-header">
-        <span class="section-subtitle">NOTĂ CURATORIALĂ &amp; METODOLOGIE DE ATELIER</span>
+        <span class="section-subtitle">NOTĂ CURATORIALĂ ȘI METODOLOGIE DE ATELIER</span>
         <h2 class="section-title">Fundamentele Teoretice ale Catalogului Raisonné</h2>
       </div>
 
@@ -419,7 +393,7 @@ def rebuild_site():
     </div>
   </section>
 
-  <!-- Luxury Modal Inspector (Deep View & Zoom) -->
+  <!-- Luxury Modal Inspector (Vizualizare Detaliată și Zoom) -->
   <dialog class="luxury-modal" id="artwork-modal" aria-labelledby="modal-title" aria-modal="true">
     <div class="modal-backdrop" id="modal-backdrop"></div>
     <div class="modal-dialog">
@@ -435,7 +409,6 @@ def rebuild_site():
           <button id="modal-prev-btn" class="btn-icon" title="Opera Anterioară (←)" aria-label="Opera Anterioară">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="15 18 9 12 15 6"></polyline></svg>
           </button>
-          <span id="modal-counter-badge" class="modal-counter-pill" style="display:inline-flex; align-items:center; font-family:var(--font-mono); font-size:0.75rem; color:var(--text-primary); font-weight:700; padding:0 0.5rem;">1 / 167</span>
           <button id="modal-next-btn" class="btn-icon" title="Opera Următoare (→)" aria-label="Opera Următoare">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
           </button>
@@ -506,7 +479,7 @@ def rebuild_site():
             </div>
 
             <div class="info-section">
-              <span class="info-label">TEHNICĂ &amp; SUPORT</span>
+              <span class="info-label">TEHNICĂ ȘI SUPORT</span>
               <span class="info-val medium-val" id="modal-medium"></span>
             </div>
 
@@ -516,7 +489,7 @@ def rebuild_site():
             </div>
 
             <div class="info-section">
-              <span class="info-label">MOTIVE &amp; VECTORI VIZUALI</span>
+              <span class="info-label">MOTIVE ȘI VECTORI VIZUALI</span>
               <div class="tag-cloud" id="modal-tags"></div>
             </div>
 
@@ -578,7 +551,7 @@ def rebuild_site():
       <div class="fs-meta-group">
         <span class="fs-wing-badge" id="fs-wing-badge">SALA I</span>
         <h2 class="fs-artwork-title" id="fs-opus-title">Opus 757 — ART-0001</h2>
-        <span class="fs-anim-indicator" id="fs-anim-indicator">Animație: The Biomechanical Osteo-Pulse &amp; Calipers</span>
+        <span class="fs-anim-indicator" id="fs-anim-indicator">Animație Experiențială</span>
       </div>
       <div class="fs-controls-top">
         <button class="btn-fs-icon" id="fs-close-btn" title="Închide Fullscreen (Esc)">&times;</button>

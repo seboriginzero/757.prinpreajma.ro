@@ -1,31 +1,31 @@
 [
   {
     "id": "biomechanical-osteology",
-    "name_ro": "Anatomie Biomecanică & Osteologie Tehnologică",
+    "name_ro": "Anatomie Biomecanică și Osteologie Tehnologică",
     "name_en": "Biomechanical Osteology & Organic Engineering",
     "description": "Compoziții dense în grafit și tuș ce investighează metamorfoza continuă dintre osatură, vertebre, cranii și angrenaje mecanice, pistoane hidraulice și articulații mobile de o rigoare anatomică desăvârșită."
   },
   {
     "id": "cryptic-totems",
-    "name_ro": "Totemuri Criptice & Registre Runic-Arhitecturale",
+    "name_ro": "Totemuri Criptice și Registre Runic-Arhitecturale",
     "name_en": "Cryptic Obelisks & Architectural Runes",
     "description": "Compoziții axiale ierarhizate în registre suprapuse, integrând grafisme ermetice, glife, scriere sacră și monograma recurentă 757, inspirate din tradiția stelelor ancestrale și a coloanelor nesfârșite."
   },
   {
     "id": "chromatic-expressions",
-    "name_ro": "Studii Cromatice & Guașă/Acrilic pe Hârtie",
+    "name_ro": "Studii Cromatice și Guașă/Acrilic pe Hârtie",
     "name_en": "Chromatic Expressions & Mixed Washes",
     "description": "Explorări picturale în tehnici mixte (tuș, guașă, pigment acrilic) ce introduc vibrații intense de teracotă, ocru cald, oxid de cupru și cobalt peste structuri geometrice deconstructiviste."
   },
   {
     "id": "cybernetic-assemblages",
-    "name_ro": "Obiecte Sculpturale & Asamblaje Cyber-Surrealiste",
+    "name_ro": "Obiecte Sculpturale și Asamblaje Cyber-Surrealiste",
     "name_en": "Cybernetic Ready-Mades & Kinetic Assemblages",
     "description": "Artefacte sculpturale ready-made construite din componente tehnologice recuperate (platane magnetice HDD, arcuri industriale, elemente antropomorfe), unind memoria biologică cu memoria mecanică."
   },
   {
     "id": "monumental-perspectives",
-    "name_ro": "Perspectivă Deconstructivistă & Arhitectură Monumentală",
+    "name_ro": "Perspectivă Deconstructivistă și Arhitectură Monumentală",
     "name_en": "Visionary Perspectives & Monolithic Labyrinths",
     "description": "Viziuni spațiale piranesiene, labirinturi axonometrice și caverne structurale cu puncte multiple de fugă, unde arhitectura funcționează ca un organism viu, monumental și hipnotic."
   }

@@ -1,17 +1,17 @@
 {
   "general": {
-    "site_title": "757 — MUGUREL EMANUEL MANEA | Catalog Raisonné & Arhivă de Artă",
+    "site_title": "757 — MUGUREL EMANUEL MANEA | Catalog Raisonné și Arhivă de Artă",
     "site_description": "Catalogul general raționat și arhiva operei artistului Mugurel Emanuel Manea (757). Suprarealism biomecanic, morfologii osteologice, totemuri criptice și viziuni deconstructiviste.",
     "primary_domain": "https://757.prinpreajma.ro",
     "secondary_domain": "757.originzero.art",
     "header_brand_name": "MUGUREL EMANUEL MANEA",
-    "header_brand_sub": "ATELIER & ARHIVĂ CURATORIALĂ",
+    "header_brand_sub": "ATELIER ȘI ARHIVĂ CURATORIALĂ",
     "announcement_text": ""
   },
   "hero": {
     "badge": "CATALOG GENERAL RAȚIONAT",
-    "title": "Suprarealism Biomecanic <br>& Morfologie Deconstructivistă",
-    "lead": "O investigație plastică de o intensă densitate grafică, situată la confluența dintre anatomia biologică, osatura sacră și mecanicismul post-industrial. 167 de opere catalogate și structurate în cinci axe estetice fundamentale din creația artistului Mugurel Emanuel Manea.",
+    "title": "Suprarealism Biomecanic <br>și Morfologie Deconstructivistă",
+    "lead": "O investigație plastică de o intensă densitate grafică, situată la confluența dintre anatomia biologică, osatura sacră și mecanicismul post-industrial. Structurată în cinci axe estetice fundamentale din creația artistului Mugurel Emanuel Manea.",
     "stat_digitized": "167",
     "stat_categories": "5",
     "stat_posts": "Atelier",
@@ -29,7 +29,7 @@
     "box1_title": "Fidelitatea Față de Materia Grafică",
     "box1_text": "Fiecare operă din catalog este conservată cu respect absolut pentru fibra suportului, porozitatea hârtiei și gradienții naturali ai tușului și grafitului, excluzând orice alterare sintetică a desenului original.",
     "box2_title": "Unitatea Ciclurilor Estetice",
-    "box2_text": "Cele 167 de opere sunt articulate pe baza afinităților morfologice din atelier: de la osteologia biomecanică la scrierea runică ermetică, compozițiile piranesiene și asamblajul tridimensional.",
+    "box2_text": "Corpusul operelor este articulat pe baza afinităților morfologice din atelier: de la osteologia biomecanică la scrierea runică ermetică, compozițiile piranesiene și asamblajul tridimensional.",
     "box3_title": "Monograma și Criptografia 757",
     "box3_text": "Semnul 757 străbate lucrările ca o emblemă identitară și liant conceptual, legând tradiția grafismului modern de o viziune oraculară asupra hibridizării om-mașină."
   },
