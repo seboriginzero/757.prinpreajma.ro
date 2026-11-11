@@ -94,7 +94,9 @@ def rebuild_site():
     for idx, item in enumerate(items[:24]):
         thumb_src = f"data/web-images/{item.get('thumbnail_file', '')}"
         item_id = item.get('id', '')
-        item_title = item.get('title', f"Opus 757 — {item_id}")
+        item_title = item.get('title', item_id)
+        if item_title.startswith('Opus 757 — '):
+            item_title = item_id
         alt_text = item.get('alt_text', 'Biomechanical surrealist artwork by Mugurel Emanuel Manea')
         cat_name = item.get('category_name', '')
         critic_note = item.get('critic_note', '')
@@ -131,7 +133,6 @@ def rebuild_site():
             </div>
             <div class="art-meta-row">
               <span class="art-id">{item_id}</span>
-              <span class="archival-stamp">OPUS 757</span>
               <span class="art-cat-name">{html.escape(cat_name)}</span>
             </div>
             <h3 class="art-card-title">{html.escape(item_title)}</h3>
@@ -402,7 +403,7 @@ def rebuild_site():
       <div class="modal-header">
         <div class="modal-title-group">
           <span class="modal-cat" id="modal-category">Categorie</span>
-          <h2 class="modal-heading" id="modal-title">Opus 757 — ART-0001</h2>
+          <h2 class="modal-heading" id="modal-title">ART-0001</h2>
         </div>
         
         <div class="modal-header-actions">
@@ -469,13 +470,13 @@ def rebuild_site():
             </div>
 
             <div class="plaque-top-meta">
-              <span class="plaque-stamp">OPUS 757 &middot; CATALOG GENERAL</span>
+              <span class="plaque-stamp">CATALOG GENERAL</span>
               <span class="info-val code" id="modal-id">ART-0001</span>
             </div>
 
             <div class="plaque-heading-group">
               <span class="plaque-category-badge" id="modal-plaque-wing">Anatomie Biomecanică</span>
-              <h3 class="plaque-title" id="modal-plaque-title">Opus 757 — ART-0001</h3>
+              <h3 class="plaque-title" id="modal-plaque-title">ART-0001</h3>
             </div>
 
             <div class="info-section">
@@ -549,7 +550,7 @@ def rebuild_site():
     <div class="fs-hud-top">
       <div class="fs-meta-group">
         <span class="fs-wing-badge" id="fs-wing-badge">SALA I</span>
-        <h2 class="fs-artwork-title" id="fs-opus-title">Opus 757 — ART-0001</h2>
+        <h2 class="fs-artwork-title" id="fs-opus-title">ART-0001</h2>
         <span class="fs-anim-indicator" id="fs-anim-indicator">Animație Experiențială</span>
       </div>
       <div class="fs-controls-top">

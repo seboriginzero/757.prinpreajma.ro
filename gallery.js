@@ -260,7 +260,6 @@
           </div>
           <div class="art-meta-row">
             <span class="art-id">${item.id}</span>
-            <span class="archival-stamp">OPUS 757</span>
             <span class="art-cat-name">${item.category_name}</span>
           </div>
           <h3 class="art-card-title">${item.title}</h3>
