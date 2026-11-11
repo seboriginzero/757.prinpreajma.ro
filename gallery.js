@@ -52,7 +52,9 @@
     modalIndex: 0,
     filteredItems: [],
     fullscreenActive: false,
-    fullscreenIndex: 0
+    fullscreenIndex: 0,
+    fullscreenWing: null,
+    fullscreenWingIndex: 0
   };
 
   // DOM Elements
@@ -345,10 +347,7 @@
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const catId = btn.getAttribute('data-wing-cat');
-        const firstIdx = state.filteredItems.findIndex(it => it.categories && it.categories.includes(catId));
-        if (firstIdx !== -1) {
-          openLuxuryFullscreen(firstIdx);
-        }
+        openLuxuryFullscreen(catId);
       });
     });
   }
@@ -476,6 +475,17 @@
   }
 
   function nextModalItem() {
+    if (state.currentView === 'wings') {
+      const currentItem = state.filteredItems[state.modalIndex];
+      const wingId = (currentItem && currentItem.categories && currentItem.categories[0]) || CURATED_WINGS[0].id;
+      const wingItems = state.filteredItems.filter(it => it.categories && it.categories.includes(wingId));
+      const currentWingIdx = wingItems.findIndex(it => it.id === currentItem.id);
+      const nextWingIdx = (currentWingIdx + 1) % wingItems.length;
+      const nextItem = wingItems[nextWingIdx];
+      const nextGlobalIdx = state.filteredItems.indexOf(nextItem);
+      openModal(nextGlobalIdx);
+      return;
+    }
     if (state.modalIndex < state.filteredItems.length - 1) {
       openModal(state.modalIndex + 1);
     } else {
@@ -484,6 +494,17 @@
   }
 
   function prevModalItem() {
+    if (state.currentView === 'wings') {
+      const currentItem = state.filteredItems[state.modalIndex];
+      const wingId = (currentItem && currentItem.categories && currentItem.categories[0]) || CURATED_WINGS[0].id;
+      const wingItems = state.filteredItems.filter(it => it.categories && it.categories.includes(wingId));
+      const currentWingIdx = wingItems.findIndex(it => it.id === currentItem.id);
+      const prevWingIdx = (currentWingIdx - 1 + wingItems.length) % wingItems.length;
+      const prevItem = wingItems[prevWingIdx];
+      const prevGlobalIdx = state.filteredItems.indexOf(prevItem);
+      openModal(prevGlobalIdx);
+      return;
+    }
     if (state.modalIndex > 0) {
       openModal(state.modalIndex - 1);
     } else {
@@ -507,26 +528,70 @@
     fsCategoryPills.querySelectorAll('.btn-fs-cat-switch').forEach(pill => {
       pill.addEventListener('click', () => {
         const targetCat = pill.getAttribute('data-cat');
-        const targetIdx = state.filteredItems.findIndex(it => it.categories && it.categories.includes(targetCat));
-        if (targetIdx !== -1) {
-          openLuxuryFullscreen(targetIdx);
-        }
+        openLuxuryFullscreen(targetCat);
       });
     });
   }
 
-  function openLuxuryFullscreen(idx) {
-    if (idx < 0 || idx >= state.filteredItems.length) return;
-    state.fullscreenIndex = idx;
+  function openLuxuryFullscreen(target) {
+    let item = null;
+    let wingId = null;
+
+    if (typeof target === 'string') {
+      // Direct call with category ID (e.g. from pill or wing header button)
+      wingId = target;
+      const wingItems = state.items.filter(it => it.categories && it.categories.includes(wingId));
+      item = wingItems[0] || state.items[0];
+    } else if (typeof target === 'number') {
+      // Call with item index
+      item = state.filteredItems[target] || state.items[target] || state.items[0];
+      wingId = (item && item.categories && item.categories[0]) || CURATED_WINGS[0].id;
+    } else if (target && typeof target === 'object') {
+      item = target;
+      wingId = (item && item.categories && item.categories[0]) || CURATED_WINGS[0].id;
+    } else {
+      item = state.items[0];
+      wingId = (item && item.categories && item.categories[0]) || CURATED_WINGS[0].id;
+    }
+
+    if (!item) return;
+
+    const wing = CURATED_WINGS.find(w => w.id === wingId) || CURATED_WINGS[0];
+    const wingItems = state.items.filter(it => it.categories && it.categories.includes(wing.id));
+    
+    let wingIdx = wingItems.findIndex(it => it.id === item.id);
+    if (wingIdx === -1) wingIdx = 0;
+
     state.fullscreenActive = true;
-    const item = state.filteredItems[idx];
+    state.fullscreenWing = wing.id;
+    state.fullscreenWingIndex = wingIdx;
 
     // Close modal if open
     if (modal.open) {
       modal.close();
     }
 
-    const wing = CURATED_WINGS.find(w => item.categories && item.categories.includes(w.id)) || CURATED_WINGS[0];
+    renderFsCurrentItem();
+
+    // Show Overlay with Active Class for smooth opacity fade-in
+    fsOverlay.style.display = 'flex';
+    requestAnimationFrame(() => {
+      fsOverlay.classList.add('active');
+    });
+    document.body.style.overflow = 'hidden';
+    document.body.classList.add('fullscreen-open');
+  }
+
+  function renderFsCurrentItem() {
+    const wing = CURATED_WINGS.find(w => w.id === state.fullscreenWing) || CURATED_WINGS[0];
+    const wingItems = state.items.filter(it => it.categories && it.categories.includes(wing.id));
+    if (wingItems.length === 0) return;
+
+    if (state.fullscreenWingIndex < 0 || state.fullscreenWingIndex >= wingItems.length) {
+      state.fullscreenWingIndex = 0;
+    }
+
+    const item = wingItems[state.fullscreenWingIndex];
 
     // Set Data Category for Bespoke CSS Animation Trigger
     fsOverlay.setAttribute('data-category', wing.id);
@@ -553,14 +618,6 @@
     void fsArtworkFrame.offsetWidth; // Force reflow
     fsArtworkFrame.style.animation = '';
 
-    // Show Overlay with Active Class for smooth opacity fade-in
-    fsOverlay.style.display = 'flex';
-    requestAnimationFrame(() => {
-      fsOverlay.classList.add('active');
-    });
-    document.body.style.overflow = 'hidden';
-    document.body.classList.add('fullscreen-open');
-
     // Setup 3D Gyro Mouse Interaction for Assemblages and Monumental
     setupGyroTilt(wing.id);
   }
@@ -580,13 +637,21 @@
   }
 
   function nextFsItem() {
-    const nextIdx = (state.fullscreenIndex + 1) % state.filteredItems.length;
-    openLuxuryFullscreen(nextIdx);
+    const currentWingId = state.fullscreenWing || CURATED_WINGS[0].id;
+    const wingItems = state.items.filter(it => it.categories && it.categories.includes(currentWingId));
+    if (wingItems.length === 0) return;
+
+    state.fullscreenWingIndex = (state.fullscreenWingIndex + 1) % wingItems.length;
+    renderFsCurrentItem();
   }
 
   function prevFsItem() {
-    const prevIdx = (state.fullscreenIndex - 1 + state.filteredItems.length) % state.filteredItems.length;
-    openLuxuryFullscreen(prevIdx);
+    const currentWingId = state.fullscreenWing || CURATED_WINGS[0].id;
+    const wingItems = state.items.filter(it => it.categories && it.categories.includes(currentWingId));
+    if (wingItems.length === 0) return;
+
+    state.fullscreenWingIndex = (state.fullscreenWingIndex - 1 + wingItems.length) % wingItems.length;
+    renderFsCurrentItem();
   }
 
   // Efect Parallax 3D și Gyro Tilt

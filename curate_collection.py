@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 curate_collection.py
-Romanian Linguistic & Art Critical Curatorial Engine for Opus 757 (Mugurel Emanuel Manea)
+Romanian Linguistic și Art Critical Curatorial Engine for 757
 Eliminates all AI slop, internal scraping jargon, and repetitive template boilerplate.
 Ensures every single artwork has authentic, erudite, and individualized curatorial analysis.
 """
@@ -20,60 +20,60 @@ def enrich_collection():
         # ART-0004: Framed geometric/organic painting in color -> chromatic-expressions
         if aid == 'ART-0004':
             item['categories'] = ['chromatic-expressions']
-            item['category_name'] = 'Studii Cromatice & Guașă/Acrilic pe Hârtie'
+            item['category_name'] = 'Studii Cromatice și Guașă/Acrilic pe Hârtie'
             item['medium_hypothesis'] = 'Tehnică mixtă pe hârtie (guașă, tuș, accente acrilice)'
             item['visual_tags'] = ['compoziție înrămată', 'policromie', 'geometrie deconstructivistă', 'guașă pe hârtie', 'tensiune spațială']
         
         # ART-0005: Biomechanical graphite/ink drawing on paper -> biomechanical-osteology
         elif aid == 'ART-0005':
             item['categories'] = ['biomechanical-osteology']
-            item['category_name'] = 'Anatomie Biomecanică & Osteologie Tehnologică'
+            item['category_name'] = 'Anatomie Biomecanică și Osteologie Tehnologică'
             item['medium_hypothesis'] = 'Grafit și tuș pe hârtie'
             item['visual_tags'] = ['anatomie biomecanică', 'hașură fină', 'articulații mecanice', 'grafit pur', 'clarobscur']
         
         # ART-0075: Dark background drawing with cryptic runic symbols from POST-0030 -> cryptic-totems
         elif aid == 'ART-0075':
             item['categories'] = ['cryptic-totems']
-            item['category_name'] = 'Totemuri Criptice & Registre Runic-Arhitecturale'
+            item['category_name'] = 'Totemuri Criptice și Registre Runic-Arhitecturale'
             item['medium_hypothesis'] = 'Tuș alb și pigment pe carton negru'
             item['visual_tags'] = ['fond negru', 'glife albe', 'registre runice', 'simboluri 757', 'compoziție axială']
             
         # ART-0076 & ART-0077: Drawings on paper from POST-0030 -> biomechanical-osteology
         elif aid == 'ART-0076':
             item['categories'] = ['biomechanical-osteology']
-            item['category_name'] = 'Anatomie Biomecanică & Osteologie Tehnologică'
+            item['category_name'] = 'Anatomie Biomecanică și Osteologie Tehnologică'
             item['medium_hypothesis'] = 'Grafit și cărbune pe hârtie'
             item['visual_tags'] = ['coloană vertebrală', 'osteologie', 'grafit pur', 'hașură fină', 'anatomie hibridă']
             
         elif aid == 'ART-0077':
             item['categories'] = ['biomechanical-osteology']
-            item['category_name'] = 'Anatomie Biomecanică & Osteologie Tehnologică'
+            item['category_name'] = 'Anatomie Biomecanică și Osteologie Tehnologică'
             item['medium_hypothesis'] = 'Tuș și grafit pe hârtie'
             item['visual_tags'] = ['structură biomecanică', 'articulații sferice', 'hașură precisă', 'anatomie vizionară']
 
         # ART-0120 & ART-0121: Biomechanical drawings -> biomechanical-osteology
         elif aid == 'ART-0120':
             item['categories'] = ['biomechanical-osteology']
-            item['category_name'] = 'Anatomie Biomecanică & Osteologie Tehnologică'
+            item['category_name'] = 'Anatomie Biomecanică și Osteologie Tehnologică'
             item['medium_hypothesis'] = 'Grafit pe hârtie velină'
             item['visual_tags'] = ['desen liniar', 'grafit pur', 'articulații mecanice', 'compoziție aerată']
 
         elif aid == 'ART-0121':
             item['categories'] = ['biomechanical-osteology']
-            item['category_name'] = 'Anatomie Biomecanică & Osteologie Tehnologică'
+            item['category_name'] = 'Anatomie Biomecanică și Osteologie Tehnologică'
             item['medium_hypothesis'] = 'Tuș și grafit pe hârtie'
             item['visual_tags'] = ['craniu mecanic', 'cavități optice', 'tensiune osteologică', 'clarobscur']
 
         # True Sculptural ready-mades
         elif aid == 'ART-0003':
             item['categories'] = ['cybernetic-assemblages']
-            item['category_name'] = 'Obiecte Sculpturale & Asamblaje Cyber-Surrealiste'
+            item['category_name'] = 'Obiecte Sculpturale și Asamblaje Cyber-Surrealiste'
             item['medium_hypothesis'] = 'Asamblaj ready-made tridimensional (platane HDD, pistoane hidraulice, încălțăminte uzată, soclu cubic)'
             item['visual_tags'] = ['asamblaj 3d', 'ready-made', 'platane hdd', 'amortizor', 'memorie magnetică', 'totem animat']
 
         elif aid == 'ART-0006':
             item['categories'] = ['cybernetic-assemblages']
-            item['category_name'] = 'Obiecte Sculpturale & Asamblaje Cyber-Surrealiste'
+            item['category_name'] = 'Obiecte Sculpturale și Asamblaje Cyber-Surrealiste'
             item['medium_hypothesis'] = 'Sculptură asamblaj (angrenaje metalice, actuatoare magnetice, elemente mecanice recuperate)'
             item['visual_tags'] = ['asamblaj sculptural', 'obiect metalic', 'ready-made', 'antropomorfism tehnologic', 'relicvă industrială']
 
