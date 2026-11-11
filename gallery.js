@@ -228,11 +228,10 @@
     const thumbSrc = `data/web-images/${item.thumbnail_file}`;
     return `
       <article class="art-card" data-idx="${globalIdx}" role="button" tabindex="0" aria-label="Deschide ${item.title}">
-        <!-- 1. Pictura înrămată pe perete -->
+        <!-- 1. Pictura înrămată pe perete (Fără suprapuneri) -->
         <div class="art-frame">
           <div class="card-specular-glare"></div>
           <div class="art-media">
-            <span class="art-badge-overlay">${item.id}</span>
             <img src="${thumbSrc}" alt="${item.alt_text}" loading="lazy" decoding="async">
           </div>
         </div>
@@ -259,7 +258,6 @@
             <span class="eyelet right"></span>
           </div>
           <div class="art-meta-row">
-            <span class="art-id">${item.id}</span>
             <span class="art-cat-name">${item.category_name}</span>
           </div>
           <h3 class="art-card-title">${item.title}</h3>
@@ -396,8 +394,8 @@
     state.modalIndex = idx;
     const item = state.filteredItems[idx];
 
-    if (modalId) modalId.textContent = item.id;
-    if (modalTitle) modalTitle.textContent = item.title;
+    if (modalId) modalId.textContent = '';
+    if (modalTitle) modalTitle.textContent = '';
     if (modalCategory) modalCategory.textContent = item.category_name;
 
     const plaqueTitle = document.getElementById('modal-plaque-title');

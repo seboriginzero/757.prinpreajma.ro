@@ -100,12 +100,11 @@ def rebuild_site():
         alt_text = item.get('alt_text', 'Biomechanical surrealist artwork by Mugurel Emanuel Manea')
         cat_name = item.get('category_name', '')
         critic_note = item.get('critic_note', '')
-        initial_cards.append(f'''        <article class="art-card" data-idx="{idx}" role="button" tabindex="0" aria-label="Deschide {html.escape(item_title)}">
+        initial_cards.append(f'''        <article class="art-card" data-idx="{idx}" role="button" tabindex="0" aria-label="Deschide {html.escape(item_id)}">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
             <div class="art-media">
-              <span class="art-badge-overlay">{item_id}</span>
               <img src="{thumb_src}" alt="{html.escape(alt_text)}" loading="lazy" decoding="async">
             </div>
           </div>
@@ -132,10 +131,9 @@ def rebuild_site():
               <span class="eyelet right"></span>
             </div>
             <div class="art-meta-row">
-              <span class="art-id">{item_id}</span>
               <span class="art-cat-name">{html.escape(cat_name)}</span>
             </div>
-            <h3 class="art-card-title">{html.escape(item_title)}</h3>
+            <h3 class="art-card-title">{html.escape(item_id)}</h3>
             <p class="art-critic-snippet">{html.escape(critic_note)}</p>
           </div>
         </article>''')
@@ -403,7 +401,6 @@ def rebuild_site():
       <div class="modal-header">
         <div class="modal-title-group">
           <span class="modal-cat" id="modal-category">Categorie</span>
-          <h2 class="modal-heading" id="modal-title">ART-0001</h2>
         </div>
         
         <div class="modal-header-actions">
@@ -471,7 +468,6 @@ def rebuild_site():
 
             <div class="plaque-top-meta">
               <span class="plaque-stamp">CATALOG GENERAL</span>
-              <span class="info-val code" id="modal-id">ART-0001</span>
             </div>
 
             <div class="plaque-heading-group">

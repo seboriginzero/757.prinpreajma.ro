@@ -6,8 +6,10 @@
 ---
 
 ## 1. Principii Non-Negociabile
-1. **GitHub-Only Delivery (STRICT RULE 2):**
-   - Zero `scp`/`rsync` de fișiere de cod sursă. Livrare exclusivă prin `origin/main`.
+1. **GitHub-Only Delivery & Interzicere Totală Copiere Directă VM (STRICT RULE 2):**
+   - **ESTE STRICT INTERZISĂ COPIEREA DIRECTĂ PE VM (`scp`, `rsync`, `docker cp` de cod sursă de pe Mac).**
+   - Totul se livrează exclusiv prin GitHub (`git push origin main`), iar pe server deployment-ul se execută prin procesul autonom GitOps (`deploy-gitops.sh`).
+   - Singura excepție permisă prin SSH securizat este livrarea secretelor `.env` (`chmod 0600`), acestea fiind strict interzise în Git.
 2. **Protecție BKP PRIOR UPDATE (STRICT RULE 6):**
    - Înainte de orice `git reset --hard origin/main`, container rebuild sau migrare pe Hetzner, se creează automat un backup timestampat imutabil al volumului `data/` (`backups/data_bak_<timestamp>.tar.gz`).
 3. **Nginx Zero-Downtime (STRICT RULE 7):**

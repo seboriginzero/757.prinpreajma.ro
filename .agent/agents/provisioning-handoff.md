@@ -5,6 +5,14 @@
 
 ---
 
+## 0. Directivă Cardinală de Livrare
+**ZERO-DIRECT-COPY PE MAȘINI DE GĂZDUIRE:**
+Este formal interzisă copierea manuală a fișierelor de aplicație prin `scp` sau `docker cp`.
+Orice provizionare și actualizare se realizează exclusiv prin clonare și pull din depozitul oficial GitHub:
+`git@github.com:seboriginzero/757.prinpreajma.ro.git` (ramura `main`).
+
+---
+
 ## 1. Pachetul Oficial de Handoff (Secțiunea 8 din Blueprint)
 La finalizarea dezvoltării și confirmarea pe GitHub (`origin/main`), acest pachet este livrat Agentului de Hosting (`proxmox-hosting&staff`):
 

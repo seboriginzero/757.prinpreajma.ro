@@ -66,8 +66,12 @@ Agentul **Figma Art Design Expert** guvernează transpunerea rigorilor muzeale i
 ---
 
 ## 3. Protocol de Verificare și Aprobare Design
-1. **Regula Limbii Române:** Niciun caracter `&` în textele publice; utilizarea exclusivă a conjuncției `și`.
-2. **Absența Contoarelor:** Nicio afișare de tip "167 de opere" în fața publicului larg; arta se contemplă calitativ, nu cantitativ.
-3. **Integritate Cromatică:** În White Cube nu există text negru pe fundal negru sau alb pe fundal alb. Contrastul fiecărui element de interfață este verificat.
-4. **Punct de Focalizare Audio Minimalist:** Comutatorul audio prezintă exclusiv un difuzor elegant (cu linie roșie oblică la oprire și unde fluide la activare), fără text redundant.
+1. **Regula Non-Redundanței (Zero Dubluri și Tripluri):**
+   - Identificatorul operei (`ART-XXXX`) apare exact o singură dată pe fiecare componentă:
+     - Pe cardul de galerie: exclusiv ca titlu principal pe cartellino (`art-card-title`); pânza operei este 100% curată (fără ecusoane suprapuse pe imagine); rândul de metadate afișează exclusiv denumirea sălii.
+     - În vizualizarea modală: exclusiv ca titlu al plăcuței de atelier (`modal-plaque-title`); bara superioară afișează doar categoria și controalele, iar sigiliul superior nu repetă identificatorul.
+2. **Regula Limbii Române:** Niciun caracter `&` în textele publice; utilizarea exclusivă a conjuncției `și`.
+3. **Absența Contoarelor:** Nicio afișare de tip "167 de opere" în fața publicului larg; arta se contemplă calitativ, nu cantitativ.
+4. **Integritate Cromatică:** În White Cube nu există text negru pe fundal negru sau alb pe fundal alb. Contrastul fiecărui element de interfață este verificat.
+5. **Punct de Focalizare Audio Minimalist:** Comutatorul audio prezintă exclusiv un difuzor elegant (cu linie roșie oblică la oprire și unde fluide la activare), fără text redundant.
 

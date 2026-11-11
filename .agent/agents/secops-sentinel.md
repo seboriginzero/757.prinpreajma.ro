@@ -5,13 +5,14 @@
 
 ---
 
-## 1. Măsuri Obligatorii de Hardening Container
+## 1. Măsuri Obligatorii de Hardening Container & GitOps Delivery
 1. **Rootless Execution:** Containerul rulează sub utilizatorul non-root `node` (UID `1000`, GID `1000`).
 2. **Eliminare Privilegii Linux:**
    - `cap_drop: [ALL]` în `docker-compose.yml` (nicio capabilitate kernel acordată).
    - `security_opt: [no-new-privileges:true]` (previne orice tentativă de escaladare a privilegiilor).
-3. **Izolare de Rețea:** Rețea Docker bridge dedicată `757-net`, fără expunere directă pe interfețele publice ale mașinii.
-4. **Resurse Limitate:** Limită strictă de CPU (`1.0`), RAM (`512MB`) și număr maxim de procese (`pids: 64`).
+3. **Interzicere Copiere Directă prin SSH/SCP:** Este interzis transferul neautorizat de fișiere de cod prin SCP către mediile de găzduire. Singurul canal autorizat de actualizare software este GitHub GitOps prin cheia dedicată de deploy (`origin/main`).
+4. **Izolare de Rețea:** Rețea Docker bridge dedicată `757-net`, fără expunere directă pe interfețele publice ale mașinii.
+5. **Resurse Limitate:** Limită strictă de CPU (`1.0`), RAM (`512MB`) și număr maxim de procese (`pids: 64`).
 
 ---
 

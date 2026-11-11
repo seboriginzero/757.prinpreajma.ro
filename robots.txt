@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+Sitemap: https://757.prinpreajma.ro/sitemap.xml
+Sitemap: https://757.originzero.art/sitemap.xml
