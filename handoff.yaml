@@ -7,10 +7,14 @@ ORIGINZERO_NEW_TENANT_HANDOFF:
   www_fqdn: "www.757.prinpreajma.ro"
   canonical_root: "https://757.prinpreajma.ro/"
   future_alias: "https://757.originzero.art/"
+  hosting_node: "Proxmox VM1 Hosting (192.168.57.51)"
+  edge_gateway: "Proxmox Nginx Reverse Proxy (192.168.57.105)"
+  external_ip: "82.137.55.195"
+  host_port: 3090
   dns_records:
-    apex_cname: "757.prinpreajma.ro -> hetzner1.banszky.men (2.31.102.36 / 2a01:4f8:c016:f3bb::1)"
-    www_cname: "www.757.prinpreajma.ro -> 757.prinpreajma.ro"
-    alias_cname: "757.originzero.art -> hetzner1.banszky.men"
+    apex_cname: "757.prinpreajma.ro -> ddns7.banszky.men (82.137.55.195)"
+    www_cname: "www.757.prinpreajma.ro -> 82.137.55.195"
+    alias_cname: "757.originzero.art -> ddns7.banszky.men (82.137.55.195)"
   github_repo: "git@github.com:seboriginzero/757.prinpreajma.ro.git"
   branch: "main"
   internal_container_port: 3000
