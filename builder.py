@@ -21,11 +21,11 @@ def rebuild_site():
     integ = sc.get('integrity', {})
     foot = sc.get('footer', {})
 
-    site_title = gen.get('site_title', '757 — MUGUREL EMANUEL MANEA | Catalog Raisonné și Arhivă de Artă')
-    site_desc = gen.get('site_description', 'Catalogul general raționat și arhiva operei artistului Mugurel Emanuel Manea (757). Suprarealism biomecanic, morfologii osteologice, totemuri criptice și viziuni deconstructiviste.')
+    site_title = gen.get('site_title', '757 | Catalog Raisonné și Arhivă de Artă')
+    site_desc = gen.get('site_description', 'Catalogul general raționat și arhiva operei artistului 757. Suprarealism biomecanic, morfologii osteologice, totemuri criptice și viziuni deconstructiviste.')
     prim_dom = gen.get('primary_domain', 'https://757.prinpreajma.ro')
     sec_dom = gen.get('secondary_domain', '757.originzero.art')
-    brand_name = gen.get('header_brand_name', 'MUGUREL EMANUEL MANEA')
+    brand_name = gen.get('header_brand_name', '757')
     brand_sub = gen.get('header_brand_sub', 'ATELIER ȘI ARHIVĂ CURATORIALĂ')
     announcement = gen.get('announcement_text', '')
 
@@ -514,7 +514,6 @@ def rebuild_site():
       <div class="footer-top">
         <div class="footer-brand">
           <span class="f-sig">757</span>
-          <span class="f-name">{html.escape(brand_name)}</span>
           <p class="f-desc">Arhivă de Artă Contemporană &middot; Suprarealism Biomecanic &middot; Toate drepturile rezervate artistului.</p>
         </div>
 
@@ -523,7 +522,7 @@ def rebuild_site():
           <ul>
             <li><a href="#galerie">Colecția Completă</a></li>
             <li><a href="#directii">Cele 5 Axe Estetice</a></li>
-            <li><a href="#artist">Despre Mugurel Emanuel Manea</a></li>
+            <li><a href="#artist">Despre Artist</a></li>
             <li><a href="#raport">Notă Curatorială</a></li>
           </ul>
         </div>
