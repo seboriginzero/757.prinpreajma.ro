@@ -36,13 +36,15 @@ def load_env():
                         else:
                             CONFIG[k] = v
 
-    # Check OS environment variables (Docker & Hetzner Production overrides)
+    # Check OS environment variables (Docker & Proxmox Production overrides)
+    for k in CONFIG:
+        if os.environ.get(k):
+            if k == 'SERVER_PORT':
+                CONFIG[k] = int(os.environ[k])
+            else:
+                CONFIG[k] = os.environ[k]
     if os.environ.get('PORT'):
         CONFIG['SERVER_PORT'] = int(os.environ['PORT'])
-    elif os.environ.get('SERVER_PORT'):
-        CONFIG['SERVER_PORT'] = int(os.environ['SERVER_PORT'])
-    if os.environ.get('HOST'):
-        CONFIG['HOST'] = os.environ['HOST']
 
     if not CONFIG['ADMIN_PASS']:
         import string
