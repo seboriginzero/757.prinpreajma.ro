@@ -1,61 +1,65 @@
-/* gallery.css — Luxury Premium Art Archive Design System for 757 (Mugurel Emanuel Manea) */
+/* gallery.css — Avant-Garde Black & White Luxury Digital Gallery for 757 (Mugurel Emanuel Manea) */
 
 :root {
-  /* Default: Atelier Biomecanic / Dark Obsidian (TIP Recomandarea Echipei) */
-  --bg-primary: #07080b;
-  --bg-surface: #0f1218;
-  --bg-card: #151822;
-  --bg-elevated: #1b202c;
-  --bg-overlay: rgba(7, 8, 11, 0.94);
+  /* Ultra-Modern High-Contrast Monochromatic Theme */
+  --bg-primary: #030305;
+  --bg-surface: #090a0e;
+  --bg-card: #0f1117;
+  --bg-elevated: #161822;
+  --bg-overlay: rgba(3, 3, 5, 0.95);
   
-  --border: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.09);
   --border-subtle: rgba(255, 255, 255, 0.04);
-  --border-hover: rgba(212, 163, 89, 0.45);
+  --border-hover: rgba(255, 255, 255, 0.45);
   
-  --text-primary: #ede8df;
-  --text-secondary: #9ea4b4;
+  --text-primary: #ffffff;
+  --text-secondary: #a3a8b7;
   --text-muted: #5e6475;
-  --text-on-accent: #07080b;
+  --text-on-accent: #030305;
 
-  --accent-gold: #d4a359;
-  --accent-gold-glow: rgba(212, 163, 89, 0.2);
-  --accent-rust: #c25737;
-  --accent-cyan: #3fa7b5;
+  --accent-gold: #ffffff;
+  --accent-gold-glow: rgba(255, 255, 255, 0.22);
+  --accent-rust: #d6d9e2;
+  --accent-cyan: #e2e5eb;
+  --accent-silver: #ffffff;
+  --accent-glow: rgba(255, 255, 255, 0.25);
 
   --font-serif: 'Cormorant Garamond', 'Cinzel', Georgia, serif;
   --font-display: 'Cinzel', 'Cormorant Garamond', serif;
   --font-mono: 'JetBrains Mono', 'Space Mono', SFMono-Regular, monospace;
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-  --radius-sm: 3px;
-  --radius-md: 6px;
-  --radius-lg: 12px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
 
-  --transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 [data-theme="light"] {
-  /* Sala de Lectură / Arhivă Pergament */
-  --bg-primary: #f6f3eb;
-  --bg-surface: #eae3d4;
-  --bg-card: #dfd7c5;
-  --bg-elevated: #d4ccb8;
-  --bg-overlay: rgba(246, 243, 235, 0.96);
+  /* White Cube Minimalist Gallery */
+  --bg-primary: #ffffff;
+  --bg-surface: #f6f7f9;
+  --bg-card: #ffffff;
+  --bg-elevated: #ededf0;
+  --bg-overlay: rgba(255, 255, 255, 0.97);
 
-  --border: rgba(0, 0, 0, 0.10);
-  --border-subtle: rgba(0, 0, 0, 0.05);
-  --border-hover: rgba(163, 66, 38, 0.5);
+  --border: rgba(0, 0, 0, 0.12);
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --border-hover: rgba(0, 0, 0, 0.55);
 
-  --text-primary: #191b20;
-  --text-secondary: #4a4f5b;
-  --text-muted: #797f8e;
+  --text-primary: #000000;
+  --text-secondary: #333333;
+  --text-muted: #666666;
   --text-on-accent: #ffffff;
 
-  --accent-gold: #9e6f2c;
-  --accent-gold-glow: rgba(158, 111, 44, 0.15);
-  --accent-rust: #9e432b;
-  --accent-cyan: #267482;
+  --accent-gold: #000000;
+  --accent-gold-glow: rgba(0, 0, 0, 0.12);
+  --accent-rust: #222222;
+  --accent-cyan: #444444;
+  --accent-silver: #000000;
+  --accent-glow: rgba(0, 0, 0, 0.15);
 }
 
 /* Reset & Basics */
@@ -81,12 +85,25 @@ body {
   overflow-x: hidden;
   background-color: var(--bg-primary);
   background-image: 
-    radial-gradient(circle at 15% 15%, rgba(212, 163, 89, 0.06) 0%, transparent 40%),
-    radial-gradient(circle at 85% 65%, rgba(0, 229, 255, 0.04) 0%, transparent 45%),
-    linear-gradient(rgba(212, 163, 89, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(212, 163, 89, 0.02) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.04) 0%, transparent 60%),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 48px 48px, 48px 48px;
   background-attachment: fixed;
+}
+
+/* Bleeding-Edge Interactive Magnetic Spotlight Cursor */
+#ambient-spotlight {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(750px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh), rgba(255, 255, 255, 0.038) 0%, transparent 70%);
+  transition: opacity 0.3s ease;
+}
+
+[data-theme="light"] #ambient-spotlight {
+  background: radial-gradient(750px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh), rgba(0, 0, 0, 0.025) 0%, transparent 70%);
 }
 
 a {
@@ -125,7 +142,7 @@ a {
 }
 
 .topbar-fqdn a {
-  color: var(--accent-gold);
+  color: var(--text-primary);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -142,6 +159,53 @@ a {
   border-radius: 50%;
   background: #34d399;
   box-shadow: 0 0 8px #34d399;
+}
+
+/* Avant-Garde Kinetic Marquee Ticker */
+.kinetic-ticker {
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0.45rem 0;
+  font-family: var(--font-mono);
+  font-size: 0.70rem;
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
+  position: relative;
+  user-select: none;
+}
+
+.ticker-track {
+  display: inline-flex;
+  animation: tickerFlow 36s linear infinite;
+  will-change: transform;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes tickerFlow {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-item {
+  padding: 0 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  white-space: nowrap;
+}
+
+.ticker-item strong {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.ticker-sep {
+  color: var(--text-muted);
 }
 
 /* Header */
@@ -555,30 +619,59 @@ a {
   flex-direction: column;
   align-items: stretch;
   perspective: 1200px;
+  transform-style: preserve-3d;
   position: relative;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
 }
 
-/* 1. Pictura înrămată pe perete */
+/* 1. Pictura înrămată pe perete (Cu luciu specular 3D) */
 .art-frame {
   position: relative;
-  background: #0c0e12;
+  background: #090a0e;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   overflow: hidden;
-  box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.55), 0 3px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.7), 0 3px 10px rgba(0, 0, 0, 0.4);
   transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+  transform-style: preserve-3d;
+}
+
+/* Luciu specular dinamic lichid ce urmărește unghiul luminii */
+.card-specular-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 50%), rgba(255, 255, 255, 0.14) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 5;
+  border-radius: inherit;
+}
+
+.art-card:hover .card-specular-glare {
+  opacity: 1;
 }
 
 [data-theme="light"] .art-frame {
-  background: #fbf9f4;
-  box-shadow: 0 18px 36px -8px rgba(0, 0, 0, 0.18), 0 4px 12px rgba(0, 0, 0, 0.08);
-  border-color: rgba(60, 45, 30, 0.16);
+  background: #ffffff;
+  box-shadow: 0 14px 32px -8px rgba(0, 0, 0, 0.12), 0 4px 10px rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .card-specular-glare {
+  background: radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 50%), rgba(0, 0, 0, 0.06) 0%, transparent 60%);
 }
 
 .art-card:hover .art-frame {
   transform: translateY(-5px);
-  border-color: var(--accent-gold);
-  box-shadow: 0 24px 48px -8px rgba(0, 0, 0, 0.65), 0 6px 14px rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 26px 52px -10px rgba(0, 0, 0, 0.85), 0 0 25px rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .art-card:hover .art-frame {
+  border-color: rgba(0, 0, 0, 0.55);
+  box-shadow: 0 22px 46px -8px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .art-media {
@@ -662,18 +755,18 @@ a {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #d4a359 30%, #75521b 75%, #2a1f0d 100%);
-  box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.65), inset 0 1px 2px rgba(255, 255, 255, 0.6);
-  border: 1px solid #4a3410;
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #b8bcc8 35%, #424652 75%, #181920 100%);
+  box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.75), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.35);
 }
 
 [data-theme="light"] .nail-cap {
-  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #a4917a 35%, #4a3f33 80%, #181410 100%);
-  box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.8);
-  border: 1px solid #332b21;
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #d2d5dc 40%, #757984 80%, #202227 100%);
+  box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
-/* Sfoara întinsă în V */
+/* Sfoara întinsă în V — Cablu de Titan & Argint Împletit */
 .hanging-twine {
   width: 100%;
   height: 48px;
@@ -682,39 +775,39 @@ a {
 }
 
 .twine-cord {
-  stroke: #c49a50;
+  stroke: #e2e5eb;
   stroke-width: 1.8;
   stroke-dasharray: 4, 1.2;
   stroke-linecap: round;
 }
 
 [data-theme="light"] .twine-cord {
-  stroke: #7c684d;
+  stroke: #333742;
   stroke-width: 1.8;
   stroke-dasharray: 4, 1.2;
 }
 
 .twine-shadow {
-  stroke: rgba(0, 0, 0, 0.45);
-  stroke-width: 2.4;
+  stroke: rgba(0, 0, 0, 0.65);
+  stroke-width: 2.6;
   stroke-linecap: round;
-  filter: blur(0.8px);
+  filter: blur(1px);
 }
 
 [data-theme="light"] .twine-shadow {
-  stroke: rgba(0, 0, 0, 0.22);
+  stroke: rgba(0, 0, 0, 0.25);
   stroke-width: 2.2;
   filter: blur(0.8px);
 }
 
-/* 3. Plăcuța cu descriere atârnată (3D Cartellino) */
+/* 3. Plăcuța cu descriere atârnată (3D Cartellino din Obsidian / Oglindă Afumată) */
 .art-hanging-tag {
   position: relative;
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
+  background: linear-gradient(160deg, #111319 0%, #07080b 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-sm);
   padding: 1.3rem 1.4rem 1.4rem;
-  box-shadow: 0 16px 34px -6px rgba(0, 0, 0, 0.55), 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 16px 34px -6px rgba(0, 0, 0, 0.7), 0 4px 10px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.12);
   transform-origin: 50% 0%;
   transform-style: preserve-3d;
   transform: perspective(800px) rotateX(2.5deg);
@@ -722,19 +815,20 @@ a {
 }
 
 [data-theme="light"] .art-hanging-tag {
-  background: #ede6d6;
-  border: 1px solid rgba(80, 65, 45, 0.2);
-  box-shadow: 0 16px 32px -6px rgba(40, 30, 20, 0.22), 0 4px 10px rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  box-shadow: 0 16px 32px -6px rgba(0, 0, 0, 0.12), 0 4px 10px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .art-card:hover .art-hanging-tag {
   transform: perspective(800px) translateY(3px) rotateX(5deg) rotateZ(-0.8deg);
-  border-color: var(--border-hover);
-  box-shadow: 0 24px 46px -6px rgba(0, 0, 0, 0.7), 0 6px 14px rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 24px 46px -6px rgba(0, 0, 0, 0.85), 0 6px 14px rgba(0, 0, 0, 0.45);
 }
 
 [data-theme="light"] .art-card:hover .art-hanging-tag {
-  box-shadow: 0 22px 42px -8px rgba(0, 0, 0, 0.28), 0 6px 14px rgba(0, 0, 0, 0.12);
+  border-color: rgba(0, 0, 0, 0.45);
+  box-shadow: 0 22px 42px -8px rgba(0, 0, 0, 0.22), 0 6px 14px rgba(0, 0, 0, 0.08);
 }
 
 /* Ocheți metalici la marginea superioară a plăcuței */
@@ -1318,100 +1412,34 @@ a {
   cursor: grabbing;
 }
 
-/* Side Gutter Navigation Arrows (Never overlaying artwork!) */
+/* Side Gutter Navigation Arrows (Hidden from canvas to keep artwork 100% clean) */
 .modal-canvas-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: rgba(13, 17, 24, 0.85);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(212, 163, 89, 0.35);
-  color: var(--accent-gold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 10;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-  transition: all var(--transition-fast);
+  display: none !important;
 }
 
-.modal-canvas-arrow.prev {
-  left: 1rem;
-}
-
-.modal-canvas-arrow.next {
-  right: 1rem;
-}
-
-.modal-canvas-arrow:hover {
-  background: var(--accent-gold);
-  color: #07080c;
-  border-color: var(--accent-gold);
-  box-shadow: 0 0 20px rgba(212, 163, 89, 0.5);
-  transform: translateY(-50%) scale(1.08);
-}
-
-/* Bottom Discrete Status Pill */
+/* Bottom Discrete Status Pill (Hidden from canvas) */
 .modal-canvas-status {
-  position: absolute;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(7, 9, 13, 0.88);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 9999px;
-  padding: 0.35rem 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  z-index: 10;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-  pointer-events: none;
-}
-
-.modal-counter-pill {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--accent-gold);
-  letter-spacing: 0.08em;
-}
-
-.status-divider {
-  color: rgba(255, 255, 255, 0.3);
-}
-
-.modal-zoom-hint {
-  font-family: var(--font-mono);
-  font-size: 0.64rem;
-  color: #9ca3af;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  display: none !important;
 }
 
 /* Curatorial Dossier Column: 3D Hanging Plaque */
 .modal-info {
-  background: #090c12;
-  border-left: 1px solid rgba(212, 163, 89, 0.22);
+  background: #07080b;
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
   height: 100%;
   min-height: 0;
   overflow-y: auto;
   padding: 2.2rem 1.8rem 3rem;
   position: relative;
   scrollbar-width: thin;
-  scrollbar-color: rgba(212, 163, 89, 0.3) transparent;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
 }
 
 .modal-info::-webkit-scrollbar {
   width: 6px;
 }
 .modal-info::-webkit-scrollbar-thumb {
-  background: rgba(212, 163, 89, 0.3);
+  background: rgba(255, 255, 255, 0.25);
   border-radius: 3px;
 }
 
@@ -1450,9 +1478,9 @@ a {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #fff2d1 0%, #d4a359 50%, #573e16 90%, #291d08 100%);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.85), inset 0 1px 2px rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(87, 62, 22, 0.8);
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #b8bcc8 35%, #424652 75%, #181920 100%);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.85), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .modal-hanging-rig .hanging-twine {
@@ -1462,7 +1490,7 @@ a {
 }
 
 .modal-hanging-rig .twine-cord {
-  stroke: #c89d5c;
+  stroke: #e2e5eb;
   stroke-width: 2.2;
   stroke-linecap: round;
   stroke-dasharray: 4, 1.5;
@@ -1475,13 +1503,13 @@ a {
   filter: blur(2px);
 }
 
-/* Plăcuța Curatorială 3D Atârnată de Cui */
+/* Plăcuța Curatorială 3D Atârnată de Cui (Obsidian & Titan) */
 .modal-plaque-card {
   position: relative;
-  background: linear-gradient(175deg, #161a24 0%, #0d1017 100%);
-  border: 1px solid rgba(212, 163, 89, 0.35);
-  border-radius: 6px;
-  box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.85), 0 0 25px rgba(212, 163, 89, 0.08);
+  background: linear-gradient(175deg, #12141a 0%, #08090d 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 4px;
+  box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 255, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.15);
   padding: 2rem 1.8rem;
   transform: perspective(1000px) rotateX(1.2deg);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -1492,10 +1520,10 @@ a {
 
 .modal-plaque-card:hover {
   transform: perspective(1000px) rotateX(0deg);
-  box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.95), 0 0 30px rgba(212, 163, 89, 0.14);
+  box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.98), 0 0 30px rgba(255, 255, 255, 0.1);
 }
 
-/* Brass Eyelets (Ocheți de Alamă) */
+/* Chrome Eyelets */
 .plaque-eyelets {
   position: absolute;
   top: 10px;
@@ -1511,9 +1539,9 @@ a {
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #fff2d1 0%, #d4a359 45%, #4a3411 90%);
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #a4a8b5 45%, #2a2c34 90%);
   box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.9), 0 2px 4px rgba(0, 0, 0, 0.6);
-  border: 1.5px solid #291d08;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Top Meta */
@@ -1522,15 +1550,15 @@ a {
   justify-content: space-between;
   align-items: center;
   padding-bottom: 0.8rem;
-  border-bottom: 1px solid rgba(212, 163, 89, 0.18);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .plaque-stamp {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.15em;
-  color: var(--accent-gold);
-  font-weight: 600;
+  font-size: 0.70rem;
+  letter-spacing: 0.16em;
+  color: #ffffff;
+  font-weight: 700;
 }
 
 /* Info Sections & High Contrast Typography */
@@ -1542,47 +1570,51 @@ a {
 
 .info-label {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   letter-spacing: 0.16em;
-  color: #9ca3af;
+  color: #ffffff;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .info-val {
   font-family: var(--font-sans);
   font-size: 0.95rem;
-  color: #f3f4f6;
+  color: #ffffff;
 }
 
 .info-val.code {
   font-family: var(--font-mono);
-  color: var(--accent-gold);
-  font-weight: 600;
+  color: #ffffff;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .info-val.medium-val {
-  color: #e5e7eb;
+  color: #d1d5db;
   font-style: italic;
 }
 
 .info-text {
   font-family: var(--font-sans);
-  font-size: 0.92rem;
-  line-height: 1.65;
-  color: #e2e4e9;
+  font-size: 0.94rem;
+  line-height: 1.7;
+  color: #c5c9d6;
   letter-spacing: 0.01em;
 }
 
 .info-quote {
   font-family: var(--font-serif);
-  font-size: 1.02rem;
+  font-size: 1.05rem;
   font-style: italic;
-  line-height: 1.65;
-  color: #f8f9fa;
-  border-left: 2px solid var(--accent-gold);
-  padding: 0.7rem 1rem;
-  background: rgba(212, 163, 89, 0.07);
+  line-height: 1.7;
+  color: #ffffff;
+  border-left: 2px solid #ffffff;
+  padding: 0.8rem 1.1rem;
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 0 4px 4px 0;
   margin: 0;
 }

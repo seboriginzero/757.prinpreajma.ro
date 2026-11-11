@@ -357,7 +357,7 @@
     });
   }
 
-  // Attach card click & keyboard handlers
+  // Attach card click, keyboard handlers & 3D tilt physics
   function attachCardEvents() {
     const cards = grid.querySelectorAll('.art-card');
     cards.forEach(card => {
@@ -371,6 +371,23 @@
           const idx = parseInt(card.getAttribute('data-idx'), 10);
           openModal(idx);
         }
+      });
+
+      // 3D Perspective Tilt & Specular Liquid Glare Physics
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -6.5;
+        const rotateY = ((x - centerX) / centerX) * 6.5;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
+        card.style.setProperty('--glare-x', `${((x / rect.width) * 100).toFixed(1)}%`);
+        card.style.setProperty('--glare-y', `${((y / rect.height) * 100).toFixed(1)}%`);
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
       });
     });
   }
@@ -611,6 +628,12 @@
 
   // Setup Event Listeners
   function setupEvents() {
+    // Ambient Magnetic Spotlight Cursor Listener
+    window.addEventListener('mousemove', (e) => {
+      document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+      document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+    }, { passive: true });
+
     // Theme toggle
     themeToggle.addEventListener('click', toggleTheme);
 

@@ -5,7 +5,9 @@
     "aspect_ratio": 0.797,
     "operations": [
       "crop_dialog_(0,8,1378,1736)",
-      "inpaint_right_nav_btn_(1331,857)"
+      "inpaint_right_nav_btn_(1350,1418)",
+      "inpaint_left_nav_btn_(24,1447)",
+      "inpaint_pagination_dots_2_at_y1707"
     ],
     "status": "retouched"
   },
@@ -14,8 +16,9 @@
     "master_dimensions": "1376x1716",
     "aspect_ratio": 0.802,
     "operations": [
-      "inpaint_left_nav_btn_(49,857)",
-      "inpaint_bottom_right_btn_(1343,1590)"
+      "inpaint_right_nav_btn_(1327,540)",
+      "inpaint_left_nav_btn_(74,1386)",
+      "inpaint_bottom_right_btn_(1346,1589)"
     ],
     "status": "retouched"
   },
@@ -25,7 +28,7 @@
     "aspect_ratio": 1.001,
     "operations": [
       "crop_dialog_(0,6,1720,1724)",
-      "inpaint_chevron_right_(1663,847)",
+      "inpaint_chevron_right_(1666,833)",
       "inpaint_pagination_dots_4_at_y1679"
     ],
     "status": "retouched"
@@ -36,7 +39,7 @@
     "aspect_ratio": 0.784,
     "operations": [
       "crop_dialog_(0,0,1344,1714)",
-      "inpaint_bottom_right_btn_(1269,1569)"
+      "inpaint_bottom_right_btn_(1262,1564)"
     ],
     "status": "retouched"
   },
@@ -46,7 +49,7 @@
     "aspect_ratio": 0.796,
     "operations": [
       "crop_dialog_(0,0,1366,1716)",
-      "inpaint_bottom_right_btn_(1346,1571)"
+      "inpaint_bottom_right_btn_(1334,1566)"
     ],
     "status": "retouched"
   },
@@ -57,16 +60,17 @@
     "operations": [
       "crop_dialog_(0,4,1724,1722)",
       "inpaint_left_nav_btn_(53,857)",
-      "inpaint_bottom_right_btn_(1649,1581)"
+      "inpaint_bottom_right_btn_(1639,1571)"
     ],
     "status": "retouched"
   },
   "ART-0007": {
     "source_file": "Pasted 2026-11-11 at 11.18.56 AM.png",
-    "master_dimensions": "1373x1720",
-    "aspect_ratio": 0.798,
+    "master_dimensions": "1314x1720",
+    "aspect_ratio": 0.764,
     "operations": [
-      "crop_dialog_(1,0,1374,1720)"
+      "crop_dialog_(60,0,1374,1720)",
+      "inpaint_left_nav_btn_(66,369)"
     ],
     "status": "retouched"
   },
@@ -76,7 +80,7 @@
     "aspect_ratio": 0.706,
     "operations": [
       "crop_dialog_(152,0,1363,1716)",
-      "inpaint_pagination_dots_2_at_y1688"
+      "inpaint_left_nav_btn_(61,986)"
     ],
     "status": "retouched"
   },
@@ -86,8 +90,9 @@
     "aspect_ratio": 0.806,
     "operations": [
       "crop_dialog_(0,4,1382,1718)",
-      "inpaint_chevron_right_(1310,826)",
-      "inpaint_left_nav_btn_(36,909)"
+      "inpaint_right_nav_btn_(1345,1020)",
+      "inpaint_left_nav_btn_(36,369)",
+      "inpaint_pagination_dots_2_at_y1632"
     ],
     "status": "retouched"
   },
@@ -96,7 +101,8 @@
     "master_dimensions": "1348x1712",
     "aspect_ratio": 0.787,
     "operations": [
-      "crop_dialog_(0,2,1348,1714)"
+      "crop_dialog_(0,2,1348,1714)",
+      "inpaint_left_nav_btn_(72,683)"
     ],
     "status": "retouched"
   },
@@ -106,7 +112,7 @@
     "aspect_ratio": 0.793,
     "operations": [
       "inpaint_right_nav_btn_(1288,825)",
-      "inpaint_left_nav_btn_(61,880)",
+      "inpaint_left_nav_btn_(60,813)",
       "inpaint_pagination_dots_2_at_y1647"
     ],
     "status": "retouched"
@@ -131,8 +137,10 @@
     "source_file": "Pasted 2026-11-11 at 11.22.12 AM.png",
     "master_dimensions": "1324x1694",
     "aspect_ratio": 0.782,
-    "operations": [],
-    "status": "clean"
+    "operations": [
+      "inpaint_left_nav_btn_(62,369)"
+    ],
+    "status": "retouched"
   },
   "ART-0015": {
     "source_file": "Pasted 2026-11-11 at 11.22.30 AM.png",
@@ -143,11 +151,11 @@
   },
   "ART-0016": {
     "source_file": "Pasted 2026-11-11 at 11.22.52 AM.png",
-    "master_dimensions": "1288x1718",
-    "aspect_ratio": 0.75,
+    "master_dimensions": "1280x1718",
+    "aspect_ratio": 0.745,
     "operations": [
-      "crop_dialog_(56,6,1344,1724)",
-      "inpaint_chevron_right_(1231,847)"
+      "crop_dialog_(64,6,1344,1724)",
+      "inpaint_chevron_right_(1199,589)"
     ],
     "status": "retouched"
   },
@@ -157,8 +165,9 @@
     "aspect_ratio": 0.801,
     "operations": [
       "crop_dialog_(24,2,1397,1716)",
-      "inpaint_right_nav_btn_(1304,782)",
-      "inpaint_pagination_dots_2_at_y1675"
+      "inpaint_right_nav_btn_(1303,854)",
+      "inpaint_left_nav_btn_(72,738)",
+      "inpaint_pagination_dots_3_at_y1675"
     ],
     "status": "retouched"
   },
@@ -168,7 +177,7 @@
     "aspect_ratio": 0.799,
     "operations": [
       "crop_dialog_(23,2,1395,1720)",
-      "inpaint_bottom_right_btn_(1297,1573)"
+      "inpaint_bottom_right_btn_(1287,1568)"
     ],
     "status": "retouched"
   },
@@ -184,17 +193,19 @@
     "master_dimensions": "1732x1714",
     "aspect_ratio": 1.011,
     "operations": [
-      "crop_dialog_(0,6,1732,1720)"
+      "crop_dialog_(0,6,1732,1720)",
+      "inpaint_left_nav_btn_(50,610)"
     ],
     "status": "retouched"
   },
   "ART-0021": {
     "source_file": "Pasted 2026-11-11 at 11.24.46 AM.png",
-    "master_dimensions": "1718x1563",
-    "aspect_ratio": 1.099,
+    "master_dimensions": "1718x1553",
+    "aspect_ratio": 1.106,
     "operations": [
-      "crop_dialog_(0,20,1718,1583)",
-      "inpaint_bottom_right_btn_(1649,1418)"
+      "crop_dialog_(0,25,1718,1578)",
+      "inpaint_left_nav_btn_(30,1258)",
+      "inpaint_bottom_right_btn_(1649,1403)"
     ],
     "status": "retouched"
   },
@@ -203,8 +214,7 @@
     "master_dimensions": "1378x1718",
     "aspect_ratio": 0.802,
     "operations": [
-      "crop_dialog_(0,6,1378,1724)",
-      "inpaint_right_nav_btn_(1306,788)"
+      "crop_dialog_(0,6,1378,1724)"
     ],
     "status": "retouched"
   },
@@ -222,7 +232,7 @@
     "master_dimensions": "1526x1718",
     "aspect_ratio": 0.888,
     "operations": [
-      "inpaint_bottom_right_btn_(1451,1573)"
+      "inpaint_bottom_right_btn_(1441,1568)"
     ],
     "status": "retouched"
   },
@@ -232,7 +242,8 @@
     "aspect_ratio": 0.802,
     "operations": [
       "crop_dialog_(0,8,1377,1724)",
-      "inpaint_bottom_right_btn_(1302,1571)"
+      "inpaint_left_nav_btn_(53,1428)",
+      "inpaint_bottom_right_btn_(1292,1566)"
     ],
     "status": "retouched"
   },
@@ -242,7 +253,7 @@
     "aspect_ratio": 0.802,
     "operations": [
       "crop_dialog_(0,6,1376,1722)",
-      "inpaint_bottom_right_btn_(1301,1571)"
+      "inpaint_bottom_right_btn_(1291,1566)"
     ],
     "status": "retouched"
   },
@@ -252,8 +263,9 @@
     "aspect_ratio": 0.801,
     "operations": [
       "crop_dialog_(0,6,1376,1724)",
-      "inpaint_chevron_right_(1295,868)",
-      "inpaint_bottom_right_btn_(1301,1573)"
+      "inpaint_chevron_right_(1313,429)",
+      "inpaint_left_nav_btn_(63,369)",
+      "inpaint_bottom_right_btn_(1291,1568)"
     ],
     "status": "retouched"
   },
@@ -262,7 +274,7 @@
     "master_dimensions": "1215x1710",
     "aspect_ratio": 0.711,
     "operations": [
-      "inpaint_right_nav_btn_(1150,928)"
+      "inpaint_right_nav_btn_(1162,351)"
     ],
     "status": "retouched"
   },
@@ -282,6 +294,7 @@
     "aspect_ratio": 0.69,
     "operations": [
       "crop_dialog_(0,4,1185,1722)",
+      "inpaint_chevron_right_(1142,432)",
       "inpaint_left_nav_btn_(49,857)",
       "inpaint_pagination_dots_4_at_y1679"
     ],
@@ -293,7 +306,7 @@
     "aspect_ratio": 0.677,
     "operations": [
       "crop_dialog_(0,4,1162,1720)",
-      "inpaint_chevron_right_(1125,815)",
+      "inpaint_chevron_right_(1105,477)",
       "inpaint_left_nav_btn_(47,857)",
       "inpaint_pagination_dots_4_at_y1679"
     ],
@@ -320,45 +333,48 @@
   },
   "ART-0034": {
     "source_file": "Pasted 2026-11-11 at 11.29.46 AM.png",
-    "master_dimensions": "1363x1679",
-    "aspect_ratio": 0.812,
+    "master_dimensions": "1363x1674",
+    "aspect_ratio": 0.814,
     "operations": [
-      "crop_dialog_(0,0,1363,1679)"
+      "crop_dialog_(0,0,1363,1674)",
+      "inpaint_chevron_right_(1282,582)"
     ],
     "status": "retouched"
   },
   "ART-0035": {
     "source_file": "Pasted 2026-11-11 at 11.30.06 AM.png",
-    "master_dimensions": "1477x1712",
-    "aspect_ratio": 0.863,
+    "master_dimensions": "1476x1712",
+    "aspect_ratio": 0.862,
     "operations": [
       "inpaint_right_nav_btn_(1409,874)",
-      "inpaint_bottom_right_btn_(1402,1567)"
+      "inpaint_bottom_right_btn_(1391,1562)"
     ],
     "status": "retouched"
   },
   "ART-0036": {
     "source_file": "Pasted 2026-11-11 at 11.30.25 AM.png",
-    "master_dimensions": "1693x1706",
-    "aspect_ratio": 0.992,
+    "master_dimensions": "1666x1706",
+    "aspect_ratio": 0.977,
     "operations": [
-      "crop_dialog_(11,0,1704,1706)"
+      "crop_dialog_(38,0,1704,1706)"
     ],
     "status": "retouched"
   },
   "ART-0037": {
     "source_file": "Pasted 2026-11-11 at 11.30.46 AM.png",
-    "master_dimensions": "1426x1700",
-    "aspect_ratio": 0.839,
-    "operations": [],
-    "status": "clean"
+    "master_dimensions": "1424x1700",
+    "aspect_ratio": 0.838,
+    "operations": [
+      "inpaint_right_nav_btn_(1358,378)"
+    ],
+    "status": "retouched"
   },
   "ART-0038": {
     "source_file": "Pasted 2026-11-11 at 11.31.05 AM.png",
-    "master_dimensions": "1503x1687",
-    "aspect_ratio": 0.891,
+    "master_dimensions": "1523x1682",
+    "aspect_ratio": 0.905,
     "operations": [
-      "crop_dialog_(0,0,1503,1687)"
+      "crop_dialog_(0,0,1523,1682)"
     ],
     "status": "retouched"
   },
@@ -368,7 +384,8 @@
     "aspect_ratio": 0.798,
     "operations": [
       "crop_dialog_(0,2,1370,1718)",
-      "inpaint_chevron_right_(1316,798)"
+      "inpaint_chevron_right_(1295,429)",
+      "inpaint_left_nav_btn_(66,512)"
     ],
     "status": "retouched"
   },
@@ -378,8 +395,9 @@
     "aspect_ratio": 0.815,
     "operations": [
       "crop_dialog_(0,2,1400,1720)",
-      "inpaint_chevron_right_(1353,799)",
-      "inpaint_bottom_right_btn_(1340,1573)"
+      "inpaint_chevron_right_(1363,429)",
+      "inpaint_left_nav_btn_(31,1304)",
+      "inpaint_bottom_right_btn_(1342,1568)"
     ],
     "status": "retouched"
   },
@@ -389,7 +407,9 @@
     "aspect_ratio": 0.8,
     "operations": [
       "crop_dialog_(0,2,1372,1716)",
-      "inpaint_bottom_right_btn_(1297,1569)"
+      "inpaint_chevron_right_(1291,627)",
+      "inpaint_left_nav_btn_(19,351)",
+      "inpaint_bottom_right_btn_(1287,1564)"
     ],
     "status": "retouched"
   },
@@ -398,8 +418,8 @@
     "master_dimensions": "1376x1720",
     "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_chevron_right_(1302,800)",
-      "inpaint_bottom_right_btn_(1345,1575)"
+      "inpaint_right_nav_btn_(1303,438)",
+      "inpaint_bottom_right_btn_(1295,1570)"
     ],
     "status": "retouched"
   },
@@ -408,8 +428,9 @@
     "master_dimensions": "1374x1724",
     "aspect_ratio": 0.797,
     "operations": [
-      "inpaint_right_nav_btn_(1331,825)",
-      "inpaint_bottom_right_btn_(1331,1579)"
+      "inpaint_right_nav_btn_(1325,582)",
+      "inpaint_left_nav_btn_(73,409)",
+      "inpaint_bottom_right_btn_(1331,1574)"
     ],
     "status": "retouched"
   },
@@ -417,23 +438,28 @@
     "source_file": "Pasted 2026-11-11 at 11.33.40 AM.png",
     "master_dimensions": "1378x1720",
     "aspect_ratio": 0.801,
-    "operations": [],
-    "status": "clean"
+    "operations": [
+      "inpaint_right_nav_btn_(1356,1451)"
+    ],
+    "status": "retouched"
   },
   "ART-0045": {
     "source_file": "Pasted 2026-11-11 at 11.33.59 AM.png",
     "master_dimensions": "1376x1718",
     "aspect_ratio": 0.801,
-    "operations": [],
-    "status": "clean"
+    "operations": [
+      "inpaint_right_nav_btn_(1338,1094)"
+    ],
+    "status": "retouched"
   },
   "ART-0046": {
     "source_file": "Pasted 2026-11-11 at 11.34.23 AM.png",
     "master_dimensions": "1376x1722",
     "aspect_ratio": 0.799,
     "operations": [
-      "inpaint_chevron_right_(1295,801)",
-      "inpaint_bottom_right_btn_(1355,1584)"
+      "inpaint_chevron_right_(1296,576)",
+      "inpaint_left_nav_btn_(69,1159)",
+      "inpaint_bottom_right_btn_(1300,1572)"
     ],
     "status": "retouched"
   },
@@ -442,7 +468,8 @@
     "master_dimensions": "1376x1724",
     "aspect_ratio": 0.798,
     "operations": [
-      "inpaint_bottom_right_btn_(1308,1579)"
+      "inpaint_chevron_right_(1302,431)",
+      "inpaint_bottom_right_btn_(1308,1574)"
     ],
     "status": "retouched"
   },
@@ -459,15 +486,20 @@
     "source_file": "Pasted 2026-11-11 at 11.35.33 AM.png",
     "master_dimensions": "1374x1720",
     "aspect_ratio": 0.799,
-    "operations": [],
-    "status": "clean"
+    "operations": [
+      "inpaint_right_nav_btn_(1299,995)",
+      "inpaint_left_nav_btn_(61,1306)",
+      "inpaint_bottom_right_btn_(1300,1651)"
+    ],
+    "status": "retouched"
   },
   "ART-0050": {
     "source_file": "Pasted 2026-11-11 at 11.35.55 AM.png",
-    "master_dimensions": "1714x1700",
-    "aspect_ratio": 1.008,
+    "master_dimensions": "1714x1695",
+    "aspect_ratio": 1.011,
     "operations": [
-      "crop_dialog_(0,20,1714,1720)"
+      "crop_dialog_(0,25,1714,1720)",
+      "inpaint_right_nav_btn_(1662,480)"
     ],
     "status": "retouched"
   },
@@ -476,7 +508,8 @@
     "master_dimensions": "1378x1716",
     "aspect_ratio": 0.803,
     "operations": [
-      "inpaint_right_nav_btn_(1356,853)"
+      "inpaint_right_nav_btn_(1309,703)",
+      "inpaint_bottom_right_btn_(1293,1653)"
     ],
     "status": "retouched"
   },
@@ -486,7 +519,9 @@
     "aspect_ratio": 0.867,
     "operations": [
       "crop_dialog_(0,0,1489,1718)",
-      "inpaint_bottom_right_btn_(1419,1576)"
+      "inpaint_right_nav_btn_(1446,524)",
+      "inpaint_left_nav_btn_(70,631)",
+      "inpaint_bottom_right_btn_(1418,1576)"
     ],
     "status": "retouched"
   },
@@ -494,16 +529,20 @@
     "source_file": "Pasted 2026-11-11 at 11.37.03 AM.png",
     "master_dimensions": "1497x1712",
     "aspect_ratio": 0.874,
-    "operations": [],
-    "status": "clean"
+    "operations": [
+      "inpaint_chevron_right_(1467,580)",
+      "inpaint_bottom_right_btn_(1412,1562)"
+    ],
+    "status": "retouched"
   },
   "ART-0054": {
     "source_file": "Pasted 2026-11-11 at 11.37.25 AM.png",
     "master_dimensions": "1376x1722",
     "aspect_ratio": 0.799,
     "operations": [
-      "inpaint_right_nav_btn_(1340,788)",
-      "inpaint_bottom_right_btn_(1332,1585)"
+      "inpaint_right_nav_btn_(1316,1056)",
+      "inpaint_left_nav_btn_(65,573)",
+      "inpaint_bottom_right_btn_(1326,1577)"
     ],
     "status": "retouched"
   },
@@ -512,8 +551,9 @@
     "master_dimensions": "1372x1716",
     "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_chevron_right_(1311,821)",
-      "inpaint_bottom_right_btn_(1325,1610)"
+      "inpaint_chevron_right_(1343,450)",
+      "inpaint_left_nav_btn_(47,1307)",
+      "inpaint_bottom_right_btn_(1311,1600)"
     ],
     "status": "retouched"
   },
@@ -522,9 +562,9 @@
     "master_dimensions": "1722x1738",
     "aspect_ratio": 0.991,
     "operations": [
-      "inpaint_right_nav_btn_(1650,937)",
-      "inpaint_left_nav_btn_(55,840)",
-      "inpaint_bottom_right_btn_(1647,1593)"
+      "inpaint_right_nav_btn_(1653,1173)",
+      "inpaint_left_nav_btn_(60,635)",
+      "inpaint_bottom_right_btn_(1637,1588)"
     ],
     "status": "retouched"
   },
@@ -547,7 +587,8 @@
     "master_dimensions": "1374x1718",
     "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_bottom_right_btn_(1299,1573)"
+      "inpaint_chevron_right_(1299,516)",
+      "inpaint_bottom_right_btn_(1289,1568)"
     ],
     "status": "retouched"
   },
@@ -556,7 +597,7 @@
     "master_dimensions": "1374x1716",
     "aspect_ratio": 0.801,
     "operations": [
-      "inpaint_chevron_right_(1293,825)"
+      "inpaint_right_nav_btn_(1298,1318)"
     ],
     "status": "retouched"
   },
@@ -581,7 +622,8 @@
     "master_dimensions": "1372x1718",
     "aspect_ratio": 0.799,
     "operations": [
-      "inpaint_bottom_right_btn_(1297,1573)"
+      "inpaint_right_nav_btn_(1299,418)",
+      "inpaint_bottom_right_btn_(1287,1568)"
     ],
     "status": "retouched"
   },
@@ -591,8 +633,8 @@
     "aspect_ratio": 0.801,
     "operations": [
       "crop_dialog_(0,0,1380,1722)",
-      "inpaint_chevron_right_(1348,839)",
-      "inpaint_bottom_right_btn_(1305,1577)"
+      "inpaint_chevron_right_(1335,430)",
+      "inpaint_bottom_right_btn_(1295,1572)"
     ],
     "status": "retouched"
   },
@@ -601,7 +643,8 @@
     "master_dimensions": "1374x1718",
     "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_bottom_right_btn_(1299,1573)"
+      "inpaint_chevron_right_(1317,449)",
+      "inpaint_bottom_right_btn_(1289,1568)"
     ],
     "status": "retouched"
   },
@@ -610,7 +653,8 @@
     "master_dimensions": "1377x1720",
     "aspect_ratio": 0.801,
     "operations": [
-      "inpaint_bottom_right_btn_(1302,1575)"
+      "inpaint_chevron_right_(1296,1122)",
+      "inpaint_bottom_right_btn_(1292,1570)"
     ],
     "status": "retouched"
   },
@@ -619,8 +663,8 @@
     "master_dimensions": "1372x1722",
     "aspect_ratio": 0.797,
     "operations": [
-      "inpaint_chevron_right_(1340,891)",
-      "inpaint_bottom_right_btn_(1297,1577)"
+      "inpaint_chevron_right_(1293,430)",
+      "inpaint_bottom_right_btn_(1290,1572)"
     ],
     "status": "retouched"
   },
@@ -629,7 +673,8 @@
     "master_dimensions": "1374x1718",
     "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_bottom_right_btn_(1299,1573)"
+      "inpaint_chevron_right_(1326,466)",
+      "inpaint_bottom_right_btn_(1289,1568)"
     ],
     "status": "retouched"
   },
@@ -638,18 +683,20 @@
     "master_dimensions": "1372x1716",
     "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_chevron_right_(1294,798)",
-      "inpaint_bottom_right_btn_(1297,1571)"
+      "inpaint_right_nav_btn_(1302,1136)",
+      "inpaint_left_nav_btn_(26,521)",
+      "inpaint_bottom_right_btn_(1287,1566)"
     ],
     "status": "retouched"
   },
   "ART-0070": {
     "source_file": "Pasted 2026-11-11 at 11.43.11 AM.png",
-    "master_dimensions": "1340x1720",
-    "aspect_ratio": 0.779,
+    "master_dimensions": "1341x1720",
+    "aspect_ratio": 0.78,
     "operations": [
-      "crop_dialog_(30,0,1370,1720)",
-      "inpaint_right_nav_btn_(1293,859)"
+      "crop_dialog_(29,0,1370,1720)",
+      "inpaint_right_nav_btn_(1269,656)",
+      "inpaint_left_nav_btn_(73,675)"
     ],
     "status": "retouched"
   },
@@ -659,8 +706,7 @@
     "aspect_ratio": 0.8,
     "operations": [
       "inpaint_right_nav_btn_(1327,857)",
-      "inpaint_left_nav_btn_(31,918)",
-      "inpaint_pagination_dots_3_at_y1679"
+      "inpaint_left_nav_btn_(31,918)"
     ],
     "status": "retouched"
   },
@@ -669,27 +715,27 @@
     "master_dimensions": "1374x1718",
     "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_chevron_right_(1293,877)"
+      "inpaint_right_nav_btn_(1332,1298)"
     ],
     "status": "retouched"
   },
   "ART-0073": {
     "source_file": "Pasted 2026-11-11 at 11.44.13 AM.png",
-    "master_dimensions": "1718x1698",
-    "aspect_ratio": 1.012,
+    "master_dimensions": "1718x1693",
+    "aspect_ratio": 1.015,
     "operations": [
-      "crop_dialog_(0,20,1718,1718)",
-      "inpaint_right_nav_btn_(1671,837)"
+      "crop_dialog_(0,25,1718,1718)",
+      "inpaint_right_nav_btn_(1671,832)"
     ],
     "status": "retouched"
   },
   "ART-0074": {
     "source_file": "Pasted 2026-11-11 at 11.44.32 AM.png",
-    "master_dimensions": "1714x1704",
-    "aspect_ratio": 1.006,
+    "master_dimensions": "1714x1699",
+    "aspect_ratio": 1.009,
     "operations": [
-      "crop_dialog_(0,20,1714,1724)",
-      "inpaint_left_nav_btn_(43,837)"
+      "crop_dialog_(0,25,1714,1724)",
+      "inpaint_left_nav_btn_(43,832)"
     ],
     "status": "retouched"
   },
@@ -697,15 +743,19 @@
     "source_file": "Pasted 2026-11-11 at 11.44.53 AM.png",
     "master_dimensions": "1714x1722",
     "aspect_ratio": 0.995,
-    "operations": [],
-    "status": "clean"
+    "operations": [
+      "inpaint_left_nav_btn_(73,701)"
+    ],
+    "status": "retouched"
   },
   "ART-0076": {
     "source_file": "Pasted 2026-11-11 at 11.45.12 AM.png",
     "master_dimensions": "1374x1718",
     "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_right_nav_btn_(1302,926)"
+      "inpaint_right_nav_btn_(1302,926)",
+      "inpaint_left_nav_btn_(44,1038)",
+      "inpaint_pagination_dots_2_at_y1691"
     ],
     "status": "retouched"
   },
@@ -714,7 +764,7 @@
     "master_dimensions": "1374x1718",
     "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_chevron_right_(1296,841)"
+      "inpaint_chevron_right_(1319,435)"
     ],
     "status": "retouched"
   },
@@ -723,7 +773,7 @@
     "master_dimensions": "1376x1716",
     "aspect_ratio": 0.802,
     "operations": [
-      "inpaint_chevron_right_(1326,835)"
+      "inpaint_chevron_right_(1295,540)"
     ],
     "status": "retouched"
   },
@@ -732,7 +782,8 @@
     "master_dimensions": "1374x1720",
     "aspect_ratio": 0.799,
     "operations": [
-      "inpaint_bottom_right_btn_(1304,1575)"
+      "inpaint_chevron_right_(1318,849)",
+      "inpaint_bottom_right_btn_(1289,1570)"
     ],
     "status": "retouched"
   },
@@ -741,8 +792,8 @@
     "master_dimensions": "1374x1718",
     "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_chevron_right_(1318,847)",
-      "inpaint_bottom_right_btn_(1299,1573)"
+      "inpaint_chevron_right_(1347,447)",
+      "inpaint_bottom_right_btn_(1292,1568)"
     ],
     "status": "retouched"
   },
@@ -751,7 +802,8 @@
     "master_dimensions": "1374x1716",
     "aspect_ratio": 0.801,
     "operations": [
-      "inpaint_chevron_right_(1318,849)"
+      "inpaint_chevron_right_(1338,429)",
+      "inpaint_bottom_right_btn_(1299,1573)"
     ],
     "status": "retouched"
   },
@@ -760,8 +812,8 @@
     "master_dimensions": "1374x1718",
     "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_right_nav_btn_(1313,785)",
-      "inpaint_bottom_right_btn_(1299,1573)"
+      "inpaint_right_nav_btn_(1313,777)",
+      "inpaint_bottom_right_btn_(1289,1568)"
     ],
     "status": "retouched"
   },
@@ -772,18 +824,19 @@
     "operations": [
       "crop_dialog_(1,0,1371,1716)",
       "inpaint_right_nav_btn_(1324,859)",
-      "inpaint_left_nav_btn_(69,931)",
+      "inpaint_left_nav_btn_(58,1349)",
       "inpaint_pagination_dots_10_at_y1681"
     ],
     "status": "retouched"
   },
   "ART-0084": {
     "source_file": "Pasted 2026-11-11 at 11.48.17 AM.png",
-    "master_dimensions": "1341x1713",
-    "aspect_ratio": 0.783,
+    "master_dimensions": "1340x1714",
+    "aspect_ratio": 0.782,
     "operations": [
-      "crop_dialog_(29,0,1370,1713)",
-      "inpaint_right_nav_btn_(1294,857)"
+      "crop_dialog_(30,0,1370,1714)",
+      "inpaint_right_nav_btn_(1269,551)",
+      "inpaint_left_nav_btn_(73,570)"
     ],
     "status": "retouched"
   },
@@ -792,26 +845,27 @@
     "master_dimensions": "1376x1716",
     "aspect_ratio": 0.802,
     "operations": [
-      "inpaint_right_nav_btn_(1342,805)"
+      "inpaint_chevron_right_(1301,756)"
     ],
     "status": "retouched"
   },
   "ART-0086": {
     "source_file": "Pasted 2026-11-11 at 11.48.54 AM.png",
-    "master_dimensions": "1175x1621",
-    "aspect_ratio": 0.725,
+    "master_dimensions": "1322x1616",
+    "aspect_ratio": 0.818,
     "operations": [
-      "crop_dialog_(181,0,1356,1621)",
-      "inpaint_right_nav_btn_(1128,857)"
+      "crop_dialog_(34,0,1356,1616)",
+      "inpaint_right_nav_btn_(1275,857)"
     ],
     "status": "retouched"
   },
   "ART-0087": {
     "source_file": "Pasted 2026-11-11 at 11.49.35 AM.png",
-    "master_dimensions": "1243x1625",
-    "aspect_ratio": 0.765,
+    "master_dimensions": "1243x1620",
+    "aspect_ratio": 0.767,
     "operations": [
-      "crop_dialog_(41,0,1284,1625)"
+      "crop_dialog_(41,0,1284,1620)",
+      "inpaint_left_nav_btn_(35,912)"
     ],
     "status": "retouched"
   },
@@ -829,7 +883,8 @@
     "master_dimensions": "1374x1722",
     "aspect_ratio": 0.798,
     "operations": [
-      "inpaint_bottom_right_btn_(1333,1649)"
+      "inpaint_chevron_right_(1318,851)",
+      "inpaint_bottom_right_btn_(1302,1572)"
     ],
     "status": "retouched"
   },
@@ -838,7 +893,8 @@
     "master_dimensions": "1376x1720",
     "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_chevron_right_(1320,851)"
+      "inpaint_chevron_right_(1324,837)",
+      "inpaint_bottom_right_btn_(1355,1570)"
     ],
     "status": "retouched"
   },
@@ -847,8 +903,9 @@
     "master_dimensions": "1372x1718",
     "aspect_ratio": 0.799,
     "operations": [
+      "inpaint_chevron_right_(1345,1088)",
       "inpaint_left_nav_btn_(45,857)",
-      "inpaint_bottom_right_btn_(1297,1573)"
+      "inpaint_bottom_right_btn_(1287,1568)"
     ],
     "status": "retouched"
   },
@@ -857,9 +914,9 @@
     "master_dimensions": "1374x1720",
     "aspect_ratio": 0.799,
     "operations": [
-      "inpaint_right_nav_btn_(1312,836)",
-      "inpaint_left_nav_btn_(63,789)",
-      "inpaint_bottom_right_btn_(1340,1575)"
+      "inpaint_right_nav_btn_(1298,492)",
+      "inpaint_left_nav_btn_(68,739)",
+      "inpaint_bottom_right_btn_(1333,1570)"
     ],
     "status": "retouched"
   },
@@ -868,8 +925,8 @@
     "master_dimensions": "1718x1718",
     "aspect_ratio": 1.0,
     "operations": [
-      "inpaint_chevron_right_(1662,847)",
-      "inpaint_bottom_right_btn_(1643,1573)"
+      "inpaint_chevron_right_(1655,596)",
+      "inpaint_bottom_right_btn_(1633,1568)"
     ],
     "status": "retouched"
   },
@@ -878,8 +935,8 @@
     "master_dimensions": "1718x1720",
     "aspect_ratio": 0.999,
     "operations": [
-      "inpaint_chevron_right_(1662,849)",
-      "inpaint_bottom_right_btn_(1643,1575)"
+      "inpaint_chevron_right_(1642,430)",
+      "inpaint_bottom_right_btn_(1633,1570)"
     ],
     "status": "retouched"
   },
@@ -888,8 +945,8 @@
     "master_dimensions": "1720x1720",
     "aspect_ratio": 1.0,
     "operations": [
-      "inpaint_chevron_right_(1639,850)",
-      "inpaint_bottom_right_btn_(1645,1575)"
+      "inpaint_chevron_right_(1693,532)",
+      "inpaint_bottom_right_btn_(1635,1570)"
     ],
     "status": "retouched"
   },
@@ -898,8 +955,8 @@
     "master_dimensions": "1718x1720",
     "aspect_ratio": 0.999,
     "operations": [
-      "inpaint_chevron_right_(1662,868)",
-      "inpaint_bottom_right_btn_(1643,1575)"
+      "inpaint_chevron_right_(1662,849)",
+      "inpaint_bottom_right_btn_(1633,1570)"
     ],
     "status": "retouched"
   },
@@ -908,8 +965,9 @@
     "master_dimensions": "1724x1726",
     "aspect_ratio": 0.999,
     "operations": [
-      "inpaint_chevron_right_(1668,874)",
-      "inpaint_bottom_right_btn_(1649,1581)"
+      "inpaint_chevron_right_(1668,855)",
+      "inpaint_left_nav_btn_(60,377)",
+      "inpaint_bottom_right_btn_(1639,1576)"
     ],
     "status": "retouched"
   },
@@ -918,8 +976,8 @@
     "master_dimensions": "1718x1722",
     "aspect_ratio": 0.998,
     "operations": [
-      "inpaint_chevron_right_(1670,801)",
-      "inpaint_bottom_right_btn_(1643,1577)"
+      "inpaint_chevron_right_(1643,772)",
+      "inpaint_bottom_right_btn_(1633,1572)"
     ],
     "status": "retouched"
   },
@@ -928,7 +986,7 @@
     "master_dimensions": "1716x1720",
     "aspect_ratio": 0.998,
     "operations": [
-      "inpaint_bottom_right_btn_(1641,1575)"
+      "inpaint_bottom_right_btn_(1631,1570)"
     ],
     "status": "retouched"
   },
@@ -943,11 +1001,11 @@
   },
   "ART-0101": {
     "source_file": "Pasted 2026-11-11 at 11.55.15 AM.png",
-    "master_dimensions": "1150x1611",
-    "aspect_ratio": 0.714,
+    "master_dimensions": "1150x1606",
+    "aspect_ratio": 0.716,
     "operations": [
-      "crop_dialog_(41,20,1191,1631)",
-      "inpaint_right_nav_btn_(1080,850)"
+      "crop_dialog_(41,25,1191,1631)",
+      "inpaint_right_nav_btn_(1080,845)"
     ],
     "status": "retouched"
   },
@@ -956,7 +1014,8 @@
     "master_dimensions": "1642x1738",
     "aspect_ratio": 0.945,
     "operations": [
-      "inpaint_bottom_right_btn_(1567,1593)"
+      "inpaint_chevron_right_(1586,1006)",
+      "inpaint_bottom_right_btn_(1557,1588)"
     ],
     "status": "retouched"
   },
@@ -965,7 +1024,9 @@
     "master_dimensions": "1366x1710",
     "aspect_ratio": 0.799,
     "operations": [
-      "inpaint_bottom_right_btn_(1291,1565)"
+      "inpaint_chevron_right_(1285,647)",
+      "inpaint_bottom_right_btn_(1281,1560)",
+      "inpaint_pagination_dots_2_at_y1637"
     ],
     "status": "retouched"
   },
@@ -975,7 +1036,8 @@
     "aspect_ratio": 0.8,
     "operations": [
       "crop_dialog_(0,0,1372,1716)",
-      "inpaint_bottom_right_btn_(1297,1571)"
+      "inpaint_chevron_right_(1299,442)",
+      "inpaint_bottom_right_btn_(1287,1566)"
     ],
     "status": "retouched"
   },
@@ -986,7 +1048,7 @@
     "operations": [
       "crop_dialog_(0,0,1373,1720)",
       "inpaint_chevron_right_(1318,849)",
-      "inpaint_bottom_right_btn_(1298,1575)"
+      "inpaint_bottom_right_btn_(1288,1570)"
     ],
     "status": "retouched"
   },
@@ -996,8 +1058,8 @@
     "aspect_ratio": 0.8,
     "operations": [
       "crop_dialog_(0,0,1374,1718)",
-      "inpaint_chevron_right_(1293,799)",
-      "inpaint_bottom_right_btn_(1299,1573)"
+      "inpaint_chevron_right_(1293,612)",
+      "inpaint_bottom_right_btn_(1289,1568)"
     ],
     "status": "retouched"
   },
@@ -1007,8 +1069,8 @@
     "aspect_ratio": 0.8,
     "operations": [
       "crop_dialog_(0,0,1373,1716)",
-      "inpaint_chevron_right_(1292,824)",
-      "inpaint_bottom_right_btn_(1298,1571)"
+      "inpaint_chevron_right_(1312,429)",
+      "inpaint_bottom_right_btn_(1288,1566)"
     ],
     "status": "retouched"
   },
@@ -1018,8 +1080,8 @@
     "aspect_ratio": 0.801,
     "operations": [
       "crop_dialog_(0,0,1376,1718)",
-      "inpaint_chevron_right_(1343,872)",
-      "inpaint_bottom_right_btn_(1301,1573)"
+      "inpaint_right_nav_btn_(1309,571)",
+      "inpaint_bottom_right_btn_(1291,1568)"
     ],
     "status": "retouched"
   },
@@ -1032,12 +1094,12 @@
   },
   "ART-0110": {
     "source_file": "Pasted 2026-11-11 at 11.58.38 AM.png",
-    "master_dimensions": "1714x1655",
-    "aspect_ratio": 1.036,
+    "master_dimensions": "1714x1645",
+    "aspect_ratio": 1.042,
     "operations": [
-      "crop_dialog_(0,20,1714,1675)",
-      "inpaint_chevron_right_(1642,767)",
-      "inpaint_left_nav_btn_(72,772)"
+      "crop_dialog_(0,25,1714,1670)",
+      "inpaint_right_nav_btn_(1647,379)",
+      "inpaint_left_nav_btn_(27,349)"
     ],
     "status": "retouched"
   },
@@ -1047,8 +1109,8 @@
     "aspect_ratio": 0.797,
     "operations": [
       "crop_dialog_(0,0,1373,1722)",
-      "inpaint_chevron_right_(1326,861)",
-      "inpaint_bottom_right_btn_(1298,1577)"
+      "inpaint_chevron_right_(1320,853)",
+      "inpaint_bottom_right_btn_(1288,1572)"
     ],
     "status": "retouched"
   },
@@ -1058,40 +1120,43 @@
     "aspect_ratio": 0.799,
     "operations": [
       "crop_dialog_(0,0,1375,1720)",
-      "inpaint_right_nav_btn_(1329,861)",
+      "inpaint_right_nav_btn_(1352,620)",
       "inpaint_left_nav_btn_(49,861)",
-      "inpaint_bottom_right_btn_(1300,1575)"
+      "inpaint_bottom_right_btn_(1290,1570)"
     ],
     "status": "retouched"
   },
   "ART-0113": {
     "source_file": "Pasted 2026-11-11 at 11.59.49 AM.png",
-    "master_dimensions": "1232x1644",
-    "aspect_ratio": 0.749,
+    "master_dimensions": "1238x1641",
+    "aspect_ratio": 0.754,
     "operations": [
-      "crop_dialog_(6,11,1238,1655)",
-      "inpaint_left_nav_btn_(31,844)",
-      "inpaint_bottom_right_btn_(1157,1499)"
+      "crop_dialog_(0,11,1238,1652)",
+      "inpaint_chevron_right_(1157,1121)",
+      "inpaint_left_nav_btn_(35,844)",
+      "inpaint_bottom_right_btn_(1153,1491)"
     ],
     "status": "retouched"
   },
   "ART-0114": {
     "source_file": "Pasted 2026-11-11 at 12.00.06 PM.png",
-    "master_dimensions": "1236x1635",
-    "aspect_ratio": 0.756,
+    "master_dimensions": "1229x1630",
+    "aspect_ratio": 0.754,
     "operations": [
-      "crop_dialog_(0,0,1236,1635)",
-      "inpaint_bottom_right_btn_(1161,1490)"
+      "crop_dialog_(0,0,1229,1630)",
+      "inpaint_bottom_right_btn_(1144,1480)"
     ],
     "status": "retouched"
   },
   "ART-0115": {
     "source_file": "Pasted 2026-11-11 at 12.00.26 PM.png",
-    "master_dimensions": "1160x1662",
+    "master_dimensions": "1160x1663",
     "aspect_ratio": 0.698,
     "operations": [
-      "crop_dialog_(0,0,1160,1662)",
-      "inpaint_bottom_right_btn_(1085,1517)"
+      "crop_dialog_(0,0,1160,1663)",
+      "inpaint_chevron_right_(1079,587)",
+      "inpaint_left_nav_btn_(63,1027)",
+      "inpaint_bottom_right_btn_(1075,1513)"
     ],
     "status": "retouched"
   },
@@ -1101,7 +1166,7 @@
     "aspect_ratio": 0.719,
     "operations": [
       "crop_dialog_(0,0,1164,1618)",
-      "inpaint_bottom_right_btn_(1089,1473)"
+      "inpaint_bottom_right_btn_(1088,1468)"
     ],
     "status": "retouched"
   },
@@ -1109,17 +1174,20 @@
     "source_file": "Pasted 2026-11-11 at 12.01.07 PM.png",
     "master_dimensions": "1372x1720",
     "aspect_ratio": 0.798,
-    "operations": [],
-    "status": "clean"
+    "operations": [
+      "inpaint_right_nav_btn_(1344,1355)"
+    ],
+    "status": "retouched"
   },
   "ART-0118": {
     "source_file": "Pasted 2026-11-11 at 12.01.26 PM.png",
-    "master_dimensions": "1716x1571",
-    "aspect_ratio": 1.092,
+    "master_dimensions": "1716x1561",
+    "aspect_ratio": 1.099,
     "operations": [
-      "crop_dialog_(0,20,1716,1591)",
-      "inpaint_chevron_right_(1669,738)",
-      "inpaint_bottom_right_btn_(1641,1426)"
+      "crop_dialog_(0,25,1716,1586)",
+      "inpaint_right_nav_btn_(1674,683)",
+      "inpaint_left_nav_btn_(30,689)",
+      "inpaint_bottom_right_btn_(1631,1411)"
     ],
     "status": "retouched"
   },
@@ -1128,8 +1196,8 @@
     "master_dimensions": "1376x1718",
     "aspect_ratio": 0.801,
     "operations": [
-      "inpaint_chevron_right_(1299,799)",
-      "inpaint_bottom_right_btn_(1301,1573)"
+      "inpaint_chevron_right_(1309,438)",
+      "inpaint_bottom_right_btn_(1291,1568)"
     ],
     "status": "retouched"
   },
@@ -1144,23 +1212,29 @@
     "source_file": "Pasted 2026-11-11 at 12.02.45 PM.png",
     "master_dimensions": "1372x1728",
     "aspect_ratio": 0.794,
-    "operations": [],
-    "status": "clean"
+    "operations": [
+      "inpaint_right_nav_btn_(1310,1205)",
+      "inpaint_bottom_right_btn_(1287,1578)"
+    ],
+    "status": "retouched"
   },
   "ART-0122": {
     "source_file": "Pasted 2026-11-11 at 12.03.04 PM.png",
     "master_dimensions": "1372x1720",
     "aspect_ratio": 0.798,
-    "operations": [],
-    "status": "clean"
+    "operations": [
+      "inpaint_chevron_right_(1307,530)",
+      "inpaint_pagination_dots_2_at_y1699"
+    ],
+    "status": "retouched"
   },
   "ART-0123": {
     "source_file": "Pasted 2026-11-11 at 12.03.23 PM.png",
     "master_dimensions": "1309x1718",
     "aspect_ratio": 0.762,
     "operations": [
-      "inpaint_chevron_right_(1251,804)",
-      "inpaint_left_nav_btn_(69,915)",
+      "inpaint_chevron_right_(1247,440)",
+      "inpaint_left_nav_btn_(55,512)",
       "inpaint_bottom_right_btn_(1291,1590)"
     ],
     "status": "retouched"
@@ -1181,7 +1255,7 @@
     "aspect_ratio": 0.797,
     "operations": [
       "crop_dialog_(22,0,1395,1722)",
-      "inpaint_bottom_right_btn_(1298,1577)"
+      "inpaint_bottom_right_btn_(1288,1572)"
     ],
     "status": "retouched"
   },
@@ -1190,7 +1264,7 @@
     "master_dimensions": "1374x1720",
     "aspect_ratio": 0.799,
     "operations": [
-      "inpaint_chevron_right_(1318,851)"
+      "inpaint_right_nav_btn_(1348,1292)"
     ],
     "status": "retouched"
   },
@@ -1207,15 +1281,18 @@
     "source_file": "Pasted 2026-11-11 at 12.05.00 PM.png",
     "master_dimensions": "1372x1722",
     "aspect_ratio": 0.797,
-    "operations": [],
-    "status": "clean"
+    "operations": [
+      "inpaint_chevron_right_(1331,430)",
+      "inpaint_bottom_right_btn_(1289,1572)"
+    ],
+    "status": "retouched"
   },
   "ART-0129": {
     "source_file": "Pasted 2026-11-11 at 12.05.21 PM.png",
     "master_dimensions": "1375x1718",
     "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_chevron_right_(1339,844)"
+      "inpaint_chevron_right_(1344,843)"
     ],
     "status": "retouched"
   },
@@ -1223,15 +1300,19 @@
     "source_file": "Pasted 2026-11-11 at 12.05.43 PM.png",
     "master_dimensions": "1372x1720",
     "aspect_ratio": 0.798,
-    "operations": [],
-    "status": "clean"
+    "operations": [
+      "inpaint_right_nav_btn_(1298,1342)"
+    ],
+    "status": "retouched"
   },
   "ART-0131": {
     "source_file": "Pasted 2026-11-11 at 12.06.01 PM.png",
     "master_dimensions": "1279x1710",
     "aspect_ratio": 0.748,
     "operations": [
-      "crop_dialog_(0,0,1279,1710)"
+      "crop_dialog_(0,0,1279,1710)",
+      "inpaint_chevron_right_(1199,464)",
+      "inpaint_bottom_right_btn_(1194,1560)"
     ],
     "status": "retouched"
   },
@@ -1240,71 +1321,80 @@
     "master_dimensions": "1370x1716",
     "aspect_ratio": 0.798,
     "operations": [
-      "inpaint_chevron_right_(1291,912)"
+      "inpaint_right_nav_btn_(1303,435)",
+      "inpaint_left_nav_btn_(65,524)"
     ],
     "status": "retouched"
   },
   "ART-0133": {
     "source_file": "Pasted 2026-11-11 at 12.06.43 PM.png",
-    "master_dimensions": "1716x1461",
-    "aspect_ratio": 1.175,
+    "master_dimensions": "1716x1451",
+    "aspect_ratio": 1.183,
     "operations": [
-      "crop_dialog_(0,20,1716,1481)"
+      "crop_dialog_(0,25,1716,1476)",
+      "inpaint_right_nav_btn_(1669,830)",
+      "inpaint_left_nav_btn_(64,665)"
     ],
     "status": "retouched"
   },
   "ART-0134": {
     "source_file": "Pasted 2026-11-11 at 12.07.01 PM.png",
-    "master_dimensions": "1714x1577",
-    "aspect_ratio": 1.087,
+    "master_dimensions": "1714x1567",
+    "aspect_ratio": 1.094,
     "operations": [
-      "crop_dialog_(0,20,1714,1597)",
-      "inpaint_right_nav_btn_(1667,825)"
+      "crop_dialog_(0,25,1714,1592)",
+      "inpaint_right_nav_btn_(1667,820)"
     ],
     "status": "retouched"
   },
   "ART-0135": {
     "source_file": "Pasted 2026-11-11 at 12.07.21 PM.png",
-    "master_dimensions": "1584x1405",
-    "aspect_ratio": 1.127,
+    "master_dimensions": "1582x1395",
+    "aspect_ratio": 1.134,
     "operations": [
-      "crop_dialog_(27,20,1611,1425)"
+      "crop_dialog_(29,25,1611,1420)",
+      "inpaint_left_nav_btn_(22,790)"
     ],
     "status": "retouched"
   },
   "ART-0136": {
     "source_file": "Pasted 2026-11-11 at 12.07.40 PM.png",
-    "master_dimensions": "1710x1451",
-    "aspect_ratio": 1.178,
+    "master_dimensions": "1710x1441",
+    "aspect_ratio": 1.187,
     "operations": [
-      "crop_dialog_(0,20,1710,1471)"
+      "crop_dialog_(0,25,1710,1466)",
+      "inpaint_right_nav_btn_(1663,806)"
     ],
     "status": "retouched"
   },
   "ART-0137": {
     "source_file": "Pasted 2026-11-11 at 12.07.59 PM.png",
-    "master_dimensions": "1714x1447",
-    "aspect_ratio": 1.185,
+    "master_dimensions": "1714x1437",
+    "aspect_ratio": 1.193,
     "operations": [
-      "crop_dialog_(0,20,1714,1467)"
+      "crop_dialog_(0,25,1714,1462)",
+      "inpaint_right_nav_btn_(1667,810)"
     ],
     "status": "retouched"
   },
   "ART-0138": {
     "source_file": "Pasted 2026-11-11 at 12.08.18 PM.png",
-    "master_dimensions": "1712x1445",
-    "aspect_ratio": 1.185,
+    "master_dimensions": "1712x1435",
+    "aspect_ratio": 1.193,
     "operations": [
-      "crop_dialog_(0,20,1712,1465)"
+      "crop_dialog_(0,25,1712,1460)",
+      "inpaint_right_nav_btn_(1665,808)",
+      "inpaint_left_nav_btn_(68,1205)"
     ],
     "status": "retouched"
   },
   "ART-0139": {
     "source_file": "Pasted 2026-11-11 at 12.08.37 PM.png",
-    "master_dimensions": "1712x1453",
-    "aspect_ratio": 1.178,
+    "master_dimensions": "1712x1443",
+    "aspect_ratio": 1.186,
     "operations": [
-      "crop_dialog_(0,20,1712,1473)"
+      "crop_dialog_(0,25,1712,1468)",
+      "inpaint_right_nav_btn_(1643,309)"
     ],
     "status": "retouched"
   },
@@ -1313,8 +1403,9 @@
     "master_dimensions": "1366x1714",
     "aspect_ratio": 0.797,
     "operations": [
-      "inpaint_chevron_right_(1303,864)",
-      "inpaint_bottom_right_btn_(1291,1569)"
+      "inpaint_chevron_right_(1303,863)",
+      "inpaint_bottom_right_btn_(1281,1564)",
+      "inpaint_pagination_dots_2_at_y1692"
     ],
     "status": "retouched"
   },
@@ -1323,7 +1414,7 @@
     "master_dimensions": "1368x1718",
     "aspect_ratio": 0.796,
     "operations": [
-      "inpaint_chevron_right_(1323,799)"
+      "inpaint_chevron_right_(1327,792)"
     ],
     "status": "retouched"
   },
@@ -1331,26 +1422,29 @@
     "source_file": "Pasted 2026-11-11 at 12.09.36 PM.png",
     "master_dimensions": "1370x1718",
     "aspect_ratio": 0.797,
-    "operations": [],
-    "status": "clean"
+    "operations": [
+      "inpaint_right_nav_btn_(1309,1349)"
+    ],
+    "status": "retouched"
   },
   "ART-0143": {
     "source_file": "Pasted 2026-11-11 at 12.09.55 PM.png",
-    "master_dimensions": "1716x1525",
-    "aspect_ratio": 1.125,
+    "master_dimensions": "1716x1515",
+    "aspect_ratio": 1.133,
     "operations": [
-      "crop_dialog_(0,20,1716,1545)",
-      "inpaint_right_nav_btn_(1655,809)"
+      "crop_dialog_(0,25,1716,1540)",
+      "inpaint_right_nav_btn_(1648,778)"
     ],
     "status": "retouched"
   },
   "ART-0144": {
     "source_file": "Pasted 2026-11-11 at 12.10.15 PM.png",
-    "master_dimensions": "1712x1553",
-    "aspect_ratio": 1.102,
+    "master_dimensions": "1712x1543",
+    "aspect_ratio": 1.11,
     "operations": [
-      "crop_dialog_(0,20,1712,1573)",
-      "inpaint_right_nav_btn_(1650,826)"
+      "crop_dialog_(0,25,1712,1568)",
+      "inpaint_right_nav_btn_(1681,937)",
+      "inpaint_left_nav_btn_(30,861)"
     ],
     "status": "retouched"
   },
@@ -1363,20 +1457,21 @@
   },
   "ART-0146": {
     "source_file": "Pasted 2026-11-11 at 12.10.54 PM.png",
-    "master_dimensions": "1716x1507",
-    "aspect_ratio": 1.139,
+    "master_dimensions": "1716x1497",
+    "aspect_ratio": 1.146,
     "operations": [
-      "crop_dialog_(0,20,1716,1527)",
-      "inpaint_bottom_right_btn_(1641,1381)"
+      "crop_dialog_(0,25,1716,1522)",
+      "inpaint_right_nav_btn_(1685,419)",
+      "inpaint_bottom_right_btn_(1631,1347)"
     ],
     "status": "retouched"
   },
   "ART-0147": {
     "source_file": "Pasted 2026-11-11 at 12.11.13 PM.png",
-    "master_dimensions": "1593x1551",
-    "aspect_ratio": 1.027,
+    "master_dimensions": "1642x1541",
+    "aspect_ratio": 1.066,
     "operations": [
-      "crop_dialog_(62,20,1655,1571)"
+      "crop_dialog_(62,25,1704,1566)"
     ],
     "status": "retouched"
   },
@@ -1389,8 +1484,8 @@
   },
   "ART-0149": {
     "source_file": "Pasted 2026-11-11 at 12.13.26 PM.png",
-    "master_dimensions": "1558x1722",
-    "aspect_ratio": 0.905,
+    "master_dimensions": "1420x1722",
+    "aspect_ratio": 0.825,
     "operations": [],
     "status": "clean"
   },
@@ -1406,8 +1501,8 @@
     "master_dimensions": "1373x1722",
     "aspect_ratio": 0.797,
     "operations": [
-      "inpaint_chevron_right_(1306,855)",
-      "inpaint_bottom_right_btn_(1311,1586)"
+      "inpaint_right_nav_btn_(1324,1239)",
+      "inpaint_bottom_right_btn_(1343,1573)"
     ],
     "status": "retouched"
   },
@@ -1416,8 +1511,8 @@
     "master_dimensions": "1374x1718",
     "aspect_ratio": 0.8,
     "operations": [
-      "inpaint_chevron_right_(1318,832)",
-      "inpaint_bottom_right_btn_(1299,1573)"
+      "inpaint_chevron_right_(1299,482)",
+      "inpaint_bottom_right_btn_(1289,1568)"
     ],
     "status": "retouched"
   },
@@ -1425,8 +1520,10 @@
     "source_file": "Pasted 2026-11-11 at 12.15.05 PM.png",
     "master_dimensions": "1376x1718",
     "aspect_ratio": 0.801,
-    "operations": [],
-    "status": "clean"
+    "operations": [
+      "inpaint_chevron_right_(1334,483)"
+    ],
+    "status": "retouched"
   },
   "ART-0154": {
     "source_file": "Pasted 2026-11-11 at 12.15.24 PM.png",
@@ -1441,22 +1538,26 @@
     "source_file": "Pasted 2026-11-11 at 12.15.43 PM.png",
     "master_dimensions": "1522x1714",
     "aspect_ratio": 0.888,
-    "operations": [],
-    "status": "clean"
+    "operations": [
+      "inpaint_left_nav_btn_(75,720)"
+    ],
+    "status": "retouched"
   },
   "ART-0156": {
     "source_file": "Pasted 2026-11-11 at 12.16.01 PM.png",
     "master_dimensions": "1511x1712",
     "aspect_ratio": 0.883,
-    "operations": [],
-    "status": "clean"
+    "operations": [
+      "inpaint_left_nav_btn_(72,360)"
+    ],
+    "status": "retouched"
   },
   "ART-0157": {
     "source_file": "Pasted 2026-11-11 at 12.16.26 PM.png",
     "master_dimensions": "1718x1722",
     "aspect_ratio": 0.998,
     "operations": [
-      "inpaint_left_nav_btn_(70,800)"
+      "inpaint_left_nav_btn_(64,581)"
     ],
     "status": "retouched"
   },
@@ -1472,16 +1573,16 @@
     "master_dimensions": "1710x1708",
     "aspect_ratio": 1.001,
     "operations": [
-      "inpaint_bottom_right_btn_(1635,1563)"
+      "inpaint_bottom_right_btn_(1625,1558)"
     ],
     "status": "retouched"
   },
   "ART-0160": {
     "source_file": "Pasted 2026-11-11 at 12.17.22 PM.png",
-    "master_dimensions": "1370x1694",
-    "aspect_ratio": 0.809,
+    "master_dimensions": "1370x1689",
+    "aspect_ratio": 0.811,
     "operations": [
-      "crop_dialog_(0,20,1370,1714)"
+      "crop_dialog_(0,25,1370,1714)"
     ],
     "status": "retouched"
   },
@@ -1490,17 +1591,21 @@
     "master_dimensions": "1374x1714",
     "aspect_ratio": 0.802,
     "operations": [
-      "inpaint_bottom_right_btn_(1299,1569)"
+      "inpaint_chevron_right_(1293,428)",
+      "inpaint_left_nav_btn_(35,1160)",
+      "inpaint_bottom_right_btn_(1289,1564)"
     ],
     "status": "retouched"
   },
   "ART-0162": {
     "source_file": "Pasted 2026-11-11 at 12.18.04 PM.png",
-    "master_dimensions": "1368x1705",
-    "aspect_ratio": 0.802,
+    "master_dimensions": "1368x1712",
+    "aspect_ratio": 0.799,
     "operations": [
-      "crop_dialog_(0,9,1368,1714)",
-      "inpaint_bottom_right_btn_(1351,1644)"
+      "crop_dialog_(0,2,1368,1714)",
+      "inpaint_right_nav_btn_(1311,425)",
+      "inpaint_left_nav_btn_(40,633)",
+      "inpaint_bottom_right_btn_(1355,1646)"
     ],
     "status": "retouched"
   },
@@ -1510,7 +1615,9 @@
     "aspect_ratio": 0.68,
     "operations": [
       "crop_dialog_(0,4,1167,1720)",
-      "inpaint_left_nav_btn_(61,917)"
+      "inpaint_right_nav_btn_(1125,502)",
+      "inpaint_left_nav_btn_(40,1263)",
+      "inpaint_bottom_right_btn_(1083,1644)"
     ],
     "status": "retouched"
   },
@@ -1520,8 +1627,8 @@
     "aspect_ratio": 0.696,
     "operations": [
       "crop_dialog_(0,2,1195,1718)",
-      "inpaint_right_nav_btn_(1122,928)",
-      "inpaint_left_nav_btn_(31,857)"
+      "inpaint_right_nav_btn_(1125,555)",
+      "inpaint_left_nav_btn_(30,857)"
     ],
     "status": "retouched"
   },
@@ -1529,8 +1636,10 @@
     "source_file": "Pasted 2026-11-11 at 12.32.35 PM.png",
     "master_dimensions": "1716x1714",
     "aspect_ratio": 1.001,
-    "operations": [],
-    "status": "clean"
+    "operations": [
+      "inpaint_left_nav_btn_(33,1099)"
+    ],
+    "status": "retouched"
   },
   "ART-0166": {
     "source_file": "Pasted 2026-11-11 at 12.32.57 PM.png",
@@ -1538,8 +1647,8 @@
     "aspect_ratio": 1.0,
     "operations": [
       "crop_dialog_(0,2,1716,1718)",
-      "inpaint_right_nav_btn_(1649,821)",
-      "inpaint_left_nav_btn_(27,925)"
+      "inpaint_right_nav_btn_(1657,734)",
+      "inpaint_left_nav_btn_(29,440)"
     ],
     "status": "retouched"
   },
@@ -1549,7 +1658,8 @@
     "aspect_ratio": 0.749,
     "operations": [
       "crop_dialog_(0,2,1284,1716)",
-      "inpaint_bottom_right_btn_(1209,1569)"
+      "inpaint_chevron_right_(1210,428)",
+      "inpaint_bottom_right_btn_(1199,1564)"
     ],
     "status": "retouched"
   }

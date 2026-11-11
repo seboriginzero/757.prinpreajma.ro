@@ -404,10 +404,13 @@ class LuxuryAdminHandler(http.server.SimpleHTTPRequestHandler):
 
         self.send_json(404, {'error': 'Ruta API nu a fost găsită.'})
 
+class ThreadingServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
+    daemon_threads = True
+    allow_reuse_address = True
+
 def run_server():
     preferred_port = CONFIG['SERVER_PORT']
     host = CONFIG['HOST']
-    socketserver.TCPServer.allow_reuse_address = True
 
     # Try preferred port (8080), fallback to 3757 or 8081 if occupied
     ports_to_try = [preferred_port, 8080, 3757, 8081]
@@ -418,7 +421,7 @@ def run_server():
     bound_port = None
     for p in unique_ports:
         try:
-            httpd = socketserver.TCPServer((host, p), LuxuryAdminHandler)
+            httpd = ThreadingServer((host, p), LuxuryAdminHandler)
             bound_port = p
             break
         except OSError as e:
@@ -429,7 +432,7 @@ def run_server():
 
     with httpd:
         print(f"==================================================")
-        print(f"  757 — MUGUREL EMANUEL MANEA — SERVER ACTIV")
+        print(f"  757 — MUGUREL EMANUEL MANEA — SERVER ACTIV (MULTITHREADED)")
         print(f"  URL Galerie Publică:   http://localhost:{bound_port}/")
         print(f"  URL Panou Admin:       http://localhost:{bound_port}/admin")
         print(f"  Utilizator Admin:      {CONFIG['ADMIN_USER']}")

@@ -104,6 +104,7 @@ def rebuild_site():
         initial_cards.append(f'''        <article class="art-card" data-idx="{idx}" role="button" tabindex="0" aria-label="Deschide {html.escape(item_title)}">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
+            <div class="card-specular-glare"></div>
             <div class="art-media">
               <span class="art-badge-overlay">{item_id}</span>
               <img src="{thumb_src}" alt="{html.escape(alt_text)}" loading="lazy" decoding="async">
@@ -169,15 +170,34 @@ def rebuild_site():
 </head>
 <body>
 
+  <!-- Bleeding-Edge Ambient Magnetic Spotlight -->
+  <div id="ambient-spotlight" aria-hidden="true"></div>
+
   <!-- Top Announcement / FQDN Bar -->
   <aside class="luxury-topbar" aria-label="Notă oficială">
     <div class="topbar-inner">
       <span class="topbar-tag">ARHIVĂ OFICIALĂ</span>
       <span class="topbar-fqdn">FQDN: <a href="{prim_dom}" target="_blank" rel="noopener">{prim_dom.replace('https://', '')}</a> &middot; Alias viitor: <code>{sec_dom}</code></span>
       <span class="topbar-status"><span class="pulse-dot"></span> {len(items)} Opere &middot; Restaurare Prudentă Activă</span>
-      <a href="/admin" class="topbar-admin-link" title="Panou de Administrare Curatorială" style="margin-left:auto; color:var(--accent-gold); font-size:0.75rem; text-decoration:none; display:inline-flex; align-items:center; gap:4px; opacity:0.85;">🔒 Admin</a>
+      <a href="/admin" class="topbar-admin-link" title="Panou de Administrare Curatorială" style="margin-left:auto; color:var(--text-primary); font-size:0.75rem; text-decoration:none; display:inline-flex; align-items:center; gap:4px; opacity:0.85;">🔒 Admin</a>
     </div>
   </aside>
+
+  <!-- Kinetic Infinite Marquee Ticker -->
+  <div class="kinetic-ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <div class="ticker-item"><strong>757 ARCHIVE</strong> <span class="ticker-sep">//</span> MUGUREL EMANUEL MANEA</div>
+      <div class="ticker-item"><strong>167 MASTER OPERA</strong> <span class="ticker-sep">//</span> RESTAURARE PRUDENTĂ DEFINITIVĂ</div>
+      <div class="ticker-item"><strong>TENANT HD-001</strong> <span class="ticker-sep">//</span> HUNEDOARA RO</div>
+      <div class="ticker-item"><strong>5 CRITICAL WINGS</strong> <span class="ticker-sep">//</span> BIOMECHANICAL OSTEOLOGY &middot; CRYPTIC TOTEMS &middot; CYBER-SURREALISM &middot; MONUMENTAL AXIS</div>
+      <div class="ticker-item"><strong>FQDN</strong> <span class="ticker-sep">//</span> 757.PRINPREAJMA.RO &middot; 757.ORIGINZERO.ART</div>
+      <div class="ticker-item"><strong>757 ARCHIVE</strong> <span class="ticker-sep">//</span> MUGUREL EMANUEL MANEA</div>
+      <div class="ticker-item"><strong>167 MASTER OPERA</strong> <span class="ticker-sep">//</span> RESTAURARE PRUDENTĂ DEFINITIVĂ</div>
+      <div class="ticker-item"><strong>TENANT HD-001</strong> <span class="ticker-sep">//</span> HUNEDOARA RO</div>
+      <div class="ticker-item"><strong>5 CRITICAL WINGS</strong> <span class="ticker-sep">//</span> BIOMECHANICAL OSTEOLOGY &middot; CRYPTIC TOTEMS &middot; CYBER-SURREALISM &middot; MONUMENTAL AXIS</div>
+      <div class="ticker-item"><strong>FQDN</strong> <span class="ticker-sep">//</span> 757.PRINPREAJMA.RO &middot; 757.ORIGINZERO.ART</div>
+    </div>
+  </div>
 
   <!-- Main Navigation Header -->
   <header class="luxury-header" id="site-header">
@@ -207,7 +227,7 @@ def rebuild_site():
         <!-- Ambience Switcher (TIP Recomandarea Echipei) -->
         <button id="theme-toggle" class="btn-control" title="Comutare ambianță (Tasta T)" aria-label="Comutare temă">
           <span class="theme-icon icon-dark">🌘 Obsidian</span>
-          <span class="theme-icon icon-light">📜 Pergament</span>
+          <span class="theme-icon icon-light">◻ White Cube</span>
         </button>
       </div>
     </div>
@@ -438,6 +458,13 @@ def rebuild_site():
         </div>
         
         <div class="modal-header-actions">
+          <button id="modal-prev-btn" class="btn-icon" title="Opera Anterioară (←)" aria-label="Opera Anterioară">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <span id="modal-counter-badge" class="modal-counter-pill" style="display:inline-flex; align-items:center; font-family:var(--font-mono); font-size:0.75rem; color:var(--text-primary); font-weight:700; padding:0 0.5rem;">1 / 167</span>
+          <button id="modal-next-btn" class="btn-icon" title="Opera Următoare (→)" aria-label="Opera Următoare">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
           <button id="modal-zoom-btn" class="btn-icon" title="Comutare Zoom Detaliu">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="11" cy="11" r="8"></circle>
@@ -460,27 +487,12 @@ def rebuild_site():
 
       <!-- Modal Body (Two-Column Exhibition View) -->
       <div class="modal-body">
-        <!-- Visual Column -->
+        <!-- Visual Column (100% Clean Artwork View, Zero Overlays) -->
         <div class="modal-canvas-pane">
           <div class="image-viewport" id="image-viewport" title="Click sau Lupă pentru Zoom / Panoramează cu mouse-ul">
             <div class="image-wrapper" id="image-wrapper">
               <img src="" alt="" id="modal-image" class="modal-img">
             </div>
-          </div>
-
-          <!-- Side Gutter Navigation Arrows (Never overlaying artwork) -->
-          <button id="modal-prev-btn" class="modal-canvas-arrow prev" title="Opera Anterioară (Săgeată Stânga)" aria-label="Opera Anterioară">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="15 18 9 12 15 6"></polyline></svg>
-          </button>
-          <button id="modal-next-btn" class="modal-canvas-arrow next" title="Opera Următoare (Săgeată Dreapta)" aria-label="Opera Următoare">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </button>
-
-          <!-- Bottom Discrete Status Pill -->
-          <div class="modal-canvas-status">
-            <span id="modal-counter-badge" class="modal-counter-pill">1 / 167</span>
-            <span class="status-divider">&middot;</span>
-            <span class="modal-zoom-hint">Click pe imagine pt Zoom</span>
           </div>
         </div>
 
