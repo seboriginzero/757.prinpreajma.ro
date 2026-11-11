@@ -29,9 +29,9 @@ Nu construiești o aplicație izolată, ci un **nod multi-tenant standardizat** 
 ### ⚖️ Delimitarea Strictă a Rolurilor între Agenți (STRICT RULE 5)
 1. **TU (Agentul LLM al Noului Proiect pe macOS):**
    - Creezi codul aplicației, designul premium (Vanilla CSS / Next.js / Node.js), baza de date, endpoint-ul `/api/health`, SEO/JSON-LD și toate cele **7 Porți GitOps** în directorul proiectului (`tenants/<JUDET>/<NNN-Nume>/` sau `apps/<slug>/`).
-   - Încarci fișierele media mari (>500KB) pe **Hostico Media CDN** (`https://media-hostico.prinpreajma.ro`).
+   - Încarci fișierele media mari (>500KB) prin FTPS Explicit TLS (Port 21) în `tenants/<slug>/` și le validezi pe HTTPS pe **Hostico Media CDN** (`https://media-hostico.prinpreajma.ro/tenants/<slug>/` — vezi **Secțiunea 6**).
    - Faci `git commit` și `git push origin main` pe GitHub.
-   - La final, generezi **Pachetul Standard de Handoff pentru Provizionare** (Secțiunea 7) către Agentul de Hosting.
+   - La final, generezi **Pachetul Standard de Handoff pentru Provizionare** (**Secțiunea 8**) sau execuți direct procedura de provizionare (**Secțiunea 7**) dacă operatorul îți aprobă accesul SSH la hosting.
    - **INTERZIS:** Nu copiezi niciodată cod pe servere prin `scp`/`rsync`/`sftp`, nu comiți `.env` în Git, nu hardcodezi porturi/IP-uri ale altor chiriași și nu modifici direct Nginx pe serverele de producție fără aprobare umană.
 2. **Agentul de Infrastructură & Hosting (`proxmox-hosting&staff`):**
    - Alocă dinamic portul liber pe Hetzner (`2.31.102.36`) / VM1 (`192.168.57.51`), configurează cheia SSH GitHub Deploy Key, livrează `.env.<slug>` securizat (`chmod 0600`), provizionează vhost-ul Nginx + certificatul Let's Encrypt SSL fără downtime, înregistrează subdomeniul în `ethicalHacking/.env` și în `<sitemapindex>`-ul `prinpreajma.ro`, rulează cele 13 module de audit și declanșează indexarea în Google Search Console & IndexNow.
@@ -87,7 +87,7 @@ Sentinelul automat [`scripts/audit-tenant-fleet-gitops.js`](../scripts/audit-ten
 - **Tenant FQDN:** `https://<slug>.prinpreajma.ro/`
 - **GitOps Sync:** `npm run gitops:sync` (`./sync-gitops.sh`) — Zero-Local-Copy (GitHub `origin/main` only).
 - **Secrets Policy:** `.env` este STRICT interzis în Git; livrare exclusivă prin SSH (`chmod 0600`).
-- **Media CDN:** Imagini >500KB, video și audio stau pe `https://media-hostico.prinpreajma.ro/pictures/<slug>/`.
+- **Media CDN (FTPS + HTTPS):** Imagini >500KB (WebP), video (MP4 `+faststart`) și audio (MP3) stau izolate în `https://media-hostico.prinpreajma.ro/tenants/<slug>/`.
 - **Database Safety:** Backup imutabil `.bak_<timestamp>` obligatoriu înainte de orice deploy în producție.
 - **SEO & WRS Canonical:** Rădăcina folosește obligatoriu slash final `https://<slug>.prinpreajma.ro/` în `sitemap.xml` și în `<link rel="canonical">` (SSR + Next.js RSC).
 ```
@@ -259,16 +259,47 @@ networks:
     driver: bridge
 ```
 
+### 4.6 Poarta 7: `public/sitemap.xml` & `public/robots.txt` (Standardul Canonic Salon Sandy)
+
+**`public/sitemap.xml` (sau rută dinamică `app/sitemap.ts` care generează exact acest XML curat):**
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://<slug>.prinpreajma.ro/</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
+```
+
+**`public/robots.txt`:**
+```txt
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+Sitemap: https://<slug>.prinpreajma.ro/sitemap.xml
+```
+
 ---
 
-## 5. CERINȚE OBLIGATORII ÎN CODUL APLICAȚIEI (SEO, WRS, CWV 2026, CDN & SECURITATE)
+## 5. CERINȚE OBLIGATORII ÎN CODUL APLICAȚIEI (SEO, WRS, CWV 2026, EMAIL SMTP & SECURITATE)
 
 Construiește din start aceste 6 elemente în aplicație pentru a obține **`100 / 100`** din prima la toate auditurile automate:
 
 1. **Healthcheck Endpoint (`/api/health`):**
    - Returnează `HTTP 200 OK` cu `{"status":"ok","tenant":"<slug>"}` în `< 100ms`.
 2. **Next.js / HTML Canonical Paritate 1:1 (Anti-Dublare WRS Chromium):**
-   - În Next.js `app/layout.tsx`, dezactivează `x-powered-by` în `next.config` (`poweredByHeader: false`) și definește pe fiecare pagină canonicalul exact cu slash pe rădăcină:
+   - În `next.config.mjs`, setează `poweredByHeader: false` și definește pe fiecare pagină canonicalul exact cu slash pe rădăcină:
      ```ts
      export const metadata: Metadata = {
        metadataBase: new URL('https://<slug>.prinpreajma.ro'),
@@ -280,70 +311,487 @@ Construiește din start aceste 6 elemente în aplicație pentru a obține **`100
 3. **Legătura de Cluster Local & Schema JSON-LD (`LocalBusiness` / Google Business Profile):**
    - Include în `<head>` un bloc `<script type="application/ld+json">` cu `@type` specific (`LocalBusiness`, `Restaurant`, `HairSalon`, `VeterinaryCare`, `Store`, `LodgingBusiness`), `"url": "https://<slug>.prinpreajma.ro/"`, `telephone`, `address`, `geo`, `hasMap` și `sameAs` (pagina Google Maps / Facebook + `"https://prinpreajma.ro/"`).
    - Include în footer un link *dofollow* discret către portalul mamă: `<a href="https://prinpreajma.ro/">Partener prinPreajma.ro</a>`.
-4. **Google Core Web Vitals (2026):**
+4. **Google Core Web Vitals (2026) & SQLite WAL:**
    - Imaginea principală Hero (LCP) are obligatoriu `fetchpriority="high"`, `decoding="async"` și **NU are `loading="lazy"`**.
    - Toate imaginile au `width` și `height` explicite (sau `aspect-ratio`) pentru `CLS = 0`.
-   - Dacă folosești SQLite (`better-sqlite3`), activează la conexiune:
-     `db.pragma('journal_mode = WAL'); db.pragma('synchronous = NORMAL');`
-5. **Hostico Media Storage CDN (`https://media-hostico.prinpreajma.ro`):**
-   - Orice imagine >500KB (convertită `.webp`), video (`.mp4`) sau audio se încarcă pe CDN și se referențiază prin `https://media-hostico.prinpreajma.ro/pictures/<slug>/<fisier>.webp`:
-     ```bash
-     curl --ftp-ssl --user "$HOSTICO_FTP_USER:$HOSTICO_FTP_PASS" \
-       -T imagine.webp "ftp://media-hostico.prinpreajma.ro/public_html/pictures/<slug>/imagine.webp"
+   - Dacă folosești SQLite (`better-sqlite3`), activează obligatoriu la conexiune:
+     ```js
+     db.pragma('journal_mode = WAL');
+     db.pragma('synchronous = NORMAL');
+     db.pragma('cache_size = -64000');
      ```
-6. **CSP Compatibil GA4 Regional UE (dacă se folosește Google Analytics `G-*`):**
-   - Dacă aplicația setează `Content-Security-Policy`, include în `connect-src`:
-     `https://region1.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com`.
+5. **CSP Compatibil Hostico CDN + GA4 Regional UE:**
+   - Dacă aplicația setează `Content-Security-Policy`, permite explicit CDN-ul media și endpoint-urile GA4 UE:
+     - `img-src 'self' data: blob: https://media-hostico.prinpreajma.ro https://*.google-analytics.com https://*.googletagmanager.com;`
+     - `media-src 'self' https://media-hostico.prinpreajma.ro;`
+     - `connect-src 'self' https://region1.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com;`
+6. **Trimitere Emailuri Tranzacționale prin Hostico Authenticated SMTP Relay (SPF + DKIM + DMARC + FCrDNS 10/10):**
+   - Aplicațiile de pe Hetzner trimit emailuri (rezervări, programări, comenzi, alerte) prin serverul autentificat `mail.prinpreajma.ro` (`188.241.72.12`, port `465` SSL/TLS, `SPF +ip4:2.31.102.36 +ip6:2a01:4f8:c016:f3bb::/64` deja autorizat):
+     ```js
+     import nodemailer from 'nodemailer';
+     export const mailer = nodemailer.createTransport({
+       host: process.env.SMTP_HOST || 'mail.prinpreajma.ro',
+       port: parseInt(process.env.SMTP_PORT || '465', 10),
+       secure: true, // TLS implicit pe portul 465
+       auth: {
+         user: process.env.SMTP_USER, // ex: prod.hetzner@prinpreajma.ro (din secrets/.env.<slug>)
+         pass: process.env.SMTP_PASS,
+       },
+     });
+     ```
 
 ---
 
-## 6. PROCEDURA END-TO-END DE PROVIZIONARE A UNUI TENANT NOU
+## 6. HOSTICO MEDIA STORAGE & CDN (UPLOAD FTPS PORT 21 + LIVRARE HTTPS EDGE)
 
-### Faza A — Executată de TINE (LLM-ul Noului Proiect pe macOS)
-1. Plasează proiectul în `tenants/<COD_JUDET>/<NNN-NumeTenant>/` (ex: `tenants/AR/007-Cofetaria-Ana/`) sau `apps/<slug>/` pentru aplicații de platformă.
-2. Generează aplicația + toate cele **7 Porți GitOps** din Secțiunea 4 (`chmod +x sync-gitops.sh deploy-gitops.sh`).
-3. Testează local build-ul, endpoint-ul `/api/health`, `/sitemap.xml`, `/robots.txt` și verifică cu `./sync-gitops.sh` că toate porțile trec.
-4. Salvează variabilele de producție în `proxmox-hosting&staff/secrets/.env.<slug>` (`chmod 0600`) și împinge codul curat în repository-ul GitHub dedicat (`seboriginzero/<slug>.prinpreajma.ro`, branch `main`).
-5. Emite **Pachetul de Handoff** (Secțiunea 7) către Agentul de Hosting.
+Toate resursele media mari (imagini `> 500 KB`, galerii foto, videoclipuri `.mp4`/`.webm`, fișiere `.mp3`) se stochează pe **Hostico Media Storage & CDN** pentru a păstra depozitele Git și containerele Docker de pe Hetzner ultra-ușoare (`< 512 MB RAM`).
 
-### Faza B — Executată de Agentul de Hosting (`proxmox-hosting&staff` pe Hetzner `2.31.102.36`)
-*(Referință operațională exactă a ecosistemului pentru provizionare Zero-Downtime)*:
-1. **Descoperire Dinamică Port Liber (`STRICT RULE 3`):**
+### 6.1 Arhitectura & Parametrii de Conectare FTPS + HTTPS
+- **URL Public Livrare HTTPS (LiteSpeed Enterprise HTTP/2 + HTTP/3):** `https://media-hostico.prinpreajma.ro`
+- **Host / IP FTPS:** `188.241.72.12` (sau `media-hostico.prinpreajma.ro`)
+- **Protocol & Port:** **`FTPS` (FTP over Explicit TLS/SSL — `AUTH TLS`) pe portul `21`**
+- **Root Fizic pe Hostico (Jail cont FTPS):** `/home/eftrdnbo/media-hostico.prinpreajma.ro/`
+- **Variabile de Autentificare (citite din `.env` rădăcină `proxmox-hosting&staff/.env` sau din `secrets/.env.<slug>` — NICIODATĂ hardcodate în Git!):**
+  ```ini
+  FTP_URL=https://media-hostico.prinpreajma.ro
+  HOSTICO_FTP_HOST=188.241.72.12
+  HOSTICO_FTP_PORT=21
+  HOSTICO_FTP_USER=media-uploader@prinpreajma.ro   # (sau FTP_USERNAME=media-uploader)
+  HOSTICO_FTP_PASSWORD=<citit_din_env_local>       # (FTP_PASSWORD în proxmox-hosting&staff/.env)
+  ```
+
+### 6.2 🚨 Clauza Critică de Izolare Shared Hosting (`STRICT TENANT JAIL`)
+1. **Subdirector Exclusiv (`tenants/<slug>/`):** Ai drept de scriere/citire **EXCLUSIV** în `tenants/<slug>/`! Este **STRICT INTERZIS** să listezi, modifici sau ștergi folderele altor chiriași (`tenants/<alt-slug>/`).
+2. **Interdicție Totală pe Rădăcina `/`:** Este **STRICT INTERZIS** să atingi sau să suprascrii fișierele globale din rădăcina storage-ului (`/.htaccess`, `/robots.txt`, `/index.html`, `/sitemap.xml`, `/llms.txt`, `/.well-known/security.txt`, `/.ftpquota`). Acestea asigură global pentru toți chiriașii:
+   - Scutul anti-AI scrapers (`GPTBot`, `ByteSpider`, `CCBot`, `ClaudeBot` -> `HTTP 403` + `X-Robots-Tag: noai, noimageai`),
+   - Protecția anti-hotlinking și **CORS dinamic** pentru `https://*.prinpreajma.ro`, `https://*.banszky.men` și `http://localhost:*`,
+   - Caching agresiv `Cache-Control: public, max-age=31536000, immutable` și streaming video `HTTP 206 Partial Content` (`Accept-Ranges: bytes`, `no-gzip` pe binare).
+3. **Protecție Cote CloudLinux LVE (`10–20 MB/s` I/O, `700–1024` IOPS):** Nu urca niciodată fișiere RAW necomprimate (`.jpg` de 15 MB din aparat sau `.mov` de 2 GB) și folosește maximum **2 conexiuni FTPS paralele**.
+
+### 6.3 Taxonomia Ierarhică Obligatorie pe FTPS și HTTPS
+```text
+FTPS Path (relativ la jail):               URL Public HTTPS Livrat în Aplicație:
+tenants/<slug>/                            https://media-hostico.prinpreajma.ro/tenants/<slug>/
+├── pictures/
+│   ├── hero/         (1920w/1280w/768w)   .../tenants/<slug>/pictures/hero/banner.webp
+│   ├── gallery/      (WebP q82-85 <300KB) .../tenants/<slug>/pictures/gallery/foto-1.webp
+│   └── thumbnails/   (WebP 400w <50KB)    .../tenants/<slug>/pictures/thumbnails/foto-1.webp
+├── video/
+│   ├── mp4/          (H.264 +faststart)   .../tenants/<slug>/video/mp4/prezentare.mp4
+│   ├── webm/         (VP9/AV1 opțional)   .../tenants/<slug>/video/webm/prezentare.webm
+│   └── posters/      (Poster WebP)        .../tenants/<slug>/video/posters/prezentare.webp
+└── audio/
+    └── mp3/          (128 kbps stereo)    .../tenants/<slug>/audio/mp3/ghid.mp3
+```
+
+### 6.4 Protocolul Obligatoriu în 5 Faze (`ZERO BLIND REPLACEMENT`)
+
+#### Faza 1 — Conversie & Optimizare Locală (înainte de upload)
+```bash
+# 1. Imagini -> WebP calitate 84%:
+cwebp -q 84 input.jpg -o banner.webp
+
+# 2. Video -> MP4 H.264 cu -movflags +faststart OBLIGATORIU (pentru redare instantă HTTP 206) + Poster WebP:
+ffmpeg -i input.mov -c:v libx264 -crf 23 -preset slow -pix_fmt yuv420p -movflags +faststart -c:a aac -b:a 128k prezentare.mp4
+ffmpeg -ss 00:00:01 -i prezentare.mp4 -vframes 1 -q:v 2 prezentare.webp
+
+# 3. Audio -> MP3 128 kbps stereo:
+ffmpeg -i input.wav -codec:a libmp3lame -b:a 128k -ar 44100 ghid.mp3
+```
+
+#### Faza 2 — Upload Criptat prin FTPS (Port 21 Explicit TLS)
+- **Opțiunea A — Din CLI (`curl` cu creare automată directoare în `tenants/<slug>/`):**
+  ```bash
+  curl -s -k --ssl-reqd --ftp-create-dirs \
+    -T "./banner.webp" \
+    -u "${FTP_USERNAME}:${FTP_PASSWORD}" \
+    "ftp://188.241.72.12/tenants/<slug>/pictures/hero/banner.webp"
+  ```
+- **Opțiunea B — Prin utilitarul workspace-ului (`basic-ftp`):**
+  ```bash
+  HOSTICO_FTP_PASSWORD="$FTP_PASSWORD" node .agents-hostico-storage/templates/uploadToHostico.mjs \
+    "./dist-media/<slug>" "tenants/<slug>"
+  ```
+- **Opțiunea C — Upload Programatic din Panoul Admin al Aplicației Tenantului (`basic-ftp` în Node.js):**
+  ```js
+  import * as ftp from 'basic-ftp';
+  import path from 'path';
+
+  export async function uploadTenantMedia(localFilePath, subPath /* ex: 'pictures/gallery/item-1.webp' */) {
+    const remotePath = `tenants/<slug>/${subPath.replace(/^\/+/, '')}`;
+    const client = new ftp.Client();
+    try {
+      await client.access({
+        host: process.env.HOSTICO_FTP_HOST || '188.241.72.12',
+        port: parseInt(process.env.HOSTICO_FTP_PORT || '21', 10),
+        user: process.env.HOSTICO_FTP_USER || 'media-uploader@prinpreajma.ro',
+        password: process.env.HOSTICO_FTP_PASSWORD,
+        secure: true, // Explicit FTPS pe portul 21
+        secureOptions: { rejectUnauthorized: false }, // Compatibil cPanel AutoSSL wildcard
+      });
+      await client.ensureDir(path.posix.dirname(remotePath));
+      await client.uploadFrom(localFilePath, remotePath);
+      return `https://media-hostico.prinpreajma.ro/${remotePath}`;
+    } finally {
+      client.close();
+    }
+  }
+  ```
+
+#### Faza 3 — Poarta Obligatorie de Validare HTTPS (`STOP` înainte de a înlocui linkurile în cod!)
+Este **STRICT INTERZIS** să înlocuiești căile locale în cod până când fișierul nu răspunde live pe HTTPS cu header-ele corecte:
+```bash
+# 1. Validare Imagine (trebuie HTTP/2 200, content-type: image/webp, cache-control: public, max-age=31536000, immutable):
+curl -sI -H "Origin: https://<slug>.prinpreajma.ro" \
+  "https://media-hostico.prinpreajma.ro/tenants/<slug>/pictures/hero/banner.webp"
+
+# 2. Validare Streaming Byte-Range pe Video (trebuie HTTP/2 206 Partial Content + Content-Range):
+curl -sI -H "Range: bytes=0-100" \
+  "https://media-hostico.prinpreajma.ro/tenants/<slug>/video/mp4/prezentare.mp4"
+```
+
+#### Faza 4 — Integrarea HTTPS în Aplicație (`next.config.mjs` & Componente UI)
+```js
+// next.config.mjs
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  poweredByHeader: false,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'media-hostico.prinpreajma.ro',
+        pathname: '/tenants/**',
+      },
+    ],
+  },
+};
+export default nextConfig;
+```
+```tsx
+{/* Imagine Hero LCP (FĂRĂ loading="lazy"!) */}
+<img
+  src="https://media-hostico.prinpreajma.ro/tenants/<slug>/pictures/hero/banner.webp"
+  alt="<NUME_AFACERE>"
+  width={1920}
+  height={1080}
+  fetchpriority="high"
+  decoding="async"
+/>
+
+{/* Video optimizat cu Poster WebP & Streaming 206 */}
+<video
+  controls
+  preload="metadata"
+  playsInline
+  poster="https://media-hostico.prinpreajma.ro/tenants/<slug>/video/posters/prezentare.webp"
+>
+  <source src="https://media-hostico.prinpreajma.ro/tenants/<slug>/video/mp4/prezentare.mp4" type="video/mp4" />
+</video>
+```
+
+#### Faza 5 — Curățare Git
+După confirmarea afișării în browser fără erori `404` / `CORS`, șterge fișierele raw grele din repo (sau adaugă folderul temporar `dist-media/` în `.gitignore`).
+
+---
+
+## 7. PROVIZIONARE INFRASTRUCTURĂ, NGINX REVERSE PROXY & CERTIFICATE SSL LET'S ENCRYPT (ZERO-DOWNTIME)
+
+Această secțiune conține arhitectura completă și comenzile exacte prin care un proiect nou este provizionat live cu **0 secunde downtime** și **0 impact asupra celorlalți tenanți** (`Blast Radius = 0`).
+
+### 7.1 Pasul 1 — Provizionare DNS Dual-Stack & Validare Pre-Flight (`dns-edge-validator`)
+Toate subdomeniile găzduite pe Hetzner Cloud VM `cax21` (`2.31.102.36` / `2a01:4f8:c016:f3bb::1`) folosesc standardul oficial de ancorare **CNAME** în **Hostico cPanel -> Zone Editor (`prinpreajma.ro`)**:
+- **Ancoră Centrală Hetzner:** `hetzner1.banszky.men`
+  - `A` -> `2.31.102.36`
+  - `AAAA` -> `2a01:4f8:c016:f3bb::1`
+- **Înregistrări DNS adăugate pentru Tenantul Nou (`<slug>`):**
+  ```text
+  <slug>.prinpreajma.ro.       14400  IN  CNAME  hetzner1.banszky.men.
+  www.<slug>.prinpreajma.ro.   14400  IN  CNAME  <slug>.prinpreajma.ro.
+  ```
+- **Poarta Pre-Flight DNS (OBLIGATORIE înainte de Certbot pentru a preveni blocarea rate-limit Let's Encrypt de 5 eșecuri/oră):**
+  ```bash
+  dig +short A <slug>.prinpreajma.ro @1.1.1.1        # Trebuie să returneze: 2.31.102.36
+  dig +short A www.<slug>.prinpreajma.ro @1.1.1.1    # Trebuie să returneze: 2.31.102.36
+  dig +short AAAA <slug>.prinpreajma.ro @1.1.1.1     # Trebuie să returneze: 2a01:4f8:c016:f3bb::1
+  ```
+
+### 7.2 Pasul 2 — Port Dinamic, Deploy Key GitHub, Secrete (`0600`), Container & Auto-Sync GitOps pe Hetzner (`2.31.102.36`)
+```bash
+# 1. Descoperire dinamică a primului port liber 127.0.0.1:30XX pe Hetzner (STRICT RULE 3):
+ssh antigravity@2.31.102.36 "ss -tulnp | grep -E '127\.0\.0\.1:30[0-9]{2}' | sort"
+# -> Exemplu port liber alocat: 3040
+
+# 2. Generare GitHub Deploy Key dedicată per tenant pe Hetzner (STRICT RULE 2):
+ssh antigravity@2.31.102.36 "ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_<slug> -N '' -C 'gitops-<slug>@hetzner' && cat ~/.ssh/id_ed25519_<slug>.pub"
+# -> Cheia publică se adaugă ca Deploy Key (Read-Only) pe repo-ul GitHub seboriginzero/<slug>.prinpreajma.ro,
+#    iar în /home/antigravity/.ssh/config se adaugă host-ul alias:
+#    Host github-<slug>
+#      HostName github.com
+#      User git
+#      IdentityFile /home/antigravity/.ssh/id_ed25519_<slug>
+#      IdentitiesOnly yes
+
+# 3. Livrare criptată a secretelor cu permisiuni stricte 0600 (mirror păstrat local în proxmox-hosting&staff/secrets/.env.<slug>):
+chmod 600 secrets/.env.<slug>
+cat secrets/.env.<slug> | ssh antigravity@2.31.102.36 "mkdir -p /home/antigravity/secrets && cat > /home/antigravity/secrets/.env.<slug> && chmod 600 /home/antigravity/secrets/.env.<slug>"
+
+# 4. Clonare GitHub & lansare container izolat pe loopback (127.0.0.1:<PORT>):
+ssh antigravity@2.31.102.36 "mkdir -p /home/antigravity/tenants/<slug>/{data,backups} && \
+  chmod -R 0777 /home/antigravity/tenants/<slug>/data && \
+  git clone git@github-<slug>:seboriginzero/<slug>.prinpreajma.ro.git /home/antigravity/tenants/<slug>/source && \
+  cp /home/antigravity/tenants/<slug>/source/{deploy-gitops.sh,docker-compose.yml} /home/antigravity/tenants/<slug>/ && \
+  chmod +x /home/antigravity/tenants/<slug>/deploy-gitops.sh && \
+  cd /home/antigravity/tenants/<slug> && HOST_PORT=<PORT> BIND_IP=127.0.0.1 ./deploy-gitops.sh"
+
+# 5. Verificare locală a containerului ÎNAINTE de expunerea în Nginx:
+ssh antigravity@2.31.102.36 "curl -fsS -i http://127.0.0.1:<PORT>/api/health"
+```
+
+- **Înregistrare în Motoarele Autonome GitOps de pe Hetzner (`/opt/originzero-gitops/`):**
+  1. În `/opt/originzero-gitops/webhook-server.py` (`127.0.0.1:9099`, validare `HMAC-SHA256` `X-Hub-Signature-256`), se adaugă în `TENANT_SCRIPTS`:
+     `'seboriginzero/<slug>.prinpreajma.ro': '/home/antigravity/tenants/<slug>/deploy-gitops.sh'` + `sudo systemctl restart originzero-gitops-webhook.service`.
+  2. În `/opt/originzero-gitops/git-watcher.sh` (timer systemd la 2 minute — fallback dacă GitHub pierde un webhook), se adaugă:
+     `check_and_deploy "<slug>" "/home/antigravity/tenants/<slug>/source" "/home/antigravity/tenants/<slug>/deploy-gitops.sh"`.
+
+---
+
+### 7.3 Pasul 3 — Certificate SSL Let's Encrypt & Automatizare ACME (Cele 3 Scenarii Oficiale)
+
+> [!CAUTION]
+> **REGULI CRITICE ZERO-DOWNTIME PENTRU SSL & NGINX:**
+> 1. Este **STRICT INTERZIS** `certbot --standalone` (oprește Nginx pe portul 80 și provoacă downtime tuturor clienților). Se folosește **EXCLUSIV** `certbot certonly --webroot -w /var/www/letsencrypt`.
+> 2. Este **STRICT INTERZIS** `systemctl restart nginx` pe un server cu trafic activ. Se folosește **EXCLUSIV** `sudo nginx -t && sudo systemctl reload nginx` (`SIGHUP` grațios).
+
+#### Scenariul A — Tenant 100% Nou direct pe Hetzner Cloud (`2.31.102.36`) [STANDARD]
+1. **Varianta Automată prin Adaptorul CLI Zero-Downtime (`hetzner-vm/manage_domain.sh` -> `/opt/hetzner-provision/remote_domain_manage.sh`):**
    ```bash
-   ssh antigravity@2.31.102.36 "ss -tulnp | grep -E '127\.0\.0\.1:30[0-9]{2}'"
-   # Se alege următorul port liber (ex: 3040)
+   ./hetzner-vm/manage_domain.sh create <slug>.prinpreajma.ro 127.0.0.1:<PORT> \
+     --websocket 1 --http2 1 --hsts 1 --client-max-body-size 50m
    ```
-2. **Livrare Secrete (`0600`) & Clonare GitOps pe Hetzner (`2.31.102.36`):**
+   **Ce execută atomic în spate `remote_domain_manage.sh` (Cele 6 Porți `zero-downtime-guardian`):**
+   - **Poarta 1 & 2:** Validează sintaxa RFC a FQDN-ului, portul `127.0.0.1:<PORT>` și rezoluția DNS pre-flight către `2.31.102.36`.
+   - **Poarta 3:** Salvează spec-ul în `/opt/hetzner-provision/vhosts/<fqdn>.env` (`0600`) și face backup configurației anterioare în `/opt/hetzner-provision/backups/<fqdn>/<timestamp>.conf`.
+   - **Poarta 4 (ACME Webroot fără oprire Nginx):** Creează temporar `/etc/nginx/conf.d/00-oz-acme-<fqdn>.conf` pe portul `80`, validează `nginx -t`, face `systemctl reload nginx`, verifică local `/.well-known/acme-challenge/ping` și rulează Certbot webroot.
+   - **Poarta 5 (Staging & Rollback Atomic):** Randează vhost-ul final în `/tmp/<fqdn>.stage.XXXXXX.conf`, îl mută atomic în `/etc/nginx/sites-available/<fqdn>.conf`, creează symlink în `/etc/nginx/sites-enabled/<fqdn>.conf`, șterge fișierul ACME temporar și rulează `nginx -t`. **Dacă `nginx -t` eșuează, șterge symlink-ul, restaurează automat ultimul backup și NU reîncarcă Nginx (`0%` impact pe ceilalți tenanți).**
+   - **Poarta 6:** Execută `systemctl reload nginx` (`SIGHUP`).
+
+2. **Emitere Certificat Multi-SAN (`apex` + `www.`) pentru Vhost-ul Enterprise Complet (Secțiunea 7.4):**
+   Pentru acoperirea simultană a `<slug>.prinpreajma.ro` și `www.<slug>.prinpreajma.ro` pe același certificat Let's Encrypt:
    ```bash
-   cat secrets/.env.<slug> | ssh antigravity@2.31.102.36 "cat > /home/antigravity/secrets/.env.<slug> && chmod 600 /home/antigravity/secrets/.env.<slug>"
-   ssh antigravity@2.31.102.36 "git clone git@github-<slug>:seboriginzero/<slug>.prinpreajma.ro.git /home/antigravity/tenants/<slug> && cd /home/antigravity/tenants/<slug> && HOST_PORT=<PORT> BIND_IP=127.0.0.1 ./deploy-gitops.sh"
+   sudo certbot certonly --webroot \
+     -w /var/www/letsencrypt \
+     --non-interactive --agree-tos \
+     -m prod.hetzner@prinpreajma.ro \
+     -d <slug>.prinpreajma.ro \
+     -d www.<slug>.prinpreajma.ro \
+     --keep-until-expiring
    ```
-3. **Validare DNS Pre-Flight (`A` / `CNAME` -> `2.31.102.36`) & Provizionare Nginx + SSL Let's Encrypt (`--webroot`, Zero Downtime):**
-   ```bash
-   dig +short <slug>.prinpreajma.ro
-   ./hetzner-vm/manage_domain.sh create <slug>.prinpreajma.ro 127.0.0.1:<PORT> --websocket 1 --http2 1 --hsts 1
-   # (Dacă se provizionează pe Proxmox VM1/VM3: /opt/originzero/bin/oz-domain-adapter create <slug>.prinpreajma.ro <PORT> --websocket 1 --http2 1)
-   ```
-4. **Înregistrare Obligatorie în Guvernanța Platformei (`STRICT RULE 4 & 8`):**
+   - **Căi Certificat Generat:**
+     - `fullchain`: `/etc/letsencrypt/live/<slug>.prinpreajma.ro/fullchain.pem`
+     - `privkey`: `/etc/letsencrypt/live/<slug>.prinpreajma.ro/privkey.pem`
+   - **Reînnoire Automată:** Gestionată de `certbot.timer` + hook-ul `/etc/letsencrypt/renewal-hooks/deploy/zz-oz-nginx-reload.sh` (`nginx -t && systemctl reload nginx`).
+
+#### Scenariul B — Migrare Tenant Existent din Proxmox VM3 pe Hetzner fără Downtime DNS (`Strategia 1`)
+Dacă domeniul are deja certificat activ pe Proxmox VM3 (`192.168.57.105`) și DNS-ul încă pointează spre Proxmox:
+```bash
+# Copiază criptat archive/ + live/ + renewal/ de pe VM3 pe Hetzner, setează permisiunile 0600/0750,
+# creează vhost-ul pe Hetzner și testează handshake-ul TLSv1.3 pre-cutover cu curl --resolve:
+./hetzner-vm/sync_ssl_to_hetzner.sh <slug>.prinpreajma.ro --create-vhost 127.0.0.1:<PORT>
+curl -Iv --resolve <slug>.prinpreajma.ro:443:2.31.102.36 https://<slug>.prinpreajma.ro/
+```
+*(Opțional la cerere expresă — `Strategia 3`: forward temporar `location ^~ /.well-known/acme-challenge/ { proxy_pass http://2.31.102.36:80; }` pe VM3 pentru emitere la rece pe Hetzner înainte de comutarea DNS).*
+
+#### Scenariul C — Provizionare în Clusterul Local Proxmox (`VM4 -> VM3 -> VM1`)
+Dacă un proiect intern sau de staging este expus prin Proxmox (`VM1 192.168.57.51` container -> `VM3 192.168.57.105` Nginx SSL):
+```bash
+# Executat EXCLUSIV la onboarding-ul inițial de pe nodul de provizionare VM4 (pro@192.168.57.101):
+ssh pro@192.168.57.101 "/home/pro/nginx-reverse-proxy/manage_domain.sh create <slug>.prinpreajma.ro 192.168.57.51:<PORT> --websocket --http2 --hsts"
+```
+*(Conform `STRICT RULE 7`, după provizionarea inițială, VM3 nu se mai atinge niciodată la deploy-urile curente de cod!)*
+
+---
+
+### 7.4 Pasul 4 — Arhitectura Nginx Reverse Proxy & Șablonul Oficial Vhost Producție (`salonsandy` Gold Standard)
+
+Infrastructura Nginx de pe Hetzner include global în `/etc/nginx/`:
+- `/etc/nginx/conf.d/00-oz-default.conf` — Server implicit catch-all pe IP brut care închide conexiunile neautorizate cu **`HTTP 444`** (anti-scanner & anti-Host-Header-Injection), păstrând deschis doar `/.well-known/acme-challenge/`.
+- `/etc/nginx/conf.d/00-oz-maps.conf` — Mapare dinamică WebSocket (`$http_upgrade -> $connection_upgrade`).
+- `/etc/nginx/conf.d/00-oz-compression.conf` — Compresie duală **Brotli nivel 6** (`brotli on; brotli_comp_level 6; brotli_static on;`) + **Gzip nivel 6** pe `text/html`, `text/css`, `application/javascript`, `application/json`, `application/xml`, `image/svg+xml`.
+- `/etc/nginx/snippets/oz-ssl-params.conf` — `TLSv1.2 TLSv1.3`, `ssl_session_cache shared:SSL:20m;`, `ssl_session_timeout 1d;`, `ssl_session_tickets off;`.
+- `/etc/nginx/snippets/oz-security-headers.conf` — Setează cu `always`: `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy: geolocation=(), microphone=(), camera=()`, și include automat `/etc/nginx/snippets/oz-indexnow.conf` (cheia globală IndexNow).
+- `/etc/nginx/snippets/oz-proxy-headers.conf` — Transmite `Host`, `X-Real-IP`, `X-Forwarded-For`, `X-Forwarded-Proto` și **ascunde headerele duplicate/sensibile din container** (`X-Powered-By`, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, `Strict-Transport-Security`, `X-LiteSpeed-Cache-Control`, `Surrogate-Control`, `Pragma`).
+
+> [!IMPORTANT]
+> **Legea de Moștenire Nginx (`ngx_http_proxy_module`):** Nu adăuga NICIODATĂ un singur `proxy_hide_header` izolat într-un bloc `location` fără `include /etc/nginx/snippets/oz-proxy-headers.conf;`, deoarece ar anula moștenirea tuturor celorlalte directive `proxy_hide_header`! Iar pe `/sitemap.xml`, dacă adaugi `Content-Type`, pune obligatoriu `proxy_hide_header Content-Type;` ca să nu apară header dublat.
+
+#### Șablonul Complet `/etc/nginx/sites-available/<slug>.prinpreajma.ro.conf`
+```nginx
+# Upstream connection pooling (Keepalive 32 -> TTFB < 200ms)
+upstream <slug>_upstream {
+    server 127.0.0.1:<PORT>;
+    keepalive 32;
+    keepalive_requests 1000;
+}
+
+# 1. HTTP (:80) -> ACME Challenge + GitOps Webhook + 301 Redirect la HTTPS Apex
+server {
+    listen 80;
+    listen [::]:80;
+    server_name <slug>.prinpreajma.ro www.<slug>.prinpreajma.ro;
+
+    location ^~ /.well-known/acme-challenge/ {
+        root /var/www/letsencrypt;
+        default_type "text/plain";
+        try_files $uri =404;
+        access_log off;
+    }
+
+    location ~* ^/api/webhook/(?:github|deploy)$ {
+        proxy_pass http://127.0.0.1:9099;
+        proxy_http_version 1.1;
+        proxy_set_header Host              $host;
+        proxy_set_header X-Real-IP         $remote_addr;
+        proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location / {
+        return 301 https://<slug>.prinpreajma.ro$request_uri;
+    }
+
+    access_log /var/log/nginx/<slug>_access.log;
+    error_log  /var/log/nginx/<slug>_error.log warn;
+}
+
+# 2. HTTPS www.<slug>.prinpreajma.ro -> 301 Redirect Canonic la HTTPS Apex (fără www)
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    http2 on;
+    server_name www.<slug>.prinpreajma.ro;
+
+    ssl_certificate     /etc/letsencrypt/live/<slug>.prinpreajma.ro/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/<slug>.prinpreajma.ro/privkey.pem;
+
+    include /etc/nginx/snippets/oz-ssl-params.conf;
+    include /etc/nginx/snippets/oz-security-headers.conf;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+    location ^~ /.well-known/acme-challenge/ {
+        root /var/www/letsencrypt;
+        default_type "text/plain";
+        try_files $uri =404;
+        access_log off;
+    }
+
+    location / {
+        return 301 https://<slug>.prinpreajma.ro$request_uri;
+    }
+
+    access_log /var/log/nginx/<slug>_ssl_access.log;
+    error_log  /var/log/nginx/<slug>_ssl_error.log warn;
+}
+
+# 3. HTTPS Canonic (<slug>.prinpreajma.ro) — Reverse Proxy Multi-Tenant
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    http2 on;
+    server_name <slug>.prinpreajma.ro;
+
+    ssl_certificate     /etc/letsencrypt/live/<slug>.prinpreajma.ro/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/<slug>.prinpreajma.ro/privkey.pem;
+
+    include /etc/nginx/snippets/oz-ssl-params.conf;
+    include /etc/nginx/snippets/oz-security-headers.conf;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+    # GitOps Auto-Deploy Webhook Fast-Path (HMAC-SHA256 verificat pe :9099)
+    location ~* ^/api/webhook/(?:github|deploy)$ {
+        proxy_pass http://127.0.0.1:9099;
+        proxy_http_version 1.1;
+        proxy_set_header Host              $host;
+        proxy_set_header X-Real-IP         $remote_addr;
+        proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 30s;
+    }
+
+    # Sitemap XML curat (fără Content-Type duplicat)
+    location = /sitemap.xml {
+        proxy_pass http://<slug>_upstream;
+        include /etc/nginx/snippets/oz-proxy-headers.conf;
+        proxy_hide_header Content-Type;
+        proxy_hide_header Cache-Control;
+        add_header Content-Type "application/xml; charset=utf-8" always;
+        add_header Cache-Control "public, max-age=3600, must-revalidate" always;
+        proxy_set_header Connection "";
+    }
+
+    # Active statice locale cu cache imutabil 30 zile
+    location ~* \.(?:webp|avif|jpg|jpeg|gif|png|ico|svg|css|js|woff2|woff|ttf)$ {
+        proxy_pass http://<slug>_upstream;
+        include /etc/nginx/snippets/oz-proxy-headers.conf;
+        proxy_set_header Connection "";
+        expires 30d;
+        add_header Cache-Control "public, max-age=2592000, immutable" always;
+        include /etc/nginx/snippets/oz-security-headers.conf;
+        add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+        access_log off;
+    }
+
+    # SSR, API & WebSocket Path cu Keepalive
+    location / {
+        include /etc/nginx/snippets/oz-proxy-headers.conf;
+        proxy_set_header Upgrade    $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+
+        client_max_body_size 50m;
+        proxy_connect_timeout 10s;
+        proxy_read_timeout    60s;
+        proxy_send_timeout    60s;
+
+        proxy_pass http://<slug>_upstream;
+    }
+
+    access_log /var/log/nginx/<slug>_ssl_access.log;
+    error_log  /var/log/nginx/<slug>_ssl_error.log warn;
+}
+```
+
+- **Activare Atomică & Validare Vhost pe Hetzner:**
+  ```bash
+  sudo ln -sf /etc/nginx/sites-available/<slug>.prinpreajma.ro.conf /etc/nginx/sites-enabled/<slug>.prinpreajma.ro.conf
+  sudo nginx -t && sudo systemctl reload nginx
+  ./hetzner-vm/manage_domain.sh status <slug>.prinpreajma.ro
+  ```
+- **Notă Avansată `sub_filter` pentru Next.js RSC Flight:** Dacă aplicația generează nativ canonical corect cu `/` (Secțiunea 5.2), **nu** este nevoie de `sub_filter`. Dacă vreodată se aplică o corecție `sub_filter` în Nginx pe un site Next.js, este obligatorie rescrierea simultană a HTML-ului SSR **și** a JSON-ului RSC cu **dublu-backslash (`\\"`)** (`sub_filter '\\"rel\\":\\"canonical\\",\\"href\\":\\"https://<slug>.prinpreajma.ro\\"' '\\"rel\\":\\"canonical\\",\\"href\\":\\"https://<slug>.prinpreajma.ro/\\"';` + `sub_filter_once off;`), urmată la `>= 500ms` după reload de verificarea cu Headless Chromium (`--headless=new --dump-dom`).
+
+---
+
+### 7.5 Pasul 5 — Înregistrare în Guvernanța Platformei, Certificare `100/100` & Indexare GSC
+1. **Înregistrare în Registrele Platformei (`STRICT RULE 4 & 8`):**
    - Adăugare `SUBDOMAINX="<slug>.prinpreajma.ro"` (sau `APPX="..."`) în `ethicalHacking/.env`.
-   - Adăugare în `hetzner-vm/.tenants-hetzner-vm` (doar după ce este LIVE activ pe Hetzner).
-   - Adăugare `<sitemap><loc>https://<slug>.prinpreajma.ro/sitemap.xml</loc>...</sitemap>` în `prinpreajma.ro/sitemap.xml` (`<sitemapindex>`) și card cu slash final `https://<slug>.prinpreajma.ro/` în `prinpreajma.ro/data/index.json`.
-5. **Certificare Completă de Securitate, SEO, WRS, Performanță & Indexare:**
+   - Adăugare în `hetzner-vm/.tenants-hetzner-vm` (lista exclusivă a tenanților LIVE pe Hetzner).
+   - Adăugare intrare `<sitemap><loc>https://<slug>.prinpreajma.ro/sitemap.xml</loc><lastmod>YYYY-MM-DD</lastmod></sitemap>` în Master Sitemap Index-ul `https://prinpreajma.ro/sitemap.xml` (`<sitemapindex>`) și card cu link canonic `https://<slug>.prinpreajma.ro/` în `prinpreajma.ro/data/index.json` + `index.html`.
+2. **Rularea Suitei Complete de Certificare & Indexare:**
    ```bash
-   node scripts/audit-tenant-fleet-gitops.js                       # Validează 7/7 Porți GitOps + inventar dinamic
-   node ethicalHacking/scripts/runner.js <slug>.prinpreajma.ro     # Certificare DAST & Runtime -> 100/100
-   node ethicalHacking/scripts/audit-seo-crawlers.js <slug>.prinpreajma.ro  # Certificare Sitemap & Canonical -> 100/100
-   node ethicalHacking/scripts/audit-blue-team-secops.js <slug>.prinpreajma.ro # Certificare L3/L4/L7 & CapDrop -> 100/100
-   node ethicalHacking/scripts/audit-performance.js <slug>.prinpreajma.ro   # Certificare Core Web Vitals 2026
-   node scripts/submit-instant-indexing.js <slug>                  # Înregistrare GSC Property + Sitemap + IndexNow + WRS Check
+   node scripts/audit-tenant-fleet-gitops.js                            # 1. Certificare 7/7 Porți GitOps + inventar dinamic
+   node ethicalHacking/scripts/runner.js <slug>.prinpreajma.ro          # 2. Certificare DAST, SSL/TLS, Headers, CORS -> 100/100
+   node ethicalHacking/scripts/audit-blue-team-secops.js <slug>.prinpreajma.ro # 3. Certificare L3/L4/L7 & CapDrop -> 100/100
+   node ethicalHacking/scripts/audit-seo-crawlers.js <slug>.prinpreajma.ro     # 4. Certificare Sitemap & Canonical -> 100/100
+   node ethicalHacking/scripts/audit-performance.js <slug>.prinpreajma.ro      # 5. Certificare Core Web Vitals 2026 & Brotli
+   node scripts/submit-instant-indexing.js <slug>                       # 6. Înregistrare GSC Property + Sitemap + IndexNow
+   node ethicalHacking/scripts/audit-live-serp.js <slug>.prinpreajma.ro # 7. Verificare WRS Headless Chromium 1:1 Canonical
    ```
-   *(Notă finală GSC: după rularea `submit-instant-indexing.js <slug>`, operatorul apasă o singură dată **Request Indexing** pe `https://<slug>.prinpreajma.ro/` în Google Search Console UI pentru crawl `Googlebot/2.1` în `< 2 minute`, deoarece API-ul `indexing.googleapis.com` declanșează crawl instantaneu doar pentru scheme `JobPosting`/`BroadcastEvent`).*
+   *(Pas final UI: după rularea `submit-instant-indexing.js <slug>`, operatorul apasă o singură dată **Request Indexing** pe `https://<slug>.prinpreajma.ro/` în Google Search Console UI pentru a declanșa crawl-ul `Googlebot/2.1` în `< 2 minute`).*
 
 ---
 
-## 7. FORMATUL PACHETULUI DE HANDOFF (PE CARE ÎL GENEREZI CÂND TERMINI CODUL)
+## 8. FORMATUL PACHETULUI DE HANDOFF (PE CARE ÎL GENEREZI CÂND TERMINI CODUL)
 
-Când ai terminat dezvoltarea proiectului nou și ai făcut `git push origin main`, livrează utilizatorului acest rezumat gata de trimis Agentului de Hosting:
+Când ai terminat dezvoltarea proiectului nou, ai validat resursele media pe Hostico HTTPS (Faza 3 din Secțiunea 6.4) și ai făcut `git push origin main`, livrează utilizatorului acest bloc complet gata de executat în `proxmox-hosting&staff`:
 
 ```yaml
 ORIGINZERO_NEW_TENANT_HANDOFF:
@@ -352,16 +800,25 @@ ORIGINZERO_NEW_TENANT_HANDOFF:
   local_path: "tenants/<JUDET>/<NNN-NumeTenant>"
   slug: "<slug>"
   fqdn: "<slug>.prinpreajma.ro"
+  www_fqdn: "www.<slug>.prinpreajma.ro"
   canonical_root: "https://<slug>.prinpreajma.ro/"
+  dns_records:
+    apex_cname: "<slug>.prinpreajma.ro -> hetzner1.banszky.men (2.31.102.36 / 2a01:4f8:c016:f3bb::1)"
+    www_cname: "www.<slug>.prinpreajma.ro -> <slug>.prinpreajma.ro"
   github_repo: "git@github.com:seboriginzero/<slug>.prinpreajma.ro.git"
   branch: "main"
   internal_container_port: 3000
+  requires_websocket: true
+  ssl_mode: "letsencrypt_webroot_multi_san" # /var/www/letsencrypt (-d <fqdn> -d www.<fqdn>)
   healthcheck_path: "/api/health"
   sitemap_path: "/sitemap.xml"
   database_type: "sqlite_wal | postgres | json | static"
   persistent_volumes:
-    - "./data:/app/data" # chmod 0777 pe host
+    - "./data:/app/data" # chmod 0777 pe host pentru UID 1000
   secrets_file_local: "proxmox-hosting&staff/secrets/.env.<slug>"
-  hostico_cdn_prefix: "https://media-hostico.prinpreajma.ro/pictures/<slug>/"
+  hostico_media_storage:
+    ftps_jail_path: "tenants/<slug>/"
+    https_base_url: "https://media-hostico.prinpreajma.ro/tenants/<slug>/"
+    https_validation_passed: true
   gitops_7_gates_verified: true
 ```
