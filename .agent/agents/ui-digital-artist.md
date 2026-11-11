@@ -29,3 +29,4 @@
    - Vizualizare completă din muchie în muchie a pânzei, fără nicio obstrucție vizuală, cu comenzi degajate în spațiul exterior și lupă de inspecție microscopică.
 6. **Săli Muzeale Fullscreen cu Animații Dedicate:**
    - 5 stări experiențiale animate specific pentru fiecare direcție taxonomică (Osteo-Scan, Rune Shimmer, Hydraulic Tilt, Structural Monolith, High-Key Bloom).
+

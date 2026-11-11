@@ -26,3 +26,4 @@ www.757.prinpreajma.ro.   14400  IN  CNAME  757.prinpreajma.ro.
 2. `dig +short A www.757.prinpreajma.ro @1.1.1.1` → Returnează strict `2.31.102.36`
 3. `dig +short AAAA 757.prinpreajma.ro @1.1.1.1` → Returnează strict `2a01:4f8:c016:f3bb::1`
 4. Previne blocarea de securitate Let's Encrypt (limita de 5 eșecuri/oră per domeniu).
+

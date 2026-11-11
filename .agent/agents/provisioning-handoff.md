@@ -39,3 +39,4 @@ ORIGINZERO_NEW_TENANT_HANDOFF:
     https_validation_passed: true
   gitops_7_gates_verified: true
 ```
+
