@@ -27,3 +27,4 @@ ORIGINZERO_NEW_TENANT_HANDOFF:
     https_base_url: "https://media-hostico.prinpreajma.ro/tenants/757/"
     https_validation_passed: true
   gitops_7_gates_verified: true
+

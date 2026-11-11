@@ -152,10 +152,10 @@ def rebuild_site():
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{html.escape(site_title)}</title>
   <meta name="description" content="{html.escape(site_desc)}">
-  <link rel="canonical" href="{prim_dom}">
+  <link rel="canonical" href="{prim_dom if prim_dom.endswith('/') else prim_dom + '/'}">
   <meta property="og:title" content="{html.escape(site_title)}">
   <meta property="og:description" content="{html.escape(site_desc)}">
-  <meta property="og:url" content="{prim_dom}">
+  <meta property="og:url" content="{prim_dom if prim_dom.endswith('/') else prim_dom + '/'}">
   <meta property="og:type" content="website">
   <meta property="og:image" content="{prim_dom}/data/web-images/ART-0001.webp">
   <meta name="twitter:card" content="summary_large_image">

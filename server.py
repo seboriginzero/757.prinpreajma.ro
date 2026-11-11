@@ -116,7 +116,22 @@ def verify_token(token_str):
         return None
 
 # 3. HTTP Request Handler
+import mimetypes
+mimetypes.init()
+mimetypes.add_type('image/webp', '.webp')
+
 class LuxuryAdminHandler(http.server.SimpleHTTPRequestHandler):
+    extensions_map = http.server.SimpleHTTPRequestHandler.extensions_map.copy()
+    extensions_map.update({
+        '.webp': 'image/webp',
+        '.png': 'image/png',
+        '.jpg': 'image/jpeg',
+        '.css': 'text/css',
+        '.js': 'application/javascript',
+        '.json': 'application/json',
+        '.svg': 'image/svg+xml'
+    })
+
     def end_headers(self):
         # Security headers
         self.send_header('X-Content-Type-Options', 'nosniff')
