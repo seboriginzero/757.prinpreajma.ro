@@ -21,8 +21,8 @@ def rebuild_site():
     integ = sc.get('integrity', {})
     foot = sc.get('footer', {})
 
-    site_title = gen.get('site_title', '757 | Catalog Raisonné și Arhivă de Artă')
-    site_desc = gen.get('site_description', 'Catalogul general raționat și arhiva operei artistului 757. Suprarealism biomecanic, morfologii osteologice, totemuri criptice și viziuni deconstructiviste.')
+    site_title = gen.get('site_title', '757')
+    site_desc = gen.get('site_description', 'SCANNER // DIAGNOSTIC IDENTITATE — Subiect: Ființă umană. Status: Activ. Operează în afara algoritmilor standard. Clasificare: Unicat (exemplar nereplicabil, fără copie de rezervă).')
     prim_dom = gen.get('primary_domain', 'https://757.prinpreajma.ro')
     sec_dom = gen.get('secondary_domain', '757.originzero.art')
     brand_name = gen.get('header_brand_name', '757')
@@ -385,7 +385,7 @@ def rebuild_site():
     <div class="section-container">
       <div class="section-header">
         <span class="section-subtitle">NOTĂ CURATORIALĂ ȘI METODOLOGIE DE ATELIER</span>
-        <h2 class="section-title">Fundamentele Teoretice ale Catalogului Raisonné</h2>
+        <h2 class="section-title">Fundamentele Teoretice ale Operei</h2>
       </div>
 
       <div class="raport-cards">
@@ -532,7 +532,7 @@ def rebuild_site():
       <div class="footer-top">
         <div class="footer-brand">
           <span class="f-sig">757</span>
-          <p class="f-desc">Arhivă de Artă Contemporană &middot; Suprarealism Biomecanic &middot; Toate drepturile rezervate artistului.</p>
+          <p class="f-desc">Suprarealism Biomecanic &middot; Toate drepturile rezervate artistului.</p>
         </div>
 
         <div class="footer-links">

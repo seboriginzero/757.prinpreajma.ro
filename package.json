@@ -1,7 +1,7 @@
 {
   "name": "757-prinpreajma-ro",
   "version": "1.0.0",
-  "description": "757 — MUGUREL EMANUEL MANEA — Arhivă de Artă & Galerie Digitală Premium (OriginZero Multi-Tenant)",
+  "description": "757 — MUGUREL EMANUEL MANEA — Galerie Digitală (OriginZero Multi-Tenant)",
   "main": "server.py",
   "scripts": {
     "start": "python3 server.py",
