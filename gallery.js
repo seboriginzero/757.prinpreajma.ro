@@ -354,8 +354,9 @@
 
   // Atașare click carduri, taste și fizică de înclinare 3D
   function attachCardEvents() {
-    const cards = grid.querySelectorAll('.art-card');
+    const cards = grid.querySelectorAll('.art-card:not([data-bound="true"])');
     cards.forEach(card => {
+      card.setAttribute('data-bound', 'true');
       card.addEventListener('click', () => {
         const idx = parseInt(card.getAttribute('data-idx'), 10);
         openModal(idx);
@@ -385,6 +386,54 @@
         card.style.transform = '';
       });
     });
+  }
+
+  // Load More: Încărcare incrementală fără salturi bruște de scroll
+  function loadMoreArtworks(e) {
+    if (e) {
+      e.preventDefault();
+      if (loadMoreBtn) loadMoreBtn.blur();
+    }
+    const total = state.filteredItems.length;
+    const startIdx = state.currentPage * state.pageSize;
+    if (startIdx >= total) {
+      if (paginationContainer) paginationContainer.style.display = 'none';
+      return;
+    }
+
+    state.currentPage++;
+    const endIdx = Math.min(state.currentPage * state.pageSize, total);
+    const newItems = state.filteredItems.slice(startIdx, endIdx);
+
+    if (newItems.length > 0) {
+      // Păstrează exact poziția de scroll curentă
+      const scrollPos = window.scrollY || document.documentElement.scrollTop;
+
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = newItems.map((item, idx) => renderCardHtml(item, startIdx + idx)).join('');
+
+      const fragment = document.createDocumentFragment();
+      while (tempDiv.firstChild) {
+        fragment.appendChild(tempDiv.firstChild);
+      }
+      grid.appendChild(fragment);
+
+      // Atașează evenimente doar cardurilor nou adăugate
+      attachCardEvents();
+
+      // Menține viewport-ul stabil (previne scroll jump la footer)
+      window.scrollTo({
+        top: scrollPos,
+        behavior: 'instant'
+      });
+    }
+
+    if (endIdx < total) {
+      if (paginationContainer) paginationContainer.style.display = 'block';
+      if (loadMoreBtn) loadMoreBtn.textContent = 'Încarcă Mai Multe Opere';
+    } else {
+      if (paginationContainer) paginationContainer.style.display = 'none';
+    }
   }
 
   // Modal Inspector: Panoramare și Zoom Detaliat
@@ -790,11 +839,10 @@
       });
     });
 
-    // Load more
-    loadMoreBtn.addEventListener('click', () => {
-      state.currentPage++;
-      renderGallery();
-    });
+    // Load more (încărcare stabilă fără salt la footer)
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener('click', loadMoreArtworks);
+    }
 
     // Modal controls
     modalCloseBtn.addEventListener('click', closeModal);
@@ -816,6 +864,34 @@
         openLuxuryFullscreen(state.modalIndex);
       });
     }
+
+    // Suport Gesturi Mobile: Touch Swipe stânga/dreapta în modal
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
+
+    modal.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    modal.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      touchEndY = e.changedTouches[0].screenY;
+      const dx = touchEndX - touchStartX;
+      const dy = touchEndY - touchStartY;
+      // Doar dacă imaginea nu este mărită cu lupa
+      if (!imageWrapper || !imageWrapper.classList.contains('zoomed')) {
+        if (Math.abs(dx) > 45 && Math.abs(dy) < 40) {
+          if (dx < 0) {
+            nextModalItem();
+          } else {
+            prevModalItem();
+          }
+        }
+      }
+    }, { passive: true });
 
     // Modal dialog native event listener (PREVENTS SCROLL-LOCK WHEN CLOSING)
     modal.addEventListener('close', () => {
