@@ -147,6 +147,11 @@ def rebuild_site():
   <meta name="twitter:image" content="{prim_dom}/data/web-images/ART-0103.jpg">
   <meta name="theme-color" content="#07080b">
 
+  <!-- Favicon & Touch Icons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
   <!-- Google Fonts: Cinzel, Cormorant Garamond, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -230,28 +235,94 @@ def rebuild_site():
           </svg>
         </div>
 
-        <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
-        <div class="art-hanging-tag hero-hanging-tag">
+        <!-- 3. Placă de Fier Forjat în Formă de Ochi (Eye Plaque cu Text Cursiv pe Retină) -->
+        <div class="forged-eye-card hero-eye-plaque" id="hero-eye-plaque">
+          
+          <!-- Ocheți metalici la marginea superioară pentru ancorare sfoară 3D -->
           <div class="tag-eyelets">
             <span class="eyelet left"></span>
             <span class="eyelet right"></span>
           </div>
-          <div class="art-meta-row">
-            <span class="art-cat-name hero-scanner-tag">SCANNER // DIAGNOSTIC IDENTITATE</span>
-          </div>
-          <div class="hero-diagnostic-meta">
-            <div class="hero-diag-line"><span class="hero-diag-k">Subiect:</span> <span class="hero-diag-v">Ființă umană.</span></div>
-            <div class="hero-diag-line"><span class="hero-diag-k">Status:</span> <span class="hero-diag-v">Activ. Operează în afara algoritmilor standard.</span></div>
-            <div class="hero-diag-line"><span class="hero-diag-k">Clasificare:</span> <span class="hero-diag-v">Unicat (exemplar nereplicabil, fără copie de rezervă).</span></div>
-          </div>
-          <div class="hero-arch-interactive" id="hero-arch-accordion" tabindex="0" role="button" aria-expanded="false" aria-label="Afișează Arhitectură Internă">
-            <div class="hero-arch-trigger" id="hero-arch-trigger">
-              <span class="hero-arch-heading">Arhitectură internă</span>
-              <span class="hero-arch-indicator" aria-hidden="true">+</span>
-            </div>
-            <div class="hero-arch-drawer" id="hero-arch-drawer">
-              <p class="hero-arch-p">Între inginerie de precizie și anatomie emoțională. Nu produce obiecte, ci mecanisme care simt. Lucrează la intersecția unde linia rece a schiței tehnice întâlnește imperfecțiunea caldă a materiei vii. Pentru el, desenul nu este decor, ci o disecție a logicii interne din spatele lucrurilor, o încercare de a cartografia felul în care funcționează o idee înainte de a primi formă fizică.</p>
-              <p class="hero-prototype-p">Fiecare lucrare din arhivă este un prototip: o urmă de grafit, un fragment de hardware, o tensiune mecanică sau o întrebare lăsată intenționat deschisă. Fără artificii, fără compromisuri estetice, doar structură pură și observație lucidă.</p>
+
+          <!-- Rama Sculptată de Fier Forjat (SVG Structural & Decorativ) -->
+          <svg class="forged-eye-frame" viewBox="0 0 520 260" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="ironBevelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#555869" />
+                <stop offset="20%" stop-color="#282a36" />
+                <stop offset="75%" stop-color="#14151a" />
+                <stop offset="100%" stop-color="#08090c" />
+              </linearGradient>
+            </defs>
+
+            <!-- Volute laterale din fier forjat la extremitățile ochiului (Canthi) -->
+            <path d="M 28,130 C 14,130 4,120 4,108 C 4,94 20,94 24,106 C 27,115 20,122 14,120" class="iron-scroll-left" />
+            <path d="M 492,130 C 506,130 516,120 516,108 C 516,94 500,94 496,106 C 493,115 500,122 506,120" class="iron-scroll-right" />
+
+            <!-- Muchia exterioară a ochiului de fier forjat -->
+            <path d="M 28,130 C 120,6 400,6 492,130 C 400,254 120,254 28,130 Z" class="iron-body-path" />
+            <!-- Muchia interioară canelată cu cusătură de bronz -->
+            <path d="M 44,130 C 130,22 390,22 476,130 C 390,238 130,238 44,130 Z" class="iron-inner-rim" />
+
+            <!-- Nituri structurale din oțel bătut -->
+            <circle cx="28" cy="130" r="4.5" class="iron-rivet-head" />
+            <circle cx="492" cy="130" r="4.5" class="iron-rivet-head" />
+            <circle cx="260" cy="12" r="4.5" class="iron-rivet-head" />
+            <circle cx="260" cy="248" r="4.5" class="iron-rivet-head" />
+          </svg>
+
+          <!-- Camera Retinei (Central Retina Chamber) -->
+          <div class="forged-retina-chamber">
+            
+            <!-- Inele Optice Concentrice de Calibrare pe Retină -->
+            <svg class="retina-optical-rings" viewBox="0 0 400 200" preserveAspectRatio="none" aria-hidden="true">
+              <ellipse cx="200" cy="100" rx="192" ry="92" class="retina-ring ring-outer" />
+              <ellipse cx="200" cy="100" rx="145" ry="70" class="retina-ring ring-mid" />
+              <ellipse cx="200" cy="100" rx="90" ry="44" class="retina-ring ring-inner" />
+              <line x1="200" y1="8" x2="200" y2="192" class="retina-axis-v" />
+              <line x1="8" y1="100" x2="392" y2="100" class="retina-axis-h" />
+            </svg>
+
+            <!-- Fluxul Textului Cursiv pe Retină -->
+            <div class="retina-content-flow">
+              
+              <!-- Badge Scanare Biometrică -->
+              <div class="retina-badge-row">
+                <span class="retina-scanner-badge">SCANNER // DIAGNOSTIC IDENTITATE</span>
+              </div>
+
+              <!-- Diagnostic Telemetry (Cursiv pe Retină) -->
+              <div class="retina-cursive-telemetry">
+                <div class="retina-cursive-item">
+                  <span class="retina-key">Subiect:</span> <span class="retina-val">Ființă umană.</span>
+                </div>
+                <div class="retina-cursive-item">
+                  <span class="retina-key">Status:</span> <span class="retina-val">Activ. Operează în afara algoritmilor standard.</span>
+                </div>
+                <div class="retina-cursive-item">
+                  <span class="retina-key">Clasificare:</span> <span class="retina-val">Unicat (exemplar nereplicabil, fără copie de rezervă).</span>
+                </div>
+              </div>
+
+              <!-- Arhitectură Internă: Apertură Interactivă -->
+              <div class="hero-arch-interactive forged-retina-arch" id="hero-arch-accordion" tabindex="0" role="button" aria-expanded="false" aria-label="Afișează Arhitectură Internă">
+                <div class="hero-arch-trigger retina-arch-trigger" id="hero-arch-trigger">
+                  <span class="hero-arch-heading retina-arch-heading">
+                    <svg class="retina-aperture-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="9" />
+                      <circle cx="12" cy="12" r="3.5" />
+                      <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
+                    </svg>
+                    Arhitectură internă
+                  </span>
+                  <span class="hero-arch-indicator" aria-hidden="true">+</span>
+                </div>
+                <div class="hero-arch-drawer retina-arch-drawer" id="hero-arch-drawer">
+                  <p class="retina-arch-p">Între inginerie de precizie și anatomie emoțională. Nu produce obiecte, ci mecanisme care simt. Lucrează la intersecția unde linia rece a schiței tehnice întâlnește imperfecțiunea caldă a materiei vii. Pentru el, desenul nu este decor, ci o disecție a logicii interne din spatele lucrurilor, o încercare de a cartografia felul în care funcționează o idee înainte de a primi formă fizică.</p>
+                  <p class="retina-prototype-p">Fiecare lucrare din arhivă este un prototip: o urmă de grafit, un fragment de hardware, o tensiune mecanică sau o întrebare lăsată intenționat deschisă. Fără artificii, fără compromisuri estetice, doar structură pură și observație lucidă.</p>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>

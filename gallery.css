@@ -494,16 +494,169 @@ a {
   filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.9));
 }
 
-.hero-hanging-tag {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  padding: 1.35rem 1.45rem;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-  text-align: left;
+/* ==========================================================================
+   HERO SHOWCASE: PLACĂ DE FIER FORJAT ÎN FORMĂ DE OCHI (RETINĂ & TEXT CURSIV)
+   ========================================================================== */
+
+.hero-eye-plaque {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  margin: -4px auto 0;
+  background: radial-gradient(ellipse at 50% 30%, #1c1e27 0%, #121319 60%, #07080b 100%);
+  border-radius: 90px 90px 90px 90px / 32px 32px 32px 32px;
+  border: 2px solid #2e313d;
+  box-shadow:
+    0 22px 50px -10px rgba(0, 0, 0, 0.95),
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    inset 0 2px 4px rgba(255, 255, 255, 0.14),
+    inset 0 -3px 8px rgba(0, 0, 0, 0.9);
+  padding: 1.35rem 1.65rem 1.25rem;
+  transform-origin: 50% 0%;
+  transform-style: preserve-3d;
+  transform: perspective(800px) rotateX(2.5deg);
+  transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 0.45s cubic-bezier(0.2, 0.9, 0.3, 1), border-color 0.3s ease;
+  overflow: visible;
 }
 
-.hero-scanner-tag {
+.hero-portrait-card:hover .hero-eye-plaque {
+  transform: perspective(800px) translateY(3px) rotateX(4.5deg);
+  border-color: rgba(212, 163, 89, 0.55);
+  box-shadow:
+    0 28px 60px -8px rgba(0, 0, 0, 0.98),
+    0 0 25px rgba(212, 163, 89, 0.22),
+    inset 0 2px 5px rgba(255, 255, 255, 0.22),
+    inset 0 -3px 8px rgba(0, 0, 0, 0.9);
+}
+
+/* 1. Rama Sculptată de Fier Forjat (SVG decorativ & structural) */
+.forged-eye-frame {
+  position: absolute;
+  inset: -6px -14px;
+  width: calc(100% + 28px);
+  height: calc(100% + 12px);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.iron-body-path {
+  fill: none;
+  stroke: url(#ironBevelGrad);
+  stroke-width: 3.6;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.85));
+  vector-effect: non-scaling-stroke;
+}
+
+.iron-inner-rim {
+  fill: none;
+  stroke: rgba(212, 163, 89, 0.38);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.iron-scroll-left,
+.iron-scroll-right {
+  fill: none;
+  stroke: #444756;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.9));
+  vector-effect: non-scaling-stroke;
+  transition: stroke 0.3s ease;
+}
+
+.hero-portrait-card:hover .iron-scroll-left,
+.hero-portrait-card:hover .iron-scroll-right {
+  stroke: #666c82;
+}
+
+.iron-rivet-head {
+  fill: #14151b;
+  stroke: #6b7082;
+  stroke-width: 1.5;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.95));
+}
+
+/* Ocheți metalici la marginea superioară a plăcuței (legați la sfoara 3D) */
+.hero-eye-plaque .tag-eyelets {
+  position: absolute;
+  top: -6px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 calc(22.5% - 4px);
+  pointer-events: none;
+  z-index: 6;
+}
+
+/* 2. Camera Retinei (Central Retina Chamber) */
+.forged-retina-chamber {
+  position: relative;
+  width: 100%;
+  background: radial-gradient(ellipse at 50% 45%, rgba(22, 26, 38, 0.95) 0%, rgba(11, 13, 18, 0.97) 65%, rgba(5, 6, 8, 1) 100%);
+  border-radius: 54px / 22px;
+  border: 1px solid rgba(212, 163, 89, 0.3);
+  box-shadow: inset 0 0 28px rgba(0, 0, 0, 0.95), 0 0 18px rgba(212, 163, 89, 0.1);
+  padding: 1.15rem 1.45rem 1rem;
+  overflow: hidden;
+  z-index: 3;
+}
+
+/* Inele Optice Concentrice de Calibrare pe Retină */
+.retina-optical-rings {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.38;
+}
+
+.retina-ring {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+
+.ring-outer {
+  stroke: rgba(212, 163, 89, 0.45);
+  stroke-width: 1;
+  stroke-dasharray: 6 3;
+}
+
+.ring-mid {
+  stroke: rgba(0, 240, 255, 0.28);
+  stroke-width: 0.8;
+}
+
+.ring-inner {
+  stroke: rgba(212, 163, 89, 0.35);
+  stroke-width: 0.8;
+  stroke-dasharray: 2 4;
+}
+
+.retina-axis-v,
+.retina-axis-h {
+  stroke: rgba(212, 163, 89, 0.22);
+  stroke-width: 0.6;
+  stroke-dasharray: 2 4;
+  vector-effect: non-scaling-stroke;
+}
+
+/* 3. Textul Cursiv pe Retină */
+.retina-content-flow {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.retina-badge-row {
+  margin-bottom: 0.65rem;
+}
+
+.retina-scanner-badge {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.16em;
@@ -511,75 +664,98 @@ a {
   text-transform: uppercase;
   font-weight: 600;
   display: inline-block;
-  margin-bottom: 0.65rem;
+  background: rgba(212, 163, 89, 0.1);
+  border: 1px solid rgba(212, 163, 89, 0.32);
+  padding: 0.2rem 0.65rem;
+  border-radius: 12px;
 }
 
-.hero-diagnostic-meta {
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
+.retina-cursive-telemetry {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.04rem;
   line-height: 1.6;
-  border-bottom: 1px solid var(--border-subtle);
-  padding-bottom: 0.85rem;
-  margin-bottom: 0.95rem;
+  border-bottom: 1px dashed rgba(212, 163, 89, 0.25);
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.85rem;
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
+  text-align: left;
 }
 
-.hero-diag-line {
+.retina-cursive-item {
   display: flex;
   flex-wrap: wrap;
+  align-items: baseline;
   gap: 0.35rem;
 }
 
-.hero-diag-k {
-  color: var(--accent-gold);
+.retina-key {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-style: normal;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  color: var(--accent-gold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
-.hero-diag-v {
-  color: var(--text-primary);
+.retina-val {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.04rem;
+  color: #ede6d8;
 }
 
-.hero-arch-interactive {
+/* 4. Apertură Interactivă Arhitectură Internă (Disecție la Hover / Click) */
+.forged-retina-arch {
   position: relative;
   cursor: pointer;
-  border-top: 1px solid var(--border-subtle);
-  padding-top: 0.65rem;
-  margin-top: 0.35rem;
-  transition: border-color var(--transition-fast);
+  border-top: 1px solid rgba(212, 163, 89, 0.25);
+  padding-top: 0.55rem;
   outline: none;
+  transition: border-color 0.25s ease;
 }
 
-.hero-arch-interactive:hover,
-.hero-arch-interactive.is-open {
+.forged-retina-arch:hover,
+.forged-retina-arch.is-open {
   border-color: var(--accent-gold);
 }
 
-.hero-arch-trigger {
+.retina-arch-trigger {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.3rem 0;
+  padding: 0.25rem 0.2rem;
   user-select: none;
 }
 
-.hero-arch-heading {
+.retina-arch-heading {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   letter-spacing: 0.1em;
   color: var(--accent-gold);
-  font-style: normal;
   text-transform: uppercase;
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
   transition: color var(--transition-fast);
 }
 
-.hero-arch-indicator {
+.retina-aperture-icon {
+  color: var(--accent-gold);
+  transition: transform 0.4s ease, color 0.2s ease;
+}
+
+.forged-retina-arch:hover .retina-aperture-icon,
+.forged-retina-arch.is-open .retina-aperture-icon {
+  transform: rotate(90deg);
+  color: #ffd700;
+}
+
+.forged-retina-arch .hero-arch-indicator {
   font-family: var(--font-mono);
   font-size: 1.15rem;
   font-weight: 600;
@@ -589,23 +765,24 @@ a {
   display: inline-block;
 }
 
-.hero-arch-interactive:hover .hero-arch-indicator,
-.hero-arch-interactive.is-open .hero-arch-indicator {
+.forged-retina-arch:hover .hero-arch-indicator,
+.forged-retina-arch.is-open .hero-arch-indicator {
   transform: rotate(45deg);
   color: #ffd700;
 }
 
-.hero-arch-drawer {
+.retina-arch-drawer {
   max-height: 0;
   opacity: 0;
   overflow: hidden;
   margin-top: 0;
   transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, margin-top 0.3s ease;
+  text-align: left;
 }
 
 /* Afișare text doar la hover pe mouse (Desktop) */
 @media (hover: hover) {
-  .hero-arch-interactive:hover .hero-arch-drawer {
+  .forged-retina-arch:hover .retina-arch-drawer {
     max-height: 520px;
     opacity: 1;
     margin-top: 0.75rem;
@@ -613,111 +790,85 @@ a {
 }
 
 /* Afișare text la click / tap pe mobil */
-.hero-arch-interactive.is-open .hero-arch-drawer {
+.forged-retina-arch.is-open .retina-arch-drawer {
   max-height: 520px;
   opacity: 1;
   margin-top: 0.75rem;
 }
 
-.hero-arch-p {
+.retina-arch-p,
+.retina-prototype-p {
   font-family: var(--font-serif);
-  font-size: 0.96rem;
-  line-height: 1.65;
-  color: var(--text-secondary);
   font-style: italic;
-  margin: 0 0 0.85rem 0;
+  font-size: 1.02rem;
+  line-height: 1.68;
+  color: rgba(237, 230, 216, 0.9);
+  margin-bottom: 0.75rem;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
-.hero-prototype-p {
-  font-family: var(--font-serif);
-  font-size: 0.96rem;
-  line-height: 1.65;
-  color: var(--text-secondary);
-  font-style: italic;
+.retina-prototype-p {
   margin: 0;
-  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  border-top: 1px dashed rgba(212, 163, 89, 0.2);
   padding-top: 0.75rem;
 }
 
-.hero-card-title {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  letter-spacing: 0.08em;
-  color: var(--text-primary);
-  margin: 0.4rem 0 0.5rem;
+/* Adaptări White Cube (Light Theme) pentru Placa Ochi */
+[data-theme="light"] .hero-eye-plaque {
+  background: radial-gradient(ellipse at 50% 30%, #292b36 0%, #1c1d25 60%, #111218 100%);
+  border: 2px solid #3d4050;
+  box-shadow:
+    0 18px 42px -8px rgba(0, 0, 0, 0.35),
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    inset 0 2px 4px rgba(255, 255, 255, 0.22),
+    inset 0 -3px 8px rgba(0, 0, 0, 0.9);
 }
 
-.hero-critic-snippet {
-  font-family: var(--font-serif);
-  font-size: 0.98rem;
-  line-height: 1.55;
-  color: var(--text-secondary);
-  font-style: italic;
-  margin: 0;
+[data-theme="light"] .hero-portrait-card:hover .hero-eye-plaque {
+  border-color: #d4a359;
+  box-shadow:
+    0 24px 50px -8px rgba(0, 0, 0, 0.45),
+    0 0 25px rgba(212, 163, 89, 0.25),
+    inset 0 2px 5px rgba(255, 255, 255, 0.25);
 }
 
-/* White Cube adaptations for Hero Showcase */
-[data-theme="light"] .hero-showcase-section {
-  background: radial-gradient(circle at 50% 30%, #ffffff 0%, #f1f5f9 85%);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+[data-theme="light"] .forged-retina-chamber {
+  background: radial-gradient(ellipse at 50% 45%, #181a24 0%, #101218 65%, #08090d 100%);
+  border: 1px solid rgba(212, 163, 89, 0.4);
+  box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.95), 0 0 16px rgba(212, 163, 89, 0.15);
 }
 
-[data-theme="light"] .hero-art-frame {
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
-  border: 1px solid rgba(0, 0, 0, 0.14);
+[data-theme="light"] .retina-val {
+  color: #f3efe8;
 }
 
-[data-theme="light"] .hero-hanging-tag {
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+[data-theme="light"] .retina-arch-p,
+[data-theme="light"] .retina-prototype-p {
+  color: rgba(243, 239, 232, 0.92);
 }
 
-[data-theme="light"] .hero-scanner-tag {
-  color: #b45309;
-}
-
-[data-theme="light"] .hero-diag-k {
-  color: #b45309;
-}
-
-[data-theme="light"] .hero-diag-v {
-  color: #0f172a;
-}
-
-[data-theme="light"] .hero-arch-interactive:hover,
-[data-theme="light"] .hero-arch-interactive.is-open {
-  border-color: #b45309;
-}
-
-[data-theme="light"] .hero-arch-heading {
-  color: #b45309;
-}
-
-[data-theme="light"] .hero-arch-indicator {
-  color: #b45309;
-}
-
-[data-theme="light"] .hero-arch-interactive:hover .hero-arch-indicator,
-[data-theme="light"] .hero-arch-interactive.is-open .hero-arch-indicator {
-  color: #78350f;
-}
-
-[data-theme="light"] .hero-arch-p {
-  color: #334155;
-}
-
-[data-theme="light"] .hero-prototype-p {
-  color: #475569;
-  border-top: 1px dashed rgba(0, 0, 0, 0.12);
-}
-
-[data-theme="light"] .hero-card-title {
-  color: #0f172a;
-}
-
-[data-theme="light"] .hero-critic-snippet {
-  color: #334155;
+/* Responsivitate Placă Ochi pe Ecrane Mici */
+@media (max-width: 480px) {
+  .hero-eye-plaque {
+    padding: 1.15rem 1.25rem 1rem;
+    border-radius: 70px 70px 70px 70px / 26px 26px 26px 26px;
+  }
+  .forged-retina-chamber {
+    padding: 1rem 1.15rem 0.85rem;
+    border-radius: 44px / 18px;
+  }
+  .retina-cursive-telemetry {
+    font-size: 0.98rem;
+  }
+  .retina-val {
+    font-size: 0.98rem;
+  }
+  .retina-arch-p,
+  .retina-prototype-p {
+    font-size: 0.98rem;
+    line-height: 1.62;
+  }
 }
 
 .btn-luxury {

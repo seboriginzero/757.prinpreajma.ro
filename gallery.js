@@ -795,7 +795,11 @@
     // Hero Portrait Card (ART-0103) Click and Tilt Interaction
     const heroPortraitCard = document.getElementById('hero-portrait-card');
     if (heroPortraitCard) {
-      heroPortraitCard.addEventListener('click', () => {
+      heroPortraitCard.addEventListener('click', (e) => {
+        // Oprește deschiderea modalului la interacțiunea cu plăcuța ochi de fier forjat
+        if (e && e.target && (e.target.closest('#hero-eye-plaque') || e.target.closest('#hero-arch-accordion') || e.target.closest('.hero-eye-plaque'))) {
+          return;
+        }
         const targetIdx = state.filteredItems.findIndex(it => it.id === 'ART-0103');
         if (targetIdx !== -1) {
           openModal(targetIdx);
@@ -806,6 +810,7 @@
       });
       heroPortraitCard.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
+          if (e.target && (e.target.closest('#hero-eye-plaque') || e.target.closest('#hero-arch-accordion'))) return;
           e.preventDefault();
           heroPortraitCard.click();
         }
@@ -844,6 +849,14 @@
         if (e.key === 'Enter' || e.key === ' ') {
           toggleArch(e);
         }
+      });
+    }
+
+    // Prevenire propagare click pe plăcuța ochi
+    const eyePlaque = document.getElementById('hero-eye-plaque');
+    if (eyePlaque) {
+      eyePlaque.addEventListener('click', (e) => {
+        e.stopPropagation();
       });
     }
 
