@@ -380,6 +380,20 @@ Construiește din start aceste 6 elemente în aplicație pentru a obține **`100
    - **Descriere Share (`og:description`):** Text concis, structurat cu date de identitate cheie, curat de tag-uri HTML sau caractere corupte.
    - **Mobile Modal Inspector / Sheets:** Pe ecrane mobile (`<= 768px`), ferestrele modale de vizualizare trebuie să se comporte ca un **Fullscreen Sheet** nativ (`100vw × 100dvh`), fără margini laterale gri (`padding: 0; margin: 0; border: none;`), cu suport pentru iOS Notch / Dynamic Island (`env(safe-area-inset-top)`), buton de închidere `×` evidențiat și fixat permanent pe ecran, și derulare lină unificată fără capcane de scroll dublu.
    - **Paginare fără salt de scroll („Încarcă Mai Multe Opere”):** Inserție incrementală a noilor carduri prin `DocumentFragment`, dezactivare focus (`blur()`) și conservare a poziției de scroll (`window.scrollTo({ top: scrollPos, behavior: 'instant' })`) pentru a preveni saltul brusc al browserului la footer la afișarea conținutului nou.
+8. **Plăcuța de Identitate / Hero Showcase Talisman & Trilogia de Favicon-uri (`Favicon Triad`):**
+   - **Talisman de Identitate / Plăcuță Atârnată de Sfoară 3D:**
+     - La piesele reprezentative (portret canonic / piesă centrală), integrează o plăcuță tematică adaptată universului tenantului (de ex. placă de fier forjat în formă de ochi cu ramă SVG, volute laterale, nituri și cameră retiniană optică).
+     - Textul curge **cursiv** (*Cormorant Garamond Italic*) direct pe suprafața retinei, oferind telemetria de identitate esențială (Subiect, Status, Clasificare).
+     - Detaliile descriptive extinse (arhitectură internă / analiză aprofundată) sunt integrate într-o apertură interactivă cu deschidere lină la hover (desktop) sau tap/click (mobil), păstrând plăcuța compactă pe verticală în starea nativă fără a aglomera ecranul.
+     - Evenimentele de click/tap pe plăcuță sau pe apertură sunt izolate strict prin `e.stopPropagation()` și verificări de țintă (`e.target.closest()`) pentru a nu declanșa accidental modalul imaginii de deasupra.
+   - **Trilogia Canonică de Favicon-uri:**
+     - Include întotdeauna cele trei formate esențiale în rădăcină și în `<head>`:
+       ```html
+       <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+       <link rel="alternate icon" href="/favicon.ico">
+       <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+       ```
+     - Elimină definitiv erorile `404 Not Found` din logurile Nginx provocate de motoarele de randare iOS/WebKit, Android și Chrome Desktop.
 
 ---
 
