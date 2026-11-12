@@ -221,139 +221,204 @@ def rebuild_site():
           </div>
         </div>
 
-        <!-- 2. Mecanism de atârnare: Cui bătut în perete + Sfoară 3D -->
-        <div class="hanging-rig" aria-hidden="true">
+        <!-- 2. Mecanism de atârnare: Cui bătut în perete + Sfoară 3D (Conexiune Directă Fără Distanță) -->
+        <div class="hanging-rig hero-ocular-rig" aria-hidden="true">
           <div class="wall-nail">
             <span class="nail-shadow"></span>
             <span class="nail-cap"></span>
           </div>
-          <svg class="hanging-twine" viewBox="0 0 160 48" preserveAspectRatio="none">
-            <line x1="82" y1="10" x2="38" y2="48" class="twine-shadow" />
-            <line x1="82" y1="10" x2="126" y2="48" class="twine-shadow" />
-            <line x1="80" y1="8" x2="36" y2="46" class="twine-cord" />
-            <line x1="80" y1="8" x2="124" y2="46" class="twine-cord" />
+          <svg class="hanging-twine" viewBox="0 0 540 48" preserveAspectRatio="none">
+            <line x1="272" y1="10" x2="162" y2="48" class="twine-shadow" />
+            <line x1="272" y1="10" x2="382" y2="48" class="twine-shadow" />
+            <line x1="270" y1="8" x2="160" y2="48" class="twine-cord" />
+            <line x1="270" y1="8" x2="380" y2="48" class="twine-cord" />
           </svg>
         </div>
 
-        <!-- 3. Placă de Fier Forjat în Formă de Ochi (Eye Plaque cu Text Cursiv pe Retină) -->
-        <div class="forged-eye-card hero-eye-plaque" id="hero-eye-plaque">
+        <!-- 3. Ochi Anatomic Realist (Design Avansat Ocular, Retină & Text Cursiv) -->
+        <div class="realistic-eye-card hero-eye-plaque" id="hero-eye-plaque">
           
-          <!-- Ocheți metalici la marginea superioară pentru ancorare sfoară 3D -->
-          <div class="tag-eyelets">
-            <span class="eyelet left"></span>
-            <span class="eyelet right"></span>
-          </div>
-
-          <!-- Rama Sculptată de Fier Forjat (SVG Structural & Decorativ - Fără Mustăți, Ochi Mare & Elegant) -->
-          <svg class="forged-eye-frame" viewBox="0 0 500 320" preserveAspectRatio="none" aria-hidden="true">
+          <!-- Ochi Realist SVG Multi-Strat (Fără Fier Forjat, Sclera Sferică, Iris Anatomic, Luciu Corneean 3D) -->
+          <svg class="realistic-eye-svg" viewBox="0 0 540 330" preserveAspectRatio="none" aria-hidden="true">
             <defs>
-              <!-- Gradiente Temă Dark (Obsidian) -->
-              <linearGradient id="ironBevelGradDark" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#555869" />
-                <stop offset="20%" stop-color="#282a36" />
-                <stop offset="75%" stop-color="#14151a" />
-                <stop offset="100%" stop-color="#08090c" />
-              </linearGradient>
-              <radialGradient id="retinaGradDark" cx="50%" cy="45%" r="52%">
-                <stop offset="0%" stop-color="#181c28" />
-                <stop offset="60%" stop-color="#0d0e14" />
-                <stop offset="100%" stop-color="#050608" />
+              <!-- Gradiente Dark (Obsidian) -->
+              <radialGradient id="scleraSphereDark" cx="50%" cy="50%" r="52%" fx="50%" fy="45%">
+                <stop offset="0%" stop-color="#181b24" />
+                <stop offset="65%" stop-color="#0e1017" />
+                <stop offset="85%" stop-color="#07080b" />
+                <stop offset="100%" stop-color="#030305" />
+              </radialGradient>
+              <radialGradient id="irisAnatomyDark" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#030406" />
+                <stop offset="30%" stop-color="#1a150e" />
+                <stop offset="60%" stop-color="#3d2c16" />
+                <stop offset="82%" stop-color="#6b4e24" />
+                <stop offset="94%" stop-color="#9c7336" />
+                <stop offset="98%" stop-color="#2e2010" />
+                <stop offset="100%" stop-color="#0a0805" />
+              </radialGradient>
+              <radialGradient id="retinaChamberDark" cx="50%" cy="50%" r="55%">
+                <stop offset="0%" stop-color="#07080c" />
+                <stop offset="70%" stop-color="#0a0b10" />
+                <stop offset="92%" stop-color="#10131a" />
+                <stop offset="100%" stop-color="#181c26" />
               </radialGradient>
 
-              <!-- Gradiente Temă Light (White Cube) -->
-              <linearGradient id="ironBevelGradLight" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#4a4d5c" />
-                <stop offset="25%" stop-color="#242632" />
-                <stop offset="75%" stop-color="#15161e" />
-                <stop offset="100%" stop-color="#0a0b0e" />
-              </linearGradient>
-              <radialGradient id="retinaGradLight" cx="50%" cy="45%" r="52%">
+              <!-- Gradiente Light (White Cube) -->
+              <radialGradient id="scleraSphereLight" cx="50%" cy="50%" r="52%" fx="50%" fy="45%">
                 <stop offset="0%" stop-color="#ffffff" />
-                <stop offset="65%" stop-color="#faf8f5" />
-                <stop offset="100%" stop-color="#f0ece4" />
+                <stop offset="60%" stop-color="#faf8f5" />
+                <stop offset="85%" stop-color="#ebe6dc" />
+                <stop offset="95%" stop-color="#d8cfc4" />
+                <stop offset="100%" stop-color="#b8aba0" />
               </radialGradient>
+              <radialGradient id="irisAnatomyLight" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#0f172a" />
+                <stop offset="30%" stop-color="#2c2014" />
+                <stop offset="65%" stop-color="#5c401e" />
+                <stop offset="85%" stop-color="#946932" />
+                <stop offset="95%" stop-color="#b88846" />
+                <stop offset="98%" stop-color="#3d2710" />
+                <stop offset="100%" stop-color="#1a1006" />
+              </radialGradient>
+              <radialGradient id="retinaChamberLight" cx="50%" cy="50%" r="55%">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="65%" stop-color="#fbf9f6" />
+                <stop offset="90%" stop-color="#f2ede4" />
+                <stop offset="100%" stop-color="#e4dcd0" />
+              </radialGradient>
+
+              <!-- Umbra anatomică a pleoapei superioare pe globul ocular -->
+              <linearGradient id="eyelidCastShadow" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="rgba(0,0,0,0.65)" />
+                <stop offset="55%" stop-color="rgba(0,0,0,0.22)" />
+                <stop offset="100%" stop-color="rgba(0,0,0,0)" />
+              </linearGradient>
+
+              <!-- Luciu Corneean 3D (Strat de Sticlă Umedă pe Iris) -->
+              <linearGradient id="corneaGlassSheen" x1="25%" y1="15%" x2="80%" y2="85%">
+                <stop offset="0%" stop-color="rgba(255,255,255,0.35)" />
+                <stop offset="40%" stop-color="rgba(255,255,255,0.12)" />
+                <stop offset="75%" stop-color="rgba(255,255,255,0.02)" />
+                <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+              </linearGradient>
+
+              <!-- Punct Specular Primar la Ora 10:30 -->
+              <radialGradient id="specularCoreGlint" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.98" />
+                <stop offset="45%" stop-color="#ffffff" stop-opacity="0.75" />
+                <stop offset="80%" stop-color="#ffffff" stop-opacity="0.2" />
+                <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+              </radialGradient>
+
+              <!-- Clip Path Anatomie Palpebrală (Formă de Ochi Migdalat) -->
+              <clipPath id="ocularPalpebralClip">
+                <path d="M 18,165 C 65,38 160,12 270,12 C 380,12 475,38 522,165 C 475,292 380,318 270,318 C 160,318 65,292 18,165 Z" />
+              </clipPath>
+
+              <!-- Fibră Radială Iris -->
+              <g id="irisRadialFibers">
+                <line x1="270" y1="100" x2="270" y2="45" />
+                <line x1="270" y1="230" x2="270" y2="285" />
+                <line x1="205" y1="165" x2="150" y2="165" />
+                <line x1="335" y1="165" x2="390" y2="165" />
+                <line x1="224" y1="119" x2="185" y2="80" />
+                <line x1="316" y1="211" x2="355" y2="250" />
+                <line x1="316" y1="119" x2="355" y2="80" />
+                <line x1="224" y1="211" x2="185" y2="250" />
+                <line x1="245" y1="105" x2="225" y2="55" />
+                <line x1="295" y1="225" x2="315" y2="275" />
+                <line x1="295" y1="105" x2="315" y2="55" />
+                <line x1="245" y1="225" x2="225" y2="275" />
+                <line x1="210" y1="140" x2="160" y2="120" />
+                <line x1="330" y1="190" x2="380" y2="210" />
+                <line x1="330" y1="140" x2="380" y2="120" />
+                <line x1="210" y1="190" x2="160" y2="210" />
+              </g>
             </defs>
 
-            <!-- 1. Corpul Plăcii de Fier Forjat (Formă Oculară Plină, Majestuoasă, Fără Mustăți) -->
-            <path d="M 15,160 C 60,30 150,12 250,12 C 350,12 440,30 485,160 C 440,290 350,308 250,308 C 150,308 60,290 15,160 Z" class="iron-eye-silhouette" />
+            <!-- 1. Structură Oculară în Fanta Palpebrală -->
+            <g clip-path="url(#ocularPalpebralClip)">
+              <!-- Sclera (Volum Sferic Tridimensional) -->
+              <path d="M 18,165 C 65,38 160,12 270,12 C 380,12 475,38 522,165 C 475,292 380,318 270,318 C 160,318 65,292 18,165 Z" class="ocular-sclera" />
+              
+              <!-- Iris (Anatomie Cromatică Bogată) -->
+              <circle cx="270" cy="165" r="135" class="ocular-iris" />
+              <use href="#irisRadialFibers" class="ocular-iris-fibers" />
+              <use href="#irisRadialFibers" class="ocular-iris-fibers" transform="rotate(7.5 270 165)" opacity="0.6" />
+              <circle cx="270" cy="165" r="135" class="ocular-limbal-ring" />
 
-            <!-- 2. Muchia Exterioară a Ramei de Fier Forjat -->
-            <path d="M 15,160 C 60,30 150,12 250,12 C 350,12 440,30 485,160 C 440,290 350,308 250,308 C 150,308 60,290 15,160 Z" class="iron-body-path" />
+              <!-- Retină & Câmp Receptiv Central (Fundal Catifelat pentru Text) -->
+              <ellipse cx="270" cy="165" rx="192" ry="110" class="ocular-retina-receptive-field" />
+              
+              <!-- Inele Biometrice Subtile de Calibrare -->
+              <ellipse cx="270" cy="165" rx="178" ry="98" class="retina-bio-ring outer" />
+              <ellipse cx="270" cy="165" rx="130" ry="72" class="retina-bio-ring mid" />
+              <line x1="270" y1="60" x2="270" y2="270" class="retina-bio-axis" />
+              <line x1="85" y1="165" x2="455" y2="165" class="retina-bio-axis" />
 
-            <!-- 3. Placa Retinei (Almond Retina Surface - Spațiu Generos pentru Text) -->
-            <path d="M 36,160 C 76,46 155,30 250,30 C 345,30 424,46 464,160 C 424,274 345,290 250,290 C 155,290 76,274 36,160 Z" class="iron-retina-plate" />
+              <!-- Umbra Pleoapei Superioare -->
+              <path d="M 18,165 C 65,38 160,12 270,12 C 380,12 475,38 522,165 C 450,75 365,60 270,60 C 175,60 90,75 18,165 Z" fill="url(#eyelidCastShadow)" class="ocular-eyelid-shadow" />
 
-            <!-- 4. Muchia interioară canelată cu cusătură de bronz -->
-            <path d="M 36,160 C 76,46 155,30 250,30 C 345,30 424,46 464,160 C 424,274 345,290 250,290 C 155,290 76,274 36,160 Z" class="iron-inner-rim" />
-
-            <!-- 5. Urechiușe Forjate de Suspendare pe pleoapa superioară (Ancoră Directă Sfoară) -->
-            <g class="iron-suspension-lugs">
-              <circle cx="112.5" cy="37" r="8" class="iron-lug-outer" />
-              <circle cx="112.5" cy="37" r="3.5" class="iron-lug-hole" />
-              <circle cx="387.5" cy="37" r="8" class="iron-lug-outer" />
-              <circle cx="387.5" cy="37" r="3.5" class="iron-lug-hole" />
+              <!-- Reflexii Corneene 3D & Luciu Umed (Best Practices Realism) -->
+              <ellipse cx="270" cy="165" rx="200" ry="115" fill="url(#corneaGlassSheen)" class="ocular-cornea-glass" />
+              <ellipse cx="215" cy="115" rx="34" ry="16" transform="rotate(-26 215 115)" fill="url(#specularCoreGlint)" class="ocular-specular-primary" />
+              <ellipse cx="330" cy="225" rx="16" ry="10" transform="rotate(20 330 225)" class="ocular-specular-secondary" />
+              <path d="M 55,180 C 120,285 200,312 270,312 C 340,312 420,285 485,180" class="ocular-waterline" />
             </g>
 
-            <!-- 6. Nituri structurale din oțel la vârfurile canthi și punctele cardinale -->
-            <circle cx="15" cy="160" r="4.5" class="iron-rivet-head" />
-            <circle cx="485" cy="160" r="4.5" class="iron-rivet-head" />
-            <circle cx="250" cy="12" r="4.5" class="iron-rivet-head" />
-            <circle cx="250" cy="308" r="4.5" class="iron-rivet-head" />
+            <!-- 2. Muchie Palpebrală Fină și Puncte de Ancorare Sfoară (Aliniate 1:1) -->
+            <path d="M 18,165 C 65,38 160,12 270,12 C 380,12 475,38 522,165 C 475,292 380,318 270,318 C 160,318 65,292 18,165 Z" class="ocular-palpebral-contour" />
+            <circle cx="160" cy="36" r="4.5" class="ocular-anchor-point" />
+            <circle cx="380" cy="36" r="4.5" class="ocular-anchor-point" />
           </svg>
 
-          <!-- Camera Retinei (Central Retina Chamber) -->
-          <div class="forged-retina-chamber">
+          <!-- 3. Camera Retinei & Fluxul Textului Cursiv -->
+          <div class="ocular-retina-content">
             
-            <!-- Inele Optice Concentrice de Calibrare pe Retină -->
-            <svg class="retina-optical-rings" viewBox="0 0 400 240" preserveAspectRatio="none" aria-hidden="true">
-              <ellipse cx="200" cy="120" rx="180" ry="105" class="retina-ring ring-outer" />
-              <ellipse cx="200" cy="120" rx="135" ry="80" class="retina-ring ring-mid" />
-              <ellipse cx="200" cy="120" rx="85" ry="50" class="retina-ring ring-inner" />
-              <line x1="200" y1="10" x2="200" y2="230" class="retina-axis-v" />
-              <line x1="10" y1="120" x2="390" y2="120" class="retina-axis-h" />
-            </svg>
-
-            <!-- Fluxul Textului Cursiv pe Retină -->
-            <div class="retina-content-flow">
-              
-              <!-- Badge Scanare Biometrică -->
-              <div class="retina-badge-row">
-                <span class="retina-scanner-badge">SCANNER // DIAGNOSTIC IDENTITATE</span>
-              </div>
-
-              <!-- Diagnostic Telemetry (Cursiv pe Retină) -->
-              <div class="retina-cursive-telemetry">
-                <div class="retina-cursive-item">
-                  <span class="retina-key">Subiect:</span> <span class="retina-val">Ființă umană.</span>
-                </div>
-                <div class="retina-cursive-item">
-                  <span class="retina-key">Status:</span> <span class="retina-val">Activ. Operează în afara algoritmilor standard.</span>
-                </div>
-                <div class="retina-cursive-item">
-                  <span class="retina-key">Clasificare:</span> <span class="retina-val">Unicat (exemplar nereplicabil, fără copie de rezervă).</span>
-                </div>
-              </div>
-
-              <!-- Arhitectură Internă: Apertură Interactivă -->
-              <div class="hero-arch-interactive forged-retina-arch" id="hero-arch-accordion" tabindex="0" role="button" aria-expanded="false" aria-label="Afișează Arhitectură Internă">
-                <div class="hero-arch-trigger retina-arch-trigger" id="hero-arch-trigger">
-                  <span class="hero-arch-heading retina-arch-heading">
-                    <svg class="retina-aperture-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
-                      <circle cx="12" cy="12" r="9" />
-                      <circle cx="12" cy="12" r="3.5" />
-                      <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
-                    </svg>
-                    Arhitectură internă
-                  </span>
-                  <span class="hero-arch-indicator" aria-hidden="true">+</span>
-                </div>
-                <div class="hero-arch-drawer retina-arch-drawer" id="hero-arch-drawer">
-                  <p class="retina-arch-p">Între inginerie de precizie și anatomie emoțională. Nu produce obiecte, ci mecanisme care simt. Lucrează la intersecția unde linia rece a schiței tehnice întâlnește imperfecțiunea caldă a materiei vii. Pentru el, desenul nu este decor, ci o disecție a logicii interne din spatele lucrurilor, o încercare de a cartografia felul în care funcționează o idee înainte de a primi formă fizică.</p>
-                  <p class="retina-prototype-p">Fiecare lucrare din arhivă este un prototip: o urmă de grafit, un fragment de hardware, o tensiune mecanică sau o întrebare lăsată intenționat deschisă. Fără artificii, fără compromisuri estetice, doar structură pură și observație lucidă.</p>
-                </div>
-              </div>
-
+            <!-- Badge Biometric Scanare -->
+            <div class="retina-header-wrap">
+              <span class="retina-scanner-tag">
+                <span class="retina-pulse-dot" aria-hidden="true"></span>
+                SCANNER // DIAGNOSTIC IDENTITATE
+              </span>
             </div>
+
+            <!-- Telemetrie Cursivă pe Retină -->
+            <div class="retina-cursive-telemetry">
+              <p class="retina-telemetry-row">
+                <span class="retina-tag-label">Subiect:</span>
+                <span class="retina-tag-cursive">Ființă umană.</span>
+              </p>
+              <p class="retina-telemetry-row">
+                <span class="retina-tag-label">Status:</span>
+                <span class="retina-tag-cursive">Activ. Operează în afara algoritmilor standard.</span>
+              </p>
+              <p class="retina-telemetry-row">
+                <span class="retina-tag-label">Clasificare:</span>
+                <span class="retina-tag-cursive">Unicat (exemplar nereplicabil, fără copie de rezervă).</span>
+              </p>
+            </div>
+
+            <!-- Arhitectură Internă: Apertură Interactivă (Hover pe Desktop / Click pe Mobil) -->
+            <div class="retina-arch-interactive" id="hero-arch-accordion" tabindex="0" role="button" aria-expanded="false" aria-label="Afișează Arhitectură Internă">
+              <div class="retina-arch-trigger" id="hero-arch-trigger">
+                <span class="retina-arch-label">
+                  <svg class="retina-aperture-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="9" />
+                    <circle cx="12" cy="12" r="3.5" />
+                    <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
+                  </svg>
+                  Arhitectură internă
+                </span>
+                <span class="retina-arch-indicator" aria-hidden="true">+</span>
+              </div>
+              <div class="retina-arch-drawer" id="hero-arch-drawer">
+                <p class="retina-arch-prose">Între inginerie de precizie și anatomie emoțională. Nu produce obiecte, ci mecanisme care simt. Lucrează la intersecția unde linia rece a schiței tehnice întâlnește imperfecțiunea caldă a materiei vii. Pentru el, desenul nu este decor, ci o disecție a logicii interne din spatele lucrurilor, o încercare de a cartografia felul în care funcționează o idee înainte de a primi formă fizică.</p>
+                <p class="retina-arch-prototype">Fiecare lucrare din arhivă este un prototip: o urmă de grafit, un fragment de hardware, o tensiune mecanică sau o întrebare lăsată intenționat deschisă. Fără artificii, fără compromisuri estetice, doar structură pură și observație lucidă.</p>
+              </div>
+            </div>
+
           </div>
         </div>
       </article>
