@@ -426,19 +426,56 @@ a {
   top: 0;
   left: 0;
   width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, transparent 0%, rgba(180, 200, 230, 0.92) 50%, transparent 100%);
-  box-shadow: 0 0 16px rgba(180, 200, 230, 0.95), 0 0 30px rgba(100, 160, 255, 0.6);
-  animation: heroOsteoScanSweep 2.8s ease-in-out infinite alternate;
+  height: 3.5px;
+  animation: heroOsteoScanSweep 2.8s ease-in-out infinite alternate, heroScanRogvaiv 8.4s linear infinite;
   pointer-events: none;
   z-index: 10;
 }
 
 @keyframes heroOsteoScanSweep {
-  0% { top: 2%; opacity: 0.1; }
+  0% { top: 2%; opacity: 0.15; }
   15% { opacity: 0.95; }
   85% { opacity: 0.95; }
-  100% { top: 98%; opacity: 0.1; }
+  100% { top: 98%; opacity: 0.15; }
+}
+
+/* Ciclu Cromatic ROGVAIV: Roșu -> Oronj -> Galben -> Verde -> Albastru -> Indigo -> Violet */
+@keyframes heroScanRogvaiv {
+  0%, 100% {
+    /* R - Roșu */
+    background: linear-gradient(90deg, transparent 0%, #ef4444 50%, transparent 100%);
+    box-shadow: 0 0 16px #ef4444, 0 0 32px rgba(239, 68, 68, 0.75);
+  }
+  14.28% {
+    /* O - Oronj */
+    background: linear-gradient(90deg, transparent 0%, #f97316 50%, transparent 100%);
+    box-shadow: 0 0 16px #f97316, 0 0 32px rgba(249, 115, 22, 0.75);
+  }
+  28.57% {
+    /* G - Galben */
+    background: linear-gradient(90deg, transparent 0%, #eab308 50%, transparent 100%);
+    box-shadow: 0 0 16px #eab308, 0 0 32px rgba(234, 179, 8, 0.75);
+  }
+  42.86% {
+    /* V - Verde */
+    background: linear-gradient(90deg, transparent 0%, #22c55e 50%, transparent 100%);
+    box-shadow: 0 0 16px #22c55e, 0 0 32px rgba(34, 197, 94, 0.75);
+  }
+  57.14% {
+    /* A - Albastru */
+    background: linear-gradient(90deg, transparent 0%, #3b82f6 50%, transparent 100%);
+    box-shadow: 0 0 16px #3b82f6, 0 0 32px rgba(59, 130, 246, 0.75);
+  }
+  71.43% {
+    /* I - Indigo */
+    background: linear-gradient(90deg, transparent 0%, #6366f1 50%, transparent 100%);
+    box-shadow: 0 0 16px #6366f1, 0 0 32px rgba(99, 102, 241, 0.75);
+  }
+  85.71% {
+    /* V - Violet */
+    background: linear-gradient(90deg, transparent 0%, #a855f7 50%, transparent 100%);
+    box-shadow: 0 0 16px #a855f7, 0 0 32px rgba(168, 85, 247, 0.75);
+  }
 }
 
 /* Animație: Șublere la cele 4 colțuri */
@@ -498,27 +535,42 @@ a {
    HERO SHOWCASE: PLACĂ DE FIER FORJAT ÎN FORMĂ DE OCHI (RETINĂ & TEXT CURSIV)
    ========================================================================== */
 
+/* Conexiune Directă Sfoară -> Ochi (Fără Distanță / Gap) */
+.hero-portrait-card .hanging-rig {
+  position: relative;
+  width: 100%;
+  height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 4px 0 0 0;
+  margin-bottom: -18px; /* Coboară sfoara direct peste inelele pleoapei superioare */
+  pointer-events: none;
+  z-index: 5;
+}
+
 .hero-eye-plaque {
   position: relative;
   width: 100%;
-  max-width: 440px;
-  margin: -4px auto 0;
+  max-width: 490px;
+  margin: 0 auto;
   background: transparent;
   border: none;
   box-shadow: none;
-  padding: 1.45rem 2.4rem 1.35rem;
+  padding: 2.2rem 3rem 1.8rem;
   transform-origin: 50% 0%;
   transform-style: preserve-3d;
   transform: perspective(800px) rotateX(2.5deg);
   transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1);
   overflow: visible;
+  z-index: 2;
 }
 
 .hero-portrait-card:hover .hero-eye-plaque {
   transform: perspective(800px) translateY(3px) rotateX(4.5deg);
 }
 
-/* 1. Rama Sculptată de Fier Forjat (SVG decorativ & structural) */
+/* 1. Rama Sculptată de Fier Forjat (SVG decorativ & structural - Fără Mustăți) */
 .forged-eye-frame {
   position: absolute;
   inset: -6px -16px;
@@ -565,19 +617,19 @@ a {
   transition: stroke 0.3s ease;
 }
 
-.iron-scroll-left,
-.iron-scroll-right {
-  fill: none;
-  stroke: #444756;
-  stroke-width: 3.2;
-  stroke-linecap: round;
+/* Urechiușe Forjate de Suspendare pe Pleoapă (Ancoră Directă Sfoară) */
+.iron-lug-outer {
+  fill: #181920;
+  stroke: #d4a359;
+  stroke-width: 1.5;
   vector-effect: non-scaling-stroke;
-  transition: stroke 0.3s ease;
 }
 
-.hero-portrait-card:hover .iron-scroll-left,
-.hero-portrait-card:hover .iron-scroll-right {
-  stroke: #777d94;
+.iron-lug-hole {
+  fill: #08090c;
+  stroke: rgba(212, 163, 89, 0.5);
+  stroke-width: 0.8;
+  vector-effect: non-scaling-stroke;
 }
 
 .iron-rivet-head {
@@ -586,15 +638,15 @@ a {
   stroke-width: 1.5;
 }
 
-/* Ocheți metalici la marginea superioară a plăcuței (legați la sfoara 3D) */
+/* Ocheți metalici la marginea superioară a plăcuței (aliniați la capătul sforilor) */
 .hero-eye-plaque .tag-eyelets {
   position: absolute;
-  top: -6px;
+  top: 10px;
   left: 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 0 calc(22.5% - 4px);
+  padding: 0 calc(22.5% - 6px);
   pointer-events: none;
   z-index: 6;
 }
@@ -606,7 +658,7 @@ a {
   background: transparent;
   border: none;
   box-shadow: none;
-  padding: 0.6rem 0.8rem 0.4rem;
+  padding: 0.8rem 1rem 0.6rem;
   overflow: visible;
   z-index: 3;
 }
@@ -614,9 +666,9 @@ a {
 /* Inele Optice Concentrice de Calibrare pe Retină */
 .retina-optical-rings {
   position: absolute;
-  inset: -15% -8%;
-  width: 116%;
-  height: 130%;
+  inset: -10% -6%;
+  width: 112%;
+  height: 120%;
   pointer-events: none;
   z-index: 0;
   opacity: 0.4;
@@ -660,7 +712,7 @@ a {
 }
 
 .retina-badge-row {
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.75rem;
 }
 
 .retina-scanner-badge {
@@ -673,17 +725,17 @@ a {
   display: inline-block;
   background: rgba(212, 163, 89, 0.1);
   border: 1px solid rgba(212, 163, 89, 0.32);
-  padding: 0.2rem 0.65rem;
+  padding: 0.2rem 0.7rem;
   border-radius: 12px;
 }
 
 .retina-cursive-telemetry {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 1.04rem;
-  line-height: 1.6;
+  font-size: 1.05rem;
+  line-height: 1.62;
   border-bottom: 1px dashed rgba(212, 163, 89, 0.25);
-  padding-bottom: 0.75rem;
+  padding-bottom: 0.8rem;
   margin-bottom: 0.85rem;
   display: flex;
   flex-direction: column;
@@ -711,7 +763,7 @@ a {
 .retina-val {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 1.04rem;
+  font-size: 1.05rem;
   color: #ede6d8;
 }
 
@@ -720,7 +772,7 @@ a {
   position: relative;
   cursor: pointer;
   border-top: 1px solid rgba(212, 163, 89, 0.25);
-  padding-top: 0.55rem;
+  padding-top: 0.6rem;
   outline: none;
   transition: border-color 0.25s ease;
 }
@@ -849,14 +901,14 @@ a {
   stroke: rgba(180, 83, 9, 0.5);
 }
 
-[data-theme="light"] .iron-scroll-left,
-[data-theme="light"] .iron-scroll-right {
-  stroke: #222430;
+[data-theme="light"] .iron-lug-outer {
+  fill: #222430;
+  stroke: #b45309;
 }
 
-[data-theme="light"] .hero-portrait-card:hover .iron-scroll-left,
-[data-theme="light"] .hero-portrait-card:hover .iron-scroll-right {
-  stroke: #3a3d4e;
+[data-theme="light"] .iron-lug-hole {
+  fill: #f0ece4;
+  stroke: #b45309;
 }
 
 [data-theme="light"] .iron-rivet-head {
@@ -953,7 +1005,7 @@ a {
 /* Responsivitate Placă Ochi pe Ecrane Mici */
 @media (max-width: 480px) {
   .hero-eye-plaque {
-    padding: 1.25rem 1.6rem 1.15rem;
+    padding: 1.8rem 1.8rem 1.4rem;
   }
   .forged-retina-chamber {
     padding: 0.5rem 0.4rem 0.35rem;

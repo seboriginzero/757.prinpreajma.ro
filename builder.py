@@ -244,8 +244,8 @@ def rebuild_site():
             <span class="eyelet right"></span>
           </div>
 
-          <!-- Rama Sculptată de Fier Forjat (SVG Structural & Decorativ) -->
-          <svg class="forged-eye-frame" viewBox="0 0 520 260" preserveAspectRatio="none" aria-hidden="true">
+          <!-- Rama Sculptată de Fier Forjat (SVG Structural & Decorativ - Fără Mustăți, Ochi Mare & Elegant) -->
+          <svg class="forged-eye-frame" viewBox="0 0 500 320" preserveAspectRatio="none" aria-hidden="true">
             <defs>
               <!-- Gradiente Temă Dark (Obsidian) -->
               <linearGradient id="ironBevelGradDark" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -254,7 +254,7 @@ def rebuild_site():
                 <stop offset="75%" stop-color="#14151a" />
                 <stop offset="100%" stop-color="#08090c" />
               </linearGradient>
-              <radialGradient id="retinaGradDark" cx="50%" cy="45%" r="50%">
+              <radialGradient id="retinaGradDark" cx="50%" cy="45%" r="52%">
                 <stop offset="0%" stop-color="#181c28" />
                 <stop offset="60%" stop-color="#0d0e14" />
                 <stop offset="100%" stop-color="#050608" />
@@ -267,46 +267,50 @@ def rebuild_site():
                 <stop offset="75%" stop-color="#15161e" />
                 <stop offset="100%" stop-color="#0a0b0e" />
               </linearGradient>
-              <radialGradient id="retinaGradLight" cx="50%" cy="45%" r="50%">
+              <radialGradient id="retinaGradLight" cx="50%" cy="45%" r="52%">
                 <stop offset="0%" stop-color="#ffffff" />
                 <stop offset="65%" stop-color="#faf8f5" />
                 <stop offset="100%" stop-color="#f0ece4" />
               </radialGradient>
             </defs>
 
-            <!-- 1. Corpul Plăcii de Fier Forjat (Formă Oculară Plină) -->
-            <path d="M 28,130 C 120,6 400,6 492,130 C 400,254 120,254 28,130 Z" class="iron-eye-silhouette" />
+            <!-- 1. Corpul Plăcii de Fier Forjat (Formă Oculară Plină, Majestuoasă, Fără Mustăți) -->
+            <path d="M 15,160 C 60,30 150,12 250,12 C 350,12 440,30 485,160 C 440,290 350,308 250,308 C 150,308 60,290 15,160 Z" class="iron-eye-silhouette" />
 
             <!-- 2. Muchia Exterioară a Ramei de Fier Forjat -->
-            <path d="M 28,130 C 120,6 400,6 492,130 C 400,254 120,254 28,130 Z" class="iron-body-path" />
+            <path d="M 15,160 C 60,30 150,12 250,12 C 350,12 440,30 485,160 C 440,290 350,308 250,308 C 150,308 60,290 15,160 Z" class="iron-body-path" />
 
-            <!-- 3. Placa Retinei (Almond Retina Surface) -->
-            <path d="M 50,130 C 130,24 390,24 470,130 C 390,236 130,236 50,130 Z" class="iron-retina-plate" />
+            <!-- 3. Placa Retinei (Almond Retina Surface - Spațiu Generos pentru Text) -->
+            <path d="M 36,160 C 76,46 155,30 250,30 C 345,30 424,46 464,160 C 424,274 345,290 250,290 C 155,290 76,274 36,160 Z" class="iron-retina-plate" />
 
             <!-- 4. Muchia interioară canelată cu cusătură de bronz -->
-            <path d="M 50,130 C 130,24 390,24 470,130 C 390,236 130,236 50,130 Z" class="iron-inner-rim" />
+            <path d="M 36,160 C 76,46 155,30 250,30 C 345,30 424,46 464,160 C 424,274 345,290 250,290 C 155,290 76,274 36,160 Z" class="iron-inner-rim" />
 
-            <!-- 5. Volute laterale din fier forjat la extremitățile ochiului (Canthi) -->
-            <path d="M 28,130 C 14,130 4,120 4,108 C 4,94 20,94 24,106 C 27,115 20,122 14,120" class="iron-scroll-left" />
-            <path d="M 492,130 C 506,130 516,120 516,108 C 516,94 500,94 496,106 C 493,115 500,122 506,120" class="iron-scroll-right" />
+            <!-- 5. Urechiușe Forjate de Suspendare pe pleoapa superioară (Ancoră Directă Sfoară) -->
+            <g class="iron-suspension-lugs">
+              <circle cx="112.5" cy="37" r="8" class="iron-lug-outer" />
+              <circle cx="112.5" cy="37" r="3.5" class="iron-lug-hole" />
+              <circle cx="387.5" cy="37" r="8" class="iron-lug-outer" />
+              <circle cx="387.5" cy="37" r="3.5" class="iron-lug-hole" />
+            </g>
 
-            <!-- 6. Nituri structurale din oțel bătut -->
-            <circle cx="28" cy="130" r="4.5" class="iron-rivet-head" />
-            <circle cx="492" cy="130" r="4.5" class="iron-rivet-head" />
-            <circle cx="260" cy="12" r="4.5" class="iron-rivet-head" />
-            <circle cx="260" cy="248" r="4.5" class="iron-rivet-head" />
+            <!-- 6. Nituri structurale din oțel la vârfurile canthi și punctele cardinale -->
+            <circle cx="15" cy="160" r="4.5" class="iron-rivet-head" />
+            <circle cx="485" cy="160" r="4.5" class="iron-rivet-head" />
+            <circle cx="250" cy="12" r="4.5" class="iron-rivet-head" />
+            <circle cx="250" cy="308" r="4.5" class="iron-rivet-head" />
           </svg>
 
           <!-- Camera Retinei (Central Retina Chamber) -->
           <div class="forged-retina-chamber">
             
             <!-- Inele Optice Concentrice de Calibrare pe Retină -->
-            <svg class="retina-optical-rings" viewBox="0 0 400 200" preserveAspectRatio="none" aria-hidden="true">
-              <ellipse cx="200" cy="100" rx="192" ry="92" class="retina-ring ring-outer" />
-              <ellipse cx="200" cy="100" rx="145" ry="70" class="retina-ring ring-mid" />
-              <ellipse cx="200" cy="100" rx="90" ry="44" class="retina-ring ring-inner" />
-              <line x1="200" y1="8" x2="200" y2="192" class="retina-axis-v" />
-              <line x1="8" y1="100" x2="392" y2="100" class="retina-axis-h" />
+            <svg class="retina-optical-rings" viewBox="0 0 400 240" preserveAspectRatio="none" aria-hidden="true">
+              <ellipse cx="200" cy="120" rx="180" ry="105" class="retina-ring ring-outer" />
+              <ellipse cx="200" cy="120" rx="135" ry="80" class="retina-ring ring-mid" />
+              <ellipse cx="200" cy="120" rx="85" ry="50" class="retina-ring ring-inner" />
+              <line x1="200" y1="10" x2="200" y2="230" class="retina-axis-v" />
+              <line x1="10" y1="120" x2="390" y2="120" class="retina-axis-h" />
             </svg>
 
             <!-- Fluxul Textului Cursiv pe Retină -->
