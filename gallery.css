@@ -542,33 +542,99 @@ a {
   color: var(--text-primary);
 }
 
-.hero-diagnostic-text {
-  font-family: var(--font-serif);
-  font-size: 0.96rem;
-  line-height: 1.65;
-  color: var(--text-secondary);
+.hero-arch-interactive {
+  position: relative;
+  cursor: pointer;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 0.65rem;
+  margin-top: 0.35rem;
+  transition: border-color var(--transition-fast);
+  outline: none;
 }
 
-.hero-arch-p {
-  margin: 0 0 0.85rem 0;
-  font-style: italic;
+.hero-arch-interactive:hover,
+.hero-arch-interactive.is-open {
+  border-color: var(--accent-gold);
+}
+
+.hero-arch-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.3rem 0;
+  user-select: none;
 }
 
 .hero-arch-heading {
   font-family: var(--font-mono);
   font-size: 0.78rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   color: var(--accent-gold);
   font-style: normal;
   text-transform: uppercase;
   font-weight: 600;
-  display: inline;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color var(--transition-fast);
+}
+
+.hero-arch-indicator {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+  line-height: 1;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+  display: inline-block;
+}
+
+.hero-arch-interactive:hover .hero-arch-indicator,
+.hero-arch-interactive.is-open .hero-arch-indicator {
+  transform: rotate(45deg);
+  color: #ffd700;
+}
+
+.hero-arch-drawer {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  margin-top: 0;
+  transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, margin-top 0.3s ease;
+}
+
+/* Afișare text doar la hover pe mouse (Desktop) */
+@media (hover: hover) {
+  .hero-arch-interactive:hover .hero-arch-drawer {
+    max-height: 520px;
+    opacity: 1;
+    margin-top: 0.75rem;
+  }
+}
+
+/* Afișare text la click / tap pe mobil */
+.hero-arch-interactive.is-open .hero-arch-drawer {
+  max-height: 520px;
+  opacity: 1;
+  margin-top: 0.75rem;
+}
+
+.hero-arch-p {
+  font-family: var(--font-serif);
+  font-size: 0.96rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin: 0 0 0.85rem 0;
 }
 
 .hero-prototype-p {
-  margin: 0;
-  font-style: italic;
+  font-family: var(--font-serif);
+  font-size: 0.96rem;
+  line-height: 1.65;
   color: var(--text-secondary);
+  font-style: italic;
+  margin: 0;
   border-top: 1px dashed rgba(255, 255, 255, 0.1);
   padding-top: 0.75rem;
 }
@@ -619,11 +685,25 @@ a {
   color: #0f172a;
 }
 
+[data-theme="light"] .hero-arch-interactive:hover,
+[data-theme="light"] .hero-arch-interactive.is-open {
+  border-color: #b45309;
+}
+
 [data-theme="light"] .hero-arch-heading {
   color: #b45309;
 }
 
-[data-theme="light"] .hero-diagnostic-text {
+[data-theme="light"] .hero-arch-indicator {
+  color: #b45309;
+}
+
+[data-theme="light"] .hero-arch-interactive:hover .hero-arch-indicator,
+[data-theme="light"] .hero-arch-interactive.is-open .hero-arch-indicator {
+  color: #78350f;
+}
+
+[data-theme="light"] .hero-arch-p {
   color: #334155;
 }
 

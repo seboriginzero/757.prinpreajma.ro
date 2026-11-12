@@ -827,6 +827,26 @@
       });
     }
 
+    // Interactivitate Arhitectură Internă (Hover pe Desktop / Click sau Tap pe Mobil)
+    const archAccordion = document.getElementById('hero-arch-accordion');
+    if (archAccordion) {
+      const toggleArch = (e) => {
+        if (e) {
+          e.stopPropagation(); // Oprește deschiderea modalului la click pe arhitectură
+          e.preventDefault();
+        }
+        const isOpen = archAccordion.classList.toggle('is-open');
+        archAccordion.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      };
+
+      archAccordion.addEventListener('click', toggleArch);
+      archAccordion.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          toggleArch(e);
+        }
+      });
+    }
+
     // View modes
     viewBtns.forEach(btn => {
       btn.addEventListener('click', () => {

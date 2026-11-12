@@ -244,9 +244,15 @@ def rebuild_site():
             <div class="hero-diag-line"><span class="hero-diag-k">Status:</span> <span class="hero-diag-v">Activ. Operează în afara algoritmilor standard.</span></div>
             <div class="hero-diag-line"><span class="hero-diag-k">Clasificare:</span> <span class="hero-diag-v">Unicat (exemplar nereplicabil, fără copie de rezervă).</span></div>
           </div>
-          <div class="hero-diagnostic-text">
-            <p class="hero-arch-p"><strong class="hero-arch-heading">Arhitectură internă:</strong> Între inginerie de precizie și anatomie emoțională. Nu produce obiecte, ci mecanisme care simt. Lucrează la intersecția unde linia rece a schiței tehnice întâlnește imperfecțiunea caldă a materiei vii. Pentru el, desenul nu este decor, ci o disecție a logicii interne din spatele lucrurilor, o încercare de a cartografia felul în care funcționează o idee înainte de a primi formă fizică.</p>
-            <p class="hero-prototype-p">Fiecare lucrare din arhivă este un prototip: o urmă de grafit, un fragment de hardware, o tensiune mecanică sau o întrebare lăsată intenționat deschisă. Fără artificii, fără compromisuri estetice, doar structură pură și observație lucidă.</p>
+          <div class="hero-arch-interactive" id="hero-arch-accordion" tabindex="0" role="button" aria-expanded="false" aria-label="Afișează Arhitectură Internă">
+            <div class="hero-arch-trigger" id="hero-arch-trigger">
+              <span class="hero-arch-heading">Arhitectură internă</span>
+              <span class="hero-arch-indicator" aria-hidden="true">+</span>
+            </div>
+            <div class="hero-arch-drawer" id="hero-arch-drawer">
+              <p class="hero-arch-p">Între inginerie de precizie și anatomie emoțională. Nu produce obiecte, ci mecanisme care simt. Lucrează la intersecția unde linia rece a schiței tehnice întâlnește imperfecțiunea caldă a materiei vii. Pentru el, desenul nu este decor, ci o disecție a logicii interne din spatele lucrurilor, o încercare de a cartografia felul în care funcționează o idee înainte de a primi formă fizică.</p>
+              <p class="hero-prototype-p">Fiecare lucrare din arhivă este un prototip: o urmă de grafit, un fragment de hardware, o tensiune mecanică sau o întrebare lăsată intenționat deschisă. Fără artificii, fără compromisuri estetice, doar structură pură și observație lucidă.</p>
+            </div>
           </div>
         </div>
       </article>
