@@ -124,24 +124,50 @@
           <!-- Rama Sculptată de Fier Forjat (SVG Structural & Decorativ) -->
           <svg class="forged-eye-frame" viewBox="0 0 520 260" preserveAspectRatio="none" aria-hidden="true">
             <defs>
-              <linearGradient id="ironBevelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <!-- Gradiente Temă Dark (Obsidian) -->
+              <linearGradient id="ironBevelGradDark" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stop-color="#555869" />
                 <stop offset="20%" stop-color="#282a36" />
                 <stop offset="75%" stop-color="#14151a" />
                 <stop offset="100%" stop-color="#08090c" />
               </linearGradient>
+              <radialGradient id="retinaGradDark" cx="50%" cy="45%" r="50%">
+                <stop offset="0%" stop-color="#181c28" />
+                <stop offset="60%" stop-color="#0d0e14" />
+                <stop offset="100%" stop-color="#050608" />
+              </radialGradient>
+
+              <!-- Gradiente Temă Light (White Cube) -->
+              <linearGradient id="ironBevelGradLight" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#4a4d5c" />
+                <stop offset="25%" stop-color="#242632" />
+                <stop offset="75%" stop-color="#15161e" />
+                <stop offset="100%" stop-color="#0a0b0e" />
+              </linearGradient>
+              <radialGradient id="retinaGradLight" cx="50%" cy="45%" r="50%">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="65%" stop-color="#faf8f5" />
+                <stop offset="100%" stop-color="#f0ece4" />
+              </radialGradient>
             </defs>
 
-            <!-- Volute laterale din fier forjat la extremitățile ochiului (Canthi) -->
+            <!-- 1. Corpul Plăcii de Fier Forjat (Formă Oculară Plină) -->
+            <path d="M 28,130 C 120,6 400,6 492,130 C 400,254 120,254 28,130 Z" class="iron-eye-silhouette" />
+
+            <!-- 2. Muchia Exterioară a Ramei de Fier Forjat -->
+            <path d="M 28,130 C 120,6 400,6 492,130 C 400,254 120,254 28,130 Z" class="iron-body-path" />
+
+            <!-- 3. Placa Retinei (Almond Retina Surface) -->
+            <path d="M 50,130 C 130,24 390,24 470,130 C 390,236 130,236 50,130 Z" class="iron-retina-plate" />
+
+            <!-- 4. Muchia interioară canelată cu cusătură de bronz -->
+            <path d="M 50,130 C 130,24 390,24 470,130 C 390,236 130,236 50,130 Z" class="iron-inner-rim" />
+
+            <!-- 5. Volute laterale din fier forjat la extremitățile ochiului (Canthi) -->
             <path d="M 28,130 C 14,130 4,120 4,108 C 4,94 20,94 24,106 C 27,115 20,122 14,120" class="iron-scroll-left" />
             <path d="M 492,130 C 506,130 516,120 516,108 C 516,94 500,94 496,106 C 493,115 500,122 506,120" class="iron-scroll-right" />
 
-            <!-- Muchia exterioară a ochiului de fier forjat -->
-            <path d="M 28,130 C 120,6 400,6 492,130 C 400,254 120,254 28,130 Z" class="iron-body-path" />
-            <!-- Muchia interioară canelată cu cusătură de bronz -->
-            <path d="M 44,130 C 130,22 390,22 476,130 C 390,238 130,238 44,130 Z" class="iron-inner-rim" />
-
-            <!-- Nituri structurale din oțel bătut -->
+            <!-- 6. Nituri structurale din oțel bătut -->
             <circle cx="28" cy="130" r="4.5" class="iron-rivet-head" />
             <circle cx="492" cy="130" r="4.5" class="iron-rivet-head" />
             <circle cx="260" cy="12" r="4.5" class="iron-rivet-head" />

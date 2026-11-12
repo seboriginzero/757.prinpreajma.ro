@@ -503,56 +503,66 @@ a {
   width: 100%;
   max-width: 440px;
   margin: -4px auto 0;
-  background: radial-gradient(ellipse at 50% 30%, #1c1e27 0%, #121319 60%, #07080b 100%);
-  border-radius: 90px 90px 90px 90px / 32px 32px 32px 32px;
-  border: 2px solid #2e313d;
-  box-shadow:
-    0 22px 50px -10px rgba(0, 0, 0, 0.95),
-    0 0 0 1px rgba(255, 255, 255, 0.08),
-    inset 0 2px 4px rgba(255, 255, 255, 0.14),
-    inset 0 -3px 8px rgba(0, 0, 0, 0.9);
-  padding: 1.35rem 1.65rem 1.25rem;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 1.45rem 2.4rem 1.35rem;
   transform-origin: 50% 0%;
   transform-style: preserve-3d;
   transform: perspective(800px) rotateX(2.5deg);
-  transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 0.45s cubic-bezier(0.2, 0.9, 0.3, 1), border-color 0.3s ease;
+  transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1);
   overflow: visible;
 }
 
 .hero-portrait-card:hover .hero-eye-plaque {
   transform: perspective(800px) translateY(3px) rotateX(4.5deg);
-  border-color: rgba(212, 163, 89, 0.55);
-  box-shadow:
-    0 28px 60px -8px rgba(0, 0, 0, 0.98),
-    0 0 25px rgba(212, 163, 89, 0.22),
-    inset 0 2px 5px rgba(255, 255, 255, 0.22),
-    inset 0 -3px 8px rgba(0, 0, 0, 0.9);
 }
 
 /* 1. Rama Sculptată de Fier Forjat (SVG decorativ & structural) */
 .forged-eye-frame {
   position: absolute;
-  inset: -6px -14px;
-  width: calc(100% + 28px);
+  inset: -6px -16px;
+  width: calc(100% + 32px);
   height: calc(100% + 12px);
   pointer-events: none;
-  z-index: 2;
+  z-index: 1;
+  filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.9));
+  transition: filter 0.35s ease;
+}
+
+.hero-portrait-card:hover .forged-eye-frame {
+  filter: drop-shadow(0 26px 55px rgba(0, 0, 0, 0.98)) drop-shadow(0 0 20px rgba(212, 163, 89, 0.25));
+}
+
+.iron-eye-silhouette {
+  fill: url(#ironBevelGradDark);
+  transition: fill 0.3s ease;
 }
 
 .iron-body-path {
   fill: none;
-  stroke: url(#ironBevelGrad);
-  stroke-width: 3.6;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.85));
+  stroke: #3e4152;
+  stroke-width: 3.5;
   vector-effect: non-scaling-stroke;
+  transition: stroke 0.3s ease;
+}
+
+.hero-portrait-card:hover .iron-body-path {
+  stroke: rgba(212, 163, 89, 0.6);
+}
+
+.iron-retina-plate {
+  fill: url(#retinaGradDark);
+  transition: fill 0.3s ease;
 }
 
 .iron-inner-rim {
   fill: none;
-  stroke: rgba(212, 163, 89, 0.38);
+  stroke: rgba(212, 163, 89, 0.4);
   stroke-width: 1.2;
   stroke-dasharray: 4 2;
   vector-effect: non-scaling-stroke;
+  transition: stroke 0.3s ease;
 }
 
 .iron-scroll-left,
@@ -561,21 +571,19 @@ a {
   stroke: #444756;
   stroke-width: 3.2;
   stroke-linecap: round;
-  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.9));
   vector-effect: non-scaling-stroke;
   transition: stroke 0.3s ease;
 }
 
 .hero-portrait-card:hover .iron-scroll-left,
 .hero-portrait-card:hover .iron-scroll-right {
-  stroke: #666c82;
+  stroke: #777d94;
 }
 
 .iron-rivet-head {
   fill: #14151b;
   stroke: #6b7082;
   stroke-width: 1.5;
-  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.95));
 }
 
 /* Ocheți metalici la marginea superioară a plăcuței (legați la sfoara 3D) */
@@ -595,24 +603,23 @@ a {
 .forged-retina-chamber {
   position: relative;
   width: 100%;
-  background: radial-gradient(ellipse at 50% 45%, rgba(22, 26, 38, 0.95) 0%, rgba(11, 13, 18, 0.97) 65%, rgba(5, 6, 8, 1) 100%);
-  border-radius: 54px / 22px;
-  border: 1px solid rgba(212, 163, 89, 0.3);
-  box-shadow: inset 0 0 28px rgba(0, 0, 0, 0.95), 0 0 18px rgba(212, 163, 89, 0.1);
-  padding: 1.15rem 1.45rem 1rem;
-  overflow: hidden;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0.6rem 0.8rem 0.4rem;
+  overflow: visible;
   z-index: 3;
 }
 
 /* Inele Optice Concentrice de Calibrare pe Retină */
 .retina-optical-rings {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  inset: -15% -8%;
+  width: 116%;
+  height: 130%;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.38;
+  opacity: 0.4;
 }
 
 .retina-ring {
@@ -660,7 +667,7 @@ a {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.16em;
-  color: var(--accent-gold);
+  color: #d4a359;
   text-transform: uppercase;
   font-weight: 600;
   display: inline-block;
@@ -696,7 +703,7 @@ a {
   font-size: 0.75rem;
   font-style: normal;
   font-weight: 600;
-  color: var(--accent-gold);
+  color: #d4a359;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -720,7 +727,7 @@ a {
 
 .forged-retina-arch:hover,
 .forged-retina-arch.is-open {
-  border-color: var(--accent-gold);
+  border-color: #d4a359;
 }
 
 .retina-arch-trigger {
@@ -735,7 +742,7 @@ a {
   font-family: var(--font-mono);
   font-size: 0.76rem;
   letter-spacing: 0.1em;
-  color: var(--accent-gold);
+  color: #d4a359;
   text-transform: uppercase;
   font-weight: 600;
   display: flex;
@@ -745,7 +752,7 @@ a {
 }
 
 .retina-aperture-icon {
-  color: var(--accent-gold);
+  color: #d4a359;
   transition: transform 0.4s ease, color 0.2s ease;
 }
 
@@ -759,7 +766,7 @@ a {
   font-family: var(--font-mono);
   font-size: 1.15rem;
   font-weight: 600;
-  color: var(--accent-gold);
+  color: #d4a359;
   line-height: 1;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
   display: inline-block;
@@ -814,49 +821,142 @@ a {
   padding-top: 0.75rem;
 }
 
-/* Adaptări White Cube (Light Theme) pentru Placa Ochi */
-[data-theme="light"] .hero-eye-plaque {
-  background: radial-gradient(ellipse at 50% 30%, #292b36 0%, #1c1d25 60%, #111218 100%);
-  border: 2px solid #3d4050;
-  box-shadow:
-    0 18px 42px -8px rgba(0, 0, 0, 0.35),
-    0 4px 12px rgba(0, 0, 0, 0.15),
-    inset 0 2px 4px rgba(255, 255, 255, 0.22),
-    inset 0 -3px 8px rgba(0, 0, 0, 0.9);
+/* ==========================================================================
+   ADAPTĂRI WHITE CUBE (LIGHT THEME) PENTRU PLACA OCHI DE FIER FORJAT
+   ========================================================================== */
+
+[data-theme="light"] .forged-eye-frame {
+  filter: drop-shadow(0 16px 36px rgba(0, 0, 0, 0.16)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.08));
 }
 
-[data-theme="light"] .hero-portrait-card:hover .hero-eye-plaque {
-  border-color: #d4a359;
-  box-shadow:
-    0 24px 50px -8px rgba(0, 0, 0, 0.45),
-    0 0 25px rgba(212, 163, 89, 0.25),
-    inset 0 2px 5px rgba(255, 255, 255, 0.25);
+[data-theme="light"] .hero-portrait-card:hover .forged-eye-frame {
+  filter: drop-shadow(0 22px 46px rgba(0, 0, 0, 0.22)) drop-shadow(0 0 15px rgba(180, 83, 9, 0.2));
 }
 
-[data-theme="light"] .forged-retina-chamber {
-  background: radial-gradient(ellipse at 50% 45%, #181a24 0%, #101218 65%, #08090d 100%);
-  border: 1px solid rgba(212, 163, 89, 0.4);
-  box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.95), 0 0 16px rgba(212, 163, 89, 0.15);
+[data-theme="light"] .iron-eye-silhouette {
+  fill: #1b1c24;
+}
+
+[data-theme="light"] .iron-body-path {
+  stroke: #0f1015;
+}
+
+[data-theme="light"] .iron-retina-plate {
+  fill: url(#retinaGradLight);
+}
+
+[data-theme="light"] .iron-inner-rim {
+  stroke: rgba(180, 83, 9, 0.5);
+}
+
+[data-theme="light"] .iron-scroll-left,
+[data-theme="light"] .iron-scroll-right {
+  stroke: #222430;
+}
+
+[data-theme="light"] .hero-portrait-card:hover .iron-scroll-left,
+[data-theme="light"] .hero-portrait-card:hover .iron-scroll-right {
+  stroke: #3a3d4e;
+}
+
+[data-theme="light"] .iron-rivet-head {
+  fill: #101117;
+  stroke: #404456;
+}
+
+/* Inele Optice în Modul White Cube */
+[data-theme="light"] .retina-optical-rings {
+  opacity: 0.5;
+}
+
+[data-theme="light"] .ring-outer {
+  stroke: rgba(180, 83, 9, 0.35);
+}
+
+[data-theme="light"] .ring-mid {
+  stroke: rgba(15, 23, 42, 0.16);
+}
+
+[data-theme="light"] .ring-inner {
+  stroke: rgba(180, 83, 9, 0.25);
+}
+
+[data-theme="light"] .retina-axis-v,
+[data-theme="light"] .retina-axis-h {
+  stroke: rgba(180, 83, 9, 0.18);
+}
+
+/* Tipografie Cursivă pe Retină în Modul White Cube (Contrast Muzeal Absolut) */
+[data-theme="light"] .retina-scanner-badge {
+  color: #92400e;
+  background: rgba(180, 83, 9, 0.09);
+  border: 1px solid rgba(180, 83, 9, 0.32);
+}
+
+[data-theme="light"] .retina-key {
+  color: #92400e;
 }
 
 [data-theme="light"] .retina-val {
-  color: #f3efe8;
+  color: #0f172a;
+}
+
+[data-theme="light"] .retina-cursive-telemetry {
+  border-bottom: 1px dashed rgba(180, 83, 9, 0.25);
+}
+
+[data-theme="light"] .forged-retina-arch {
+  border-top: 1px solid rgba(180, 83, 9, 0.25);
+}
+
+[data-theme="light"] .forged-retina-arch:hover,
+[data-theme="light"] .forged-retina-arch.is-open {
+  border-color: #b45309;
+}
+
+[data-theme="light"] .retina-arch-heading {
+  color: #92400e;
+}
+
+[data-theme="light"] .retina-aperture-icon {
+  color: #92400e;
+}
+
+[data-theme="light"] .forged-retina-arch .hero-arch-indicator {
+  color: #92400e;
+}
+
+[data-theme="light"] .forged-retina-arch:hover .retina-arch-heading,
+[data-theme="light"] .forged-retina-arch.is-open .retina-arch-heading {
+  color: #b45309;
+}
+
+[data-theme="light"] .forged-retina-arch:hover .retina-aperture-icon,
+[data-theme="light"] .forged-retina-arch.is-open .retina-aperture-icon {
+  color: #b45309;
+}
+
+[data-theme="light"] .forged-retina-arch:hover .hero-arch-indicator,
+[data-theme="light"] .forged-retina-arch.is-open .hero-arch-indicator {
+  color: #b45309;
 }
 
 [data-theme="light"] .retina-arch-p,
 [data-theme="light"] .retina-prototype-p {
-  color: rgba(243, 239, 232, 0.92);
+  color: #1e293b;
+}
+
+[data-theme="light"] .retina-prototype-p {
+  border-top: 1px dashed rgba(180, 83, 9, 0.2);
 }
 
 /* Responsivitate Placă Ochi pe Ecrane Mici */
 @media (max-width: 480px) {
   .hero-eye-plaque {
-    padding: 1.15rem 1.25rem 1rem;
-    border-radius: 70px 70px 70px 70px / 26px 26px 26px 26px;
+    padding: 1.25rem 1.6rem 1.15rem;
   }
   .forged-retina-chamber {
-    padding: 1rem 1.15rem 0.85rem;
-    border-radius: 44px / 18px;
+    padding: 0.5rem 0.4rem 0.35rem;
   }
   .retina-cursive-telemetry {
     font-size: 0.98rem;
