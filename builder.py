@@ -90,33 +90,71 @@ def rebuild_site():
           </div>
 
           <!-- 2. Mecanism de atârnare: Cui bătut în perete + Sfoară 3D -->
-          <div class="hanging-rig" aria-hidden="true">
-            <div class="wall-nail">
-              <span class="nail-shadow"></span>
-              <span class="nail-cap"></span>
-            </div>
-            <svg class="hanging-twine" viewBox="0 0 160 48" preserveAspectRatio="none">
-              <!-- Sfoară în V cu umbră 3D proiectată pe perete -->
-              <line x1="82" y1="10" x2="38" y2="48" class="twine-shadow" />
-              <line x1="82" y1="10" x2="126" y2="48" class="twine-shadow" />
-              <line x1="80" y1="8" x2="36" y2="46" class="twine-cord" />
-              <line x1="80" y1="8" x2="124" y2="46" class="twine-cord" />
-            </svg>
+        <div class="hanging-rig hero-hanging-rig" aria-hidden="true">
+          <div class="wall-nail">
+            <span class="nail-shadow"></span>
+            <span class="nail-cap"></span>
+          </div>
+          <svg class="hanging-twine" viewBox="0 0 200 44" preserveAspectRatio="none">
+            <line x1="102" y1="10" x2="42" y2="44" class="twine-shadow" />
+            <line x1="102" y1="10" x2="162" y2="44" class="twine-shadow" />
+            <line x1="100" y1="8" x2="40" y2="44" class="twine-cord" />
+            <line x1="100" y1="8" x2="160" y2="44" class="twine-cord" />
+          </svg>
+        </div>
+
+        <!-- 3. Placă Curatorială Simplă (Albă / Neagră — Pur Monocrom Fără Alte Culori) -->
+        <div class="hero-curatorial-plaque hero-eye-plaque" id="hero-eye-plaque">
+          
+          <!-- Ocheți de suspendare sfoară -->
+          <div class="plaque-eyelets" aria-hidden="true">
+            <span class="plaque-eyelet left"></span>
+            <span class="plaque-eyelet right"></span>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
-          <div class="art-hanging-tag">
-            <div class="tag-eyelets">
-              <span class="eyelet left"></span>
-              <span class="eyelet right"></span>
+          <div class="plaque-inner-content">
+            <!-- Header Diagnostic -->
+            <div class="plaque-header-row">
+              <span class="plaque-scanner-badge">SCANNER // DIAGNOSTIC IDENTITATE</span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">{html.escape(cat_name)}</span>
+
+            <!-- Telemetrie Diagnostic -->
+            <div class="plaque-telemetry-body">
+              <p class="plaque-telemetry-item">
+                <span class="plaque-key">Subiect:</span>
+                <span class="plaque-val">Ființă umană.</span>
+              </p>
+              <p class="plaque-telemetry-item">
+                <span class="plaque-key">Status:</span>
+                <span class="plaque-val">Activ. Operează în afara algoritmilor standard.</span>
+              </p>
+              <p class="plaque-telemetry-item">
+                <span class="plaque-key">Clasificare:</span>
+                <span class="plaque-val">Unicat (exemplar nereplicabil, fără copie de rezervă).</span>
+              </p>
             </div>
-            <h3 class="art-card-title">{html.escape(item_id)}</h3>
-            <p class="art-critic-snippet">{html.escape(critic_note)}</p>
+
+            <!-- Arhitectură Internă: Expandabil la Hover / Click -->
+            <div class="hero-arch-interactive plaque-arch-interactive" id="hero-arch-accordion" tabindex="0" role="button" aria-expanded="false" aria-label="Afișează Arhitectură Internă">
+              <div class="hero-arch-trigger plaque-arch-trigger" id="hero-arch-trigger">
+                <span class="plaque-arch-heading">
+                  <svg class="plaque-arch-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="9" />
+                    <circle cx="12" cy="12" r="3.5" />
+                    <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
+                  </svg>
+                  Arhitectură internă
+                </span>
+                <span class="hero-arch-indicator" aria-hidden="true">+</span>
+              </div>
+              <div class="hero-arch-drawer plaque-arch-drawer" id="hero-arch-drawer">
+                <p class="plaque-prose">Între inginerie de precizie și anatomie emoțională. Nu produce obiecte, ci mecanisme care simt. Lucrează la intersecția unde linia rece a schiței tehnice întâlnește imperfecțiunea caldă a materiei vii. Pentru el, desenul nu este decor, ci o disecție a logicii interne din spatele lucrurilor, o încercare de a cartografia felul în care funcționează o idee înainte de a primi formă fizică.</p>
+                <p class="plaque-prose plaque-prototype">Fiecare lucrare din arhivă este un prototip: o urmă de grafit, un fragment de hardware, o tensiune mecanică sau o întrebare lăsată intenționat deschisă. Fără artificii, fără compromisuri estetice, doar structură pură și observație lucidă.</p>
+              </div>
+            </div>
           </div>
-        </article>''')
+        </div>
+      </article>''')
     initial_cards_rendered = '\n'.join(initial_cards)
 
     json_dataset = json.dumps(items, ensure_ascii=False)
