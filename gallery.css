@@ -450,43 +450,44 @@ a {
   100% { top: 2%; opacity: 0.2; }
 }
 
-/* Ciclu Cromatic ROGVAIV: Culoare identică pe toată durata unei curse complete du-te-vino sus/jos (4s),
+/* Ciclu Cromatic ROGVAIV: Albastru -> Indigo -> Violet primele, urmate de Roșu -> Oronj -> Galben -> Verde
+   Culoare identică pe toată durata unei curse complete du-te-vino sus/jos (4s),
    schimbare strict la revenirea sus înainte de următoarea cursă */
 @keyframes heroScanRogvaivCycle {
-  /* 1. R - Roșu (Cursa completă 1: 0s - 4s) */
+  /* 1. A - Albastru (Cursa completă 1: 0s - 4s) */
   0%, 14.285% {
-    background: linear-gradient(90deg, transparent 0%, #ef4444 50%, transparent 100%);
-    box-shadow: 0 0 6px rgba(239, 68, 68, 0.75);
-  }
-  /* 2. O - Oronj (Cursa completă 2: 4s - 8s) */
-  14.286%, 28.571% {
-    background: linear-gradient(90deg, transparent 0%, #f97316 50%, transparent 100%);
-    box-shadow: 0 0 6px rgba(249, 115, 22, 0.75);
-  }
-  /* 3. G - Galben (Cursa completă 3: 8s - 12s) */
-  28.572%, 42.857% {
-    background: linear-gradient(90deg, transparent 0%, #eab308 50%, transparent 100%);
-    box-shadow: 0 0 6px rgba(234, 179, 8, 0.75);
-  }
-  /* 4. V - Verde (Cursa completă 4: 12s - 16s) */
-  42.858%, 57.142% {
-    background: linear-gradient(90deg, transparent 0%, #22c55e 50%, transparent 100%);
-    box-shadow: 0 0 6px rgba(34, 197, 94, 0.75);
-  }
-  /* 5. A - Albastru (Cursa completă 5: 16s - 20s) */
-  57.143%, 71.428% {
     background: linear-gradient(90deg, transparent 0%, #06b6d4 50%, transparent 100%);
     box-shadow: 0 0 6px rgba(6, 182, 212, 0.75);
   }
-  /* 6. I - Indigo (Cursa completă 6: 20s - 24s) */
-  71.429%, 85.714% {
+  /* 2. I - Indigo (Cursa completă 2: 4s - 8s) */
+  14.286%, 28.571% {
     background: linear-gradient(90deg, transparent 0%, #6366f1 50%, transparent 100%);
     box-shadow: 0 0 6px rgba(99, 102, 241, 0.75);
   }
-  /* 7. V - Violet (Cursa completă 7: 24s - 28s) */
-  85.715%, 100% {
+  /* 3. V - Violet (Cursa completă 3: 8s - 12s) */
+  28.572%, 42.857% {
     background: linear-gradient(90deg, transparent 0%, #a855f7 50%, transparent 100%);
     box-shadow: 0 0 6px rgba(168, 85, 247, 0.75);
+  }
+  /* 4. R - Roșu (Cursa completă 4: 12s - 16s) */
+  42.858%, 57.142% {
+    background: linear-gradient(90deg, transparent 0%, #ef4444 50%, transparent 100%);
+    box-shadow: 0 0 6px rgba(239, 68, 68, 0.75);
+  }
+  /* 5. O - Oronj (Cursa completă 5: 16s - 20s) */
+  57.143%, 71.428% {
+    background: linear-gradient(90deg, transparent 0%, #f97316 50%, transparent 100%);
+    box-shadow: 0 0 6px rgba(249, 115, 22, 0.75);
+  }
+  /* 6. G - Galben (Cursa completă 6: 20s - 24s) */
+  71.429%, 85.714% {
+    background: linear-gradient(90deg, transparent 0%, #eab308 50%, transparent 100%);
+    box-shadow: 0 0 6px rgba(234, 179, 8, 0.75);
+  }
+  /* 7. V - Verde (Cursa completă 7: 24s - 28s) */
+  85.715%, 100% {
+    background: linear-gradient(90deg, transparent 0%, #22c55e 50%, transparent 100%);
+    box-shadow: 0 0 6px rgba(34, 197, 94, 0.75);
   }
 }
 
