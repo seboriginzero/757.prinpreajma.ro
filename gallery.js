@@ -743,16 +743,40 @@
       });
     });
 
-    // Quick filter buttons in the directions section
-    document.querySelectorAll('.btn-quick-filter').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const cat = btn.getAttribute('data-category');
-        const targetPill = document.querySelector(`.cat-pill[data-filter="${cat}"]`);
-        if (targetPill) targetPill.click();
-        const galleryElem = document.getElementById('galerie');
-        galleryElem.scrollIntoView({ behavior: 'smooth' });
+    // Hero Portrait Card (ART-0103) Click and Tilt Interaction
+    const heroPortraitCard = document.getElementById('hero-portrait-card');
+    if (heroPortraitCard) {
+      heroPortraitCard.addEventListener('click', () => {
+        const targetIdx = state.filteredItems.findIndex(it => it.id === 'ART-0103');
+        if (targetIdx !== -1) {
+          openModal(targetIdx);
+        } else {
+          const globalIdx = state.items.findIndex(it => it.id === 'ART-0103');
+          if (globalIdx !== -1) openModal(globalIdx);
+        }
       });
-    });
+      heroPortraitCard.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          heroPortraitCard.click();
+        }
+      });
+
+      // 3D Perspective Tilt on Mouse Movement
+      heroPortraitCard.addEventListener('mousemove', (e) => {
+        const rect = heroPortraitCard.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -5.5;
+        const rotateY = ((x - centerX) / centerX) * 5.5;
+        heroPortraitCard.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
+      });
+      heroPortraitCard.addEventListener('mouseleave', () => {
+        heroPortraitCard.style.transform = '';
+      });
+    }
 
     // View modes
     viewBtns.forEach(btn => {

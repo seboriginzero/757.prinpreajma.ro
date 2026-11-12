@@ -69,26 +69,6 @@ def rebuild_site():
         pill_html.append(f'<button class="cat-pill" data-filter="{cid}" role="tab" aria-selected="false">{html.escape(short_name)}</button>')
     pills_rendered = '\n        '.join(pill_html)
 
-    # Render directions section cards (clean, zero artwork counts)
-    roman_map = {0: 'I', 1: 'II', 2: 'III', 3: 'IV', 4: 'V'}
-    directii_cards = []
-    for idx, cat in enumerate(categories):
-        cid = cat['id']
-        cname = cat.get('name_ro', cid)
-        cdesc = cat.get('description', '')
-        roman = roman_map.get(idx, str(idx+1))
-        directii_cards.append(f'''        <article class="directie-card">
-          <div class="directie-index">{roman}</div>
-          <h3 class="directie-title">{html.escape(cname)}</h3>
-          <p class="directie-desc">
-            {html.escape(cdesc)}
-          </p>
-          <div class="directie-meta">
-            <button class="btn-quick-filter" data-category="{cid}">Explorează Axa &rarr;</button>
-          </div>
-        </article>''')
-    directii_rendered = '\n\n'.join(directii_cards)
-
     # Pre-render initial 24 artwork cards with 3D hanging rig for instant paint
     initial_cards = []
     for idx, item in enumerate(items[:24]):
@@ -180,7 +160,6 @@ def rebuild_site():
 
       <nav class="main-nav" aria-label="Navigare principală">
         <a href="#galerie" class="nav-item active">Colecție</a>
-        <a href="#directii" class="nav-item">Direcții Estetice</a>
         <a href="#artist" class="nav-item">Despre Artist</a>
         <a href="#raport" class="nav-item">Notă Curatorială</a>
       </nav>
@@ -210,20 +189,50 @@ def rebuild_site():
     </div>
   </header>
 
-  <!-- Hero Section: Curatorial Overture -->
-  <section class="hero-section" id="hero">
-    <div class="hero-backdrop"></div>
-    <div class="hero-content">
-      <div class="hero-badge">{html.escape(hero_badge)}</div>
-      <h1 class="hero-title">{hero_title}</h1>
-      <p class="hero-lead">
-        {html.escape(hero_lead)}
-      </p>
+  <!-- Hero Showcase: Portretul Canonic 757 cu Animație Pulsul Osteo-Mecanic și Șublere -->
+  <section class="hero-showcase-section" id="hero">
+    <div class="hero-showcase-container">
+      <article class="art-card hero-portrait-card" id="hero-portrait-card" role="button" tabindex="0" aria-label="Deschide Portretul 757 (ART-0103)">
+        <!-- 1. Pictura înrămată cu Șublere și Scanare Osteo-Mecanică -->
+        <div class="art-frame hero-art-frame">
+          <div class="hero-caliper top-left" aria-hidden="true"></div>
+          <div class="hero-caliper top-right" aria-hidden="true"></div>
+          <div class="hero-caliper bottom-left" aria-hidden="true"></div>
+          <div class="hero-caliper bottom-right" aria-hidden="true"></div>
+          <div class="hero-osteo-scan" aria-hidden="true"></div>
+          <div class="card-specular-glare"></div>
+          <div class="art-media hero-art-media">
+            <img src="data/web-images/ART-0103.webp" alt="Portretul Canonic 757 — ART-0103" loading="eager" decoding="async">
+          </div>
+        </div>
 
-      <div class="hero-actions">
-        <a href="#galerie" class="btn-luxury primary">Explorează Galeria</a>
-        <a href="#directii" class="btn-luxury secondary">Vezi Analiza Critică</a>
-      </div>
+        <!-- 2. Mecanism de atârnare: Cui bătut în perete + Sfoară 3D -->
+        <div class="hanging-rig" aria-hidden="true">
+          <div class="wall-nail">
+            <span class="nail-shadow"></span>
+            <span class="nail-cap"></span>
+          </div>
+          <svg class="hanging-twine" viewBox="0 0 160 48" preserveAspectRatio="none">
+            <line x1="82" y1="10" x2="38" y2="48" class="twine-shadow" />
+            <line x1="82" y1="10" x2="126" y2="48" class="twine-shadow" />
+            <line x1="80" y1="8" x2="36" y2="46" class="twine-cord" />
+            <line x1="80" y1="8" x2="124" y2="46" class="twine-cord" />
+          </svg>
+        </div>
+
+        <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+        <div class="art-hanging-tag hero-hanging-tag">
+          <div class="tag-eyelets">
+            <span class="eyelet left"></span>
+            <span class="eyelet right"></span>
+          </div>
+          <div class="art-meta-row">
+            <span class="art-cat-name">Anatomie Biomecanică și Osteologie Tehnologică</span>
+          </div>
+          <h2 class="art-card-title hero-card-title">ART-0103</h2>
+          <p class="art-critic-snippet hero-critic-snippet">Forța acestei foi rezidă în coerența absolută a logicii interne a formei: mecanismul imaginat pare deplin funcțional, animat de o respirație interioară ce sfidează inerția metalului.</p>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -299,21 +308,6 @@ def rebuild_site():
       <button id="btn-load-more" class="btn-luxury secondary">Încarcă Mai Multe Opere</button>
     </div>
   </main>
-
-  <!-- Thematic Sections: Cele 5 Direcții Estetice Detaliate -->
-  <section class="section-directii" id="directii">
-    <div class="section-container">
-      <div class="section-header">
-        <span class="section-subtitle">TAXONOMIE ȘI DIRECȚIE CURATORIALĂ</span>
-        <h2 class="section-title">Cele Cinci Axe ale Universului 757</h2>
-        <p class="section-lead">Analiză curatorială privind morfologia, tensiunea formei și materialitatea lucrărilor.</p>
-      </div>
-
-      <div class="directii-grid">
-{directii_rendered}
-      </div>
-    </div>
-  </section>
 
   <!-- Artist Identity Section -->
   <section class="section-artist" id="artist">
