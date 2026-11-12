@@ -380,12 +380,17 @@ Construiește din start aceste 6 elemente în aplicație pentru a obține **`100
    - **Descriere Share (`og:description`):** Text concis, structurat cu date de identitate cheie, curat de tag-uri HTML sau caractere corupte.
    - **Mobile Modal Inspector / Sheets:** Pe ecrane mobile (`<= 768px`), ferestrele modale de vizualizare trebuie să se comporte ca un **Fullscreen Sheet** nativ (`100vw × 100dvh`), fără margini laterale gri (`padding: 0; margin: 0; border: none;`), cu suport pentru iOS Notch / Dynamic Island (`env(safe-area-inset-top)`), buton de închidere `×` evidențiat și fixat permanent pe ecran, și derulare lină unificată fără capcane de scroll dublu.
    - **Paginare fără salt de scroll („Încarcă Mai Multe Opere”):** Inserție incrementală a noilor carduri prin `DocumentFragment`, dezactivare focus (`blur()`) și conservare a poziției de scroll (`window.scrollTo({ top: scrollPos, behavior: 'instant' })`) pentru a preveni saltul brusc al browserului la footer la afișarea conținutului nou.
-8. **Plăcuța de Identitate / Hero Showcase Talisman & Trilogia de Favicon-uri (`Favicon Triad`):**
-   - **Talisman de Identitate / Plăcuță Atârnată de Sfoară 3D:**
-     - La piesele reprezentative (portret canonic / piesă centrală), integrează o plăcuță tematică adaptată universului tenantului (de ex. placă de fier forjat în formă de ochi cu ramă SVG, volute laterale, nituri și cameră retiniană optică).
-     - Textul curge **cursiv** (*Cormorant Garamond Italic*) direct pe suprafața retinei, oferind telemetria de identitate esențială (Subiect, Status, Clasificare).
-     - Detaliile descriptive extinse (arhitectură internă / analiză aprofundată) sunt integrate într-o apertură interactivă cu deschidere lină la hover (desktop) sau tap/click (mobil), păstrând plăcuța compactă pe verticală în starea nativă fără a aglomera ecranul.
-     - Evenimentele de click/tap pe plăcuță sau pe apertură sunt izolate strict prin `e.stopPropagation()` și verificări de țintă (`e.target.closest()`) pentru a nu declanșa accidental modalul imaginii de deasupra.
+8. **Plăcuța Curatorială Monocromă de Identitate & Trilogia de Favicon-uri (`Favicon Triad`):**
+   - **Plăcuță Curatorială Simplă Atârnată de Sfoară 3D (Minimalism Muzeal):**
+     - La piesele reprezentative (portret canonic / piesă centrală), integrează o plăcuță curatorială simplă, geometrică, **ușor mai lată decât imaginea** (ex: $456\text{px}$ plăcuță vs $420\text{px}$ rama portretului), creând un echilibru vizual arhitectural.
+     - **Monocrom Pur (Zero alte culori):**
+       - *Tema Dark:* Placă neagră (`#000000`) cu text alb (`#ffffff`), contur fin alb discret.
+       - *Tema Light:* Placă albă (`#ffffff`) cu text negru (`#000000`), contur fin negru discret.
+     - **Telemetrie & Arhitectură Internă Expandabilă:** Textul de diagnostic esențial (Subiect, Status, Clasificare) este vizibil nativ, iar detaliile descriptive extinse sunt integrate într-o apertură interactivă cu deschidere lină la hover (desktop) sau tap/click (mobil), păstrând plăcuța compactă.
+     - **Izolare Evenimente:** Click/tap pe plăcuță sau pe apertură este izolat strict prin `e.stopPropagation()` și `e.target.closest('#hero-eye-plaque')` pentru a nu declanșa deschiderea modalului imaginii asociate.
+   - **Scaner Laser ROGVAIV Sincronizat:**
+     - Linie ultra-fină ($1.5\text{px}$, fără îngroșare sau aureole încețoșate).
+     - Rulare sincronizată: o cursă completă du-te-vino sus/jos ($4.0\text{s}$) rulează strict pe o singură culoare, schimbarea în următoarea culoare din spectrul ROGVAIV având loc exclusiv la returul în poziția superioară (ciclu complet $7 \times 4\text{s} = 28\text{s}$).
    - **Trilogia Canonică de Favicon-uri:**
      - Include întotdeauna cele trei formate esențiale în rădăcină și în `<head>`:
        ```html
