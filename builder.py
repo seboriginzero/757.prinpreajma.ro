@@ -133,8 +133,18 @@ def rebuild_site():
   <meta property="og:description" content="{html.escape(site_desc)}">
   <meta property="og:url" content="{prim_dom if prim_dom.endswith('/') else prim_dom + '/'}">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="{prim_dom}/data/web-images/ART-0001.webp">
+  <meta property="og:image" content="{prim_dom}/data/web-images/ART-0103.jpg">
+  <meta property="og:image:secure_url" content="{prim_dom}/data/web-images/ART-0103.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1080">
+  <meta property="og:image:height" content="1352">
+  <meta property="og:image:alt" content="SCANNER // DIAGNOSTIC IDENTITATE — 757">
+  <meta property="og:image" content="{prim_dom}/data/web-images/ART-0103.webp">
+  <meta property="og:image:type" content="image/webp">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{html.escape(site_title)}">
+  <meta name="twitter:description" content="{html.escape(site_desc)}">
+  <meta name="twitter:image" content="{prim_dom}/data/web-images/ART-0103.jpg">
   <meta name="theme-color" content="#07080b">
 
   <!-- Google Fonts: Cinzel, Cormorant Garamond, JetBrains Mono -->
@@ -227,10 +237,17 @@ def rebuild_site():
             <span class="eyelet right"></span>
           </div>
           <div class="art-meta-row">
-            <span class="art-cat-name">Anatomie Biomecanică și Osteologie Tehnologică</span>
+            <span class="art-cat-name hero-scanner-tag">SCANNER // DIAGNOSTIC IDENTITATE</span>
           </div>
-          <h2 class="art-card-title hero-card-title">ART-0103</h2>
-          <p class="art-critic-snippet hero-critic-snippet">Forța acestei foi rezidă în coerența absolută a logicii interne a formei: mecanismul imaginat pare deplin funcțional, animat de o respirație interioară ce sfidează inerția metalului.</p>
+          <div class="hero-diagnostic-meta">
+            <div class="hero-diag-line"><span class="hero-diag-k">Subiect:</span> <span class="hero-diag-v">Ființă umană.</span></div>
+            <div class="hero-diag-line"><span class="hero-diag-k">Status:</span> <span class="hero-diag-v">Activ. Operează în afara algoritmilor standard.</span></div>
+            <div class="hero-diag-line"><span class="hero-diag-k">Clasificare:</span> <span class="hero-diag-v">Unicat (exemplar nereplicabil, fără copie de rezervă).</span></div>
+          </div>
+          <div class="hero-diagnostic-text">
+            <p class="hero-arch-p"><strong class="hero-arch-heading">Arhitectură internă:</strong> Între inginerie de precizie și anatomie emoțională. Nu produce obiecte, ci mecanisme care simt. Lucrează la intersecția unde linia rece a schiței tehnice întâlnește imperfecțiunea caldă a materiei vii. Pentru el, desenul nu este decor, ci o disecție a logicii interne din spatele lucrurilor, o încercare de a cartografia felul în care funcționează o idee înainte de a primi formă fizică.</p>
+            <p class="hero-prototype-p">Fiecare lucrare din arhivă este un prototip: o urmă de grafit, un fragment de hardware, o tensiune mecanică sau o întrebare lăsată intenționat deschisă. Fără artificii, fără compromisuri estetice, doar structură pură și observație lucidă.</p>
+          </div>
         </div>
       </article>
     </div>

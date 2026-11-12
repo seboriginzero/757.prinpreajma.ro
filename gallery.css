@@ -498,9 +498,79 @@ a {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
-  padding: 1.25rem 1.4rem;
+  padding: 1.35rem 1.45rem;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
   text-align: left;
+}
+
+.hero-scanner-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 0.65rem;
+}
+
+.hero-diagnostic-meta {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  line-height: 1.6;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.85rem;
+  margin-bottom: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.hero-diag-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.hero-diag-k {
+  color: var(--accent-gold);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.hero-diag-v {
+  color: var(--text-primary);
+}
+
+.hero-diagnostic-text {
+  font-family: var(--font-serif);
+  font-size: 0.96rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.hero-arch-p {
+  margin: 0 0 0.85rem 0;
+  font-style: italic;
+}
+
+.hero-arch-heading {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--accent-gold);
+  font-style: normal;
+  text-transform: uppercase;
+  font-weight: 600;
+  display: inline;
+}
+
+.hero-prototype-p {
+  margin: 0;
+  font-style: italic;
+  color: var(--text-secondary);
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  padding-top: 0.75rem;
 }
 
 .hero-card-title {
@@ -535,6 +605,31 @@ a {
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.12);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .hero-scanner-tag {
+  color: #b45309;
+}
+
+[data-theme="light"] .hero-diag-k {
+  color: #b45309;
+}
+
+[data-theme="light"] .hero-diag-v {
+  color: #0f172a;
+}
+
+[data-theme="light"] .hero-arch-heading {
+  color: #b45309;
+}
+
+[data-theme="light"] .hero-diagnostic-text {
+  color: #334155;
+}
+
+[data-theme="light"] .hero-prototype-p {
+  color: #475569;
+  border-top: 1px dashed rgba(0, 0, 0, 0.12);
 }
 
 [data-theme="light"] .hero-card-title {
