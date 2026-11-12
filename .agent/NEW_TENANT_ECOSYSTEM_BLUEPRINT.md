@@ -390,7 +390,10 @@ Construiește din start aceste 6 elemente în aplicație pentru a obține **`100
      - **Izolare Evenimente:** Click/tap pe plăcuță sau pe apertură este izolat strict prin `e.stopPropagation()` și `e.target.closest('#hero-eye-plaque')` pentru a nu declanșa deschiderea modalului imaginii asociate.
    - **Scaner Laser ROGVAIV Sincronizat:**
      - Linie ultra-fină ($1.5\text{px}$, fără îngroșare sau aureole încețoșate).
-     - Rulare sincronizată: o cursă completă du-te-vino sus/jos ($4.0\text{s}$) rulează strict pe o singură culoare, schimbarea în următoarea culoare din spectrul ROGVAIV având loc exclusiv la returul în poziția superioară (ciclu complet $7 \times 4\text{s} = 28\text{s}$).
+     - Rulare sincronizată: o cursă completă du-te-vino sus/jos ($4.0\text{s}$) rulează strict pe o singură culoare, schimbarea în următoarea culoare din spectrul ROGVAIV (cu secvența canonică: Albastru $\rightarrow$ Indigo $\rightarrow$ Violet $\rightarrow$ Roșu $\rightarrow$ Oronj $\rightarrow$ Galben $\rightarrow$ Verde) având loc exclusiv la returul în poziția superioară (ciclu complet $7 \times 4\text{s} = 28\text{s}$).
+   - **Arhitectură Internă pe Plăcuță:**
+     - Controlată strict prin butonul `+` / `X` și trigger cu acordion canonic unic (`#hero-arch-accordion`), fără multiplicare în grila generală de opere.
+     - Închiderea prin click pe `X` este prioritară și garantată (fără reguli CSS de `:hover` care să blocheze retractarea sub cursor).
    - **Trilogia Canonică de Favicon-uri:**
      - Include întotdeauna cele trei formate esențiale în rădăcină și în `<head>`:
        ```html
