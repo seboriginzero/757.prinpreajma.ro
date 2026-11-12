@@ -394,6 +394,9 @@
       e.preventDefault();
       if (loadMoreBtn) loadMoreBtn.blur();
     }
+    if (document.activeElement && document.activeElement.blur) {
+      document.activeElement.blur();
+    }
     const total = state.filteredItems.length;
     const startIdx = state.currentPage * state.pageSize;
     if (startIdx >= total) {
@@ -407,7 +410,7 @@
 
     if (newItems.length > 0) {
       // Păstrează exact poziția de scroll curentă
-      const scrollPos = window.scrollY || document.documentElement.scrollTop;
+      const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
 
       const tempDiv = document.createElement('div');
       tempDiv.innerHTML = newItems.map((item, idx) => renderCardHtml(item, startIdx + idx)).join('');
@@ -421,10 +424,13 @@
       // Atașează evenimente doar cardurilor nou adăugate
       attachCardEvents();
 
-      // Menține viewport-ul stabil (previne scroll jump la footer)
-      window.scrollTo({
-        top: scrollPos,
-        behavior: 'instant'
+      // Menține viewport-ul stabil și derulează lin spre debutul noilor opere (previne salt la footer)
+      window.scrollTo(0, scrollPos);
+      requestAnimationFrame(() => {
+        const firstNewCard = grid.querySelector(`[data-idx="${startIdx}"]`);
+        if (firstNewCard) {
+          firstNewCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
       });
     }
 

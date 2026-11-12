@@ -77,12 +77,22 @@ html {
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
 body {
   min-height: 100vh;
   line-height: 1.6;
   overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
   background-color: var(--bg-primary);
   background-image: 
     radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.04) 0%, transparent 60%),
@@ -1552,10 +1562,19 @@ a {
   font-size: 0.8rem;
 }
 
-/* Pagination */
+/* Pagination & Progressive Loading (Fără Salturi de Scroll) */
+.gallery-container {
+  overflow-anchor: none;
+}
+
 .gallery-pagination {
   margin-top: 3.5rem;
   text-align: center;
+  overflow-anchor: none;
+}
+
+#btn-load-more {
+  overflow-anchor: none;
 }
 
 /* Thematic Section (Cele 5 Direcții) */
@@ -3682,10 +3701,16 @@ a {
   .luxury-modal {
     padding: 0 !important;
     margin: 0 !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
     width: 100vw !important;
     height: 100% !important;
     height: 100dvh !important;
-    max-width: 100vw !important;
+    max-width: 100% !important;
     max-height: 100dvh !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
@@ -3696,8 +3721,11 @@ a {
   }
 
   .modal-dialog {
-    width: 100vw !important;
-    max-width: 100vw !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
     height: 100% !important;
     height: 100dvh !important;
     max-height: 100dvh !important;
