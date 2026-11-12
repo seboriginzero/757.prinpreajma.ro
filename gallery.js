@@ -838,22 +838,63 @@
       });
     }
 
-    // Interactivitate Arhitectură Internă (Hover pe Desktop / Click sau Tap pe Mobil)
+    // Interactivitate Arhitectură Internă (Deschidere/Închidere Garantată pe Butonul X și Trigger)
     const archAccordion = document.getElementById('hero-arch-accordion');
-    if (archAccordion) {
+    const archTrigger = document.getElementById('hero-arch-trigger');
+    const archDrawer = document.getElementById('hero-arch-drawer');
+
+    if (archAccordion && archTrigger) {
+      let explicitlyClosed = false;
+
       const toggleArch = (e) => {
         if (e) {
-          e.stopPropagation(); // Oprește deschiderea modalului la click pe arhitectură
+          e.stopPropagation(); // Oprește propagarea către card/modal
           e.preventDefault();
         }
-        const isOpen = archAccordion.classList.toggle('is-open');
-        archAccordion.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        const isCurrentlyOpen = archAccordion.classList.contains('is-open');
+        if (isCurrentlyOpen) {
+          // Utilizatorul a apăsat explicit pentru a închide
+          archAccordion.classList.remove('is-open');
+          archAccordion.setAttribute('aria-expanded', 'false');
+          explicitlyClosed = true;
+        } else {
+          // Deschide
+          archAccordion.classList.add('is-open');
+          archAccordion.setAttribute('aria-expanded', 'true');
+          explicitlyClosed = false;
+        }
       };
 
-      archAccordion.addEventListener('click', toggleArch);
-      archAccordion.addEventListener('keydown', (e) => {
+      // Click pe trigger sau pe butonul + / X
+      archTrigger.addEventListener('click', toggleArch);
+
+      // Previne propagarea click-ului din interiorul textului pentru a permite selectarea textului fără a închide
+      if (archDrawer) {
+        archDrawer.addEventListener('click', (e) => {
+          e.stopPropagation();
+        });
+      }
+
+      archTrigger.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           toggleArch(e);
+        }
+      });
+
+      // Hover inteligent pe desktop (doar dacă utilizatorul nu a apăsat explicit X pentru a-l închide)
+      archTrigger.addEventListener('mouseenter', () => {
+        if (!explicitlyClosed && !archAccordion.classList.contains('is-open')) {
+          archAccordion.classList.add('is-open');
+          archAccordion.setAttribute('aria-expanded', 'true');
+        }
+      });
+
+      archAccordion.addEventListener('mouseleave', () => {
+        // Când cursorul părăsește complet plăcuța, resetează starea explicit închisă
+        explicitlyClosed = false;
+        if (archAccordion.classList.contains('is-open')) {
+          archAccordion.classList.remove('is-open');
+          archAccordion.setAttribute('aria-expanded', 'false');
         }
       });
     }

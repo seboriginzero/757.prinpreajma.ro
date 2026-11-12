@@ -738,7 +738,6 @@ a {
 /* Arhitectură Internă Expandabilă */
 .hero-arch-interactive {
   position: relative;
-  cursor: pointer;
   border-top: 1px solid rgba(255, 255, 255, 0.22);
   padding-top: 0.65rem;
   margin-top: 0.35rem;
@@ -755,8 +754,9 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.2rem 0;
+  padding: 0.25rem 0;
   user-select: none;
+  cursor: pointer;
 }
 
 .hero-arch-heading {
@@ -774,15 +774,28 @@ a {
 
 .hero-arch-indicator {
   font-family: var(--font-mono);
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 600;
   color: #ffffff;
   line-height: 1;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  display: inline-block;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+  cursor: pointer;
 }
 
-.hero-arch-interactive:hover .hero-arch-indicator,
+.hero-arch-trigger:hover .hero-arch-indicator {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="light"] .hero-arch-trigger:hover .hero-arch-indicator {
+  background: rgba(0, 0, 0, 0.08);
+}
+
 .hero-arch-interactive.is-open .hero-arch-indicator {
   transform: rotate(45deg);
 }
@@ -792,21 +805,15 @@ a {
   opacity: 0;
   overflow: hidden;
   margin-top: 0;
+  pointer-events: none;
   transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, margin-top 0.3s ease;
-}
-
-@media (hover: hover) {
-  .hero-arch-interactive:hover .hero-arch-drawer {
-    max-height: 520px;
-    opacity: 1;
-    margin-top: 0.75rem;
-  }
 }
 
 .hero-arch-interactive.is-open .hero-arch-drawer {
   max-height: 520px;
   opacity: 1;
   margin-top: 0.75rem;
+  pointer-events: auto;
 }
 
 .hero-arch-p {
