@@ -2,6 +2,22 @@
 (function () {
   'use strict';
 
+  // 1. Dezactivează restaurarea automată a poziției de scroll din cache-ul browserului
+  // (Garantează că orice deschidere a link-ului începe strict de sus, de la antet și portret)
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
+  // Curăță hash-ul din URL la încărcare inițială pentru a preveni saltul la ancore
+  if (window.location.hash) {
+    history.replaceState(null, document.title, window.location.pathname + window.location.search);
+  }
+
+  // Fixează poziția inițială strict în vârf (0, 0)
+  window.scrollTo(0, 0);
+  if (document.documentElement) document.documentElement.scrollTop = 0;
+  if (document.body) document.body.scrollTop = 0;
+
   // 5 Curated Classifications Taxonomy Metadata
   const CURATED_WINGS = [
     {
@@ -907,6 +923,22 @@
       });
     }
 
+    // Navigare internă lină fără poluarea URL-ului cu ancore # (previne salvarea/distribuirea linkurilor cu scroll automat)
+    document.querySelectorAll('.main-nav a, .brand-link, .footer-links a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+            // Curăță URL-ul în address bar ca linkul copiat sau distribuit să fie curat fără hash
+            history.replaceState(null, document.title, window.location.pathname + window.location.search);
+          }
+        }
+      });
+    });
+
     // View modes
     viewBtns.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -1045,4 +1077,13 @@
   } else {
     init();
   }
+
+  // Asigură că la încărcarea completă a ferestrei (inclusiv imagini și resurse)
+  // poziția rămâne strict în vârf (Y=0), apoi activează derularea lină
+  window.addEventListener('load', () => {
+    window.scrollTo(0, 0);
+    setTimeout(() => {
+      document.documentElement.classList.add('smooth-scroll');
+    }, 150);
+  });
 })();
