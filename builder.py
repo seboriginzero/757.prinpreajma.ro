@@ -641,19 +641,9 @@ def rebuild_site():
         <span class="spatial-3d-counter" id="spatial-3d-counter">167 LUCRĂRI</span>
       </div>
 
-      <!-- Center: Room / Wing Filter Pills -->
-      <div class="spatial-3d-wings" id="spatial-3d-wings">
-        <button class="spatial-wing-btn is-active" data-wing="all">Toate</button>
-        <button class="spatial-wing-btn" data-wing="biomechanical-osteology">Sala I</button>
-        <button class="spatial-wing-btn" data-wing="cryptic-totems">Sala II</button>
-        <button class="spatial-wing-btn" data-wing="chromatic-expressions">Sala III</button>
-        <button class="spatial-wing-btn" data-wing="cybernetic-assemblages">Sala IV</button>
-        <button class="spatial-wing-btn" data-wing="monumental-perspectives">Sala V</button>
-      </div>
-      
       <div class="spatial-3d-hud-actions">
-        <!-- Auto-Rotate Toggle -->
-        <button id="spatial-3d-spin-btn" class="spatial-hud-btn" title="Pauză / Redare Balansare Automată (Spațiu)">
+        <!-- Auto-Flight Toggle -->
+        <button id="spatial-3d-spin-btn" class="spatial-hud-btn" title="Pornire / Oprire Zbor Automat (Spațiu)">
           <svg class="spin-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
           </svg>

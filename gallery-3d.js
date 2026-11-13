@@ -8,7 +8,6 @@
     isOpen: false,
     initialized: false,
     mode: 'helix', // Strictly Tunel Biomecanic Z-Axis
-    activeWing: 'all', // 'all', 'biomechanical-osteology', etc.
     allItems: [],
     activeItems: [],
     meshes: [],
@@ -59,7 +58,7 @@
 
   // DOM Elements
   let gallery3dOverlay, canvasContainer;
-  let modeLabel, counterLabel, modeBtns, wingBtns, spinBtn, themeBtn, closeBtn;
+  let modeLabel, counterLabel, spinBtn, themeBtn, closeBtn;
   let focusCard, cardId, cardWing, cardTitle, cardMedium, cardNote, cardDetailBtn, cardBackBtn, cardDismissBtn;
 
   // Initialize trigger from header button
@@ -178,8 +177,6 @@
     canvasContainer = document.getElementById('spatial-3d-canvas-container');
     modeLabel = document.getElementById('spatial-3d-mode-label');
     counterLabel = document.getElementById('spatial-3d-counter');
-    modeBtns = document.querySelectorAll('.spatial-mode-btn');
-    wingBtns = document.querySelectorAll('.spatial-wing-btn');
     spinBtn = document.getElementById('spatial-3d-spin-btn');
     themeBtn = document.getElementById('spatial-3d-theme-btn');
     closeBtn = document.getElementById('spatial-3d-close-btn');
@@ -200,16 +197,6 @@
   // Setup DOM Interactions
   function setupDOMEyents() {
     if (closeBtn) closeBtn.addEventListener('click', close3DGallery);
-
-    // Room / Wing Filter
-    if (wingBtns) {
-      wingBtns.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const wing = btn.getAttribute('data-wing');
-          switchWingFilter(wing);
-        });
-      });
-    }
 
     // Auto-flight toggle in Tunnel
     if (spinBtn) {
@@ -282,33 +269,13 @@
     });
   }
 
-  // Filter artworks by wing and rebuild 3D set
-  function switchWingFilter(wingId) {
-    if (state3D.activeWing === wingId) return;
-    state3D.activeWing = wingId;
-
-    if (wingBtns) {
-      wingBtns.forEach((btn) => {
-        btn.classList.toggle('is-active', btn.getAttribute('data-wing') === wingId);
-      });
-    }
-
-    dismissFocusCard();
-    rebuildActiveItems();
-  }
-
-  // Filter master items into active set (LOAD ALL 167 ARTWORKS!)
+  // Load complete collection into Tunnel (ALL 167 ARTWORKS!)
   function rebuildActiveItems() {
     state3D.allItems = window.COLLECTION_DATA || [];
     if (state3D.allItems.length === 0) return;
 
-    if (state3D.activeWing === 'all') {
-      // LOAD ALL 167 ARTWORKS!
-      state3D.activeItems = [...state3D.allItems];
-    } else {
-      const filtered = state3D.allItems.filter((it) => it.categories && it.categories.includes(state3D.activeWing));
-      state3D.activeItems = filtered.length > 0 ? filtered : [...state3D.allItems];
-    }
+    // Load full collection unconditionally into the 3D Tunnel
+    state3D.activeItems = [...state3D.allItems];
 
     if (counterLabel) {
       counterLabel.textContent = `${state3D.activeItems.length} LUCRĂRI`;
