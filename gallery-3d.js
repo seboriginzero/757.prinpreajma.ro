@@ -62,6 +62,7 @@
   let gallery3dOverlay, canvasContainer;
   let modeLabel, counterLabel, spinBtn, themeBtn, closeBtn;
   let focusCard, cardId, cardWing, cardTitle, cardMedium, cardNote, cardDetailBtn, cardBackBtn, cardDismissBtn;
+  let mobileNav, mobileFwdBtn, mobileBackBtn, mobileLeftBtn, mobileRightBtn, mobileCenterBtn;
 
   // Initialize trigger from header button
   function initTrigger() {
@@ -193,6 +194,13 @@
     cardBackBtn = document.getElementById('spatial-card-back-btn');
     cardDismissBtn = document.getElementById('spatial-card-dismiss-btn');
 
+    mobileNav = document.getElementById('spatial-3d-mobile-nav');
+    mobileFwdBtn = document.getElementById('spatial-mobile-fwd');
+    mobileBackBtn = document.getElementById('spatial-mobile-back');
+    mobileLeftBtn = document.getElementById('spatial-mobile-left');
+    mobileRightBtn = document.getElementById('spatial-mobile-right');
+    mobileCenterBtn = document.getElementById('spatial-mobile-center');
+
     setupDOMEyents();
   }
 
@@ -221,6 +229,84 @@
 
     if (cardDismissBtn) cardDismissBtn.addEventListener('click', dismissFocusCard);
     if (cardBackBtn) cardBackBtn.addEventListener('click', dismissFocusCard);
+
+    // Mobile Navigation Controls
+    function bindContinuousNav(btn, onStep, onHold) {
+      if (!btn) return;
+      let holdTimer = null;
+      let holdInterval = null;
+
+      const start = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (state3D.focusedMesh) dismissFocusCard();
+        btn.classList.add('is-active');
+        state3D.lastInteractionTime = Date.now();
+        onStep();
+
+        holdTimer = setTimeout(() => {
+          holdInterval = setInterval(() => {
+            state3D.lastInteractionTime = Date.now();
+            onHold();
+          }, 35);
+        }, 220);
+      };
+
+      const stop = (e) => {
+        btn.classList.remove('is-active');
+        if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; }
+        if (holdInterval) { clearInterval(holdInterval); holdInterval = null; }
+      };
+
+      btn.addEventListener('pointerdown', start);
+      btn.addEventListener('pointerup', stop);
+      btn.addEventListener('pointerleave', stop);
+      btn.addEventListener('pointercancel', stop);
+    }
+
+    const getMaxZ = () => Math.ceil(state3D.meshes.length / 2) * HELIX_SPACING + 6;
+
+    if (mobileFwdBtn) {
+      bindContinuousNav(
+        mobileFwdBtn,
+        () => { state3D.targetZ = Math.min(getMaxZ(), state3D.targetZ + 5.0); },
+        () => { state3D.targetZ = Math.min(getMaxZ(), state3D.targetZ + 0.35); }
+      );
+    }
+
+    if (mobileBackBtn) {
+      bindContinuousNav(
+        mobileBackBtn,
+        () => { state3D.targetZ = Math.max(0, state3D.targetZ - 5.0); },
+        () => { state3D.targetZ = Math.max(0, state3D.targetZ - 0.35); }
+      );
+    }
+
+    if (mobileLeftBtn) {
+      bindContinuousNav(
+        mobileLeftBtn,
+        () => { state3D.targetTunnelYaw += 0.3; },
+        () => { state3D.targetTunnelYaw += 0.035; }
+      );
+    }
+
+    if (mobileRightBtn) {
+      bindContinuousNav(
+        mobileRightBtn,
+        () => { state3D.targetTunnelYaw -= 0.3; },
+        () => { state3D.targetTunnelYaw -= 0.035; }
+      );
+    }
+
+    if (mobileCenterBtn) {
+      mobileCenterBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        state3D.targetTunnelYaw = 0;
+        state3D.targetTunnelPitch = 0;
+        state3D.lastInteractionTime = Date.now();
+      });
+    }
 
     if (cardDetailBtn) {
       cardDetailBtn.addEventListener('click', () => {
@@ -1123,8 +1209,14 @@
   // Mouse & Touch Pointer Interactions
   function setupCanvasInteractions() {
     const el = canvasContainer;
+    const activePointers = new Map();
+    let initialPinchDist = 0;
+    let initialPinchZ = 0;
 
     el.addEventListener('pointerdown', (e) => {
+      try { el.setPointerCapture(e.pointerId); } catch (_) {}
+      activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
       state3D.isDragging = true;
       state3D.dragStartX = e.clientX;
       state3D.dragStartY = e.clientY;
@@ -1132,6 +1224,12 @@
       state3D.lastPointerY = e.clientY;
       state3D.velocity = 0;
       state3D.lastInteractionTime = Date.now();
+
+      if (activePointers.size === 2) {
+        const pts = Array.from(activePointers.values());
+        initialPinchDist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+        initialPinchZ = state3D.targetZ;
+      }
     });
 
     window.addEventListener('pointermove', (e) => {
@@ -1140,6 +1238,21 @@
       mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
 
       if (!state3D.isDragging) return;
+
+      if (activePointers.has(e.pointerId)) {
+        activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      }
+
+      // Handle 2-Finger Pinch Zoom/Travel along Tunnel Z
+      if (activePointers.size === 2 && initialPinchDist > 0) {
+        const pts = Array.from(activePointers.values());
+        const currentDist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+        const distDiff = currentDist - initialPinchDist;
+        const maxZ = Math.ceil(state3D.meshes.length / 2) * HELIX_SPACING + 6;
+        state3D.targetZ = Math.max(0, Math.min(maxZ, initialPinchZ + distDiff * 0.12));
+        state3D.lastInteractionTime = Date.now();
+        return;
+      }
 
       const deltaX = e.clientX - state3D.lastPointerX;
       const deltaY = e.clientY - state3D.lastPointerY;
@@ -1154,25 +1267,55 @@
         }
       }
 
-      // Rotire 3D lină și stabilă a privirii în tunel (Yaw & Pitch)
-      state3D.targetTunnelYaw += deltaX * 0.0035;
-      state3D.targetTunnelPitch = Math.max(-0.35, Math.min(0.35, state3D.targetTunnelPitch + deltaY * 0.002));
+      const isTouch = e.pointerType === 'touch';
+      const maxZ = Math.ceil(state3D.meshes.length / 2) * HELIX_SPACING + 6;
 
-      state3D.velocity = deltaX * 0.0035;
+      if (isTouch) {
+        // Navigare Touch pe Mobil:
+        // Glisarea verticală înaintează sau dă înapoi prin tunel
+        // Glisare în sus (deltaY < 0) -> avansare; glisare în jos (deltaY > 0) -> retragere
+        state3D.targetZ -= deltaY * 0.06;
+        state3D.targetZ = Math.max(0, Math.min(maxZ, state3D.targetZ));
+
+        // Glisarea orizontală rotește privirea stânga/dreapta (inversată conform cerinței)
+        state3D.targetTunnelYaw -= deltaX * 0.004;
+      } else {
+        // Navigare Mouse Desktop (INVERSATĂ conform cerinței utilizatorului):
+        // Mișcarea mouse-ului (Yaw & Pitch) este inversată
+        state3D.targetTunnelYaw -= deltaX * 0.0035;
+        state3D.targetTunnelPitch = Math.max(-0.35, Math.min(0.35, state3D.targetTunnelPitch - deltaY * 0.002));
+      }
+
+      state3D.velocity = -deltaX * 0.0035;
       state3D.lastInteractionTime = Date.now();
     });
 
     window.addEventListener('pointerup', (e) => {
-      if (!state3D.isDragging) return;
-      state3D.isDragging = false;
+      try { el.releasePointerCapture(e.pointerId); } catch (_) {}
+      activePointers.delete(e.pointerId);
+      if (activePointers.size < 2) {
+        initialPinchDist = 0;
+      }
+      if (activePointers.size === 0) {
+        state3D.isDragging = false;
+      }
 
       const dist = Math.hypot(e.clientX - state3D.dragStartX, e.clientY - state3D.dragStartY);
-      if (dist < 6) {
+      if (dist < 8) {
         handleClickRaycast();
       }
     });
 
-    // Wheel Scroll Navigation along Tunnel Z
+    window.addEventListener('pointercancel', (e) => {
+      try { el.releasePointerCapture(e.pointerId); } catch (_) {}
+      activePointers.delete(e.pointerId);
+      if (activePointers.size === 0) {
+        state3D.isDragging = false;
+        initialPinchDist = 0;
+      }
+    });
+
+    // Wheel Scroll Navigation along Tunnel Z (INVERSAT conform cerinței utilizatorului)
     el.addEventListener(
       'wheel',
       (e) => {
@@ -1183,8 +1326,8 @@
           dismissFocusCard();
         }
 
-        // Deplasare lină și controlată prin tunel
-        state3D.targetZ += e.deltaY * 0.025;
+        // Deplasare inversată: scroll în sus (deltaY < 0, împins înainte) avansează în adâncimea tunelului
+        state3D.targetZ -= e.deltaY * 0.025;
         const maxZ = Math.ceil(state3D.meshes.length / 2) * HELIX_SPACING + 6;
         state3D.targetZ = Math.max(0, Math.min(maxZ, state3D.targetZ));
       },

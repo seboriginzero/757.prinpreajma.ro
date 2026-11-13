@@ -665,12 +665,35 @@ def rebuild_site():
     <!-- 3D Bottom Floating Instruction HUD -->
     <div class="spatial-3d-hud-bottom">
       <div class="spatial-3d-instructions">
-        <span class="spatial-hint">⟵ Trage orizontal pentru rotire 3D ⟶</span>
+        <span class="spatial-hint">⟵ Trage pentru rotire 3D ⟶</span>
         <span class="spatial-hint-dot">·</span>
         <span class="spatial-hint">Scroll pentru navigare</span>
         <span class="spatial-hint-dot">·</span>
         <span class="spatial-hint">Click pe tablou pentru detalii</span>
       </div>
+    </div>
+
+    <!-- Mobile Touch Navigation Toolbar -->
+    <div class="spatial-3d-mobile-nav" id="spatial-3d-mobile-nav" role="toolbar" aria-label="Comenzi Navigare Mobil">
+      <button id="spatial-mobile-fwd" class="spatial-mobile-btn" aria-label="Avansează în Tunel">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+        <span>Înainte</span>
+      </button>
+      <div class="spatial-mobile-group">
+        <button id="spatial-mobile-left" class="spatial-mobile-btn-icon" aria-label="Rotește Stânga" title="Rotește Stânga">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button id="spatial-mobile-center" class="spatial-mobile-btn-icon" aria-label="Centrare Privire" title="Centrare Privire">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>
+        </button>
+        <button id="spatial-mobile-right" class="spatial-mobile-btn-icon" aria-label="Rotește Dreapta" title="Rotește Dreapta">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+      <button id="spatial-mobile-back" class="spatial-mobile-btn" aria-label="Mergi Înapoi">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        <span>Înapoi</span>
+      </button>
     </div>
 
     <!-- Curatorial Inspection Card (Plaque) when an artwork is focused in 3D -->
