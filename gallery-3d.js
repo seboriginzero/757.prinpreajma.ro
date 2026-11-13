@@ -15,6 +15,8 @@
     // Cylinder Kinematics
     currentAngle: 0,
     targetAngle: 0,
+    currentCylinderY: 0,
+    targetCylinderY: 0,
     // Helix / Tunnel Kinematics
     currentZ: 0,
     targetZ: 0,
@@ -27,8 +29,8 @@
     targetWallPanX: 0,
     wallPanY: 0,
     targetWallPanY: 0,
-    wallZoomZ: 10.5,
-    targetWallZoomZ: 10.5,
+    wallZoomZ: 14.0,
+    targetWallZoomZ: 14.0,
     // Pointer Drag Physics
     isDragging: false,
     dragStartX: 0,
@@ -57,9 +59,9 @@
   let animFrameId = null;
 
   // Geometry Constants
-  const CYLINDER_RADIUS = 16.5;
+  const CYLINDER_RADIUS = 22.0;
   const HELIX_SPACING = 5.0;
-  const HELIX_OFFSET_X = 3.2;
+  const HELIX_OFFSET_X = 3.3;
 
   // DOM Elements
   let gallery3dOverlay, canvasContainer;
@@ -125,6 +127,7 @@
 
     if (gallery3dOverlay) {
       gallery3dOverlay.classList.remove('is-active');
+      gallery3dOverlay.classList.remove('is-focused');
       gallery3dOverlay.setAttribute('aria-hidden', 'true');
     }
 
@@ -238,20 +241,22 @@
       } else if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
         if (state3D.mode === 'cylinder') state3D.targetAngle += 0.22;
         if (state3D.mode === 'helix') state3D.targetTunnelYaw += 0.22;
-        if (state3D.mode === 'wall') state3D.targetWallPanX -= 1.8;
+        if (state3D.mode === 'wall') state3D.targetWallPanX -= 2.2;
         state3D.lastInteractionTime = Date.now();
       } else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
         if (state3D.mode === 'cylinder') state3D.targetAngle -= 0.22;
         if (state3D.mode === 'helix') state3D.targetTunnelYaw -= 0.22;
-        if (state3D.mode === 'wall') state3D.targetWallPanX += 1.8;
+        if (state3D.mode === 'wall') state3D.targetWallPanX += 2.2;
         state3D.lastInteractionTime = Date.now();
       } else if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') {
-        if (state3D.mode === 'helix') state3D.targetZ += 3.5;
-        if (state3D.mode === 'wall') state3D.targetWallPanY -= 1.5;
+        if (state3D.mode === 'cylinder') state3D.targetCylinderY = Math.min(5.5, state3D.targetCylinderY + 1.2);
+        if (state3D.mode === 'helix') state3D.targetZ += 4.5;
+        if (state3D.mode === 'wall') state3D.targetWallPanY -= 1.8;
         state3D.lastInteractionTime = Date.now();
       } else if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') {
-        if (state3D.mode === 'helix') state3D.targetZ -= 3.5;
-        if (state3D.mode === 'wall') state3D.targetWallPanY += 1.5;
+        if (state3D.mode === 'cylinder') state3D.targetCylinderY = Math.max(-5.5, state3D.targetCylinderY - 1.2);
+        if (state3D.mode === 'helix') state3D.targetZ -= 4.5;
+        if (state3D.mode === 'wall') state3D.targetWallPanY += 1.8;
         state3D.lastInteractionTime = Date.now();
       }
     });
@@ -272,17 +277,17 @@
     rebuildActiveItems();
   }
 
-  // Filter master items into active set (clean non-overlapping count)
+  // Filter master items into active set (LOAD ALL 167 ARTWORKS!)
   function rebuildActiveItems() {
     state3D.allItems = window.COLLECTION_DATA || [];
     if (state3D.allItems.length === 0) return;
 
     if (state3D.activeWing === 'all') {
-      // Pick up to 28 top works across categories to guarantee zero overlap and peak performance
-      state3D.activeItems = state3D.allItems.slice(0, 28);
+      // LOAD ALL 167 ARTWORKS!
+      state3D.activeItems = [...state3D.allItems];
     } else {
       const filtered = state3D.allItems.filter((it) => it.categories && it.categories.includes(state3D.activeWing));
-      state3D.activeItems = filtered.length > 0 ? filtered.slice(0, 28) : state3D.allItems.slice(0, 28);
+      state3D.activeItems = filtered.length > 0 ? filtered : [...state3D.allItems];
     }
 
     if (counterLabel) {
@@ -322,6 +327,8 @@
       artGroup.rotation.set(0, 0, 0);
       state3D.currentAngle = 0;
       state3D.targetAngle = 0;
+      state3D.currentCylinderY = 0;
+      state3D.targetCylinderY = 0;
     } else if (newMode === 'helix') {
       camera.position.set(0, 0, 0);
       camera.rotation.set(0, 0, 0);
@@ -334,7 +341,7 @@
       state3D.tunnelPitch = 0;
       state3D.targetTunnelPitch = 0;
     } else if (newMode === 'wall') {
-      camera.position.set(0, 0, 10.5);
+      camera.position.set(0, 0, 14.0);
       camera.rotation.set(0, 0, 0);
       artGroup.position.set(0, 0, 0);
       artGroup.rotation.set(0, 0, 0);
@@ -342,8 +349,8 @@
       state3D.targetWallPanX = 0;
       state3D.wallPanY = 0;
       state3D.targetWallPanY = 0;
-      state3D.wallZoomZ = 10.5;
-      state3D.targetWallZoomZ = 10.5;
+      state3D.wallZoomZ = 14.0;
+      state3D.targetWallZoomZ = 14.0;
     }
 
     computeLayoutTargets();
@@ -358,10 +365,10 @@
     // 1. Scene
     scene = new THREE.Scene();
     // Atmospheric fog for background only (paintings use fog: false to remain ultra-crisp!)
-    scene.fog = new THREE.Fog(0x030406, 25, 95);
+    scene.fog = new THREE.Fog(0x030406, 30, 110);
 
-    // 2. Camera
-    camera = new THREE.PerspectiveCamera(54, width / height, 0.1, 1000);
+    // 2. Camera (FOV 52 for cinematic, wide museum perspective)
+    camera = new THREE.PerspectiveCamera(52, width / height, 0.1, 1000);
     camera.position.set(0, 0, 0);
 
     // 3. High Performance Renderer with sRGB Output
@@ -372,28 +379,28 @@
     container.appendChild(renderer.domElement);
 
     // 4. Lights
-    ambientLight = new THREE.AmbientLight(0xffffff, 1.1);
+    ambientLight = new THREE.AmbientLight(0xffffff, 1.15);
     scene.add(ambientLight);
 
     dirLight = new THREE.DirectionalLight(0xd4a359, 0.7);
-    dirLight.position.set(0, 15, 10);
+    dirLight.position.set(0, 20, 10);
     scene.add(dirLight);
 
-    pointLight = new THREE.PointLight(0x06b6d4, 1.2, 40);
+    pointLight = new THREE.PointLight(0x06b6d4, 1.2, 45);
     pointLight.position.set(0, 0, 0);
     scene.add(pointLight);
 
     // 5. Specular Ground Plane
-    const gridGeo = new THREE.PlaneGeometry(180, 180, 36, 36);
+    const gridGeo = new THREE.PlaneGeometry(240, 240, 48, 48);
     const gridMat = new THREE.MeshBasicMaterial({
       color: 0x0f141e,
       wireframe: true,
       transparent: true,
-      opacity: 0.22
+      opacity: 0.2
     });
     gridFloor = new THREE.Mesh(gridGeo, gridMat);
     gridFloor.rotation.x = -Math.PI / 2;
-    gridFloor.position.y = -6.2;
+    gridFloor.position.y = -8.5;
     scene.add(gridFloor);
 
     // 6. Dust Particles
@@ -417,23 +424,23 @@
 
   // Floating Dust Particles
   function createParticles() {
-    const particleCount = 260;
+    const particleCount = 280;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
 
     for (let i = 0; i < particleCount * 3; i += 3) {
-      positions[i] = (Math.random() - 0.5) * 60;
-      positions[i + 1] = (Math.random() - 0.5) * 35;
-      positions[i + 2] = (Math.random() - 0.5) * 60;
+      positions[i] = (Math.random() - 0.5) * 70;
+      positions[i + 1] = (Math.random() - 0.5) * 45;
+      positions[i + 2] = (Math.random() - 0.5) * 70;
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
     const material = new THREE.PointsMaterial({
       color: 0xd4a359,
-      size: 0.2,
+      size: 0.22,
       transparent: true,
-      opacity: 0.6,
+      opacity: 0.55,
       blending: THREE.AdditiveBlending
     });
 
@@ -469,8 +476,8 @@
       const h = item.height || 1350;
       const aspect = w / h;
 
-      // Base height 2.6 units
-      const planeH = 2.6;
+      // Base height 2.5 units
+      const planeH = 2.5;
       const planeW = planeH * aspect;
 
       // Root Artwork Object
@@ -530,7 +537,6 @@
       );
 
       artGroup.add(artworkPivot);
-      // Store reference for raycasting
       picMesh.userData.parentPivot = artworkPivot;
       state3D.meshes.push(artworkPivot);
     });
@@ -543,47 +549,73 @@
     const total = state3D.meshes.length;
     if (total === 0) return;
 
-    state3D.meshes.forEach((mesh, i) => {
-      const tPos = mesh.userData.targetPos;
-      const tRot = mesh.userData.targetRot;
+    if (state3D.mode === 'cylinder') {
+      // Mode 1: Inel 360° — Grand 5-Tier Rotunda (ALL 167 ARTWORKS, ZERO OVERLAP!)
+      const rows = 5;
+      const itemsPerRow = Math.ceil(total / rows);
+      const rad = CYLINDER_RADIUS;
 
-      if (state3D.mode === 'cylinder') {
-        // Mode 1: Inel 360° — Generously spaced circular ring (ZERO OVERLAP!)
-        const angle = (i / total) * Math.PI * 2;
-        tPos.x = Math.sin(angle) * CYLINDER_RADIUS;
-        tPos.z = Math.cos(angle) * CYLINDER_RADIUS;
-        tPos.y = i % 2 === 0 ? 0.2 : -0.2; // Subtle elegant stagger
-        tRot.set(0, angle + Math.PI, 0); // Face inward towards viewer
-      } else if (state3D.mode === 'helix') {
-        // Mode 2: Tunel Z — Runway Corridor along Z axis
+      state3D.meshes.forEach((mesh, i) => {
+        const row = i % rows; // 0, 1, 2, 3, 4
+        const col = Math.floor(i / rows);
+        const angle = (col / itemsPerRow) * Math.PI * 2;
+
+        const tPos = mesh.userData.targetPos;
+        const tRot = mesh.userData.targetRot;
+
+        tPos.x = Math.sin(angle) * rad;
+        tPos.z = Math.cos(angle) * rad;
+        tPos.y = (row - 2) * 3.3; // -6.6, -3.3, 0, +3.3, +6.6
+        tRot.set(0, angle + Math.PI, 0); // Face inward towards center
+
+        if (instant) {
+          mesh.position.copy(tPos);
+          mesh.rotation.copy(tRot);
+        }
+      });
+    } else if (state3D.mode === 'helix') {
+      // Mode 2: Tunel Z — Runway Corridor along Z axis (ALL 167 ARTWORKS!)
+      state3D.meshes.forEach((mesh, i) => {
         const isLeft = i % 2 === 0;
         const pairIndex = Math.floor(i / 2);
+        const tPos = mesh.userData.targetPos;
+        const tRot = mesh.userData.targetRot;
+
         tPos.x = isLeft ? -HELIX_OFFSET_X : HELIX_OFFSET_X;
-        tPos.y = 0; // Pure eye-level gallery alignment
+        tPos.y = 0; // Pure eye-level alignment
         tPos.z = pairIndex * HELIX_SPACING + 4.5;
         // Inward tilt towards oncoming viewer (front face faces camera looking down +Z)
         const inwardAngle = 0.28; // ~16° tilt towards center runway
         tRot.set(0, isLeft ? (Math.PI - inwardAngle) : (Math.PI + inwardAngle), 0);
-      } else if (state3D.mode === 'wall') {
-        // Mode 3: Perete Matrix — 3-Tier Curved Floating Wall (Directly in view!)
-        const rows = 3;
-        const col = Math.floor(i / rows);
+
+        if (instant) {
+          mesh.position.copy(tPos);
+          mesh.rotation.copy(tRot);
+        }
+      });
+    } else if (state3D.mode === 'wall') {
+      // Mode 3: Perete Matrix — 5-Tier Curved Floating Wall (ALL 167 ARTWORKS!)
+      const rows = 5;
+      const totalCols = Math.ceil(total / rows);
+
+      state3D.meshes.forEach((mesh, i) => {
         const row = i % rows;
-        const totalCols = Math.ceil(total / rows);
+        const col = Math.floor(i / rows);
+        const tPos = mesh.userData.targetPos;
+        const tRot = mesh.userData.targetRot;
 
         const colOffset = (col - (totalCols - 1) / 2) * 2.85;
         tPos.x = colOffset;
-        tPos.y = (1 - row) * 3.35;
-        // Gentle concave wrap embracing camera
-        tPos.z = -Math.pow(colOffset / 14, 2) * 1.5;
-        tRot.set(0, -colOffset * 0.025, 0);
-      }
+        tPos.y = (2 - row) * 3.35; // 5 rows centered around 0
+        tPos.z = -Math.pow(colOffset / 20, 2) * 2.2;
+        tRot.set(0, -colOffset * 0.02, 0);
 
-      if (instant) {
-        mesh.position.copy(tPos);
-        mesh.rotation.copy(tRot);
-      }
-    });
+        if (instant) {
+          mesh.position.copy(tPos);
+          mesh.rotation.copy(tRot);
+        }
+      });
+    }
   }
 
   // Update Theme Colors in WebGL
@@ -651,6 +683,8 @@
 
       if (state3D.mode === 'cylinder') {
         state3D.targetAngle += deltaX * 0.0035;
+        // Drag vertical glisează între etaje
+        state3D.targetCylinderY = Math.max(-5.5, Math.min(5.5, state3D.targetCylinderY + deltaY * 0.015));
       } else if (state3D.mode === 'helix') {
         // Rotire 3D completă (Yaw): drag orizontal rotește privirea spre stânga/dreapta
         state3D.targetTunnelYaw += deltaX * 0.005;
@@ -660,9 +694,9 @@
         const maxZ = Math.ceil(state3D.meshes.length / 2) * HELIX_SPACING + 6;
         state3D.targetZ = Math.max(-2, Math.min(maxZ, state3D.targetZ));
       } else if (state3D.mode === 'wall') {
-        state3D.targetWallPanX -= deltaX * 0.015;
-        state3D.targetWallPanY += deltaY * 0.015;
-        state3D.targetWallPanY = Math.max(-4.5, Math.min(4.5, state3D.targetWallPanY));
+        state3D.targetWallPanX -= deltaX * 0.02;
+        state3D.targetWallPanY += deltaY * 0.02;
+        state3D.targetWallPanY = Math.max(-8.0, Math.min(8.0, state3D.targetWallPanY));
       }
 
       state3D.velocity = deltaX * 0.0035;
@@ -689,11 +723,11 @@
         if (state3D.mode === 'cylinder') {
           state3D.targetAngle -= (e.deltaY + e.deltaX) * 0.0018;
         } else if (state3D.mode === 'helix') {
-          state3D.targetZ += e.deltaY * 0.04;
+          state3D.targetZ += e.deltaY * 0.05;
           const maxZ = Math.ceil(state3D.meshes.length / 2) * HELIX_SPACING + 6;
           state3D.targetZ = Math.max(-2, Math.min(maxZ, state3D.targetZ));
         } else if (state3D.mode === 'wall') {
-          state3D.targetWallZoomZ = Math.max(5.5, Math.min(18.0, state3D.targetWallZoomZ + e.deltaY * 0.015));
+          state3D.targetWallZoomZ = Math.max(6.0, Math.min(24.0, state3D.targetWallZoomZ + e.deltaY * 0.018));
         }
       },
       { passive: false }
@@ -723,11 +757,15 @@
     }
   }
 
-  // Focus Artwork with Smooth Camera Glide
+  // Focus Artwork with Smooth Camera Glide & ZERO TEXT OVERLAY ON ART
   function focusArtwork(pivot) {
     state3D.focusedMesh = pivot;
     const item = pivot.userData.item;
     if (!item) return;
+
+    if (gallery3dOverlay) {
+      gallery3dOverlay.classList.add('is-focused');
+    }
 
     if (cardId) cardId.textContent = item.id || 'ART-757';
     if (cardWing) cardWing.textContent = item.category_name || 'SALA I';
@@ -746,16 +784,34 @@
 
     state3D.cameraStartPos = camera.position.clone();
 
-    // Calculate world position and normal
+    // Calculate world position
     const meshWorldPos = new THREE.Vector3();
     pivot.getWorldPosition(meshWorldPos);
 
+    // Normal facing outward from artwork face
     const normal = new THREE.Vector3(0, 0, 1).applyEuler(pivot.rotation);
-    const targetCamPos = meshWorldPos.clone().add(normal.multiplyScalar(3.0));
+    // Right tangent vector
+    const rightVec = new THREE.Vector3(1, 0, 0).applyEuler(pivot.rotation);
+
+    // Camera framing:
+    // Distance 4.5 gives ample margin so the top of artwork is never covered by top HUD bar!
+    const camDist = 4.5;
+    const isDesktop = window.innerWidth >= 900;
+    // On desktop, shift camera right so the artwork is rendered on the left of screen
+    // completely clear of the right-docked curatorial card!
+    const horizontalShift = isDesktop ? 1.25 : 0;
+    // Slight downward camera offset to center artwork below 68px top bar
+    const verticalShift = isDesktop ? -0.15 : 0.45;
+
+    const targetCamPos = meshWorldPos.clone()
+      .add(normal.clone().multiplyScalar(camDist))
+      .add(rightVec.clone().multiplyScalar(horizontalShift))
+      .add(new THREE.Vector3(0, verticalShift, 0));
 
     state3D.cameraTargetPos = targetCamPos;
     state3D.cameraStartLookAt = new THREE.Vector3(0, 0, 0);
-    state3D.cameraTargetLookAt = meshWorldPos.clone();
+    // Look slightly to the right of artwork so artwork sits cleanly in the left 65% of screen
+    state3D.cameraTargetLookAt = meshWorldPos.clone().add(rightVec.clone().multiplyScalar(horizontalShift * 0.45));
     state3D.focusProgress = 0;
   }
 
@@ -763,6 +819,10 @@
   function dismissFocusCard() {
     if (!state3D.focusedMesh) return;
     state3D.focusedMesh = null;
+
+    if (gallery3dOverlay) {
+      gallery3dOverlay.classList.remove('is-focused');
+    }
 
     if (focusCard) {
       focusCard.classList.remove('is-visible');
@@ -772,7 +832,7 @@
     state3D.cameraStartPos = camera.position.clone();
 
     if (state3D.mode === 'cylinder') {
-      state3D.cameraTargetPos = new THREE.Vector3(0, 0, 0);
+      state3D.cameraTargetPos = new THREE.Vector3(0, state3D.currentCylinderY, 0);
     } else if (state3D.mode === 'helix') {
       state3D.cameraTargetPos = new THREE.Vector3(0, 0, state3D.currentZ);
     } else if (state3D.mode === 'wall') {
@@ -820,6 +880,7 @@
 
       // 2. Damping & Lerping
       state3D.currentAngle += (state3D.targetAngle - state3D.currentAngle) * 0.08;
+      state3D.currentCylinderY += (state3D.targetCylinderY - state3D.currentCylinderY) * 0.08;
       state3D.currentZ += (state3D.targetZ - state3D.currentZ) * 0.08;
       state3D.tunnelYaw += (state3D.targetTunnelYaw - state3D.tunnelYaw) * 0.08;
       state3D.tunnelPitch += (state3D.targetTunnelPitch - state3D.tunnelPitch) * 0.08;
@@ -843,9 +904,9 @@
       if (!state3D.focusedMesh) {
         if (state3D.mode === 'cylinder') {
           artGroup.rotation.y = state3D.currentAngle;
-          camera.position.set(0, 0, 0);
-          camera.rotation.x = mouse.y * 0.06;
-          camera.rotation.y = -mouse.x * 0.06;
+          camera.position.set(0, state3D.currentCylinderY, 0);
+          camera.rotation.x = mouse.y * 0.08;
+          camera.rotation.y = -mouse.x * 0.08;
         } else if (state3D.mode === 'helix') {
           artGroup.rotation.y = 0;
           camera.position.set(0, 0, state3D.currentZ);
@@ -872,7 +933,9 @@
           const t = state3D.focusProgress;
           const ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
           camera.position.lerpVectors(state3D.cameraStartPos, state3D.cameraTargetPos, ease);
-          camera.lookAt(state3D.focusedMesh.position);
+          if (state3D.cameraTargetLookAt) {
+            camera.lookAt(state3D.cameraTargetLookAt);
+          }
         }
       }
 
