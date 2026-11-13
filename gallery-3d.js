@@ -26,7 +26,7 @@
     lastPointerX: 0,
     lastPointerY: 0,
     velocity: 0,
-    isAutoSpin: true,
+    isAutoSpin: false,
     lastInteractionTime: Date.now(),
     // Inspection Focus
     hoveredMesh: null,
@@ -211,13 +211,12 @@
       });
     }
 
-    // Auto-spin / Sway toggle in Tunnel
+    // Auto-flight toggle in Tunnel
     if (spinBtn) {
       spinBtn.addEventListener('click', () => {
         state3D.isAutoSpin = !state3D.isAutoSpin;
         spinBtn.classList.toggle('is-spinning', state3D.isAutoSpin);
       });
-      spinBtn.classList.add('is-spinning');
     }
 
     // Theme toggle in 3D
@@ -650,13 +649,9 @@
         }
       }
 
-      // Rotire 3D completă (Yaw): drag orizontal rotește privirea stânga/dreapta în tunel
-      state3D.targetTunnelYaw += deltaX * 0.005;
-      // Înclinare verticală (Pitch) și deplasare lină de-a lungul axei Z
-      state3D.targetTunnelPitch = Math.max(-0.55, Math.min(0.55, state3D.targetTunnelPitch + deltaY * 0.003));
-      state3D.targetZ += deltaY * 0.06;
-      const maxZ = Math.ceil(state3D.meshes.length / 2) * HELIX_SPACING + 6;
-      state3D.targetZ = Math.max(-2, Math.min(maxZ, state3D.targetZ));
+      // Rotire 3D lină și stabilă a privirii în tunel (Yaw & Pitch)
+      state3D.targetTunnelYaw += deltaX * 0.0035;
+      state3D.targetTunnelPitch = Math.max(-0.35, Math.min(0.35, state3D.targetTunnelPitch + deltaY * 0.002));
 
       state3D.velocity = deltaX * 0.0035;
       state3D.lastInteractionTime = Date.now();
@@ -683,9 +678,10 @@
           dismissFocusCard();
         }
 
-        state3D.targetZ += e.deltaY * 0.05;
+        // Deplasare lină și controlată prin tunel
+        state3D.targetZ += e.deltaY * 0.025;
         const maxZ = Math.ceil(state3D.meshes.length / 2) * HELIX_SPACING + 6;
-        state3D.targetZ = Math.max(-2, Math.min(maxZ, state3D.targetZ));
+        state3D.targetZ = Math.max(0, Math.min(maxZ, state3D.targetZ));
       },
       { passive: false }
     );
@@ -855,15 +851,18 @@
       const delta = Math.min(clock.getDelta(), 0.1);
       const time = clock.getElapsedTime();
 
-      // 1. Auto-Sway in Tunnel
+      // 1. Auto-Flight in Tunnel (Activ exclusiv dacă utilizatorul apasă butonul de redare)
       if (
         state3D.isAutoSpin &&
         !state3D.isDragging &&
-        !state3D.focusedMesh &&
-        Date.now() - state3D.lastInteractionTime > 2000
+        !state3D.focusedMesh
       ) {
-        // Balansare cinematică lină stânga-dreapta între tablouri
-        state3D.targetTunnelYaw = Math.sin(time * 0.45) * 0.35;
+        const maxZ = Math.ceil(state3D.meshes.length / 2) * HELIX_SPACING + 6;
+        if (state3D.targetZ < maxZ) {
+          state3D.targetZ += 0.04;
+        } else {
+          state3D.targetZ = 0;
+        }
       }
 
       // 2. Damping & Lerping along Tunnel Runway
@@ -883,13 +882,14 @@
         mesh.scale.set(u.currentScale, u.currentScale, u.currentScale);
       });
 
-      // 4. Camera Dynamics in Tunnel
+      // 4. Camera Dynamics in Tunnel (Complet stabilă — fără tremur sau înclinare la mișcarea cursorului)
       if (!state3D.focusedMesh && !state3D.isUnfocusing) {
         artGroup.rotation.y = 0;
         camera.position.set(0, 0, state3D.currentZ);
-        // Rotație 3D completă (Yaw & Pitch) în tunel:
-        const totalYaw = state3D.tunnelYaw - mouse.x * 0.08;
-        const totalPitch = state3D.tunnelPitch + mouse.y * 0.06;
+
+        // Direcția privirii este dictată STRICT de rotația deliberată a utilizatorului (drag / taste)
+        const totalYaw = state3D.tunnelYaw;
+        const totalPitch = state3D.tunnelPitch;
         const dirX = Math.sin(totalYaw) * Math.cos(totalPitch);
         const dirY = Math.sin(totalPitch);
         const dirZ = Math.cos(totalYaw) * Math.cos(totalPitch);
@@ -943,7 +943,7 @@
           if (state3D.hoveredMesh !== hitPivot) {
             if (state3D.hoveredMesh) state3D.hoveredMesh.userData.targetScale = 1;
             state3D.hoveredMesh = hitPivot;
-            hitPivot.userData.targetScale = 1.08;
+            hitPivot.userData.targetScale = 1.02; // Evidențiere discretă, fără deformări bruște
             if (canvasContainer) canvasContainer.classList.add('is-hovering');
           }
         } else {
@@ -965,14 +965,12 @@
         particlesMesh.rotation.x = time * 0.01;
       }
 
-      // 7. Dynamic Point Light follows mouse and shines forward onto paintings
+      // 7. Iluminare stabilă de muzeu (fără oscilații generate de cursor)
       if (pointLight) {
-        pointLight.position.x = camera.position.x + mouse.x * 5;
-        pointLight.position.y = camera.position.y + mouse.y * 5;
-        pointLight.position.z = camera.position.z + 4;
+        pointLight.position.set(camera.position.x, camera.position.y + 1.2, camera.position.z + 2.0);
       }
       if (dirLight) {
-        dirLight.position.set(camera.position.x, camera.position.y + 12, camera.position.z + 4);
+        dirLight.position.set(camera.position.x, camera.position.y + 12, camera.position.z + 5);
       }
 
       renderer.render(scene, camera);
