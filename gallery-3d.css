@@ -1,0 +1,483 @@
+/* ==========================================================================
+   gallery-3d.css — 3D Spatial Modern Photo Gallery Engine for 757
+   Biomechanical Surrealism · WebGL Three.js Visualizer
+   ========================================================================== */
+
+/* Top Header 3D Button (placed near the sound icon) */
+.btn-3d-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0 0.75rem;
+  height: 40px;
+  border-radius: 20px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-3d-icon:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+  background: rgba(212, 163, 89, 0.12);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(212, 163, 89, 0.25);
+}
+
+.btn-3d-icon .icon-3d-svg {
+  display: block;
+  stroke: currentColor;
+  transition: transform 0.3s ease;
+}
+
+.btn-3d-icon:hover .icon-3d-svg {
+  transform: rotate(15deg) scale(1.1);
+}
+
+.btn-3d-badge {
+  display: inline-block;
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
+   3D Spatial Gallery Fullscreen Overlay
+   -------------------------------------------------------------------------- */
+.spatial-3d-gallery {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  background: #040507;
+  color: #f1f1f1;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s ease;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.spatial-3d-gallery.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Light Theme Adaptations inside 3D Gallery */
+[data-theme="light"] .spatial-3d-gallery {
+  background: #f7f6f2;
+  color: #1a1a1a;
+}
+
+/* Canvas Container */
+.spatial-3d-canvas-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  z-index: 1;
+}
+
+.spatial-3d-canvas-container:active {
+  cursor: grabbing;
+}
+
+.spatial-3d-canvas-container.is-hovering {
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   Top Bar HUD
+   -------------------------------------------------------------------------- */
+.spatial-3d-hud-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 68px;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 20;
+  pointer-events: auto;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: rgba(4, 5, 7, 0.75);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .spatial-3d-hud-top {
+  background: rgba(247, 246, 242, 0.85);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.spatial-3d-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.spatial-3d-logo {
+  font-family: var(--font-display, 'Cinzel', serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--accent-gold, #d4a359);
+}
+
+.spatial-3d-divider {
+  opacity: 0.35;
+  font-weight: 300;
+}
+
+.spatial-3d-mode-label {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary, #9ca3af);
+}
+
+/* HUD Action Group */
+.spatial-3d-hud-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Mode Switcher Pills */
+.spatial-3d-modes {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3px;
+  border-radius: 24px;
+  gap: 2px;
+}
+
+[data-theme="light"] .spatial-3d-modes {
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.spatial-mode-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary, #9ca3af);
+  padding: 0.35rem 0.85rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.2s);
+}
+
+.spatial-mode-btn:hover {
+  color: #fff;
+}
+
+[data-theme="light"] .spatial-mode-btn:hover {
+  color: #000;
+}
+
+.spatial-mode-btn.is-active {
+  background: var(--accent-gold, #d4a359);
+  color: #050508;
+  box-shadow: 0 2px 8px rgba(212, 163, 89, 0.4);
+}
+
+/* HUD Buttons */
+.spatial-hud-btn {
+  height: 38px;
+  padding: 0 0.85rem;
+  border-radius: 19px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: inherit;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.2s);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+}
+
+[data-theme="light"] .spatial-hud-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.spatial-hud-btn:hover {
+  border-color: var(--accent-gold, #d4a359);
+  color: var(--accent-gold, #d4a359);
+}
+
+.spatial-hud-btn.is-spinning .spin-icon {
+  animation: spatialSpin 4s linear infinite;
+  color: var(--accent-gold, #d4a359);
+}
+
+@keyframes spatialSpin {
+  100% { transform: rotate(360deg); }
+}
+
+.spatial-close-btn {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #f87171;
+  font-weight: 700;
+}
+
+.spatial-close-btn:hover {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: #ef4444;
+  color: #fff;
+}
+
+/* --------------------------------------------------------------------------
+   Bottom Floating Instruction HUD
+   -------------------------------------------------------------------------- */
+.spatial-3d-hud-bottom {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.spatial-3d-instructions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.45rem 1.25rem;
+  border-radius: 30px;
+  background: rgba(10, 12, 16, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="light"] .spatial-3d-instructions {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.75);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.spatial-hint-dot {
+  color: var(--accent-gold, #d4a359);
+}
+
+/* --------------------------------------------------------------------------
+   Curatorial Inspection Card (Focused Artwork Plaque)
+   -------------------------------------------------------------------------- */
+.spatial-3d-focus-card {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  width: 380px;
+  max-width: calc(100vw - 4rem);
+  background: rgba(12, 14, 18, 0.92);
+  border: 1px solid rgba(212, 163, 89, 0.35);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(212, 163, 89, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 8px;
+  padding: 1.5rem;
+  z-index: 30;
+  opacity: 0;
+  transform: translateY(20px) scale(0.96);
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] .spatial-3d-focus-card {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12), 0 0 30px rgba(212, 163, 89, 0.1);
+}
+
+.spatial-3d-focus-card.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.spatial-card-dismiss {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  background: transparent;
+  border: none;
+  color: inherit;
+  opacity: 0.6;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+  transition: opacity 0.2s;
+}
+
+.spatial-card-dismiss:hover {
+  opacity: 1;
+  color: var(--accent-gold, #d4a359);
+}
+
+.spatial-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+}
+
+.spatial-card-id {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--accent-gold, #d4a359);
+}
+
+.spatial-card-wing {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(212, 163, 89, 0.15);
+  color: var(--accent-gold, #d4a359);
+}
+
+.spatial-card-title {
+  font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0 0 0.4rem 0;
+  color: inherit;
+}
+
+.spatial-card-medium {
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.78rem;
+  opacity: 0.7;
+  margin: 0 0 0.85rem 0;
+}
+
+.spatial-card-note {
+  font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
+  font-size: 0.88rem;
+  font-style: italic;
+  line-height: 1.45;
+  opacity: 0.85;
+  margin: 0 0 1.25rem 0;
+  max-height: 85px;
+  overflow-y: auto;
+  border-left: 2px solid var(--accent-gold, #d4a359);
+  padding-left: 0.75rem;
+}
+
+.spatial-card-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.spatial-btn-primary {
+  flex: 1;
+  background: var(--accent-gold, #d4a359);
+  color: #050508;
+  border: none;
+  border-radius: 4px;
+  padding: 0.55rem 0.85rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.2s);
+}
+
+.spatial-btn-primary:hover {
+  filter: brightness(1.15);
+  box-shadow: 0 4px 12px rgba(212, 163, 89, 0.35);
+}
+
+.spatial-btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  padding: 0.55rem 0.85rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.2s);
+}
+
+[data-theme="light"] .spatial-btn-secondary {
+  background: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.spatial-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Mobile responsiveness for 3D overlay */
+@media (max-width: 768px) {
+  .spatial-3d-hud-top {
+    height: 58px;
+    padding: 0 0.85rem;
+  }
+  .spatial-3d-mode-label {
+    display: none;
+  }
+  .spatial-mode-btn {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.68rem;
+  }
+  .spatial-3d-instructions {
+    font-size: 0.65rem;
+    padding: 0.35rem 0.85rem;
+    max-width: 90vw;
+    text-align: center;
+  }
+  .spatial-hint-dot:not(:first-of-type),
+  .spatial-hint:not(:first-of-type) {
+    display: none;
+  }
+  .spatial-3d-focus-card {
+    right: 1rem;
+    left: 1rem;
+    bottom: 1rem;
+    width: auto;
+    max-width: none;
+    padding: 1.1rem;
+  }
+}

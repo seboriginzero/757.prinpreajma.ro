@@ -158,6 +158,7 @@ def rebuild_site():
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="gallery.css">
+  <link rel="stylesheet" href="gallery-3d.css">
 </head>
 <body>
 
@@ -180,6 +181,16 @@ def rebuild_site():
       </nav>
 
       <div class="header-controls">
+        <!-- 3D Spatial Modern Photo Gallery Toggle -->
+        <button id="gallery-3d-toggle" class="btn-control btn-3d-icon" title="Galeria 3D Spațială (Tasta 3)" aria-label="Deschide Galeria 3D">
+          <svg class="icon-3d-svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5"></path>
+            <path d="M2 12l10 5 10-5"></path>
+          </svg>
+          <span class="btn-3d-badge">3D</span>
+        </button>
+
         <!-- Ambience Synthesizer Toggle: Speaker with Red Slash (Off) / Waves (On) -->
         <button id="ambience-toggle" class="btn-control btn-ambience-icon" title="Sunet Ambiental (Web Audio)" aria-label="Comutare Sunet">
           <!-- Difuzor tăiat cu linie roșie (OFF) -->
@@ -616,12 +627,83 @@ def rebuild_site():
     </div>
   </div>
 
+  <!-- 3D Spatial Modern Photo Gallery Container -->
+  <div id="spatial-3d-gallery" class="spatial-3d-gallery" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Galeria 3D Spațială 757">
+    <!-- WebGL Canvas Mount -->
+    <div id="spatial-3d-canvas-container" class="spatial-3d-canvas-container"></div>
+    
+    <!-- 3D Top Bar HUD -->
+    <div class="spatial-3d-hud-top">
+      <div class="spatial-3d-brand">
+        <span class="spatial-3d-logo">757</span>
+        <span class="spatial-3d-divider">/</span>
+        <span class="spatial-3d-mode-label" id="spatial-3d-mode-label">INEL PANORAMIC 360°</span>
+      </div>
+      
+      <div class="spatial-3d-hud-actions">
+        <!-- Layout Switcher Tabs -->
+        <div class="spatial-3d-modes">
+          <button class="spatial-mode-btn is-active" data-mode="cylinder" title="Inel Panoramic 360°">Inel 360°</button>
+          <button class="spatial-mode-btn" data-mode="helix" title="Tunel Infinit Z-Axis">Tunel Z</button>
+          <button class="spatial-mode-btn" data-mode="wall" title="Perete Curbat Matrix">Perete</button>
+        </div>
+        
+        <!-- Auto-Rotate Toggle -->
+        <button id="spatial-3d-spin-btn" class="spatial-hud-btn" title="Pauză / Redare Rotație Automată (Spațiu)">
+          <svg class="spin-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+          </svg>
+        </button>
+
+        <!-- Theme Switcher in 3D -->
+        <button id="spatial-3d-theme-btn" class="spatial-hud-btn" title="Comutare Ambianță (Obsidian / White Cube)">
+          <span class="spatial-theme-dark">🌘</span>
+          <span class="spatial-theme-light">◻</span>
+        </button>
+
+        <!-- Close Button -->
+        <button id="spatial-3d-close-btn" class="spatial-hud-btn spatial-close-btn" title="Închide Galeria 3D (ESC)" aria-label="Închide Galeria 3D">
+          <span class="spatial-close-label">✕ ESC</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 3D Bottom Floating Instruction HUD -->
+    <div class="spatial-3d-hud-bottom">
+      <div class="spatial-3d-instructions">
+        <span class="spatial-hint">⟵ Trage orizontal pentru rotire 3D ⟶</span>
+        <span class="spatial-hint-dot">·</span>
+        <span class="spatial-hint">Scroll pentru navigare</span>
+        <span class="spatial-hint-dot">·</span>
+        <span class="spatial-hint">Click pe tablou pentru detalii</span>
+      </div>
+    </div>
+
+    <!-- Curatorial Inspection Card (Plaque) when an artwork is focused in 3D -->
+    <div id="spatial-3d-focus-card" class="spatial-3d-focus-card" aria-hidden="true">
+      <button id="spatial-card-dismiss-btn" class="spatial-card-dismiss" title="Revino la explorare 3D">✕</button>
+      <div class="spatial-card-header">
+        <span class="spatial-card-id" id="spatial-card-id">ART-0001</span>
+        <span class="spatial-card-wing" id="spatial-card-wing">SALA I</span>
+      </div>
+      <h3 class="spatial-card-title" id="spatial-card-title">Titlu Operă</h3>
+      <p class="spatial-card-medium" id="spatial-card-medium">Tehnică mixtă</p>
+      <p class="spatial-card-note" id="spatial-card-note">Analiză curatorială a operei...</p>
+      <div class="spatial-card-actions">
+        <button id="spatial-card-detail-btn" class="spatial-btn-primary">Examinează în Detaliu</button>
+        <button id="spatial-card-back-btn" class="spatial-btn-secondary">Înapoi în Spațiul 3D</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Embed collection data directly for instant offline rendering -->
   <script>
     window.COLLECTION_DATA = {json_dataset};
   </script>
 
   <script src="gallery.js"></script>
+  <script src="three.min.js" defer></script>
+  <script src="gallery-3d.js" defer></script>
 </body>
 </html>'''
 

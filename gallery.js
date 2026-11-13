@@ -951,6 +951,22 @@
       });
     });
 
+    // Bridge public pentru deschiderea modalului din experiențe externe (Galeria 3D Three.js)
+    window.openArtworkModalById = function (artId) {
+      let idx = state.filteredItems.findIndex(i => i.id === artId);
+      if (idx !== -1) {
+        openModal(idx);
+      } else {
+        state.activeFilter = 'all';
+        catPills.forEach(p => p.classList.remove('active'));
+        const allPill = document.querySelector('.cat-pill[data-category="all"]');
+        if (allPill) allPill.classList.add('active');
+        filterItems();
+        idx = state.filteredItems.findIndex(i => i.id === artId);
+        if (idx !== -1) openModal(idx);
+      }
+    };
+
     // Load more (încărcare stabilă fără salt la footer)
     if (loadMoreBtn) {
       loadMoreBtn.addEventListener('click', loadMoreArtworks);
