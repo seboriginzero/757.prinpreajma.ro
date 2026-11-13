@@ -1821,7 +1821,7 @@ a {
   height: 100vh;
   background: transparent;
   border: none;
-  z-index: 1000;
+  z-index: 200000;
   display: none;
   justify-content: center;
   align-items: center;
@@ -3725,6 +3725,7 @@ a {
     max-height: 100dvh !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
+    z-index: 200000 !important;
   }
 
   .modal-backdrop {

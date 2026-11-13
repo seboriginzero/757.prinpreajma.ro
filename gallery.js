@@ -502,13 +502,30 @@
     document.body.classList.add('modal-open');
   }
 
+  function handleModalCloseState() {
+    const spatialGallery = document.getElementById('spatial-3d-gallery');
+    const is3dActive = spatialGallery && spatialGallery.classList.contains('is-active');
+    if (!is3dActive) {
+      document.body.style.overflow = '';
+    } else {
+      document.body.style.overflow = 'hidden';
+      const currentItem = state.filteredItems[state.modalIndex];
+      if (currentItem && window.sync3DToArtworkId) {
+        window.sync3DToArtworkId(currentItem.id);
+      }
+    }
+    document.body.classList.remove('modal-open');
+    resetZoom();
+    if (window.onCloseDetailModalFrom3D) {
+      window.onCloseDetailModalFrom3D();
+    }
+  }
+
   function closeModal() {
     if (modal.open) {
       modal.close();
     }
-    document.body.style.overflow = '';
-    document.body.classList.remove('modal-open');
-    resetZoom();
+    handleModalCloseState();
   }
 
   function resetZoom() {
@@ -1023,15 +1040,11 @@
 
     // Modal dialog native event listener (PREVENTS SCROLL-LOCK WHEN CLOSING)
     modal.addEventListener('close', () => {
-      document.body.style.overflow = '';
-      document.body.classList.remove('modal-open');
-      resetZoom();
+      handleModalCloseState();
     });
 
     modal.addEventListener('cancel', () => {
-      document.body.style.overflow = '';
-      document.body.classList.remove('modal-open');
-      resetZoom();
+      handleModalCloseState();
     });
 
     // Click outside dialog to close

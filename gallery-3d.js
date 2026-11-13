@@ -50,6 +50,7 @@
     focusProgress: 1,
     isUnfocusing: false,
     unfocusProgress: 1,
+    isDetailModalOpen: false,
     theme: 'dark'
   };
 
@@ -218,7 +219,8 @@
       cardDetailBtn.addEventListener('click', () => {
         if (state3D.focusedMesh && state3D.focusedMesh.userData.item) {
           const item = state3D.focusedMesh.userData.item;
-          close3DGallery();
+          state3D.isDetailModalOpen = true;
+          // Open high-res modal ON TOP of 3D without closing the 3D gallery
           if (window.openArtworkModalById) {
             window.openArtworkModalById(item.id);
           }
@@ -231,6 +233,11 @@
       if (!state3D.isOpen) return;
 
       if (e.key === 'Escape') {
+        const modal = document.getElementById('artwork-modal');
+        if (modal && modal.open) {
+          // Modal handles its own Escape; keep 3D gallery intact
+          return;
+        }
         if (state3D.focusedMesh) {
           dismissFocusCard();
         } else {
@@ -765,8 +772,8 @@
       const pivot = hit.userData.parentPivot;
       if (pivot) {
         if (state3D.focusedMesh === pivot && state3D.focusProgress >= 0.8) {
-          // Double-clicking focused artwork opens full high-res detail inspection
-          close3DGallery();
+          // Double-clicking focused artwork opens full high-res detail inspection on top
+          state3D.isDetailModalOpen = true;
           if (window.openArtworkModalById && pivot.userData.item) {
             window.openArtworkModalById(pivot.userData.item.id);
           }
@@ -1062,6 +1069,25 @@
   // Export public methods
   window.openSpatial3DGallery = open3DGallery;
   window.closeSpatial3DGallery = close3DGallery;
+
+  // Sync 3D view when returning from modal or switching items in modal
+  window.sync3DToArtworkId = function (artId) {
+    if (!state3D.isOpen) return;
+    state3D.isDetailModalOpen = false;
+    state3D.lastInteractionTime = Date.now();
+    const mesh = state3D.meshes.find((m) => m.userData && m.userData.item && m.userData.item.id === artId);
+    if (mesh) {
+      focusArtwork(mesh);
+    }
+  };
+
+  window.onCloseDetailModalFrom3D = function () {
+    state3D.isDetailModalOpen = false;
+    state3D.lastInteractionTime = Date.now();
+    if (state3D.isOpen) {
+      document.body.style.overflow = 'hidden';
+    }
+  };
 
   // Init trigger on DOM ready
   if (document.readyState === 'loading') {
