@@ -638,6 +638,17 @@ def rebuild_site():
         <span class="spatial-3d-logo">757</span>
         <span class="spatial-3d-divider">/</span>
         <span class="spatial-3d-mode-label" id="spatial-3d-mode-label">INEL PANORAMIC 360°</span>
+        <span class="spatial-3d-counter" id="spatial-3d-counter">28 LUCRĂRI</span>
+      </div>
+
+      <!-- Center: Room / Wing Filter Pills -->
+      <div class="spatial-3d-wings" id="spatial-3d-wings">
+        <button class="spatial-wing-btn is-active" data-wing="all">Toate</button>
+        <button class="spatial-wing-btn" data-wing="biomechanical-osteology">Sala I</button>
+        <button class="spatial-wing-btn" data-wing="cryptic-totems">Sala II</button>
+        <button class="spatial-wing-btn" data-wing="chromatic-expressions">Sala III</button>
+        <button class="spatial-wing-btn" data-wing="cybernetic-assemblages">Sala IV</button>
+        <button class="spatial-wing-btn" data-wing="monumental-perspectives">Sala V</button>
       </div>
       
       <div class="spatial-3d-hud-actions">
@@ -645,7 +656,7 @@ def rebuild_site():
         <div class="spatial-3d-modes">
           <button class="spatial-mode-btn is-active" data-mode="cylinder" title="Inel Panoramic 360°">Inel 360°</button>
           <button class="spatial-mode-btn" data-mode="helix" title="Tunel Infinit Z-Axis">Tunel Z</button>
-          <button class="spatial-mode-btn" data-mode="wall" title="Perete Curbat Matrix">Perete</button>
+          <button class="spatial-mode-btn" data-mode="wall" title="Perete Matrix">Perete</button>
         </div>
         
         <!-- Auto-Rotate Toggle -->

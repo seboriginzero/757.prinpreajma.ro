@@ -8,14 +8,24 @@
     isOpen: false,
     initialized: false,
     mode: 'cylinder', // 'cylinder', 'helix', 'wall'
-    items: [],
+    activeWing: 'all', // 'all', 'biomechanical-osteology', etc.
+    allItems: [],
+    activeItems: [],
     meshes: [],
+    // Cylinder Kinematics
     currentAngle: 0,
     targetAngle: 0,
-    targetZ: 0,
+    // Helix Kinematics
     currentZ: 0,
-    targetY: 0,
-    currentY: 0,
+    targetZ: 0,
+    // Wall Kinematics
+    wallPanX: 0,
+    targetWallPanX: 0,
+    wallPanY: 0,
+    targetWallPanY: 0,
+    wallZoomZ: 10.5,
+    targetWallZoomZ: 10.5,
+    // Pointer Drag Physics
     isDragging: false,
     dragStartX: 0,
     dragStartY: 0,
@@ -24,11 +34,14 @@
     velocity: 0,
     isAutoSpin: true,
     lastInteractionTime: Date.now(),
+    // Inspection Focus
     hoveredMesh: null,
     focusedMesh: null,
     cameraStartPos: null,
     cameraTargetPos: null,
-    focusProgress: 1, // 1 = fully stationary
+    cameraStartLookAt: null,
+    cameraTargetLookAt: null,
+    focusProgress: 1,
     theme: 'dark'
   };
 
@@ -39,26 +52,24 @@
   let raycaster, mouse;
   let animFrameId = null;
 
-  // Layout Configuration
-  const CYLINDER_RADIUS = 13.5;
-  const HELIX_SPACING = 3.6;
-  const WALL_COLUMNS = 12;
+  // Geometry Constants
+  const CYLINDER_RADIUS = 16.5;
+  const HELIX_SPACING = 4.2;
+  const HELIX_OFFSET_X = 3.8;
 
   // DOM Elements
   let gallery3dOverlay, canvasContainer;
-  let modeLabel, modeBtns, spinBtn, themeBtn, closeBtn;
+  let modeLabel, counterLabel, modeBtns, wingBtns, spinBtn, themeBtn, closeBtn;
   let focusCard, cardId, cardWing, cardTitle, cardMedium, cardNote, cardDetailBtn, cardBackBtn, cardDismissBtn;
 
-  // Wait for DOM to wire up trigger button
+  // Initialize trigger from header button
   function initTrigger() {
     const triggerBtn = document.getElementById('gallery-3d-toggle');
     if (!triggerBtn) return;
 
-    triggerBtn.addEventListener('click', () => {
-      open3DGallery();
-    });
+    triggerBtn.addEventListener('click', open3DGallery);
 
-    // Global shortcut: press '3' on keyboard to open 3D gallery
+    // Global keyboard shortcut: '3' opens 3D gallery
     window.addEventListener('keydown', (e) => {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
       if (e.key === '3' && !state3D.isOpen) {
@@ -68,7 +79,7 @@
     });
   }
 
-  // Open the 3D Gallery
+  // Open 3D Spatial Gallery
   function open3DGallery() {
     if (state3D.isOpen) return;
     state3D.isOpen = true;
@@ -82,18 +93,14 @@
       gallery3dOverlay.setAttribute('aria-hidden', 'false');
     }
 
-    // Disable main body scroll
     document.body.style.overflow = 'hidden';
 
-    // Synchronize theme with main page
     const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
     state3D.theme = currentTheme;
 
-    // Initialize WebGL scene if not already done
     if (!state3D.initialized) {
       if (typeof THREE === 'undefined') {
-        console.warn('Three.js is still loading. Retrying in 100ms...');
-        setTimeout(open3DGallery, 100);
+        setTimeout(open3DGallery, 80);
         return;
       }
       initThreeScene();
@@ -103,12 +110,11 @@
       onWindowResize();
     }
 
-    // Start render loop
     state3D.lastInteractionTime = Date.now();
     startAnimationLoop();
   }
 
-  // Close the 3D Gallery
+  // Close 3D Spatial Gallery
   function close3DGallery() {
     if (!state3D.isOpen) return;
     state3D.isOpen = false;
@@ -121,7 +127,6 @@
     dismissFocusCard();
     document.body.style.overflow = '';
 
-    // Stop render loop to save GPU
     if (animFrameId) {
       cancelAnimationFrame(animFrameId);
       animFrameId = null;
@@ -133,7 +138,9 @@
     gallery3dOverlay = document.getElementById('spatial-3d-gallery');
     canvasContainer = document.getElementById('spatial-3d-canvas-container');
     modeLabel = document.getElementById('spatial-3d-mode-label');
+    counterLabel = document.getElementById('spatial-3d-counter');
     modeBtns = document.querySelectorAll('.spatial-mode-btn');
+    wingBtns = document.querySelectorAll('.spatial-wing-btn');
     spinBtn = document.getElementById('spatial-3d-spin-btn');
     themeBtn = document.getElementById('spatial-3d-theme-btn');
     closeBtn = document.getElementById('spatial-3d-close-btn');
@@ -151,10 +158,11 @@
     setupDOMEyents();
   }
 
-  // Bind HUD DOM Events
+  // Setup DOM Interactions
   function setupDOMEyents() {
     if (closeBtn) closeBtn.addEventListener('click', close3DGallery);
 
+    // Layout switcher
     if (modeBtns) {
       modeBtns.forEach((btn) => {
         btn.addEventListener('click', () => {
@@ -164,6 +172,17 @@
       });
     }
 
+    // Room / Wing Filter
+    if (wingBtns) {
+      wingBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const wing = btn.getAttribute('data-wing');
+          switchWingFilter(wing);
+        });
+      });
+    }
+
+    // Auto-spin toggle
     if (spinBtn) {
       spinBtn.addEventListener('click', () => {
         state3D.isAutoSpin = !state3D.isAutoSpin;
@@ -172,6 +191,7 @@
       spinBtn.classList.add('is-spinning');
     }
 
+    // Theme toggle in 3D
     if (themeBtn) {
       themeBtn.addEventListener('click', () => {
         const nextTheme = state3D.theme === 'dark' ? 'light' : 'dark';
@@ -190,7 +210,6 @@
         if (state3D.focusedMesh && state3D.focusedMesh.userData.item) {
           const item = state3D.focusedMesh.userData.item;
           close3DGallery();
-          // Open main detail modal
           if (window.openArtworkModalById) {
             window.openArtworkModalById(item.id);
           }
@@ -198,7 +217,7 @@
       });
     }
 
-    // Keyboard Shortcuts inside 3D Gallery
+    // Keyboard Shortcuts inside 3D
     window.addEventListener('keydown', (e) => {
       if (!state3D.isOpen) return;
 
@@ -213,22 +232,61 @@
         state3D.isAutoSpin = !state3D.isAutoSpin;
         if (spinBtn) spinBtn.classList.toggle('is-spinning', state3D.isAutoSpin);
       } else if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
-        state3D.targetAngle += 0.2;
+        if (state3D.mode === 'cylinder') state3D.targetAngle += 0.22;
+        if (state3D.mode === 'wall') state3D.targetWallPanX -= 1.8;
         state3D.lastInteractionTime = Date.now();
       } else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
-        state3D.targetAngle -= 0.2;
+        if (state3D.mode === 'cylinder') state3D.targetAngle -= 0.22;
+        if (state3D.mode === 'wall') state3D.targetWallPanX += 1.8;
         state3D.lastInteractionTime = Date.now();
-      } else if (e.key === '1') {
-        switchLayoutMode('cylinder');
-      } else if (e.key === '2') {
-        switchLayoutMode('helix');
-      } else if (e.key === '3') {
-        switchLayoutMode('wall');
+      } else if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') {
+        if (state3D.mode === 'helix') state3D.targetZ += 3.5;
+        if (state3D.mode === 'wall') state3D.targetWallPanY -= 1.5;
+        state3D.lastInteractionTime = Date.now();
+      } else if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') {
+        if (state3D.mode === 'helix') state3D.targetZ -= 3.5;
+        if (state3D.mode === 'wall') state3D.targetWallPanY += 1.5;
+        state3D.lastInteractionTime = Date.now();
       }
     });
   }
 
-  // Switch Layout Modes with Smooth Interpolation
+  // Filter artworks by wing and rebuild 3D set
+  function switchWingFilter(wingId) {
+    if (state3D.activeWing === wingId) return;
+    state3D.activeWing = wingId;
+
+    if (wingBtns) {
+      wingBtns.forEach((btn) => {
+        btn.classList.toggle('is-active', btn.getAttribute('data-wing') === wingId);
+      });
+    }
+
+    dismissFocusCard();
+    rebuildActiveItems();
+  }
+
+  // Filter master items into active set (clean non-overlapping count)
+  function rebuildActiveItems() {
+    state3D.allItems = window.COLLECTION_DATA || [];
+    if (state3D.allItems.length === 0) return;
+
+    if (state3D.activeWing === 'all') {
+      // Pick up to 28 top works across categories to guarantee zero overlap and peak performance
+      state3D.activeItems = state3D.allItems.slice(0, 28);
+    } else {
+      const filtered = state3D.allItems.filter((it) => it.categories && it.categories.includes(state3D.activeWing));
+      state3D.activeItems = filtered.length > 0 ? filtered.slice(0, 28) : state3D.allItems.slice(0, 28);
+    }
+
+    if (counterLabel) {
+      counterLabel.textContent = `${state3D.activeItems.length} LUCRĂRI`;
+    }
+
+    buildArtworkMeshes();
+  }
+
+  // Switch Layout Modes
   function switchLayoutMode(newMode) {
     if (state3D.mode === newMode) return;
     state3D.mode = newMode;
@@ -243,105 +301,129 @@
       const labels = {
         cylinder: 'INEL PANORAMIC 360°',
         helix: 'TUNEL BIOMECANIC Z-AXIS',
-        wall: 'PERETE CURBAT MATRIX'
+        wall: 'PERETE MATRIX'
       };
       modeLabel.textContent = labels[newMode] || 'GALERIE 3D';
     }
 
     dismissFocusCard();
+
+    // Reset camera position and group orientation cleanly per mode
+    if (newMode === 'cylinder') {
+      camera.position.set(0, 0, 0);
+      camera.rotation.set(0, 0, 0);
+      artGroup.position.set(0, 0, 0);
+      artGroup.rotation.set(0, 0, 0);
+      state3D.currentAngle = 0;
+      state3D.targetAngle = 0;
+    } else if (newMode === 'helix') {
+      camera.position.set(0, 0, 0);
+      camera.rotation.set(0, 0, 0);
+      artGroup.position.set(0, 0, 0);
+      artGroup.rotation.set(0, 0, 0);
+      state3D.currentZ = 0;
+      state3D.targetZ = 0;
+    } else if (newMode === 'wall') {
+      camera.position.set(0, 0, 10.5);
+      camera.rotation.set(0, 0, 0);
+      artGroup.position.set(0, 0, 0);
+      artGroup.rotation.set(0, 0, 0);
+      state3D.wallPanX = 0;
+      state3D.targetWallPanX = 0;
+      state3D.wallPanY = 0;
+      state3D.targetWallPanY = 0;
+      state3D.wallZoomZ = 10.5;
+      state3D.targetWallZoomZ = 10.5;
+    }
+
     computeLayoutTargets();
   }
 
-  // Initialize Three.js WebGL Scene
+  // Initialize Three.js Scene
   function initThreeScene() {
     container = canvasContainer;
     const width = container.clientWidth || window.innerWidth;
     const height = container.clientHeight || window.innerHeight;
 
-    // 1. Scene & Fog
+    // 1. Scene
     scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x040507, 0.018);
+    // Atmospheric fog for background only (paintings use fog: false to remain ultra-crisp!)
+    scene.fog = new THREE.Fog(0x030406, 25, 95);
 
     // 2. Camera
-    camera = new THREE.PerspectiveCamera(52, width / height, 0.1, 1000);
+    camera = new THREE.PerspectiveCamera(54, width / height, 0.1, 1000);
     camera.position.set(0, 0, 0);
 
-    // 3. Renderer
+    // 3. High Performance Renderer with sRGB Output
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'high-performance' });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    if (renderer.outputColorSpace) {
-      renderer.outputColorSpace = THREE.SRGBColorSpace;
-    } else if (renderer.outputEncoding) {
-      renderer.outputEncoding = THREE.sRGBEncoding;
-    }
+    renderer.outputEncoding = THREE.sRGBEncoding;
     container.appendChild(renderer.domElement);
 
     // 4. Lights
-    ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
+    ambientLight = new THREE.AmbientLight(0xffffff, 1.1);
     scene.add(ambientLight);
 
-    dirLight = new THREE.DirectionalLight(0xd4a359, 0.8);
-    dirLight.position.set(0, 20, 10);
+    dirLight = new THREE.DirectionalLight(0xd4a359, 0.7);
+    dirLight.position.set(0, 15, 10);
     scene.add(dirLight);
 
-    pointLight = new THREE.PointLight(0x06b6d4, 1.2, 35);
+    pointLight = new THREE.PointLight(0x06b6d4, 1.2, 40);
     pointLight.position.set(0, 0, 0);
     scene.add(pointLight);
 
     // 5. Specular Ground Plane
-    const gridGeo = new THREE.PlaneGeometry(160, 160, 40, 40);
+    const gridGeo = new THREE.PlaneGeometry(180, 180, 36, 36);
     const gridMat = new THREE.MeshBasicMaterial({
-      color: 0x111622,
+      color: 0x0f141e,
       wireframe: true,
       transparent: true,
-      opacity: 0.15
+      opacity: 0.22
     });
     gridFloor = new THREE.Mesh(gridGeo, gridMat);
     gridFloor.rotation.x = -Math.PI / 2;
-    gridFloor.position.y = -6.5;
+    gridFloor.position.y = -6.2;
     scene.add(gridFloor);
 
     // 6. Dust Particles
     createParticles();
 
-    // 7. Raycasting & Mouse
+    // 7. Raycaster
     raycaster = new THREE.Raycaster();
     mouse = new THREE.Vector2(-999, -999);
 
-    // 8. Artwork Group
+    // 8. Artworks Group
     artGroup = new THREE.Group();
     scene.add(artGroup);
 
-    // Load and build artworks
-    buildArtworkMeshes();
+    rebuildActiveItems();
 
-    // Listeners
     setupCanvasInteractions();
     window.addEventListener('resize', onWindowResize);
 
     updateThemeInScene(state3D.theme);
   }
 
-  // Floating Atmospheric Dust Particles
+  // Floating Dust Particles
   function createParticles() {
-    const particleCount = 280;
+    const particleCount = 260;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
 
     for (let i = 0; i < particleCount * 3; i += 3) {
-      positions[i] = (Math.random() - 0.5) * 50;
-      positions[i + 1] = (Math.random() - 0.5) * 30;
-      positions[i + 2] = (Math.random() - 0.5) * 50;
+      positions[i] = (Math.random() - 0.5) * 60;
+      positions[i + 1] = (Math.random() - 0.5) * 35;
+      positions[i + 2] = (Math.random() - 0.5) * 60;
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
     const material = new THREE.PointsMaterial({
       color: 0xd4a359,
-      size: 0.18,
+      size: 0.2,
       transparent: true,
-      opacity: 0.55,
+      opacity: 0.6,
       blending: THREE.AdditiveBlending
     });
 
@@ -349,71 +431,87 @@
     scene.add(particlesMesh);
   }
 
-  // Build 3D Artworks from Master Dataset
+  // Build 3D Artworks with Luxury Museum Frame & Crisp Textures
   function buildArtworkMeshes() {
-    state3D.items = window.COLLECTION_DATA || [];
-    if (!state3D.items || state3D.items.length === 0) return;
+    // Clear existing meshes
+    while (artGroup.children.length > 0) {
+      const obj = artGroup.children[0];
+      artGroup.remove(obj);
+      if (obj.geometry) obj.geometry.dispose();
+      if (obj.material) {
+        if (Array.isArray(obj.material)) obj.material.forEach((m) => m.dispose());
+        else obj.material.dispose();
+      }
+    }
+    state3D.meshes = [];
 
     const textureLoader = new THREE.TextureLoader();
 
-    // Reusable materials
-    const frameMaterial = new THREE.MeshStandardMaterial({
-      color: 0x14161d,
-      roughness: 0.4,
-      metalness: 0.7
+    // Shared frame shadowbox material
+    const frameMat = new THREE.MeshStandardMaterial({
+      color: 0x14161c,
+      roughness: 0.55,
+      metalness: 0.65
     });
 
-    state3D.items.forEach((item, index) => {
-      // Determine aspect ratio
+    state3D.activeItems.forEach((item, index) => {
       const w = item.width || 1080;
       const h = item.height || 1350;
       const aspect = w / h;
 
-      // Base dimension: height ~ 2.8 units
-      const planeH = 2.8;
+      // Base height 2.6 units
+      const planeH = 2.6;
       const planeW = planeH * aspect;
 
-      // 1. Picture Mesh
+      // Root Artwork Object
+      const artworkPivot = new THREE.Group();
+
+      // 1. Picture Mesh (fog: false ensures textures are NEVER washed out or hazy!)
       const planeGeo = new THREE.PlaneGeometry(planeW, planeH);
       const picMaterial = new THREE.MeshBasicMaterial({
         color: 0x222222,
-        side: THREE.DoubleSide
+        side: THREE.FrontSide,
+        fog: false // Crucial: Keeps paintings saturated, sharp, and deep black!
       });
-
       const picMesh = new THREE.Mesh(planeGeo, picMaterial);
-      picMesh.userData = {
+      picMesh.position.z = 0.04;
+      artworkPivot.add(picMesh);
+
+      // 2. Museum Shadowbox Frame (precise depth, zero clipping)
+      const frameGeo = new THREE.BoxGeometry(planeW + 0.12, planeH + 0.12, 0.07);
+      const frameMesh = new THREE.Mesh(frameGeo, frameMat);
+      frameMesh.position.z = 0;
+      artworkPivot.add(frameMesh);
+
+      // User data for raycasting & animations
+      artworkPivot.userData = {
         item: item,
         index: index,
-        textureLoaded: false,
+        picMesh: picMesh,
         targetPos: new THREE.Vector3(),
         targetRot: new THREE.Euler(),
         currentScale: 1,
         targetScale: 1
       };
 
-      // 2. Beveled Backing / Frame
-      const frameGeo = new THREE.PlaneGeometry(planeW + 0.16, planeH + 0.16);
-      const frameMesh = new THREE.Mesh(frameGeo, frameMaterial);
-      frameMesh.position.z = -0.02;
-      picMesh.add(frameMesh);
-
-      // 3. Lazy texture loading
+      // Load texture with correct sRGB encoding
       const thumbUrl = 'data/web-images/' + (item.thumbnail_file || (item.id + '_thumb.webp'));
       textureLoader.load(
         thumbUrl,
         (tex) => {
-          if (tex.colorSpace) tex.colorSpace = THREE.SRGBColorSpace;
+          tex.encoding = THREE.sRGBEncoding;
           tex.generateMipmaps = true;
           tex.minFilter = THREE.LinearMipmapLinearFilter;
+          tex.anisotropy = Math.min(renderer.capabilities.getMaxAnisotropy(), 8);
           picMaterial.map = tex;
           picMaterial.color.setHex(0xffffff);
           picMaterial.needsUpdate = true;
-          picMesh.userData.textureLoaded = true;
         },
         undefined,
         () => {
-          // Fallback to web-images full webp if thumb fails
+          // Fallback to full webp
           textureLoader.load('data/web-images/' + item.id + '.webp', (tex) => {
+            tex.encoding = THREE.sRGBEncoding;
             picMaterial.map = tex;
             picMaterial.color.setHex(0xffffff);
             picMaterial.needsUpdate = true;
@@ -421,14 +519,16 @@
         }
       );
 
-      artGroup.add(picMesh);
-      state3D.meshes.push(picMesh);
+      artGroup.add(artworkPivot);
+      // Store reference for raycasting
+      picMesh.userData.parentPivot = artworkPivot;
+      state3D.meshes.push(artworkPivot);
     });
 
     computeLayoutTargets(true);
   }
 
-  // Calculate target positions and rotations for each layout
+  // Calculate target positions & rotations for the active layout mode
   function computeLayoutTargets(instant) {
     const total = state3D.meshes.length;
     if (total === 0) return;
@@ -438,29 +538,33 @@
       const tRot = mesh.userData.targetRot;
 
       if (state3D.mode === 'cylinder') {
-        // Mode 1: Cylindrical Ring Carousel
+        // Mode 1: Inel 360° — Generously spaced circular ring (ZERO OVERLAP!)
         const angle = (i / total) * Math.PI * 2;
         tPos.x = Math.sin(angle) * CYLINDER_RADIUS;
         tPos.z = Math.cos(angle) * CYLINDER_RADIUS;
-        tPos.y = (i % 2 === 0 ? 0.3 : -0.3); // subtle rhythmic stagger
-        tRot.set(0, angle + Math.PI, 0); // Face the center camera
+        tPos.y = i % 2 === 0 ? 0.2 : -0.2; // Subtle elegant stagger
+        tRot.set(0, angle + Math.PI, 0); // Face inward towards viewer
       } else if (state3D.mode === 'helix') {
-        // Mode 2: Biomechanical Corridor / Spinal Tunnel
-        const side = (i % 2 === 0 ? -1 : 1);
-        tPos.x = side * 4.6;
-        tPos.y = Math.sin(i * 0.4) * 1.6;
-        tPos.z = (i - total / 2) * HELIX_SPACING;
-        tRot.set(0, side > 0 ? -Math.PI / 2 : Math.PI / 2, 0); // Face inward towards runway
+        // Mode 2: Tunel Z — Runway Corridor along Z axis
+        const isLeft = i % 2 === 0;
+        tPos.x = isLeft ? -HELIX_OFFSET_X : HELIX_OFFSET_X;
+        tPos.y = Math.sin(i * 0.45) * 0.8;
+        tPos.z = Math.floor(i / 2) * HELIX_SPACING + 4;
+        // Inward tilt towards oncoming viewer
+        tRot.set(0, isLeft ? Math.PI * 0.38 : -Math.PI * 0.38, 0);
       } else if (state3D.mode === 'wall') {
-        // Mode 3: Curved Matrix Wall
-        const row = i % 3; // 3 tiers
-        const col = Math.floor(i / 3);
-        const colAngle = ((col - total / 6) / total) * Math.PI * 1.5;
-        const r = 16;
-        tPos.x = Math.sin(colAngle) * r;
-        tPos.z = Math.cos(colAngle) * r - 5;
-        tPos.y = (row - 1) * 3.4;
-        tRot.set(0, colAngle + Math.PI, 0);
+        // Mode 3: Perete Matrix — 3-Tier Curved Floating Wall (Directly in view!)
+        const rows = 3;
+        const col = Math.floor(i / rows);
+        const row = i % rows;
+        const totalCols = Math.ceil(total / rows);
+
+        const colOffset = (col - (totalCols - 1) / 2) * 2.85;
+        tPos.x = colOffset;
+        tPos.y = (1 - row) * 3.35;
+        // Gentle concave wrap embracing camera
+        tPos.z = -Math.pow(colOffset / 14, 2) * 1.5;
+        tRot.set(0, -colOffset * 0.025, 0);
       }
 
       if (instant) {
@@ -468,19 +572,9 @@
         mesh.rotation.copy(tRot);
       }
     });
-
-    if (instant) {
-      if (state3D.mode === 'cylinder') {
-        camera.position.set(0, 0, 0);
-      } else if (state3D.mode === 'helix') {
-        camera.position.set(0, 0, -20);
-      } else if (state3D.mode === 'wall') {
-        camera.position.set(0, 0, 0);
-      }
-    }
   }
 
-  // Update Theme Palette in 3D Scene
+  // Update Theme Colors in WebGL
   function updateThemeInScene(theme) {
     if (!scene) return;
 
@@ -488,36 +582,36 @@
       scene.background = new THREE.Color(0xf7f6f2);
       scene.fog.color.setHex(0xf7f6f2);
       ambientLight.color.setHex(0xffffff);
-      ambientLight.intensity = 1.2;
+      ambientLight.intensity = 1.25;
       dirLight.color.setHex(0xb45309);
       pointLight.color.setHex(0x0284c7);
       if (gridFloor) {
-        gridFloor.material.color.setHex(0xcccccc);
-        gridFloor.material.opacity = 0.25;
+        gridFloor.material.color.setHex(0xd0cfc8);
+        gridFloor.material.opacity = 0.35;
       }
       if (particlesMesh) {
         particlesMesh.material.color.setHex(0xb45309);
         particlesMesh.material.opacity = 0.35;
       }
     } else {
-      scene.background = new THREE.Color(0x040507);
-      scene.fog.color.setHex(0x040507);
+      scene.background = new THREE.Color(0x030406);
+      scene.fog.color.setHex(0x030406);
       ambientLight.color.setHex(0xffffff);
-      ambientLight.intensity = 0.9;
+      ambientLight.intensity = 1.1;
       dirLight.color.setHex(0xd4a359);
       pointLight.color.setHex(0x06b6d4);
       if (gridFloor) {
-        gridFloor.material.color.setHex(0x111622);
-        gridFloor.material.opacity = 0.15;
+        gridFloor.material.color.setHex(0x0f141e);
+        gridFloor.material.opacity = 0.22;
       }
       if (particlesMesh) {
         particlesMesh.material.color.setHex(0xd4a359);
-        particlesMesh.material.opacity = 0.55;
+        particlesMesh.material.opacity = 0.6;
       }
     }
   }
 
-  // Canvas Mouse & Touch Interactions
+  // Mouse & Touch Pointer Interactions
   function setupCanvasInteractions() {
     const el = canvasContainer;
 
@@ -532,7 +626,6 @@
     });
 
     window.addEventListener('pointermove', (e) => {
-      // Raycasting coordinates
       const rect = el.getBoundingClientRect();
       mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
@@ -544,11 +637,17 @@
       state3D.lastPointerX = e.clientX;
       state3D.lastPointerY = e.clientY;
 
-      if (state3D.mode === 'cylinder' || state3D.mode === 'wall') {
+      if (state3D.mode === 'cylinder') {
         state3D.targetAngle += deltaX * 0.0035;
-        state3D.targetY = Math.max(-2, Math.min(2, state3D.targetY + deltaY * 0.005));
       } else if (state3D.mode === 'helix') {
-        state3D.targetZ += deltaY * 0.08 + deltaX * 0.04;
+        state3D.targetZ += deltaY * 0.08 + deltaX * 0.02;
+        // Keep camera within runway bounds
+        const maxZ = Math.ceil(state3D.meshes.length / 2) * HELIX_SPACING + 6;
+        state3D.targetZ = Math.max(-2, Math.min(maxZ, state3D.targetZ));
+      } else if (state3D.mode === 'wall') {
+        state3D.targetWallPanX -= deltaX * 0.015;
+        state3D.targetWallPanY += deltaY * 0.015;
+        state3D.targetWallPanY = Math.max(-4.5, Math.min(4.5, state3D.targetWallPanY));
       }
 
       state3D.velocity = deltaX * 0.0035;
@@ -559,39 +658,49 @@
       if (!state3D.isDragging) return;
       state3D.isDragging = false;
 
-      // Click detection threshold
       const dist = Math.hypot(e.clientX - state3D.dragStartX, e.clientY - state3D.dragStartY);
       if (dist < 6) {
         handleClickRaycast();
       }
     });
 
-    // Mouse Wheel / Trackpad Scroll
+    // Wheel Scroll Navigation
     el.addEventListener(
       'wheel',
       (e) => {
         e.preventDefault();
         state3D.lastInteractionTime = Date.now();
 
-        if (state3D.mode === 'cylinder' || state3D.mode === 'wall') {
-          state3D.targetAngle -= e.deltaY * 0.0015;
-          state3D.targetAngle -= e.deltaX * 0.0015;
+        if (state3D.mode === 'cylinder') {
+          state3D.targetAngle -= (e.deltaY + e.deltaX) * 0.0018;
         } else if (state3D.mode === 'helix') {
-          state3D.targetZ -= e.deltaY * 0.05;
+          state3D.targetZ += e.deltaY * 0.04;
+          const maxZ = Math.ceil(state3D.meshes.length / 2) * HELIX_SPACING + 6;
+          state3D.targetZ = Math.max(-2, Math.min(maxZ, state3D.targetZ));
+        } else if (state3D.mode === 'wall') {
+          state3D.targetWallZoomZ = Math.max(5.5, Math.min(18.0, state3D.targetWallZoomZ + e.deltaY * 0.015));
         }
       },
       { passive: false }
     );
   }
 
-  // Click on Artwork Mesh -> Focus Camera & Display HUD Card
+  // Click on Artwork Mesh -> Focus Camera & Open Curatorial HUD
   function handleClickRaycast() {
     raycaster.setFromCamera(mouse, camera);
-    const intersects = raycaster.intersectObjects(state3D.meshes, false);
+
+    const hitTargets = [];
+    state3D.meshes.forEach((mesh) => {
+      const picMesh = mesh.userData.picMesh;
+      if (picMesh) hitTargets.push(picMesh);
+    });
+
+    const intersects = raycaster.intersectObjects(hitTargets, false);
 
     if (intersects.length > 0) {
       const hit = intersects[0].object;
-      focusArtwork(hit);
+      const pivot = hit.userData.parentPivot;
+      if (pivot) focusArtwork(pivot);
     } else {
       if (state3D.focusedMesh) {
         dismissFocusCard();
@@ -599,13 +708,12 @@
     }
   }
 
-  // Focus Artwork with Smooth Camera Translation
-  function focusArtwork(mesh) {
-    state3D.focusedMesh = mesh;
-    const item = mesh.userData.item;
+  // Focus Artwork with Smooth Camera Glide
+  function focusArtwork(pivot) {
+    state3D.focusedMesh = pivot;
+    const item = pivot.userData.item;
     if (!item) return;
 
-    // Fill Focus Card Metadata
     if (cardId) cardId.textContent = item.id || 'ART-757';
     if (cardWing) cardWing.textContent = item.category_name || 'SALA I';
     if (cardTitle) cardTitle.textContent = item.title || 'Fără titlu';
@@ -621,20 +729,22 @@
       focusCard.setAttribute('aria-hidden', 'false');
     }
 
-    // Set camera animation towards front of mesh
     state3D.cameraStartPos = camera.position.clone();
-    const meshWorldPos = new THREE.Vector3();
-    mesh.getWorldPosition(meshWorldPos);
 
-    // Compute normal direction facing outward
-    const normal = new THREE.Vector3(0, 0, 1).applyEuler(mesh.rotation);
-    const targetCamPos = meshWorldPos.clone().add(normal.multiplyScalar(3.2));
+    // Calculate world position and normal
+    const meshWorldPos = new THREE.Vector3();
+    pivot.getWorldPosition(meshWorldPos);
+
+    const normal = new THREE.Vector3(0, 0, 1).applyEuler(pivot.rotation);
+    const targetCamPos = meshWorldPos.clone().add(normal.multiplyScalar(3.0));
 
     state3D.cameraTargetPos = targetCamPos;
+    state3D.cameraStartLookAt = new THREE.Vector3(0, 0, 0);
+    state3D.cameraTargetLookAt = meshWorldPos.clone();
     state3D.focusProgress = 0;
   }
 
-  // Dismiss Focus Card & Return Camera
+  // Dismiss Focus Card
   function dismissFocusCard() {
     if (!state3D.focusedMesh) return;
     state3D.focusedMesh = null;
@@ -645,7 +755,15 @@
     }
 
     state3D.cameraStartPos = camera.position.clone();
-    state3D.cameraTargetPos = new THREE.Vector3(0, 0, 0);
+
+    if (state3D.mode === 'cylinder') {
+      state3D.cameraTargetPos = new THREE.Vector3(0, 0, 0);
+    } else if (state3D.mode === 'helix') {
+      state3D.cameraTargetPos = new THREE.Vector3(0, 0, state3D.currentZ);
+    } else if (state3D.mode === 'wall') {
+      state3D.cameraTargetPos = new THREE.Vector3(state3D.wallPanX, state3D.wallPanY, state3D.wallZoomZ);
+    }
+
     state3D.focusProgress = 0;
   }
 
@@ -659,7 +777,7 @@
     renderer.setSize(w, h);
   }
 
-  // Main 60 FPS Render Loop
+  // 60 FPS Animation & Physics Loop
   function startAnimationLoop() {
     if (animFrameId) cancelAnimationFrame(animFrameId);
 
@@ -670,54 +788,59 @@
       const delta = Math.min(clock.getDelta(), 0.1);
       const time = clock.getElapsedTime();
 
-      // 1. Idle Auto-Spin Logic
+      // 1. Auto-Spin in Cylinder mode when untouched
       if (
         state3D.isAutoSpin &&
         !state3D.isDragging &&
         !state3D.focusedMesh &&
-        Date.now() - state3D.lastInteractionTime > 2200
+        state3D.mode === 'cylinder' &&
+        Date.now() - state3D.lastInteractionTime > 2000
       ) {
-        state3D.targetAngle -= 0.0014;
+        state3D.targetAngle -= 0.0012;
       }
 
-      // 2. Physics & Damping (Lerping)
+      // 2. Damping & Lerping
       state3D.currentAngle += (state3D.targetAngle - state3D.currentAngle) * 0.08;
       state3D.currentZ += (state3D.targetZ - state3D.currentZ) * 0.08;
-      state3D.currentY += (state3D.targetY - state3D.currentY) * 0.08;
+      state3D.wallPanX += (state3D.targetWallPanX - state3D.wallPanX) * 0.08;
+      state3D.wallPanY += (state3D.targetWallPanY - state3D.wallPanY) * 0.08;
+      state3D.wallZoomZ += (state3D.targetWallZoomZ - state3D.wallZoomZ) * 0.08;
 
-      // 3. Artwork Mesh Positions & Rotations Morphing
+      // 3. Smooth Mesh Morphing to Layout Targets
       state3D.meshes.forEach((mesh) => {
         const u = mesh.userData;
-        mesh.position.lerp(u.targetPos, 0.08);
+        mesh.position.lerp(u.targetPos, 0.1);
+        mesh.rotation.x += (u.targetRot.x - mesh.rotation.x) * 0.1;
+        mesh.rotation.y += (u.targetRot.y - mesh.rotation.y) * 0.1;
+        mesh.rotation.z += (u.targetRot.z - mesh.rotation.z) * 0.1;
 
-        // Smooth rotation slerp / lerp
-        mesh.rotation.x += (u.targetRot.x - mesh.rotation.x) * 0.08;
-        mesh.rotation.y += (u.targetRot.y - mesh.rotation.y) * 0.08;
-        mesh.rotation.z += (u.targetRot.z - mesh.rotation.z) * 0.08;
-
-        // Hover scale lerp
-        u.currentScale += (u.targetScale - u.currentScale) * 0.12;
+        u.currentScale += (u.targetScale - u.currentScale) * 0.14;
         mesh.scale.set(u.currentScale, u.currentScale, u.currentScale);
       });
 
-      // 4. Group Rotation & Camera Dynamics
+      // 4. Camera Dynamics per Mode
       if (!state3D.focusedMesh) {
-        if (state3D.mode === 'cylinder' || state3D.mode === 'wall') {
+        if (state3D.mode === 'cylinder') {
           artGroup.rotation.y = state3D.currentAngle;
-          camera.position.y = state3D.currentY;
-          // Mouse parallax
+          camera.position.set(0, 0, 0);
           camera.rotation.x = mouse.y * 0.06;
           camera.rotation.y = -mouse.x * 0.06;
         } else if (state3D.mode === 'helix') {
           artGroup.rotation.y = 0;
-          camera.position.z = state3D.currentZ;
-          camera.position.y = Math.sin(state3D.currentZ * 0.1) * 0.6;
+          camera.position.set(0, 0, state3D.currentZ);
+          // Look down the corridor
+          camera.lookAt(0, 0, state3D.currentZ + 15);
+          camera.rotation.x += mouse.y * 0.04;
+          camera.rotation.y += -mouse.x * 0.04;
+        } else if (state3D.mode === 'wall') {
+          artGroup.rotation.y = 0;
+          camera.position.set(state3D.wallPanX, state3D.wallPanY, state3D.wallZoomZ);
+          camera.lookAt(state3D.wallPanX, state3D.wallPanY, 0);
         }
       } else {
-        // Camera smooth fly-to transition
+        // Camera smooth ease-in-out to focused painting
         if (state3D.focusProgress < 1 && state3D.cameraStartPos && state3D.cameraTargetPos) {
-          state3D.focusProgress = Math.min(1, state3D.focusProgress + delta * 2.2);
-          // Ease in-out cubic
+          state3D.focusProgress = Math.min(1, state3D.focusProgress + delta * 2.4);
           const t = state3D.focusProgress;
           const ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
           camera.position.lerpVectors(state3D.cameraStartPos, state3D.cameraTargetPos, ease);
@@ -728,14 +851,19 @@
       // 5. Hover Detection via Raycaster
       if (!state3D.isDragging && !state3D.focusedMesh) {
         raycaster.setFromCamera(mouse, camera);
-        const intersects = raycaster.intersectObjects(state3D.meshes, false);
+        const hitTargets = [];
+        state3D.meshes.forEach((mesh) => {
+          if (mesh.userData.picMesh) hitTargets.push(mesh.userData.picMesh);
+        });
+
+        const intersects = raycaster.intersectObjects(hitTargets, false);
 
         if (intersects.length > 0) {
-          const hit = intersects[0].object;
-          if (state3D.hoveredMesh !== hit) {
+          const hitPivot = intersects[0].object.userData.parentPivot;
+          if (state3D.hoveredMesh !== hitPivot) {
             if (state3D.hoveredMesh) state3D.hoveredMesh.userData.targetScale = 1;
-            state3D.hoveredMesh = hit;
-            hit.userData.targetScale = 1.08;
+            state3D.hoveredMesh = hitPivot;
+            hitPivot.userData.targetScale = 1.08;
             if (canvasContainer) canvasContainer.classList.add('is-hovering');
           }
         } else {
@@ -747,16 +875,17 @@
         }
       }
 
-      // 6. Dust Particle Drift
+      // 6. Dust Particles Drift
       if (particlesMesh) {
-        particlesMesh.rotation.y = time * 0.03;
-        particlesMesh.rotation.x = time * 0.015;
+        particlesMesh.rotation.y = time * 0.02;
+        particlesMesh.rotation.x = time * 0.01;
       }
 
-      // 7. Dynamic Point Light following cursor
+      // 7. Dynamic Point Light follows mouse
       if (pointLight) {
-        pointLight.position.x = mouse.x * 6;
-        pointLight.position.y = mouse.y * 6;
+        pointLight.position.x = camera.position.x + mouse.x * 6;
+        pointLight.position.y = camera.position.y + mouse.y * 6;
+        pointLight.position.z = camera.position.z - 2;
       }
 
       renderer.render(scene, camera);
@@ -765,11 +894,11 @@
     render();
   }
 
-  // Export public bridge for external triggers
+  // Export public methods
   window.openSpatial3DGallery = open3DGallery;
   window.closeSpatial3DGallery = close3DGallery;
 
-  // Run on DOM Ready
+  // Init trigger on DOM ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initTrigger);
   } else {

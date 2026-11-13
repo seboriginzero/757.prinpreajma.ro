@@ -61,7 +61,7 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  background: #040507;
+  background: #030406;
   color: #f1f1f1;
   transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s ease;
   overflow: hidden;
@@ -116,12 +116,13 @@
   pointer-events: auto;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  background: rgba(4, 5, 7, 0.75);
+  background: rgba(3, 4, 6, 0.85);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 1rem;
 }
 
 [data-theme="light"] .spatial-3d-hud-top {
-  background: rgba(247, 246, 242, 0.85);
+  background: rgba(247, 246, 242, 0.9);
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
@@ -129,6 +130,7 @@
   display: flex;
   align-items: center;
   gap: 0.6rem;
+  flex-shrink: 0;
 }
 
 .spatial-3d-logo {
@@ -152,11 +154,71 @@
   color: var(--text-secondary, #9ca3af);
 }
 
+.spatial-3d-counter {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--accent-gold, #d4a359);
+  letter-spacing: 0.05em;
+}
+
+[data-theme="light"] .spatial-3d-counter {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* Wing / Room Filter Selector in 3D HUD */
+.spatial-3d-wings {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 3px 6px;
+  border-radius: 20px;
+  overflow-x: auto;
+}
+
+[data-theme="light"] .spatial-3d-wings {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.spatial-wing-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary, #9ca3af);
+  padding: 0.3rem 0.65rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  border-radius: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast, 0.2s);
+}
+
+.spatial-wing-btn:hover {
+  color: #fff;
+}
+
+[data-theme="light"] .spatial-wing-btn:hover {
+  color: #000;
+}
+
+.spatial-wing-btn.is-active {
+  background: rgba(212, 163, 89, 0.2);
+  color: var(--accent-gold, #d4a359);
+  font-weight: 700;
+}
+
 /* HUD Action Group */
 .spatial-3d-hud-actions {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.65rem;
+  flex-shrink: 0;
 }
 
 /* Mode Switcher Pills */
@@ -271,20 +333,20 @@
   gap: 0.75rem;
   padding: 0.45rem 1.25rem;
   border-radius: 30px;
-  background: rgba(10, 12, 16, 0.85);
+  background: rgba(8, 10, 14, 0.88);
   border: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(12px);
   font-family: var(--font-mono, monospace);
   font-size: 0.72rem;
   letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.85);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 [data-theme="light"] .spatial-3d-instructions {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(0, 0, 0, 0.12);
-  color: rgba(0, 0, 0, 0.75);
+  color: rgba(0, 0, 0, 0.8);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -301,9 +363,9 @@
   right: 2rem;
   width: 380px;
   max-width: calc(100vw - 4rem);
-  background: rgba(12, 14, 18, 0.92);
-  border: 1px solid rgba(212, 163, 89, 0.35);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(212, 163, 89, 0.15);
+  background: rgba(10, 12, 16, 0.95);
+  border: 1px solid rgba(212, 163, 89, 0.4);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 163, 89, 0.2);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 8px;
@@ -317,9 +379,9 @@
 }
 
 [data-theme="light"] .spatial-3d-focus-card {
-  background: rgba(255, 255, 255, 0.94);
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12), 0 0 30px rgba(212, 163, 89, 0.1);
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15), 0 0 30px rgba(212, 163, 89, 0.1);
 }
 
 .spatial-3d-focus-card.is-visible {
@@ -450,12 +512,19 @@
 }
 
 /* Mobile responsiveness for 3D overlay */
+@media (max-width: 900px) {
+  .spatial-3d-wings {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
   .spatial-3d-hud-top {
     height: 58px;
     padding: 0 0.85rem;
   }
-  .spatial-3d-mode-label {
+  .spatial-3d-mode-label,
+  .spatial-3d-counter {
     display: none;
   }
   .spatial-mode-btn {
