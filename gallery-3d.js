@@ -77,6 +77,19 @@
         open3DGallery();
       }
     });
+
+    // Direct deep-link support: #3d or ?view=3d opens directly into the 3D Tunnel
+    if (window.location.hash === '#3d' || window.location.search.includes('view=3d')) {
+      setTimeout(open3DGallery, 250);
+    }
+
+    window.addEventListener('hashchange', () => {
+      if (window.location.hash === '#3d' && !state3D.isOpen) {
+        open3DGallery();
+      } else if (window.location.hash !== '#3d' && state3D.isOpen) {
+        close3DGallery();
+      }
+    });
   }
 
   // Open 3D Spatial Gallery (Directly into the 3D Tunnel)
@@ -92,6 +105,10 @@
     if (gallery3dOverlay) {
       gallery3dOverlay.classList.add('is-active');
       gallery3dOverlay.setAttribute('aria-hidden', 'false');
+    }
+
+    if (window.location.hash !== '#3d') {
+      try { history.replaceState(null, '', '#3d'); } catch (e) {}
     }
 
     document.body.style.overflow = 'hidden';
@@ -140,6 +157,10 @@
       gallery3dOverlay.classList.remove('is-active');
       gallery3dOverlay.classList.remove('is-focused');
       gallery3dOverlay.setAttribute('aria-hidden', 'true');
+    }
+
+    if (window.location.hash === '#3d') {
+      try { history.replaceState(null, '', window.location.pathname + window.location.search); } catch (e) {}
     }
 
     dismissFocusCard();
