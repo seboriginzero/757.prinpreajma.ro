@@ -754,22 +754,22 @@
     const medallionGeo = new THREE.PlaneGeometry(8.5, 8.5);
     skyMedallions = [];
 
-    // Distribute medallions along the corridor
-    for (let k = 0; k < 12; k++) {
+    // Distribute medallions along the corridor ahead of the camera
+    for (let k = 0; k < 18; k++) {
       const tex = textures[k % 3];
       const mat = new THREE.MeshBasicMaterial({
         map: tex,
         transparent: true,
-        opacity: 0.72,
+        opacity: 0.85,
         blending: THREE.AdditiveBlending,
         depthWrite: false,
         side: THREE.DoubleSide
       });
       const mesh = new THREE.Mesh(medallionGeo, mat);
-      // Height 6.8 (above artworks which top out at 1.25)
-      mesh.position.set(0, 6.8, (k - 1) * 38);
-      // Face downwards towards viewer on the runway
-      mesh.rotation.x = Math.PI / 2;
+      // Height 4.6 (comfortably above artworks which top out at 1.4)
+      mesh.position.set(0, 4.6, k * 24 + 14);
+      // Tilted ~25° forward toward oncoming viewer for magnificent celestial visibility
+      mesh.rotation.x = Math.PI / 2 - 0.42;
       mesh.rotation.z = (k * 0.45);
       skyGroup.add(mesh);
       skyMedallions.push(mesh);
@@ -786,19 +786,19 @@
     }
     const spiralCurveGeo = new THREE.BufferGeometry().setFromPoints(spiralPoints);
 
-    for (let k = 0; k < 8; k++) {
+    for (let k = 0; k < 18; k++) {
       const spiralMat = new THREE.LineBasicMaterial({
         color: k % 2 === 0 ? 0xd4a359 : 0x06b6d4,
         transparent: true,
-        opacity: 0.55,
+        opacity: 0.70,
         blending: THREE.AdditiveBlending
       });
       const spiralLine = new THREE.Line(spiralCurveGeo, spiralMat);
       // Alternating slightly left and right along the sky vault
-      const xOffset = k % 2 === 0 ? -3.5 : 3.5;
-      spiralLine.position.set(xOffset, 7.8, (k - 1) * 55);
-      spiralLine.rotation.x = Math.PI / 2;
-      spiralLine.rotation.z = k * 0.8;
+      const xOffset = k % 2 === 0 ? -3.0 : 3.0;
+      spiralLine.position.set(xOffset, 5.2, k * 24 + 26);
+      spiralLine.rotation.x = Math.PI / 2 - 0.38;
+      spiralLine.rotation.z = k * 0.75;
       skyGroup.add(spiralLine);
       skySpirals.push(spiralLine);
     }
