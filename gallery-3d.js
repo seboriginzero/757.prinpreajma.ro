@@ -15,9 +15,13 @@
     // Cylinder Kinematics
     currentAngle: 0,
     targetAngle: 0,
-    // Helix Kinematics
+    // Helix / Tunnel Kinematics
     currentZ: 0,
     targetZ: 0,
+    tunnelYaw: 0,
+    targetTunnelYaw: 0,
+    tunnelPitch: 0,
+    targetTunnelPitch: 0,
     // Wall Kinematics
     wallPanX: 0,
     targetWallPanX: 0,
@@ -54,8 +58,8 @@
 
   // Geometry Constants
   const CYLINDER_RADIUS = 16.5;
-  const HELIX_SPACING = 4.2;
-  const HELIX_OFFSET_X = 3.8;
+  const HELIX_SPACING = 5.0;
+  const HELIX_OFFSET_X = 3.2;
 
   // DOM Elements
   let gallery3dOverlay, canvasContainer;
@@ -233,10 +237,12 @@
         if (spinBtn) spinBtn.classList.toggle('is-spinning', state3D.isAutoSpin);
       } else if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
         if (state3D.mode === 'cylinder') state3D.targetAngle += 0.22;
+        if (state3D.mode === 'helix') state3D.targetTunnelYaw += 0.22;
         if (state3D.mode === 'wall') state3D.targetWallPanX -= 1.8;
         state3D.lastInteractionTime = Date.now();
       } else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
         if (state3D.mode === 'cylinder') state3D.targetAngle -= 0.22;
+        if (state3D.mode === 'helix') state3D.targetTunnelYaw -= 0.22;
         if (state3D.mode === 'wall') state3D.targetWallPanX += 1.8;
         state3D.lastInteractionTime = Date.now();
       } else if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') {
@@ -323,6 +329,10 @@
       artGroup.rotation.set(0, 0, 0);
       state3D.currentZ = 0;
       state3D.targetZ = 0;
+      state3D.tunnelYaw = 0;
+      state3D.targetTunnelYaw = 0;
+      state3D.tunnelPitch = 0;
+      state3D.targetTunnelPitch = 0;
     } else if (newMode === 'wall') {
       camera.position.set(0, 0, 10.5);
       camera.rotation.set(0, 0, 0);
@@ -547,11 +557,13 @@
       } else if (state3D.mode === 'helix') {
         // Mode 2: Tunel Z — Runway Corridor along Z axis
         const isLeft = i % 2 === 0;
+        const pairIndex = Math.floor(i / 2);
         tPos.x = isLeft ? -HELIX_OFFSET_X : HELIX_OFFSET_X;
-        tPos.y = Math.sin(i * 0.45) * 0.8;
-        tPos.z = Math.floor(i / 2) * HELIX_SPACING + 4;
-        // Inward tilt towards oncoming viewer
-        tRot.set(0, isLeft ? Math.PI * 0.38 : -Math.PI * 0.38, 0);
+        tPos.y = 0; // Pure eye-level gallery alignment
+        tPos.z = pairIndex * HELIX_SPACING + 4.5;
+        // Inward tilt towards oncoming viewer (front face faces camera looking down +Z)
+        const inwardAngle = 0.28; // ~16° tilt towards center runway
+        tRot.set(0, isLeft ? (Math.PI - inwardAngle) : (Math.PI + inwardAngle), 0);
       } else if (state3D.mode === 'wall') {
         // Mode 3: Perete Matrix — 3-Tier Curved Floating Wall (Directly in view!)
         const rows = 3;
@@ -640,8 +652,11 @@
       if (state3D.mode === 'cylinder') {
         state3D.targetAngle += deltaX * 0.0035;
       } else if (state3D.mode === 'helix') {
-        state3D.targetZ += deltaY * 0.08 + deltaX * 0.02;
-        // Keep camera within runway bounds
+        // Rotire 3D completă (Yaw): drag orizontal rotește privirea spre stânga/dreapta
+        state3D.targetTunnelYaw += deltaX * 0.005;
+        // Înclinare verticală (Pitch) și deplasare lină de-a lungul axei Z
+        state3D.targetTunnelPitch = Math.max(-0.55, Math.min(0.55, state3D.targetTunnelPitch + deltaY * 0.003));
+        state3D.targetZ += deltaY * 0.06;
         const maxZ = Math.ceil(state3D.meshes.length / 2) * HELIX_SPACING + 6;
         state3D.targetZ = Math.max(-2, Math.min(maxZ, state3D.targetZ));
       } else if (state3D.mode === 'wall') {
@@ -788,20 +803,26 @@
       const delta = Math.min(clock.getDelta(), 0.1);
       const time = clock.getElapsedTime();
 
-      // 1. Auto-Spin in Cylinder mode when untouched
+      // 1. Auto-Spin Logic
       if (
         state3D.isAutoSpin &&
         !state3D.isDragging &&
         !state3D.focusedMesh &&
-        state3D.mode === 'cylinder' &&
         Date.now() - state3D.lastInteractionTime > 2000
       ) {
-        state3D.targetAngle -= 0.0012;
+        if (state3D.mode === 'cylinder') {
+          state3D.targetAngle -= 0.0012;
+        } else if (state3D.mode === 'helix') {
+          // Balansare cinematică lină stânga-dreapta între tablouri
+          state3D.targetTunnelYaw = Math.sin(time * 0.45) * 0.35;
+        }
       }
 
       // 2. Damping & Lerping
       state3D.currentAngle += (state3D.targetAngle - state3D.currentAngle) * 0.08;
       state3D.currentZ += (state3D.targetZ - state3D.currentZ) * 0.08;
+      state3D.tunnelYaw += (state3D.targetTunnelYaw - state3D.tunnelYaw) * 0.08;
+      state3D.tunnelPitch += (state3D.targetTunnelPitch - state3D.tunnelPitch) * 0.08;
       state3D.wallPanX += (state3D.targetWallPanX - state3D.wallPanX) * 0.08;
       state3D.wallPanY += (state3D.targetWallPanY - state3D.wallPanY) * 0.08;
       state3D.wallZoomZ += (state3D.targetWallZoomZ - state3D.wallZoomZ) * 0.08;
@@ -828,10 +849,17 @@
         } else if (state3D.mode === 'helix') {
           artGroup.rotation.y = 0;
           camera.position.set(0, 0, state3D.currentZ);
-          // Look down the corridor
-          camera.lookAt(0, 0, state3D.currentZ + 15);
-          camera.rotation.x += mouse.y * 0.04;
-          camera.rotation.y += -mouse.x * 0.04;
+          // Rotație 3D completă (Yaw & Pitch) în tunel:
+          const totalYaw = state3D.tunnelYaw - mouse.x * 0.08;
+          const totalPitch = state3D.tunnelPitch + mouse.y * 0.06;
+          const dirX = Math.sin(totalYaw) * Math.cos(totalPitch);
+          const dirY = Math.sin(totalPitch);
+          const dirZ = Math.cos(totalYaw) * Math.cos(totalPitch);
+          camera.lookAt(
+            camera.position.x + dirX * 15,
+            camera.position.y + dirY * 15,
+            camera.position.z + dirZ * 15
+          );
         } else if (state3D.mode === 'wall') {
           artGroup.rotation.y = 0;
           camera.position.set(state3D.wallPanX, state3D.wallPanY, state3D.wallZoomZ);
@@ -881,11 +909,14 @@
         particlesMesh.rotation.x = time * 0.01;
       }
 
-      // 7. Dynamic Point Light follows mouse
+      // 7. Dynamic Point Light follows mouse and shines forward onto paintings
       if (pointLight) {
-        pointLight.position.x = camera.position.x + mouse.x * 6;
-        pointLight.position.y = camera.position.y + mouse.y * 6;
-        pointLight.position.z = camera.position.z - 2;
+        pointLight.position.x = camera.position.x + mouse.x * 5;
+        pointLight.position.y = camera.position.y + mouse.y * 5;
+        pointLight.position.z = camera.position.z + 4;
+      }
+      if (dirLight) {
+        dirLight.position.set(camera.position.x, camera.position.y + 12, camera.position.z + 4);
       }
 
       renderer.render(scene, camera);
