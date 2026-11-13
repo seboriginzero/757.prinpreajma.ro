@@ -43,7 +43,9 @@
 
   // Three.js References
   let scene, camera, renderer, container;
-  let artGroup, particlesMesh, gridFloor;
+  let artGroup, particlesMesh;
+  let infiniteMirrorMesh, abyssGroup, skyGroup;
+  let skyMedallions = [], skySpirals = [], skyStarsMesh;
   let ambientLight, dirLight, pointLight;
   let raycaster, mouse;
   let animFrameId = null;
@@ -284,6 +286,551 @@
     buildArtworkMeshes();
   }
 
+  // =========================================================================
+  // CELESTIAL FIBONACCI SYMBOLS & SACRED GEOMETRY CANVAS TEXTURES
+  // =========================================================================
+
+  // 1. Golden Ratio (Phi) & Astrolabe Sigil
+  function createFibonacciPhiCanvas() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 512;
+    canvas.height = 512;
+    const ctx = canvas.getContext('2d');
+    const cx = 256;
+    const cy = 256;
+
+    ctx.clearRect(0, 0, 512, 512);
+
+    // Glowing outer celestial compass rings
+    ctx.strokeStyle = 'rgba(212, 163, 89, 0.85)';
+    ctx.lineWidth = 2.2;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 240, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, 226, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // 144 ticks around perimeter (144 is a Fibonacci number!)
+    ctx.lineWidth = 1.5;
+    for (let i = 0; i < 144; i++) {
+      const ang = (i / 144) * Math.PI * 2;
+      const r1 = i % 12 === 0 ? 212 : i % 4 === 0 ? 218 : 222;
+      const r2 = 226;
+      ctx.beginPath();
+      ctx.moveTo(cx + Math.cos(ang) * r1, cy + Math.sin(ang) * r1);
+      ctx.lineTo(cx + Math.cos(ang) * r2, cy + Math.sin(ang) * r2);
+      ctx.stroke();
+    }
+
+    // Glowing Golden Spiral logarithmic curve
+    ctx.strokeStyle = '#06b6d4'; // Cybernetic cyan
+    ctx.lineWidth = 3.2;
+    ctx.beginPath();
+    const phi = 1.6180339887;
+    const b = Math.log(phi) / (Math.PI / 2);
+    for (let t = 0; t <= Math.PI * 3.8; t += 0.04) {
+      const r = 2.4 * Math.exp(b * t);
+      if (r > 205) break;
+      const x = cx + r * Math.cos(t);
+      const y = cy + r * Math.sin(t);
+      if (t === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Central Greek Letter Φ (Phi)
+    ctx.fillStyle = '#d4a359';
+    ctx.font = 'bold 125px "Cinzel", "Times New Roman", serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('Φ', cx, cy - 20);
+
+    // Text labels
+    ctx.font = 'bold 20px monospace';
+    ctx.fillText('φ = 1.6180339887', cx, cy + 85);
+    ctx.font = '600 15px monospace';
+    ctx.fillStyle = 'rgba(6, 182, 212, 0.9)';
+    ctx.fillText('(1 + √5) / 2 · SECTIO AUREA', cx, cy + 120);
+
+    return canvas;
+  }
+
+  // 2. Sacred Fibonacci Rectangles & Spira Mirabilis
+  function createFibonacciRectanglesCanvas() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 512;
+    canvas.height = 512;
+    const ctx = canvas.getContext('2d');
+    const cx = 256;
+    const cy = 256;
+
+    ctx.clearRect(0, 0, 512, 512);
+
+    ctx.strokeStyle = 'rgba(212, 163, 89, 0.75)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 235, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Golden Rectangles subdivision centered
+    const s = 6.2;
+    ctx.save();
+    ctx.translate(cx - 30, cy - 10);
+
+    ctx.strokeStyle = 'rgba(212, 163, 89, 0.65)';
+    ctx.lineWidth = 1.8;
+
+    const squares = [
+      { x: 0, y: 0, w: 21 * s, h: 21 * s },
+      { x: 0, y: 21 * s, w: 13 * s, h: 13 * s },
+      { x: 13 * s, y: 26 * s, w: 8 * s, h: 8 * s },
+      { x: 16 * s, y: 21 * s, w: 5 * s, h: 5 * s }
+    ];
+
+    ctx.translate(-10 * s, -14 * s);
+
+    squares.forEach(sq => {
+      ctx.strokeRect(sq.x, sq.y, sq.w, sq.h);
+    });
+
+    // Glowing Golden Spiral Arc connecting them
+    ctx.strokeStyle = '#06b6d4';
+    ctx.lineWidth = 3.2;
+    ctx.beginPath();
+    const phi = 1.6180339887;
+    const b = Math.log(phi) / (Math.PI / 2);
+    for (let t = 0; t <= Math.PI * 3.5; t += 0.05) {
+      const r = 2.8 * Math.exp(b * t);
+      if (r > 210) break;
+      const px = 14 * s + r * Math.cos(t - 1.2);
+      const py = 18 * s + r * Math.sin(t - 1.2);
+      if (t === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+
+    ctx.restore();
+
+    ctx.textAlign = 'center';
+    ctx.font = '700 22px monospace';
+    ctx.fillStyle = '#d4a359';
+    ctx.fillText('SPIRA MIRABILIS', cx, cy + 180);
+    ctx.font = '600 15px monospace';
+    ctx.fillStyle = 'rgba(6, 182, 212, 0.9)';
+    ctx.fillText('1 · 1 · 2 · 3 · 5 · 8 · 13 · 21 · 34 · 55', cx, cy + 208);
+
+    return canvas;
+  }
+
+  // 3. Fibonacci Sequence & Harmonia Universalis Mandala
+  function createFibonacciSequenceCanvas() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 512;
+    canvas.height = 512;
+    const ctx = canvas.getContext('2d');
+    const cx = 256;
+    const cy = 256;
+
+    ctx.clearRect(0, 0, 512, 512);
+
+    ctx.strokeStyle = 'rgba(212, 163, 89, 0.8)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 235, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, 180, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // 12-pointed star in center
+    ctx.strokeStyle = 'rgba(6, 182, 212, 0.7)';
+    ctx.lineWidth = 1.6;
+    for (let k = 0; k < 3; k++) {
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate((k * Math.PI) / 6);
+      ctx.strokeRect(-65, -65, 130, 130);
+      ctx.restore();
+    }
+
+    // Sequence numbers distributed around circle
+    const fibNums = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987];
+    ctx.font = 'bold 17px monospace';
+    ctx.fillStyle = '#d4a359';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    fibNums.forEach((num, idx) => {
+      const ang = (idx / fibNums.length) * Math.PI * 2 - Math.PI / 2;
+      const x = cx + Math.cos(ang) * 208;
+      const y = cy + Math.sin(ang) * 208;
+      ctx.fillText(String(num), x, y);
+    });
+
+    // Central formula
+    ctx.font = 'bold 22px monospace';
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText('Fn = Fn-1 + Fn-2', cx, cy - 10);
+    ctx.font = '600 16px monospace';
+    ctx.fillStyle = '#06b6d4';
+    ctx.fillText('HARMONIA UNIVERSALIS', cx, cy + 22);
+
+    return canvas;
+  }
+
+  // =========================================================================
+  // REAL-TIME PLANAR REFLECTOR (Three.js High-Performance Mirror)
+  // =========================================================================
+  function createReflectorMesh(geometry, options = {}) {
+    const scope = new THREE.Mesh(geometry);
+    scope.type = 'Reflector';
+
+    const color = options.color !== undefined ? new THREE.Color(options.color) : new THREE.Color(0x070a12);
+    const textureWidth = options.textureWidth || 512;
+    const textureHeight = options.textureHeight || 512;
+    const clipBias = options.clipBias || 0.003;
+
+    const reflectorPlane = new THREE.Plane();
+    const normal = new THREE.Vector3();
+    const reflectorWorldPosition = new THREE.Vector3();
+    const cameraWorldPosition = new THREE.Vector3();
+    const rotationMatrix = new THREE.Matrix4();
+    const lookAtPosition = new THREE.Vector3(0, 0, -1);
+    const clipPlane = new THREE.Vector4();
+
+    const view = new THREE.Vector3();
+    const target = new THREE.Vector3();
+    const q = new THREE.Vector4();
+
+    const virtualCamera = new THREE.PerspectiveCamera();
+
+    const renderTarget = new THREE.WebGLRenderTarget(textureWidth, textureHeight, {
+      minFilter: THREE.LinearFilter,
+      magFilter: THREE.LinearFilter,
+      format: THREE.RGBFormat
+    });
+
+    const shader = {
+      uniforms: {
+        color: { value: color },
+        tDiffuse: { value: renderTarget.texture },
+        textureMatrix: { value: new THREE.Matrix4() },
+        opacity: { value: options.opacity || 0.82 }
+      },
+      vertexShader: `
+        uniform mat4 textureMatrix;
+        varying vec4 vUv;
+        void main() {
+          vUv = textureMatrix * vec4( position, 1.0 );
+          gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+        }
+      `,
+      fragmentShader: `
+        uniform vec3 color;
+        uniform sampler2D tDiffuse;
+        uniform float opacity;
+        varying vec4 vUv;
+        void main() {
+          vec4 ref = texture2DProj( tDiffuse, vUv );
+          // Mix dark obsidian floor tint with vivid reflection of artworks
+          vec3 finalCol = mix( color, ref.rgb, 0.65 );
+          gl_FragColor = vec4( finalCol, opacity );
+        }
+      `
+    };
+
+    const material = new THREE.ShaderMaterial({
+      uniforms: shader.uniforms,
+      vertexShader: shader.vertexShader,
+      fragmentShader: shader.fragmentShader,
+      transparent: true,
+      depthWrite: false
+    });
+
+    scope.material = material;
+
+    scope.onBeforeRender = function (renderer, scene, camera) {
+      reflectorWorldPosition.setFromMatrixPosition(scope.matrixWorld);
+      cameraWorldPosition.setFromMatrixPosition(camera.matrixWorld);
+
+      rotationMatrix.extractRotation(scope.matrixWorld);
+
+      normal.set(0, 0, 1);
+      normal.applyMatrix4(rotationMatrix);
+
+      view.subVectors(reflectorWorldPosition, cameraWorldPosition);
+
+      // Avoid rendering when camera is facing back of reflector
+      if (view.dot(normal) > 0) return;
+
+      view.reflect(normal).negate();
+      view.add(reflectorWorldPosition);
+
+      rotationMatrix.extractRotation(camera.matrixWorld);
+
+      lookAtPosition.set(0, 0, -1);
+      lookAtPosition.applyMatrix4(rotationMatrix);
+      lookAtPosition.add(cameraWorldPosition);
+
+      target.subVectors(reflectorWorldPosition, lookAtPosition);
+      target.reflect(normal).negate();
+      target.add(reflectorWorldPosition);
+
+      virtualCamera.position.copy(view);
+      virtualCamera.up.set(0, 1, 0);
+      virtualCamera.up.applyMatrix4(rotationMatrix);
+      virtualCamera.up.reflect(normal);
+      virtualCamera.lookAt(target);
+
+      virtualCamera.far = camera.far;
+
+      virtualCamera.updateMatrixWorld();
+      virtualCamera.projectionMatrix.copy(camera.projectionMatrix);
+
+      // Update texture matrix
+      material.uniforms.textureMatrix.value.set(
+        0.5, 0.0, 0.0, 0.5,
+        0.0, 0.5, 0.0, 0.5,
+        0.0, 0.0, 0.5, 0.5,
+        0.0, 0.0, 0.0, 1.0
+      );
+      material.uniforms.textureMatrix.value.multiply(virtualCamera.projectionMatrix);
+      material.uniforms.textureMatrix.value.multiply(virtualCamera.matrixWorldInverse);
+      material.uniforms.textureMatrix.value.multiply(scope.matrixWorld);
+
+      // Oblique near-plane clipping
+      reflectorPlane.setFromNormalAndCoplanarPoint(normal, reflectorWorldPosition);
+      reflectorPlane.applyMatrix4(virtualCamera.matrixWorldInverse);
+
+      clipPlane.set(reflectorPlane.normal.x, reflectorPlane.normal.y, reflectorPlane.normal.z, reflectorPlane.constant);
+
+      const projectionMatrix = virtualCamera.projectionMatrix;
+
+      q.x = (Math.sign(clipPlane.x) + projectionMatrix.elements[8]) / projectionMatrix.elements[0];
+      q.y = (Math.sign(clipPlane.y) + projectionMatrix.elements[9]) / projectionMatrix.elements[5];
+      q.z = -1.0;
+      q.w = (1.0 + projectionMatrix.elements[10]) / projectionMatrix.elements[14];
+
+      clipPlane.multiplyScalar(2.0 / clipPlane.dot(q));
+
+      projectionMatrix.elements[2] = clipPlane.x;
+      projectionMatrix.elements[6] = clipPlane.y;
+      projectionMatrix.elements[10] = clipPlane.z + 1.0 - clipBias;
+      projectionMatrix.elements[14] = clipPlane.w;
+
+      // Render reflection pass
+      scope.visible = false;
+
+      const currentRenderTarget = renderer.getRenderTarget();
+      const currentXrEnabled = renderer.xr.enabled;
+      const currentShadowMapEnabled = renderer.shadowMap.enabled;
+
+      renderer.xr.enabled = false;
+      renderer.shadowMap.enabled = false;
+
+      renderer.setRenderTarget(renderTarget);
+      renderer.state.buffers.depth.setMask(true);
+      if (renderer.autoClear === false) renderer.clear();
+      renderer.render(scene, virtualCamera);
+
+      renderer.xr.enabled = currentXrEnabled;
+      renderer.shadowMap.enabled = currentShadowMapEnabled;
+
+      renderer.setRenderTarget(currentRenderTarget);
+
+      const viewport = camera.viewport;
+      if (viewport !== undefined) {
+        renderer.state.viewport(viewport);
+      }
+
+      scope.visible = true;
+    };
+
+    return scope;
+  }
+
+  // =========================================================================
+  // INFINITE MIRROR FLOOR & ABYSS DEPTH
+  // =========================================================================
+  function createInfiniteMirrorFloor() {
+    // 1. Planar Obsidian Reflector (Surface mirror)
+    const mirrorGeo = new THREE.PlaneGeometry(36, 160, 1, 1);
+    infiniteMirrorMesh = createReflectorMesh(mirrorGeo, {
+      color: 0x070a12,
+      opacity: 0.84,
+      textureWidth: 512,
+      textureHeight: 512
+    });
+    infiniteMirrorMesh.rotation.x = -Math.PI / 2;
+    infiniteMirrorMesh.position.set(0, -2.2, 0);
+    scene.add(infiniteMirrorMesh);
+
+    // 2. Infinite Abyss Tiers (Deep layered light frames descending into the void)
+    abyssGroup = new THREE.Group();
+    abyssGroup.position.set(0, 0, 0);
+
+    const tiers = 7;
+    const abyssPoints = [];
+    const len = 150;
+
+    for (let t = 0; t < tiers; t++) {
+      const y = -2.6 - t * 2.2; // -2.6, -4.8, -7.0, -9.2, -11.4, -13.6, -15.8
+      const hw = 3.2 - t * 0.32; // Tapers inward towards bottom vanishing point
+
+      // Longitudinal left & right rails
+      abyssPoints.push(-hw, y, -len / 2, -hw, y, len / 2);
+      abyssPoints.push(hw, y, -len / 2, hw, y, len / 2);
+
+      // Transverse crossbars every 10m
+      for (let z = -len / 2; z <= len / 2; z += 10) {
+        abyssPoints.push(-hw, y, z, hw, y, z);
+      }
+
+      // Vertical drop struts every 25m connecting tiers
+      if (t < tiers - 1) {
+        const nextY = -2.6 - (t + 1) * 2.2;
+        const nextHw = 3.2 - (t + 1) * 0.32;
+        for (let z = -len / 2; z <= len / 2; z += 25) {
+          abyssPoints.push(-hw, y, z, -nextHw, nextY, z);
+          abyssPoints.push(hw, y, z, nextHw, nextY, z);
+        }
+      }
+    }
+
+    const abyssGeo = new THREE.BufferGeometry();
+    abyssGeo.setAttribute('position', new THREE.Float32BufferAttribute(abyssPoints, 3));
+    const abyssMat = new THREE.LineBasicMaterial({
+      color: 0x06b6d4, // Neon cyan cybernetic grid
+      transparent: true,
+      opacity: 0.38,
+      blending: THREE.AdditiveBlending
+    });
+    const abyssLines = new THREE.LineSegments(abyssGeo, abyssMat);
+    abyssGroup.add(abyssLines);
+
+    // 3. Glowing surface runway guide beams at x = -2.8 and x = +2.8
+    const railPoints = [
+      -2.8, -2.18, -len / 2, -2.8, -2.18, len / 2,
+       2.8, -2.18, -len / 2,  2.8, -2.18, len / 2
+    ];
+    const railGeo = new THREE.BufferGeometry();
+    railGeo.setAttribute('position', new THREE.Float32BufferAttribute(railPoints, 3));
+    const railMat = new THREE.LineBasicMaterial({
+      color: 0xd4a359, // Gold laser runway boundary
+      transparent: true,
+      opacity: 0.85
+    });
+    const railLines = new THREE.LineSegments(railGeo, railMat);
+    abyssGroup.add(railLines);
+
+    scene.add(abyssGroup);
+  }
+
+  // =========================================================================
+  // CELESTIAL FIBONACCI SKY VAULT
+  // =========================================================================
+  function createFibonacciSky() {
+    skyGroup = new THREE.Group();
+    skyGroup.position.set(0, 0, 0);
+
+    // 1. Procedural High-Res Fibonacci Canvas Sigil Textures
+    const canvasPhi = createFibonacciPhiCanvas();
+    const canvasRect = createFibonacciRectanglesCanvas();
+    const canvasSeq = createFibonacciSequenceCanvas();
+
+    const texPhi = new THREE.CanvasTexture(canvasPhi);
+    texPhi.encoding = THREE.sRGBEncoding;
+    const texRect = new THREE.CanvasTexture(canvasRect);
+    texRect.encoding = THREE.sRGBEncoding;
+    const texSeq = new THREE.CanvasTexture(canvasSeq);
+    texSeq.encoding = THREE.sRGBEncoding;
+
+    const textures = [texPhi, texRect, texSeq];
+
+    // 2. Place 12 Celestial Fibonacci Medallions facing down from the ceiling
+    const medallionGeo = new THREE.PlaneGeometry(8.5, 8.5);
+    skyMedallions = [];
+
+    // Distribute medallions along the corridor
+    for (let k = 0; k < 12; k++) {
+      const tex = textures[k % 3];
+      const mat = new THREE.MeshBasicMaterial({
+        map: tex,
+        transparent: true,
+        opacity: 0.72,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+        side: THREE.DoubleSide
+      });
+      const mesh = new THREE.Mesh(medallionGeo, mat);
+      // Height 6.8 (above artworks which top out at 1.25)
+      mesh.position.set(0, 6.8, (k - 1) * 38);
+      // Face downwards towards viewer on the runway
+      mesh.rotation.x = Math.PI / 2;
+      mesh.rotation.z = (k * 0.45);
+      skyGroup.add(mesh);
+      skyMedallions.push(mesh);
+    }
+
+    // 3. 3D Glowing Golden Spiral Curves (Spira Mirabilis) in the vault
+    skySpirals = [];
+    const phi = (1 + Math.sqrt(5)) / 2;
+    const b = Math.log(phi) / (Math.PI / 2);
+    const spiralPoints = [];
+    for (let t = 0; t <= Math.PI * 3.8; t += 0.05) {
+      const r = 0.5 * Math.exp(b * t);
+      spiralPoints.push(new THREE.Vector3(r * Math.cos(t), 0, r * Math.sin(t)));
+    }
+    const spiralCurveGeo = new THREE.BufferGeometry().setFromPoints(spiralPoints);
+
+    for (let k = 0; k < 8; k++) {
+      const spiralMat = new THREE.LineBasicMaterial({
+        color: k % 2 === 0 ? 0xd4a359 : 0x06b6d4,
+        transparent: true,
+        opacity: 0.55,
+        blending: THREE.AdditiveBlending
+      });
+      const spiralLine = new THREE.Line(spiralCurveGeo, spiralMat);
+      // Alternating slightly left and right along the sky vault
+      const xOffset = k % 2 === 0 ? -3.5 : 3.5;
+      spiralLine.position.set(xOffset, 7.8, (k - 1) * 55);
+      spiralLine.rotation.x = Math.PI / 2;
+      spiralLine.rotation.z = k * 0.8;
+      skyGroup.add(spiralLine);
+      skySpirals.push(spiralLine);
+    }
+
+    // 4. Phyllotaxis (Golden Angle) Starlight Constellation Dome
+    const starCount = 280;
+    const starPositions = [];
+    const goldenAngle = Math.PI * (3 - Math.sqrt(5)); // ~137.508 deg
+
+    for (let i = 1; i <= starCount; i++) {
+      const th = i * goldenAngle;
+      const r = Math.sqrt(i) * 1.35;
+      const y = 8.5 + Math.sin(i * 0.35) * 2.2; // Vault arch
+      const z = ((i * 7) % 180) - 90;
+      starPositions.push(r * Math.cos(th), y, z);
+    }
+
+    const starGeo = new THREE.BufferGeometry();
+    starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starPositions, 3));
+    const starMat = new THREE.PointsMaterial({
+      color: 0xd4a359,
+      size: 0.22,
+      transparent: true,
+      opacity: 0.75,
+      blending: THREE.AdditiveBlending
+    });
+    skyStarsMesh = new THREE.Points(starGeo, starMat);
+    skyGroup.add(skyStarsMesh);
+
+    scene.add(skyGroup);
+  }
+
   // Initialize Three.js Scene
   function initThreeScene() {
     container = canvasContainer;
@@ -318,20 +865,13 @@
     pointLight.position.set(0, 0, 0);
     scene.add(pointLight);
 
-    // 5. Specular Ground Plane (Runway Floor in Tunnel)
-    const gridGeo = new THREE.PlaneGeometry(120, 240, 24, 48);
-    const gridMat = new THREE.MeshBasicMaterial({
-      color: 0x0f141e,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.22
-    });
-    gridFloor = new THREE.Mesh(gridGeo, gridMat);
-    gridFloor.rotation.x = -Math.PI / 2;
-    gridFloor.position.y = -2.2;
-    scene.add(gridFloor);
+    // 5. Infinite Mirror Runway Floor & Deep Abyss
+    createInfiniteMirrorFloor();
 
-    // 6. Dust Particles
+    // 6. Celestial Fibonacci Sky Vault
+    createFibonacciSky();
+
+    // 7. Dust Particles
     createParticles();
 
     // 7. Raycaster
@@ -556,9 +1096,8 @@
       ambientLight.intensity = 1.25;
       dirLight.color.setHex(0xb45309);
       pointLight.color.setHex(0x0284c7);
-      if (gridFloor) {
-        gridFloor.material.color.setHex(0xd0cfc8);
-        gridFloor.material.opacity = 0.35;
+      if (infiniteMirrorMesh && infiniteMirrorMesh.material && infiniteMirrorMesh.material.uniforms && infiniteMirrorMesh.material.uniforms.color) {
+        infiniteMirrorMesh.material.uniforms.color.value.setHex(0xd0cfc8);
       }
       if (particlesMesh) {
         particlesMesh.material.color.setHex(0xb45309);
@@ -571,9 +1110,8 @@
       ambientLight.intensity = 1.1;
       dirLight.color.setHex(0xd4a359);
       pointLight.color.setHex(0x06b6d4);
-      if (gridFloor) {
-        gridFloor.material.color.setHex(0x0f141e);
-        gridFloor.material.opacity = 0.22;
+      if (infiniteMirrorMesh && infiniteMirrorMesh.material && infiniteMirrorMesh.material.uniforms && infiniteMirrorMesh.material.uniforms.color) {
+        infiniteMirrorMesh.material.uniforms.color.value.setHex(0x070a12);
       }
       if (particlesMesh) {
         particlesMesh.material.color.setHex(0xd4a359);
@@ -922,17 +1460,37 @@
         }
       }
 
-      // 6. Ground Runway Grid & Dust Particles follow camera along Z-axis
-      if (gridFloor) {
-        gridFloor.position.z = camera.position.z;
+      // 6. Infinite Mirror Runway & Deep Abyss follow camera along Z-axis
+      if (infiniteMirrorMesh) {
+        infiniteMirrorMesh.position.z = camera.position.z;
       }
+      if (abyssGroup) {
+        abyssGroup.position.z = camera.position.z;
+      }
+
+      // 7. Celestial Fibonacci Sky Vault follows camera along Z-axis
+      if (skyGroup) {
+        skyGroup.position.z = camera.position.z;
+      }
+      // Gentle cosmic rotation of the celestial Fibonacci symbols
+      skyMedallions.forEach((m, idx) => {
+        m.rotation.z += (idx % 2 === 0 ? 0.0006 : -0.0006);
+      });
+      skySpirals.forEach((sp, idx) => {
+        sp.rotation.y += (idx % 2 === 0 ? 0.0008 : -0.0008);
+      });
+      if (skyStarsMesh) {
+        skyStarsMesh.rotation.y = time * 0.002;
+      }
+
+      // 8. Dust Particles
       if (particlesMesh) {
         particlesMesh.position.z = camera.position.z;
         particlesMesh.rotation.y = time * 0.02;
         particlesMesh.rotation.x = time * 0.01;
       }
 
-      // 7. Iluminare stabilă de muzeu (fără oscilații generate de cursor)
+      // 9. Iluminare stabilă de muzeu (fără oscilații generate de cursor)
       if (pointLight) {
         pointLight.position.set(camera.position.x, camera.position.y + 1.2, camera.position.z + 2.0);
       }
