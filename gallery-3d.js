@@ -48,6 +48,8 @@
     cameraStartLookAt: null,
     cameraTargetLookAt: null,
     focusProgress: 1,
+    isUnfocusing: false,
+    unfocusProgress: 1,
     theme: 'dark'
   };
 
@@ -681,6 +683,14 @@
       state3D.lastPointerX = e.clientX;
       state3D.lastPointerY = e.clientY;
 
+      // If user drags while an artwork is focused, smoothly dismiss the card and resume navigation
+      if (state3D.focusedMesh) {
+        const totalDrag = Math.hypot(e.clientX - state3D.dragStartX, e.clientY - state3D.dragStartY);
+        if (totalDrag > 12) {
+          dismissFocusCard();
+        }
+      }
+
       if (state3D.mode === 'cylinder') {
         state3D.targetAngle += deltaX * 0.0035;
         // Drag vertical glisează între etaje
@@ -720,6 +730,10 @@
         e.preventDefault();
         state3D.lastInteractionTime = Date.now();
 
+        if (state3D.focusedMesh) {
+          dismissFocusCard();
+        }
+
         if (state3D.mode === 'cylinder') {
           state3D.targetAngle -= (e.deltaY + e.deltaX) * 0.0018;
         } else if (state3D.mode === 'helix') {
@@ -749,7 +763,17 @@
     if (intersects.length > 0) {
       const hit = intersects[0].object;
       const pivot = hit.userData.parentPivot;
-      if (pivot) focusArtwork(pivot);
+      if (pivot) {
+        if (state3D.focusedMesh === pivot && state3D.focusProgress >= 0.8) {
+          // Double-clicking focused artwork opens full high-res detail inspection
+          close3DGallery();
+          if (window.openArtworkModalById && pivot.userData.item) {
+            window.openArtworkModalById(pivot.userData.item.id);
+          }
+        } else {
+          focusArtwork(pivot);
+        }
+      }
     } else {
       if (state3D.focusedMesh) {
         dismissFocusCard();
@@ -760,6 +784,7 @@
   // Focus Artwork with Smooth Camera Glide & ZERO TEXT OVERLAY ON ART
   function focusArtwork(pivot) {
     state3D.focusedMesh = pivot;
+    state3D.isUnfocusing = false;
     const item = pivot.userData.item;
     if (!item) return;
 
@@ -767,14 +792,32 @@
       gallery3dOverlay.classList.add('is-focused');
     }
 
+    const WING_BADGES = {
+      'biomechanical-osteology': 'SALA I',
+      'cryptic-totems': 'SALA II',
+      'chromatic-expressions': 'SALA III',
+      'cybernetic-assemblages': 'SALA IV',
+      'monumental-perspectives': 'SALA V'
+    };
+    const firstCat = (item.categories && item.categories[0]) || '';
+    const wingBadge = WING_BADGES[firstCat] || (item.category_name ? item.category_name.split(' ')[0] : 'SALA I');
+
     if (cardId) cardId.textContent = item.id || 'ART-757';
-    if (cardWing) cardWing.textContent = item.category_name || 'SALA I';
-    if (cardTitle) cardTitle.textContent = item.title || 'Fără titlu';
+    if (cardWing) cardWing.textContent = wingBadge;
+    if (cardTitle) {
+      // If title is just ART-XXXX, display the curatorial category title to avoid duplicate ART ID badge!
+      const isGenericId = !item.title || item.title === item.id || /^ART-\d+/i.test(item.title);
+      cardTitle.textContent = isGenericId ? (item.category_name || 'Compoziție Biomecanică') : item.title;
+    }
     if (cardMedium) {
-      cardMedium.textContent = (item.medium || 'Tehnică mixtă') + (item.dimensions ? ' · ' + item.dimensions : '');
+      const med = (item.medium_hypothesis && item.medium_hypothesis !== 'unknown')
+        ? item.medium_hypothesis
+        : ((item.medium && item.medium !== 'unknown') ? item.medium : 'Tehnică mixtă pe hârtie');
+      const dim = (item.dimensions && item.dimensions !== 'unknown') ? ` · ${item.dimensions}` : '';
+      cardMedium.textContent = med + dim;
     }
     if (cardNote) {
-      cardNote.textContent = item.curatorial_note || item.critic_note || 'Compoziție din arhiva de anatomie biomecanică.';
+      cardNote.textContent = item.curatorial_note || item.critic_note || 'Compoziție din arhiva de anatomie biomecanică a artistului Mugurel Emanuel Manea.';
     }
 
     if (focusCard) {
@@ -784,24 +827,27 @@
 
     state3D.cameraStartPos = camera.position.clone();
 
-    // Calculate world position
+    // Get TRUE world transform of the artwork
     const meshWorldPos = new THREE.Vector3();
     pivot.getWorldPosition(meshWorldPos);
 
-    // Normal facing outward from artwork face
-    const normal = new THREE.Vector3(0, 0, 1).applyEuler(pivot.rotation);
-    // Right tangent vector
-    const rightVec = new THREE.Vector3(1, 0, 0).applyEuler(pivot.rotation);
+    const worldQuat = new THREE.Quaternion();
+    pivot.getWorldQuaternion(worldQuat);
+
+    // Normal facing outward from artwork canvas face (in world space)
+    const normal = new THREE.Vector3(0, 0, 1).applyQuaternion(worldQuat);
+    // Right tangent vector along artwork width (in world space)
+    const rightVec = new THREE.Vector3(1, 0, 0).applyQuaternion(worldQuat);
 
     // Camera framing:
-    // Distance 4.5 gives ample margin so the top of artwork is never covered by top HUD bar!
-    const camDist = 4.5;
+    // Distance 4.4 gives ample margin so the top of artwork is never covered by top HUD bar
+    const camDist = 4.4;
     const isDesktop = window.innerWidth >= 900;
-    // On desktop, shift camera right so the artwork is rendered on the left of screen
+    // On desktop, shift camera right so the artwork is rendered on the left 60% of screen
     // completely clear of the right-docked curatorial card!
-    const horizontalShift = isDesktop ? 1.25 : 0;
-    // Slight downward camera offset to center artwork below 68px top bar
-    const verticalShift = isDesktop ? -0.15 : 0.45;
+    const horizontalShift = isDesktop ? 1.05 : 0;
+    // Slight vertical shift: on mobile raise slightly, on desktop keep centered below top bar
+    const verticalShift = isDesktop ? -0.1 : 0.45;
 
     const targetCamPos = meshWorldPos.clone()
       .add(normal.clone().multiplyScalar(camDist))
@@ -809,16 +855,19 @@
       .add(new THREE.Vector3(0, verticalShift, 0));
 
     state3D.cameraTargetPos = targetCamPos;
-    state3D.cameraStartLookAt = new THREE.Vector3(0, 0, 0);
-    // Look slightly to the right of artwork so artwork sits cleanly in the left 65% of screen
+
+    // Start looking along current camera forward vector
+    const currentForward = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion);
+    state3D.cameraStartLookAt = camera.position.clone().add(currentForward.multiplyScalar(10));
+
+    // Look slightly to the right of artwork center so artwork sits cleanly in the left 65% of screen
     state3D.cameraTargetLookAt = meshWorldPos.clone().add(rightVec.clone().multiplyScalar(horizontalShift * 0.45));
     state3D.focusProgress = 0;
   }
 
-  // Dismiss Focus Card
+  // Dismiss Focus Card with smooth glide back
   function dismissFocusCard() {
-    if (!state3D.focusedMesh) return;
-    state3D.focusedMesh = null;
+    if (!state3D.focusedMesh && !state3D.isUnfocusing) return;
 
     if (gallery3dOverlay) {
       gallery3dOverlay.classList.remove('is-focused');
@@ -830,16 +879,22 @@
     }
 
     state3D.cameraStartPos = camera.position.clone();
+    const currentForward = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion);
+    state3D.cameraStartLookAt = camera.position.clone().add(currentForward.multiplyScalar(10));
 
     if (state3D.mode === 'cylinder') {
       state3D.cameraTargetPos = new THREE.Vector3(0, state3D.currentCylinderY, 0);
+      state3D.cameraTargetLookAt = new THREE.Vector3(0, state3D.currentCylinderY, -10);
     } else if (state3D.mode === 'helix') {
       state3D.cameraTargetPos = new THREE.Vector3(0, 0, state3D.currentZ);
+      state3D.cameraTargetLookAt = new THREE.Vector3(0, 0, state3D.currentZ + 15);
     } else if (state3D.mode === 'wall') {
       state3D.cameraTargetPos = new THREE.Vector3(state3D.wallPanX, state3D.wallPanY, state3D.wallZoomZ);
+      state3D.cameraTargetLookAt = new THREE.Vector3(state3D.wallPanX, state3D.wallPanY, 0);
     }
 
-    state3D.focusProgress = 0;
+    state3D.isUnfocusing = true;
+    state3D.unfocusProgress = 0;
   }
 
   // Window Resize
@@ -901,7 +956,7 @@
       });
 
       // 4. Camera Dynamics per Mode
-      if (!state3D.focusedMesh) {
+      if (!state3D.focusedMesh && !state3D.isUnfocusing) {
         if (state3D.mode === 'cylinder') {
           artGroup.rotation.y = state3D.currentAngle;
           camera.position.set(0, state3D.currentCylinderY, 0);
@@ -926,6 +981,19 @@
           camera.position.set(state3D.wallPanX, state3D.wallPanY, state3D.wallZoomZ);
           camera.lookAt(state3D.wallPanX, state3D.wallPanY, 0);
         }
+      } else if (state3D.isUnfocusing) {
+        state3D.unfocusProgress = Math.min(1, state3D.unfocusProgress + delta * 2.8);
+        const t = state3D.unfocusProgress;
+        const ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        camera.position.lerpVectors(state3D.cameraStartPos, state3D.cameraTargetPos, ease);
+        if (state3D.cameraStartLookAt && state3D.cameraTargetLookAt) {
+          const currentLook = new THREE.Vector3().lerpVectors(state3D.cameraStartLookAt, state3D.cameraTargetLookAt, ease);
+          camera.lookAt(currentLook);
+        }
+        if (state3D.unfocusProgress >= 1) {
+          state3D.isUnfocusing = false;
+          state3D.focusedMesh = null;
+        }
       } else {
         // Camera smooth ease-in-out to focused painting
         if (state3D.focusProgress < 1 && state3D.cameraStartPos && state3D.cameraTargetPos) {
@@ -933,9 +1001,12 @@
           const t = state3D.focusProgress;
           const ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
           camera.position.lerpVectors(state3D.cameraStartPos, state3D.cameraTargetPos, ease);
-          if (state3D.cameraTargetLookAt) {
-            camera.lookAt(state3D.cameraTargetLookAt);
+          if (state3D.cameraStartLookAt && state3D.cameraTargetLookAt) {
+            const currentLook = new THREE.Vector3().lerpVectors(state3D.cameraStartLookAt, state3D.cameraTargetLookAt, ease);
+            camera.lookAt(currentLook);
           }
+        } else if (state3D.cameraTargetLookAt) {
+          camera.lookAt(state3D.cameraTargetLookAt);
         }
       }
 
