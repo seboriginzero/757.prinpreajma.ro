@@ -467,56 +467,38 @@
     ctx.moveTo(canvas.width - 38 - cornerSize, canvas.height - 38); ctx.lineTo(canvas.width - 38, canvas.height - 38); ctx.lineTo(canvas.width - 38, canvas.height - 38 - cornerSize);
     ctx.stroke();
 
-    // 4. Museum Badge Header
+    // 4. English Message (Clean, Elegant Serif — FĂRĂ GHILIMELE)
     ctx.textAlign = 'center';
-    ctx.font = 'bold 24px "JetBrains Mono", monospace, "Courier New"';
-    ctx.fillStyle = isLight ? '#0284c7' : '#06b6d4';
-    ctx.fillText('757 // EPILOG & CONTINUUM', cx, 150);
-
-    ctx.strokeStyle = isLight ? 'rgba(180, 83, 9, 0.25)' : 'rgba(212, 163, 89, 0.25)';
-    ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    ctx.moveTo(cx - 250, 185);
-    ctx.lineTo(cx + 250, 185);
-    ctx.stroke();
-
-    // 5. English Message (Clean, Elegant Serif — FĂRĂ GHILIMELE)
-    ctx.font = 'italic 600 58px "Cormorant Garamond", "Cinzel", "Georgia", serif';
+    ctx.font = 'italic 600 62px "Cormorant Garamond", "Cinzel", "Georgia", serif';
     ctx.fillStyle = isLight ? '#0f172a' : '#fcfaf6';
-    ctx.fillText('This isn’t goodbye.', cx, 350);
-    ctx.fillText('It’s the start of what comes next.', cx, 445);
+    ctx.fillText('This isn’t goodbye.', cx, 440);
+    ctx.fillText('It’s the start of what comes next.', cx, 530);
 
-    // 6. Central Sacred Golden Ratio Divider (Phi Medallion)
+    // 5. Central Emblem (757 Golden Seal flanked by Architectural Accent Rules)
+    const emblemText = '757';
+    ctx.font = 'bold 54px "Cinzel", "Playfair Display", serif';
+    const textWidth = ctx.measureText(emblemText).width;
+    const emblemGap = textWidth / 2 + 28;
+
     ctx.strokeStyle = isLight ? 'rgba(180, 83, 9, 0.45)' : 'rgba(212, 163, 89, 0.55)';
     ctx.lineWidth = 2.0;
     ctx.beginPath();
-    ctx.moveTo(cx - 380, 575);
-    ctx.lineTo(cx - 55, 575);
-    ctx.moveTo(cx + 55, 575);
-    ctx.lineTo(cx + 380, 575);
+    ctx.moveTo(cx - 380, cy);
+    ctx.lineTo(cx - emblemGap, cy);
+    ctx.moveTo(cx + emblemGap, cy);
+    ctx.lineTo(cx + 380, cy);
     ctx.stroke();
 
     ctx.fillStyle = isLight ? '#b45309' : '#d4a359';
-    ctx.font = 'bold 42px "Cinzel", serif';
-    ctx.fillText('Φ', cx, 588);
+    ctx.textBaseline = 'middle';
+    ctx.fillText(emblemText, cx, cy);
+    ctx.textBaseline = 'alphabetic';
 
-    // 7. Romanian Message (Harmonious Serif Translation — FĂRĂ GHILIMELE)
-    ctx.font = 'italic 500 50px "Cormorant Garamond", "Cinzel", "Georgia", serif';
+    // 6. Romanian Message (Harmonious Serif Translation — FĂRĂ GHILIMELE)
+    ctx.font = 'italic 500 52px "Cormorant Garamond", "Cinzel", "Georgia", serif';
     ctx.fillStyle = isLight ? '#b45309' : '#d4a359';
-    ctx.fillText('Acesta nu este un rămas-bun.', cx, 715);
-    ctx.fillText('Este începutul a ceea ce urmează.', cx, 805);
-
-    // 8. Signoff Footer
-    ctx.strokeStyle = isLight ? 'rgba(180, 83, 9, 0.25)' : 'rgba(212, 163, 89, 0.25)';
-    ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    ctx.moveTo(cx - 340, 960);
-    ctx.lineTo(cx + 340, 960);
-    ctx.stroke();
-
-    ctx.font = 'bold 24px "JetBrains Mono", monospace, "Courier New"';
-    ctx.fillStyle = isLight ? '#64748b' : 'rgba(255, 255, 255, 0.55)';
-    ctx.fillText('MUGUREL EMANUEL MANEA · COLECȚIA COMPLETĂ · 167 DE LUCRĂRI', cx, 1020);
+    ctx.fillText('Acesta nu este un rămas-bun.', cx, 750);
+    ctx.fillText('Este începutul a ceea ce urmează.', cx, 838);
 
     return canvas;
   }
@@ -622,7 +604,7 @@
       isTerminal: true,
       parentPivot: terminalMonumentGroup,
       item: {
-        id: '757 // EPILOG',
+        id: '757',
         title: 'This isn’t goodbye. It’s the start of what comes next.',
         technique: 'Acesta nu este un rămas-bun. Este începutul a ceea ce urmează.',
         wing: 'CONTINUUM',
@@ -1656,7 +1638,7 @@
     }
 
     if (pivot.userData && pivot.userData.isTerminal) {
-      if (cardId) cardId.textContent = '757 // EPILOG';
+      if (cardId) cardId.textContent = '757';
       if (cardWing) cardWing.textContent = 'CONTINUUM';
       if (cardTitle) cardTitle.textContent = 'This isn’t goodbye. It’s the start of what comes next.';
       if (cardMedium) cardMedium.textContent = 'Acesta nu este un rămas-bun. Este începutul a ceea ce urmează.';
