@@ -10,18 +10,20 @@
 2. **Eliminare Privilegii Linux:**
    - `cap_drop: [ALL]` în `docker-compose.yml` (nicio capabilitate kernel acordată).
    - `security_opt: [no-new-privileges:true]` (previne orice tentativă de escaladare a privilegiilor).
-3. **Interzicere Copiere Directă prin SSH/SCP:** Este interzis transferul neautorizat de fișiere de cod prin SCP către mediile de găzduire. Singurul canal autorizat de actualizare software este GitHub GitOps prin cheia dedicată de deploy (`origin/main`).
+3. **Interzicere Copiere Directă prin SSH/SCP (STRICT RULE 2):** Este interzis transferul neautorizat de fișiere de cod prin SCP către mediile de găzduire. Singurul canal autorizat de actualizare software este GitHub GitOps prin cheia dedicată de deploy (`origin/main`).
 4. **Izolare de Rețea:** Rețea Docker bridge dedicată `757-net`, fără expunere directă pe interfețele publice ale mașinii.
 5. **Resurse Limitate:** Limită strictă de CPU (`1.0`), RAM (`512MB`) și număr maxim de procese (`pids: 64`).
 
 ---
 
-## 2. Politica de Securitate HTTP & Secrete
+## 2. Politica de Securitate HTTP, Caching & Secrete
 - **Headere de Securitate Obligatorii:**
   - `X-Content-Type-Options: nosniff`
   - `X-Frame-Options: SAMEORIGIN`
   - `Referrer-Policy: strict-origin-when-cross-origin`
   - `Strict-Transport-Security: max-age=31536000; includeSubDomains`
+- **Headere de Caching Imutabil pentru Resurse Statice:**
+  - `Cache-Control: public, max-age=2592000, immutable` (pentru `.webp`, `.png`, `.css`, `.js`, `.woff2`)
 - **Dezactivare Header Emis:** `X-Powered-By` este complet dezactivat din container și ascuns în Nginx.
 - **Secrete Zero-Leak:** `.env` este strict exclus din depozitul Git (`.gitignore` + verificare automată în `sync-gitops.sh`).
 - **Autentificare Admin:** Token semnat criptografic HMAC-SHA256, protecție anti-bruteforce (rate limiting la 6 încercări eșuate cu lockout 60s).

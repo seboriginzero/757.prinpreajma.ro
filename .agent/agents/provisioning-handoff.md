@@ -1,7 +1,7 @@
 # AGENT: PROVISIONING HANDOFF & ORCHESTRATOR
 **Rol:** Generarea Pachetului Standard de Handoff pentru Provizionare pe Hetzner Cloud & VM3  
 **Fișier:** `.agent/agents/provisioning-handoff.md`  
-**Ecosistem:** OriginZero & PrinPreajma.ro (Tenant `757` — HD)
+**Ecosistem:** OriginZero & PrinPreajma.ro (Tenant `757` — HD, Mugurel Emanuel Manea)
 
 ---
 
@@ -38,6 +38,9 @@ ORIGINZERO_NEW_TENANT_HANDOFF:
   healthcheck_path: "/api/health"
   sitemap_path: "/sitemap.xml"
   database_type: "json"
+  collection_architecture: "unified_expanding_corpus"
+  spatial_3d_engine: "three_js_tunnel_infinite_mirror_fibonacci"
+  static_caching_policy: "Cache-Control: public, max-age=2592000, immutable"
   persistent_volumes:
     - "./data:/app/data" # chmod -R 0777 pe host pentru UID 1000
   secrets_file_local: "proxmox-hosting&staff/secrets/.env.757"
@@ -47,4 +50,3 @@ ORIGINZERO_NEW_TENANT_HANDOFF:
     https_validation_passed: true
   gitops_7_gates_verified: true
 ```
-

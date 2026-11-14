@@ -1,7 +1,7 @@
 # AGENT: SEO INDEXER & STANDARDUL SALON SANDY
 **Rol:** Indexare Canonică 1:1, Paritate WRS Chromium, Generare Sitemap XML & Instant Indexing GSC  
 **Fișier:** `.agent/agents/seo-indexer.md`  
-**Ecosistem:** OriginZero & PrinPreajma.ro (Tenant `757` — HD)
+**Ecosistem:** OriginZero & PrinPreajma.ro (Tenant `757` — HD, Mugurel Emanuel Manea)
 
 ---
 
@@ -22,6 +22,7 @@
 ## 2. Cluster Local & Geo-SEO
 - **Date Structurate Schema.org:**
   - Bloc `<script type="application/ld+json">` de tip `ArtGallery` / `VisualArtwork` cu legături canonice către județul Hunedoara (`HD`), coordonate geografice, autor (`Mugurel Emanuel Manea`) și `sameAs` către `https://prinpreajma.ro/`.
+  - Catalog unificat deschis (`ART-0001` .. `ART-000n`), fără etichetări restrictive de categorii sau contoare cantitative brute.
 - **Prezență în Master Index:**
   - Înregistrat în `<sitemapindex>`-ul portalului regional: `<loc>https://757.prinpreajma.ro/sitemap.xml</loc>`.
 - **Instant Indexing:**

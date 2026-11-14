@@ -65,7 +65,7 @@
   const HELIX_OFFSET_X = 3.3;
 
   function getTerminalZ() {
-    const total = state3D.meshes.length || (window.COLLECTION_DATA ? window.COLLECTION_DATA.length : 167);
+    const total = state3D.meshes.length || (window.COLLECTION_DATA ? window.COLLECTION_DATA.length : 0);
     const lastPair = Math.max(0, Math.floor((total - 1) / 2));
     return (lastPair + 2) * HELIX_SPACING + 4.5;
   }
@@ -384,7 +384,7 @@
     });
   }
 
-  // Load complete collection into Tunnel (ALL 167 ARTWORKS!)
+  // Load complete collection into Tunnel (Unified Expanding Corpus)
   function rebuildActiveItems() {
     state3D.allItems = window.COLLECTION_DATA || [];
     if (state3D.allItems.length === 0) return;
@@ -607,7 +607,7 @@
         title: 'This isn’t goodbye. It’s the start of what comes next.',
         technique: 'Acesta nu este un rămas-bun. Este începutul a ceea ce urmează.',
         wing: 'CONTINUUM',
-        curatorial_note: 'Mesajul de încheiere al Galeriei 3D Spațiale 757. Moștenirea artistică a lui Mugurel Emanuel Manea (167 de opere catalogate) deschide o poartă spre viitor, continuând dincolo de limitele spațio-temporale ale pânzei.'
+        curatorial_note: 'Mesajul de încheiere al Galeriei 3D Spațiale 757. Moștenirea artistică a lui Mugurel Emanuel Manea deschide o poartă spre viitor, continuând dincolo de limitele spațio-temporale ale pânzei.'
       },
       currentScale: 1,
       targetScale: 1
@@ -1503,7 +1503,7 @@
     const total = state3D.meshes.length;
     if (total === 0) return;
 
-    // Mode: Tunel Biomecanic Z-Axis (Runway Corridor — ALL 167 ARTWORKS!)
+    // Mode: Tunel Biomecanic Z-Axis (Runway Corridor — Unified Expanding Corpus)
     state3D.meshes.forEach((mesh, i) => {
       const isLeft = i % 2 === 0;
       const pairIndex = Math.floor(i / 2);
@@ -1752,7 +1752,7 @@
       if (cardTitle) cardTitle.textContent = 'This isn’t goodbye. It’s the start of what comes next.';
       if (cardMedium) cardMedium.textContent = 'Acesta nu este un rămas-bun. Este începutul a ceea ce urmează.';
       if (cardNote) {
-        cardNote.textContent = 'Mesajul de încheiere al Galeriei 3D Spațiale 757. Moștenirea artistică a lui Mugurel Emanuel Manea (167 de opere catalogate) deschide o poartă spre viitor, continuând dincolo de limitele spațio-temporale ale pânzei.';
+        cardNote.textContent = 'Mesajul de încheiere al Galeriei 3D Spațiale 757. Moștenirea artistică a lui Mugurel Emanuel Manea deschide o poartă spre viitor, continuând dincolo de limitele spațio-temporale ale pânzei.';
       }
       if (cardDetailBtn) cardDetailBtn.textContent = 'Reia Turul de la Început';
       if (cardBackBtn) cardBackBtn.textContent = 'Rămâi la Epilog';
