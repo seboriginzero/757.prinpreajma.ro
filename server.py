@@ -137,6 +137,15 @@ class LuxuryAdminHandler(http.server.SimpleHTTPRequestHandler):
         self.send_header('X-Content-Type-Options', 'nosniff')
         self.send_header('X-Frame-Options', 'SAMEORIGIN')
         self.send_header('Referrer-Policy', 'strict-origin-when-cross-origin')
+
+        # Cache control for static assets (images, css, js, fonts)
+        req_path = getattr(self, 'path', '')
+        clean_path = req_path.split('?')[0]
+        if clean_path.startswith('/data/web-images/') or clean_path.endswith(('.webp', '.jpg', '.jpeg', '.png', '.svg', '.woff2', '.ttf', '.css', '.js')):
+            self.send_header('Cache-Control', 'public, max-age=2592000, immutable')
+        elif clean_path in ['/', '/index.html']:
+            self.send_header('Cache-Control', 'public, max-age=60, must-revalidate')
+
         super().end_headers()
 
     def get_client_ip(self):

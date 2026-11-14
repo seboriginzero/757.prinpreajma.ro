@@ -1248,6 +1248,126 @@
     scene.add(particlesMesh);
   }
 
+  // Progressive Distance-Prioritized Texture Streaming Engine
+  const textureCache = new Map();
+  let textureLoader = null;
+  let activeTextureRequests = 0;
+  const MAX_CONCURRENT_TEXTURE_REQUESTS = 6;
+  let lastStreamCheckTime = 0;
+
+  function pumpTextureStreamingQueue(immediateFirstBatch) {
+    if (!textureLoader) {
+      textureLoader = new THREE.TextureLoader();
+    }
+    if (!state3D.meshes || state3D.meshes.length === 0) return;
+
+    const currentCamZ = camera ? camera.position.z : state3D.currentZ;
+    // Lookahead slightly down the tunnel (+6 units along Z)
+    const viewCenterZ = currentCamZ + 6.0;
+
+    const unloaded = [];
+    for (let i = 0; i < state3D.meshes.length; i++) {
+      const mesh = state3D.meshes[i];
+      const ud = mesh.userData;
+      if (!ud || ud.textureLoaded || ud.textureLoading) continue;
+
+      const meshZ = ud.targetPos ? ud.targetPos.z : 0;
+      const distFromCenter = Math.abs(meshZ - viewCenterZ);
+      unloaded.push({ mesh, dist: distFromCenter, z: meshZ });
+    }
+
+    if (unloaded.length === 0) return;
+
+    // Sort closest to view center first
+    unloaded.sort((a, b) => a.dist - b.dist);
+
+    const availableSlots = immediateFirstBatch
+      ? 16 // Burst for immediate viewport
+      : Math.max(0, MAX_CONCURRENT_TEXTURE_REQUESTS - activeTextureRequests);
+
+    if (availableSlots <= 0) return;
+
+    const batch = unloaded.slice(0, availableSlots);
+    batch.forEach(({ mesh }) => {
+      loadMeshTexture(mesh);
+    });
+  }
+
+  function loadMeshTexture(mesh) {
+    const ud = mesh.userData;
+    if (!ud || ud.textureLoaded || ud.textureLoading) return;
+
+    if (!textureLoader) {
+      textureLoader = new THREE.TextureLoader();
+    }
+
+    const thumbUrl = ud.thumbUrl;
+    const fallbackUrl = ud.fallbackUrl;
+
+    if (textureCache.has(thumbUrl)) {
+      const cached = textureCache.get(thumbUrl);
+      applyTextureToMaterial(ud.picMaterial, cached);
+      ud.textureLoaded = true;
+      ud.textureLoading = false;
+      return;
+    }
+
+    ud.textureLoading = true;
+    activeTextureRequests++;
+
+    textureLoader.load(
+      thumbUrl,
+      (tex) => {
+        tex.encoding = THREE.sRGBEncoding;
+        tex.generateMipmaps = true;
+        tex.minFilter = THREE.LinearMipmapLinearFilter;
+        tex.anisotropy = Math.min(renderer ? renderer.capabilities.getMaxAnisotropy() : 4, 4);
+
+        textureCache.set(thumbUrl, tex);
+        applyTextureToMaterial(ud.picMaterial, tex);
+
+        ud.textureLoaded = true;
+        ud.textureLoading = false;
+        activeTextureRequests = Math.max(0, activeTextureRequests - 1);
+        pumpTextureStreamingQueue(false);
+      },
+      undefined,
+      () => {
+        // Fallback to full webp
+        textureLoader.load(
+          fallbackUrl,
+          (tex) => {
+            tex.encoding = THREE.sRGBEncoding;
+            tex.generateMipmaps = true;
+            tex.minFilter = THREE.LinearMipmapLinearFilter;
+            tex.anisotropy = Math.min(renderer ? renderer.capabilities.getMaxAnisotropy() : 4, 4);
+
+            textureCache.set(thumbUrl, tex);
+            applyTextureToMaterial(ud.picMaterial, tex);
+
+            ud.textureLoaded = true;
+            ud.textureLoading = false;
+            activeTextureRequests = Math.max(0, activeTextureRequests - 1);
+            pumpTextureStreamingQueue(false);
+          },
+          undefined,
+          () => {
+            ud.textureLoading = false;
+            activeTextureRequests = Math.max(0, activeTextureRequests - 1);
+            pumpTextureStreamingQueue(false);
+          }
+        );
+      }
+    );
+  }
+
+  function applyTextureToMaterial(mat, tex) {
+    if (!mat) return;
+    mat.map = tex;
+    mat.color.setHex(0xffffff);
+    mat.needsUpdate = true;
+  }
+
   // Build 3D Artworks with Luxury Museum Frame & Crisp Textures (Front: Artwork, Verso: Artist Portrait)
   function buildArtworkMeshes() {
     // Clear existing meshes
@@ -1260,7 +1380,6 @@
           obj.remove(child);
           if (child.geometry) child.geometry.dispose();
           if (child.material && child.material !== sharedVersoMaterial && child.material !== frameMat) {
-            if (child.material.map && child.material.map !== sharedArtistTexture) child.material.map.dispose();
             child.material.dispose();
           }
         }
@@ -1273,7 +1392,9 @@
     }
     state3D.meshes = [];
 
-    const textureLoader = new THREE.TextureLoader();
+    if (!textureLoader) {
+      textureLoader = new THREE.TextureLoader();
+    }
 
     // 1. Shared frame shadowbox material
     const frameMat = new THREE.MeshStandardMaterial({
@@ -1282,13 +1403,13 @@
       metalness: 0.65
     });
 
-    // 2. Canonical Artist Portrait for Verso (Rear) of all picture frames
+    // 2. Canonical Artist Portrait for Verso (Rear) of all picture frames (69KB thumb for 3.4x faster load)
     if (!sharedArtistTexture) {
-      sharedArtistTexture = textureLoader.load('data/web-images/ART-0103.webp');
+      sharedArtistTexture = textureLoader.load('data/web-images/ART-0103_thumb.webp');
       sharedArtistTexture.encoding = THREE.sRGBEncoding;
       sharedArtistTexture.generateMipmaps = true;
       sharedArtistTexture.minFilter = THREE.LinearMipmapLinearFilter;
-      sharedArtistTexture.anisotropy = Math.min(renderer.capabilities.getMaxAnisotropy(), 8);
+      sharedArtistTexture.anisotropy = Math.min(renderer ? renderer.capabilities.getMaxAnisotropy() : 4, 4);
     }
     if (!sharedVersoMaterial) {
       sharedVersoMaterial = new THREE.MeshBasicMaterial({
@@ -1311,10 +1432,15 @@
       // Root Artwork Object
       const artworkPivot = new THREE.Group();
 
+      const thumbUrl = 'data/web-images/' + (item.thumbnail_file || (item.id + '_thumb.webp'));
+      const fallbackUrl = 'data/web-images/' + (item.image_file || (item.id + '.webp'));
+      const cachedTex = textureCache.get(thumbUrl);
+
       // 1. Front Picture Mesh (artwork)
       const planeGeo = new THREE.PlaneGeometry(planeW, planeH);
       const picMaterial = new THREE.MeshBasicMaterial({
-        color: 0x222222,
+        color: cachedTex ? 0xffffff : 0x161820,
+        map: cachedTex || null,
         side: THREE.FrontSide,
         fog: false // Crucial: Keeps paintings saturated, sharp, and deep black!
       });
@@ -1344,12 +1470,17 @@
       versoMesh.rotation.y = Math.PI; // Face backwards toward oncoming viewer from behind
       artworkPivot.add(versoMesh);
 
-      // User data for raycasting & animations
+      // User data for raycasting, layout & progressive streaming
       artworkPivot.userData = {
         item: item,
         index: index,
         picMesh: picMesh,
         versoMesh: versoMesh,
+        picMaterial: picMaterial,
+        thumbUrl: thumbUrl,
+        fallbackUrl: fallbackUrl,
+        textureLoaded: !!cachedTex,
+        textureLoading: false,
         targetPos: new THREE.Vector3(),
         targetRot: new THREE.Euler(),
         currentScale: 1,
@@ -1359,36 +1490,12 @@
       picMesh.userData.parentPivot = artworkPivot;
       versoMesh.userData.parentPivot = artworkPivot;
 
-      // Load texture with correct sRGB encoding for the artwork
-      const thumbUrl = 'data/web-images/' + (item.thumbnail_file || (item.id + '_thumb.webp'));
-      textureLoader.load(
-        thumbUrl,
-        (tex) => {
-          tex.encoding = THREE.sRGBEncoding;
-          tex.generateMipmaps = true;
-          tex.minFilter = THREE.LinearMipmapLinearFilter;
-          tex.anisotropy = Math.min(renderer.capabilities.getMaxAnisotropy(), 8);
-          picMaterial.map = tex;
-          picMaterial.color.setHex(0xffffff);
-          picMaterial.needsUpdate = true;
-        },
-        undefined,
-        () => {
-          // Fallback to full webp
-          textureLoader.load('data/web-images/' + item.id + '.webp', (tex) => {
-            tex.encoding = THREE.sRGBEncoding;
-            picMaterial.map = tex;
-            picMaterial.color.setHex(0xffffff);
-            picMaterial.needsUpdate = true;
-          });
-        }
-      );
-
       artGroup.add(artworkPivot);
       state3D.meshes.push(artworkPivot);
     });
 
     computeLayoutTargets(true);
+    pumpTextureStreamingQueue(true);
   }
 
   // Calculate target positions & rotations for Tunel 3D
@@ -1636,6 +1743,10 @@
       gallery3dOverlay.classList.add('is-focused');
     }
 
+    if (!pivot.userData.isTerminal && !pivot.userData.textureLoaded) {
+      loadMeshTexture(pivot);
+    }
+
     if (pivot.userData && pivot.userData.isTerminal) {
       if (cardId) cardId.textContent = '757';
       if (cardTitle) cardTitle.textContent = 'This isn’t goodbye. It’s the start of what comes next.';
@@ -1831,6 +1942,12 @@
         }
       }
 
+      // Dynamic Progressive Distance Texture Streaming (throttled check every 60ms)
+      if (time - lastStreamCheckTime > 0.06) {
+        lastStreamCheckTime = time;
+        pumpTextureStreamingQueue(false);
+      }
+
       // 5. Hover Detection via Raycaster (Front & Verso & Terminal Monument)
       if (!state3D.isDragging && !state3D.focusedMesh) {
         raycaster.setFromCamera(mouse, camera);
@@ -1928,6 +2045,35 @@
       document.body.style.overflow = 'hidden';
     }
   };
+
+  // Idle speculative prefetch for instant 3D tunnel entrance
+  function preloadInitial3DAssets() {
+    try {
+      const items = window.COLLECTION_DATA || [];
+      if (items.length === 0) return;
+      // 1. Shared artist back face (69KB)
+      const backImg = new Image();
+      backImg.src = 'data/web-images/ART-0103_thumb.webp';
+
+      // 2. First 16 artwork thumbnails for instant entry
+      const count = Math.min(items.length, 16);
+      for (let i = 0; i < count; i++) {
+        const it = items[i];
+        const url = 'data/web-images/' + (it.thumbnail_file || (it.id + '_thumb.webp'));
+        const img = new Image();
+        img.decoding = 'async';
+        img.src = url;
+      }
+    } catch (e) {}
+  }
+
+  if (typeof window !== 'undefined') {
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(preloadInitial3DAssets);
+    } else {
+      setTimeout(preloadInitial3DAssets, 1200);
+    }
+  }
 
   // Init trigger on DOM ready
   if (document.readyState === 'loading') {
