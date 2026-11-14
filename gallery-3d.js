@@ -54,9 +54,25 @@
   let sharedArtistTexture = null;
   let sharedVersoMaterial = null;
 
+  // Terminal Epilogue Monument at End of Tunnel
+  let terminalMonumentGroup = null;
+  let terminalFaceMesh = null;
+  let terminalFaceTexture = null;
+  let terminalFaceMaterial = null;
+
   // Tunnel Geometry Constants
   const HELIX_SPACING = 5.0;
   const HELIX_OFFSET_X = 3.3;
+
+  function getTerminalZ() {
+    const total = state3D.meshes.length || (window.COLLECTION_DATA ? window.COLLECTION_DATA.length : 167);
+    const lastPair = Math.max(0, Math.floor((total - 1) / 2));
+    return (lastPair + 2) * HELIX_SPACING + 4.5;
+  }
+
+  function getTunnelMaxZ() {
+    return getTerminalZ() - 4.5;
+  }
 
   // DOM Elements
   let gallery3dOverlay, canvasContainer;
@@ -264,7 +280,7 @@
       btn.addEventListener('pointercancel', stop);
     }
 
-    const getMaxZ = () => Math.ceil(state3D.meshes.length / 2) * HELIX_SPACING + 6;
+    const getMaxZ = () => getTunnelMaxZ();
 
     if (mobileFwdBtn) {
       bindContinuousNav(
@@ -310,6 +326,14 @@
 
     if (cardDetailBtn) {
       cardDetailBtn.addEventListener('click', () => {
+        if (state3D.focusedMesh && state3D.focusedMesh.userData && state3D.focusedMesh.userData.isTerminal) {
+          // Reia Turul de la Început: lin și maiestuos spre intrarea tunelului
+          state3D.targetZ = 0;
+          state3D.targetTunnelYaw = 0;
+          state3D.targetTunnelPitch = 0;
+          dismissFocusCard();
+          return;
+        }
         if (state3D.focusedMesh && state3D.focusedMesh.userData.item) {
           const item = state3D.focusedMesh.userData.item;
           state3D.isDetailModalOpen = true;
@@ -347,7 +371,7 @@
         state3D.targetTunnelYaw -= 0.22;
         state3D.lastInteractionTime = Date.now();
       } else if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') {
-        const maxZ = Math.ceil(state3D.meshes.length / 2) * HELIX_SPACING + 6;
+        const maxZ = getTunnelMaxZ();
         state3D.targetZ = Math.min(maxZ, state3D.targetZ + 4.5);
         state3D.lastInteractionTime = Date.now();
       } else if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') {
@@ -370,6 +394,243 @@
     }
 
     buildArtworkMeshes();
+    buildTerminalMonument();
+  }
+
+  // =========================================================================
+  // TERMINAL EPILOGUE MONUMENT AT THE END OF THE 3D TUNNEL
+  // Message: This isn’t goodbye. It’s the start of what comes next. EN-RO
+  // Rendered strictly WITHOUT quotation marks as requested.
+  // =========================================================================
+
+  function createTerminalTextCanvas(theme) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 2048;
+    canvas.height = 1280;
+    const ctx = canvas.getContext('2d');
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+
+    const isLight = theme === 'light';
+
+    // 1. Background Luxury Slate Gradient
+    if (isLight) {
+      const grad = ctx.createRadialGradient(cx, cy, 120, cx, cy, 1100);
+      grad.addColorStop(0, '#ffffff');
+      grad.addColorStop(0.7, '#f7f6f2');
+      grad.addColorStop(1, '#ece9e0');
+      ctx.fillStyle = grad;
+    } else {
+      const grad = ctx.createRadialGradient(cx, cy, 120, cx, cy, 1100);
+      grad.addColorStop(0, '#101626');
+      grad.addColorStop(0.65, '#070a11');
+      grad.addColorStop(1, '#020306');
+      ctx.fillStyle = grad;
+    }
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // 2. Sacred Geometry Fibonacci Golden Spiral Watermark in Background
+    ctx.save();
+    ctx.strokeStyle = isLight ? 'rgba(180, 83, 9, 0.07)' : 'rgba(212, 163, 89, 0.08)';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    const phi = 1.6180339887;
+    const b = Math.log(phi) / (Math.PI / 2);
+    for (let t = 0; t <= Math.PI * 4.2; t += 0.03) {
+      const r = 3.8 * Math.exp(b * t);
+      if (r > 620) break;
+      const x = cx + r * Math.cos(t);
+      const y = cy + r * Math.sin(t);
+      if (t === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    ctx.restore();
+
+    // 3. Architectural Double Border with Corner Accents
+    ctx.strokeStyle = isLight ? 'rgba(180, 83, 9, 0.3)' : 'rgba(212, 163, 89, 0.35)';
+    ctx.lineWidth = 2.0;
+    ctx.strokeRect(55, 55, canvas.width - 110, canvas.height - 110);
+
+    ctx.strokeStyle = isLight ? 'rgba(180, 83, 9, 0.65)' : 'rgba(212, 163, 89, 0.75)';
+    ctx.lineWidth = 3.5;
+    const cornerSize = 45;
+    // Corners
+    ctx.beginPath();
+    ctx.moveTo(38, 38 + cornerSize); ctx.lineTo(38, 38); ctx.lineTo(38 + cornerSize, 38);
+    ctx.moveTo(canvas.width - 38 - cornerSize, 38); ctx.lineTo(canvas.width - 38, 38); ctx.lineTo(canvas.width - 38, 38 + cornerSize);
+    ctx.moveTo(38, canvas.height - 38 - cornerSize); ctx.lineTo(38, canvas.height - 38); ctx.lineTo(38 + cornerSize, canvas.height - 38);
+    ctx.moveTo(canvas.width - 38 - cornerSize, canvas.height - 38); ctx.lineTo(canvas.width - 38, canvas.height - 38); ctx.lineTo(canvas.width - 38, canvas.height - 38 - cornerSize);
+    ctx.stroke();
+
+    // 4. Museum Badge Header
+    ctx.textAlign = 'center';
+    ctx.font = 'bold 24px "JetBrains Mono", monospace, "Courier New"';
+    ctx.fillStyle = isLight ? '#0284c7' : '#06b6d4';
+    ctx.fillText('757 // EPILOG & CONTINUUM', cx, 150);
+
+    ctx.strokeStyle = isLight ? 'rgba(180, 83, 9, 0.25)' : 'rgba(212, 163, 89, 0.25)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(cx - 250, 185);
+    ctx.lineTo(cx + 250, 185);
+    ctx.stroke();
+
+    // 5. English Message (Clean, Elegant Serif — FĂRĂ GHILIMELE)
+    ctx.font = 'italic 600 66px "Cormorant Garamond", "Cinzel", "Georgia", serif';
+    ctx.fillStyle = isLight ? '#0f172a' : '#fcfaf6';
+    ctx.fillText('This isn’t goodbye.', cx, 350);
+    ctx.fillText('It’s the start of what comes next.', cx, 445);
+
+    // 6. Central Sacred Golden Ratio Divider (Phi Medallion)
+    ctx.strokeStyle = isLight ? 'rgba(180, 83, 9, 0.45)' : 'rgba(212, 163, 89, 0.55)';
+    ctx.lineWidth = 2.0;
+    ctx.beginPath();
+    ctx.moveTo(cx - 440, 575);
+    ctx.lineTo(cx - 55, 575);
+    ctx.moveTo(cx + 55, 575);
+    ctx.lineTo(cx + 440, 575);
+    ctx.stroke();
+
+    ctx.fillStyle = isLight ? '#b45309' : '#d4a359';
+    ctx.font = 'bold 42px "Cinzel", serif';
+    ctx.fillText('Φ', cx, 588);
+
+    // 7. Romanian Message (Harmonious Serif Translation — FĂRĂ GHILIMELE)
+    ctx.font = 'italic 500 56px "Cormorant Garamond", "Cinzel", "Georgia", serif';
+    ctx.fillStyle = isLight ? '#b45309' : '#d4a359';
+    ctx.fillText('Acesta nu este un rămas-bun.', cx, 715);
+    ctx.fillText('Este începutul a ceea ce urmează.', cx, 805);
+
+    // 8. Signoff Footer
+    ctx.strokeStyle = isLight ? 'rgba(180, 83, 9, 0.25)' : 'rgba(212, 163, 89, 0.25)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(cx - 340, 960);
+    ctx.lineTo(cx + 340, 960);
+    ctx.stroke();
+
+    ctx.font = 'bold 24px "JetBrains Mono", monospace, "Courier New"';
+    ctx.fillStyle = isLight ? '#64748b' : 'rgba(255, 255, 255, 0.55)';
+    ctx.fillText('MUGUREL EMANUEL MANEA · COLECȚIA COMPLETĂ · 167 DE LUCRĂRI', cx, 1020);
+
+    return canvas;
+  }
+
+  // 3D Terminal Monument Construction
+  function buildTerminalMonument() {
+    if (!scene) return;
+
+    if (terminalMonumentGroup) {
+      scene.remove(terminalMonumentGroup);
+      while (terminalMonumentGroup.children.length > 0) {
+        const c = terminalMonumentGroup.children[0];
+        terminalMonumentGroup.remove(c);
+        if (c.geometry) c.geometry.dispose();
+        if (c.material) {
+          if (c.material.map && c.material.map !== terminalFaceTexture) c.material.map.dispose();
+          c.material.dispose();
+        }
+      }
+    }
+
+    const terminalZ = getTerminalZ();
+    terminalMonumentGroup = new THREE.Group();
+    terminalMonumentGroup.position.set(0, 0, terminalZ);
+    // Face oncoming viewer walking down positive Z
+    terminalMonumentGroup.rotation.set(0, Math.PI, 0);
+
+    const aspect = 2048 / 1280; // 1.6
+    const planeH = 4.0;
+    const planeW = planeH * aspect; // 6.4
+
+    // 1. Text Canvas Face Mesh
+    const canvas = createTerminalTextCanvas(state3D.theme);
+    if (!terminalFaceTexture) {
+      terminalFaceTexture = new THREE.CanvasTexture(canvas);
+      terminalFaceTexture.encoding = THREE.sRGBEncoding;
+      terminalFaceTexture.generateMipmaps = true;
+      terminalFaceTexture.minFilter = THREE.LinearMipmapLinearFilter;
+      terminalFaceTexture.anisotropy = Math.min(renderer ? renderer.capabilities.getMaxAnisotropy() : 8, 8);
+    } else {
+      terminalFaceTexture.image = canvas;
+      terminalFaceTexture.needsUpdate = true;
+    }
+
+    terminalFaceMaterial = new THREE.MeshBasicMaterial({
+      map: terminalFaceTexture,
+      side: THREE.FrontSide,
+      fog: false // Crucial: crystal clarity without fog dimming
+    });
+
+    const faceGeo = new THREE.PlaneGeometry(planeW, planeH);
+    terminalFaceMesh = new THREE.Mesh(faceGeo, terminalFaceMaterial);
+    terminalFaceMesh.position.set(0, 0, 0.08);
+    terminalMonumentGroup.add(terminalFaceMesh);
+
+    // 2. Shadowbox Obsidian Monolith Backing
+    const monolithMat = new THREE.MeshStandardMaterial({
+      color: 0x0c0e14,
+      roughness: 0.45,
+      metalness: 0.8
+    });
+    const monolithGeo = new THREE.BoxGeometry(planeW + 0.25, planeH + 0.25, 0.14);
+    const monolithMesh = new THREE.Mesh(monolithGeo, monolithMat);
+    monolithMesh.position.set(0, 0, 0);
+    terminalMonumentGroup.add(monolithMesh);
+
+    // 3. Glowing Golden Frame Edge
+    const frameEdges = new THREE.EdgesGeometry(monolithGeo);
+    const frameLineMat = new THREE.LineBasicMaterial({
+      color: 0xd4a359,
+      linewidth: 2,
+      transparent: true,
+      opacity: 0.85
+    });
+    const frameLine = new THREE.LineSegments(frameEdges, frameLineMat);
+    terminalMonumentGroup.add(frameLine);
+
+    // 4. Side Portal Pylons (Twin Golden Light Pillars)
+    const pylonGeo = new THREE.BoxGeometry(0.18, 7.5, 0.18);
+    const pylonMat = new THREE.MeshBasicMaterial({ color: 0xd4a359 });
+
+    const leftPylon = new THREE.Mesh(pylonGeo, pylonMat);
+    leftPylon.position.set(-planeW / 2 - 0.35, 0.8, 0);
+    terminalMonumentGroup.add(leftPylon);
+
+    const rightPylon = new THREE.Mesh(pylonGeo, pylonMat);
+    rightPylon.position.set(planeW / 2 + 0.35, 0.8, 0);
+    terminalMonumentGroup.add(rightPylon);
+
+    // 5. Floor Runway Laser Threshold
+    const thresholdGeo = new THREE.PlaneGeometry(planeW + 1.2, 0.14);
+    const thresholdMat = new THREE.MeshBasicMaterial({
+      color: 0x06b6d4,
+      side: THREE.DoubleSide
+    });
+    const thresholdMesh = new THREE.Mesh(thresholdGeo, thresholdMat);
+    thresholdMesh.rotation.x = -Math.PI / 2;
+    thresholdMesh.position.set(0, -1.98, 0.3);
+    terminalMonumentGroup.add(thresholdMesh);
+
+    // Raycast user data for interactive focus
+    terminalFaceMesh.userData = {
+      isTerminal: true,
+      parentPivot: terminalMonumentGroup,
+      item: {
+        id: '757 // EPILOG',
+        title: 'This isn’t goodbye. It’s the start of what comes next.',
+        technique: 'Acesta nu este un rămas-bun. Este începutul a ceea ce urmează.',
+        wing: 'CONTINUUM',
+        curatorial_note: 'Mesajul de încheiere al Galeriei 3D Spațiale 757. Moștenirea artistică a lui Mugurel Emanuel Manea (167 de opere catalogate) deschide o poartă spre viitor, continuând dincolo de limitele spațio-temporale ale pânzei.'
+      },
+      currentScale: 1,
+      targetScale: 1
+    };
+    monolithMesh.userData = terminalFaceMesh.userData;
+    terminalMonumentGroup.userData = terminalFaceMesh.userData;
+
+    scene.add(terminalMonumentGroup);
   }
 
   // =========================================================================
@@ -1204,6 +1465,12 @@
         particlesMesh.material.opacity = 0.6;
       }
     }
+
+    if (terminalFaceTexture) {
+      const newCanvas = createTerminalTextCanvas(theme);
+      terminalFaceTexture.image = newCanvas;
+      terminalFaceTexture.needsUpdate = true;
+    }
   }
 
   // Mouse & Touch Pointer Interactions
@@ -1248,7 +1515,7 @@
         const pts = Array.from(activePointers.values());
         const currentDist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
         const distDiff = currentDist - initialPinchDist;
-        const maxZ = Math.ceil(state3D.meshes.length / 2) * HELIX_SPACING + 6;
+        const maxZ = getTunnelMaxZ();
         state3D.targetZ = Math.max(0, Math.min(maxZ, initialPinchZ + distDiff * 0.12));
         state3D.lastInteractionTime = Date.now();
         return;
@@ -1268,7 +1535,7 @@
       }
 
       const isTouch = e.pointerType === 'touch';
-      const maxZ = Math.ceil(state3D.meshes.length / 2) * HELIX_SPACING + 6;
+      const maxZ = getTunnelMaxZ();
 
       if (isTouch) {
         // Navigare Touch pe Mobil:
@@ -1328,7 +1595,7 @@
 
         // Deplasare inversată: scroll în sus (deltaY < 0, împins înainte) avansează în adâncimea tunelului
         state3D.targetZ -= e.deltaY * 0.025;
-        const maxZ = Math.ceil(state3D.meshes.length / 2) * HELIX_SPACING + 6;
+        const maxZ = getTunnelMaxZ();
         state3D.targetZ = Math.max(0, Math.min(maxZ, state3D.targetZ));
       },
       { passive: false }
@@ -1346,6 +1613,9 @@
       const versoMesh = mesh.userData.versoMesh;
       if (versoMesh) hitTargets.push(versoMesh);
     });
+    if (terminalFaceMesh) {
+      hitTargets.push(terminalFaceMesh);
+    }
 
     const intersects = raycaster.intersectObjects(hitTargets, false);
 
@@ -1381,32 +1651,46 @@
       gallery3dOverlay.classList.add('is-focused');
     }
 
-    const WING_BADGES = {
-      'biomechanical-osteology': 'SALA I',
-      'cryptic-totems': 'SALA II',
-      'chromatic-expressions': 'SALA III',
-      'cybernetic-assemblages': 'SALA IV',
-      'monumental-perspectives': 'SALA V'
-    };
-    const firstCat = (item.categories && item.categories[0]) || '';
-    const wingBadge = WING_BADGES[firstCat] || (item.category_name ? item.category_name.split(' ')[0] : 'SALA I');
+    if (pivot.userData && pivot.userData.isTerminal) {
+      if (cardId) cardId.textContent = '757 // EPILOG';
+      if (cardWing) cardWing.textContent = 'CONTINUUM';
+      if (cardTitle) cardTitle.textContent = 'This isn’t goodbye. It’s the start of what comes next.';
+      if (cardMedium) cardMedium.textContent = 'Acesta nu este un rămas-bun. Este începutul a ceea ce urmează.';
+      if (cardNote) {
+        cardNote.textContent = 'Mesajul de încheiere al Galeriei 3D Spațiale 757. Moștenirea artistică a lui Mugurel Emanuel Manea (167 de opere catalogate) deschide o poartă spre viitor, continuând dincolo de limitele spațio-temporale ale pânzei.';
+      }
+      if (cardDetailBtn) cardDetailBtn.textContent = 'Reia Turul de la Început';
+      if (cardBackBtn) cardBackBtn.textContent = 'Rămâi la Epilog';
+    } else {
+      const WING_BADGES = {
+        'biomechanical-osteology': 'SALA I',
+        'cryptic-totems': 'SALA II',
+        'chromatic-expressions': 'SALA III',
+        'cybernetic-assemblages': 'SALA IV',
+        'monumental-perspectives': 'SALA V'
+      };
+      const firstCat = (item.categories && item.categories[0]) || '';
+      const wingBadge = WING_BADGES[firstCat] || (item.category_name ? item.category_name.split(' ')[0] : 'SALA I');
 
-    if (cardId) cardId.textContent = item.id || 'ART-757';
-    if (cardWing) cardWing.textContent = wingBadge;
-    if (cardTitle) {
-      // If title is just ART-XXXX, display the curatorial category title to avoid duplicate ART ID badge!
-      const isGenericId = !item.title || item.title === item.id || /^ART-\d+/i.test(item.title);
-      cardTitle.textContent = isGenericId ? (item.category_name || 'Compoziție Biomecanică') : item.title;
-    }
-    if (cardMedium) {
-      const med = (item.medium_hypothesis && item.medium_hypothesis !== 'unknown')
-        ? item.medium_hypothesis
-        : ((item.medium && item.medium !== 'unknown') ? item.medium : 'Tehnică mixtă pe hârtie');
-      const dim = (item.dimensions && item.dimensions !== 'unknown') ? ` · ${item.dimensions}` : '';
-      cardMedium.textContent = med + dim;
-    }
-    if (cardNote) {
-      cardNote.textContent = item.curatorial_note || item.critic_note || 'Compoziție din arhiva de anatomie biomecanică a artistului Mugurel Emanuel Manea.';
+      if (cardId) cardId.textContent = item.id || 'ART-757';
+      if (cardWing) cardWing.textContent = wingBadge;
+      if (cardTitle) {
+        // If title is just ART-XXXX, display the curatorial category title to avoid duplicate ART ID badge!
+        const isGenericId = !item.title || item.title === item.id || /^ART-\d+/i.test(item.title);
+        cardTitle.textContent = isGenericId ? (item.category_name || 'Compoziție Biomecanică') : item.title;
+      }
+      if (cardMedium) {
+        const med = (item.medium_hypothesis && item.medium_hypothesis !== 'unknown')
+          ? item.medium_hypothesis
+          : ((item.medium && item.medium !== 'unknown') ? item.medium : 'Tehnică mixtă pe hârtie');
+        const dim = (item.dimensions && item.dimensions !== 'unknown') ? ` · ${item.dimensions}` : '';
+        cardMedium.textContent = med + dim;
+      }
+      if (cardNote) {
+        cardNote.textContent = item.curatorial_note || item.critic_note || 'Compoziție din arhiva de anatomie biomecanică a artistului Mugurel Emanuel Manea.';
+      }
+      if (cardDetailBtn) cardDetailBtn.textContent = 'Examinează în Detaliu';
+      if (cardBackBtn) cardBackBtn.textContent = 'Înapoi în Spațiul 3D';
     }
 
     if (focusCard) {
@@ -1505,7 +1789,7 @@
         !state3D.isDragging &&
         !state3D.focusedMesh
       ) {
-        const maxZ = Math.ceil(state3D.meshes.length / 2) * HELIX_SPACING + 6;
+        const maxZ = getTunnelMaxZ();
         if (state3D.targetZ < maxZ) {
           state3D.targetZ += 0.04;
         } else {
@@ -1575,7 +1859,7 @@
         }
       }
 
-      // 5. Hover Detection via Raycaster (Front & Verso)
+      // 5. Hover Detection via Raycaster (Front & Verso & Terminal Monument)
       if (!state3D.isDragging && !state3D.focusedMesh) {
         raycaster.setFromCamera(mouse, camera);
         const hitTargets = [];
@@ -1583,6 +1867,9 @@
           if (mesh.userData.picMesh) hitTargets.push(mesh.userData.picMesh);
           if (mesh.userData.versoMesh) hitTargets.push(mesh.userData.versoMesh);
         });
+        if (terminalFaceMesh) {
+          hitTargets.push(terminalFaceMesh);
+        }
 
         const intersects = raycaster.intersectObjects(hitTargets, false);
 
