@@ -96,15 +96,15 @@
       }
     });
 
-    // Direct deep-link support: #3d or ?view=3d opens directly into the 3D Tunnel
-    if (window.location.hash === '#3d' || window.location.search.includes('view=3d')) {
+    // Direct deep-link support: #3d or ?view=3d opens directly into the 3D Tunnel (#3d-epilog lands at monument)
+    if (window.location.hash.startsWith('#3d') || window.location.search.includes('view=3d')) {
       setTimeout(open3DGallery, 250);
     }
 
     window.addEventListener('hashchange', () => {
-      if (window.location.hash === '#3d' && !state3D.isOpen) {
+      if (window.location.hash.startsWith('#3d') && !state3D.isOpen) {
         open3DGallery();
-      } else if (window.location.hash !== '#3d' && state3D.isOpen) {
+      } else if (!window.location.hash.startsWith('#3d') && state3D.isOpen) {
         close3DGallery();
       }
     });
@@ -125,7 +125,7 @@
       gallery3dOverlay.setAttribute('aria-hidden', 'false');
     }
 
-    if (window.location.hash !== '#3d') {
+    if (!window.location.hash.startsWith('#3d')) {
       try { history.replaceState(null, '', '#3d'); } catch (e) {}
     }
 
@@ -146,9 +146,11 @@
       onWindowResize();
     }
 
-    // Direct entry into Tunel Z Runway
-    state3D.currentZ = 0;
-    state3D.targetZ = 0;
+    // Direct entry into Tunel Z Runway (support #3d-epilog to arrive at end monument)
+    const isAtEnd = window.location.hash === '#3d-epilog' || window.location.search.includes('pos=end');
+    const startZ = isAtEnd ? getTunnelMaxZ() : 0;
+    state3D.currentZ = startZ;
+    state3D.targetZ = startZ;
     state3D.tunnelYaw = 0;
     state3D.targetTunnelYaw = 0;
     state3D.tunnelPitch = 0;
@@ -177,7 +179,7 @@
       gallery3dOverlay.setAttribute('aria-hidden', 'true');
     }
 
-    if (window.location.hash === '#3d') {
+    if (window.location.hash.startsWith('#3d')) {
       try { history.replaceState(null, '', window.location.pathname + window.location.search); } catch (e) {}
     }
 
