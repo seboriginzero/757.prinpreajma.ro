@@ -79,7 +79,7 @@
   // DOM Elements
   let gallery3dOverlay, canvasContainer;
   let modeLabel, counterLabel, spinBtn, themeBtn, closeBtn;
-  let focusCard, cardId, cardWing, cardTitle, cardMedium, cardNote, cardDetailBtn, cardBackBtn, cardDismissBtn;
+  let focusCard, cardId, cardTitle, cardMedium, cardNote, cardDetailBtn, cardBackBtn, cardDismissBtn;
   let mobileNav, mobileFwdBtn, mobileBackBtn, mobileLeftBtn, mobileRightBtn, mobileCenterBtn;
 
   // Initialize trigger from header button
@@ -206,7 +206,6 @@
 
     focusCard = document.getElementById('spatial-3d-focus-card');
     cardId = document.getElementById('spatial-card-id');
-    cardWing = document.getElementById('spatial-card-wing');
     cardTitle = document.getElementById('spatial-card-title');
     cardMedium = document.getElementById('spatial-card-medium');
     cardNote = document.getElementById('spatial-card-note');
@@ -1639,7 +1638,6 @@
 
     if (pivot.userData && pivot.userData.isTerminal) {
       if (cardId) cardId.textContent = '757';
-      if (cardWing) cardWing.textContent = 'CONTINUUM';
       if (cardTitle) cardTitle.textContent = 'This isn’t goodbye. It’s the start of what comes next.';
       if (cardMedium) cardMedium.textContent = 'Acesta nu este un rămas-bun. Este începutul a ceea ce urmează.';
       if (cardNote) {
@@ -1648,23 +1646,11 @@
       if (cardDetailBtn) cardDetailBtn.textContent = 'Reia Turul de la Început';
       if (cardBackBtn) cardBackBtn.textContent = 'Rămâi la Epilog';
     } else {
-      const WING_BADGES = {
-        'biomechanical-osteology': 'SALA I',
-        'cryptic-totems': 'SALA II',
-        'chromatic-expressions': 'SALA III',
-        'cybernetic-assemblages': 'SALA IV',
-        'monumental-perspectives': 'SALA V'
-      };
-      const firstCat = (item.categories && item.categories[0]) || '';
-      const wingBadge = WING_BADGES[firstCat] || (item.category_name ? item.category_name.split(' ')[0] : 'SALA I');
+      const rawId = item.id || 'ART-0001';
+      const displayId = `757 ${rawId.replace('-', ' ')}`;
 
-      if (cardId) cardId.textContent = item.id || 'ART-757';
-      if (cardWing) cardWing.textContent = wingBadge;
-      if (cardTitle) {
-        // If title is just ART-XXXX, display the curatorial category title to avoid duplicate ART ID badge!
-        const isGenericId = !item.title || item.title === item.id || /^ART-\d+/i.test(item.title);
-        cardTitle.textContent = isGenericId ? (item.category_name || 'Compoziție Biomecanică') : item.title;
-      }
+      if (cardId) cardId.textContent = displayId;
+      if (cardTitle) cardTitle.textContent = displayId;
       if (cardMedium) {
         const med = (item.medium_hypothesis && item.medium_hypothesis !== 'unknown')
           ? item.medium_hypothesis

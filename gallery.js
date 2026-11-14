@@ -18,59 +18,17 @@
   if (document.documentElement) document.documentElement.scrollTop = 0;
   if (document.body) document.body.scrollTop = 0;
 
-  // 5 Curated Classifications Taxonomy Metadata
-  const CURATED_WINGS = [
-    {
-      id: 'biomechanical-osteology',
-      badge: 'SALA I',
-      title: 'Anatomie Biomecanică și Osteologie Tehnologică',
-      animName: 'Pulsul Osteo-Mecanic și Șublere',
-      description: 'Explorare viscerală a osaturii organice fuzionate cu vertebre de titan, pistoane pneumatice și cablaje nervoase. Carnalitate sintetică de mare rigoare anatomică.'
-    },
-    {
-      id: 'cryptic-totems',
-      badge: 'SALA II',
-      title: 'Totemuri Criptice și Registre Runic-Arhitecturale',
-      animName: 'Ascensiunea Monolitică și Rădăcina Runică',
-      description: 'Structuri monolitice stratificate în registre verticale arhaice. Glife hermetice, alfabete oculte și geometrie sacră transpusă în tehno-arheologie.'
-    },
-    {
-      id: 'chromatic-expressions',
-      badge: 'SALA III',
-      title: 'Studii Cromatice și Guașă/Acrilic pe Hârtie',
-      animName: 'Eflorescența Pigmentară Prismatică',
-      description: 'Lucrări intime pe hârtie și carton. Explozii controlate de ocru mineral, oxid de cupru, roșu de cadmiu și negru de fum, marcate de gestualitate pură.'
-    },
-    {
-      id: 'cybernetic-assemblages',
-      badge: 'SALA IV',
-      title: 'Obiecte Sculpturale și Asamblaje Cyber-Surrealiste',
-      animName: 'Holograma Cinetică 3D și Reflexii Speculare',
-      description: 'Tensiunea tridimensională dintre ready-made tehnologic (platane hard disk, rulmenți, arcuri industriale) și încălțăminte de copil sau sfere reflectante.'
-    },
-    {
-      id: 'monumental-perspectives',
-      badge: 'SALA V',
-      title: 'Perspectivă Deconstructivistă și Arhitectură Monumentală',
-      animName: 'Punctul de Fugă Infinit și Axonometrie',
-      description: 'Volume arhitecturale masive, secțiuni transversale și axe axonometrice ce converg spre puncte de fugă infinite. Gravitație deconstructivistă.'
-    }
-  ];
-
   const state = {
     items: window.COLLECTION_DATA || [],
-    activeFilter: 'all',
     searchQuery: '',
-    currentView: 'editorial', // 'editorial', 'atelier', 'ledger', 'wings'
+    currentView: 'editorial', // 'editorial', 'atelier', 'ledger'
     theme: localStorage.getItem('theme_757') || 'dark',
     pageSize: 24,
     currentPage: 1,
     modalIndex: 0,
     filteredItems: [],
     fullscreenActive: false,
-    fullscreenIndex: 0,
-    fullscreenWing: null,
-    fullscreenWingIndex: 0
+    fullscreenIndex: 0
   };
 
   // DOM Elements
@@ -78,7 +36,6 @@
   const resultsCount = document.getElementById('results-count');
   const searchInput = document.getElementById('gallery-search');
   const searchClear = document.getElementById('search-clear');
-  const catPills = document.querySelectorAll('.cat-pill');
   const viewBtns = document.querySelectorAll('.btn-view');
   const themeToggle = document.getElementById('theme-toggle');
   const loadMoreBtn = document.getElementById('btn-load-more');
@@ -100,7 +57,6 @@
   const imageWrapper = document.getElementById('image-wrapper');
   const imageViewport = document.getElementById('image-viewport');
   const modalTitle = document.getElementById('modal-title');
-  const modalCategory = document.getElementById('modal-category');
   const modalId = document.getElementById('modal-id');
   const modalCuratorial = document.getElementById('modal-curatorial');
   const modalCritic = document.getElementById('modal-critic');
@@ -117,20 +73,17 @@
   const fsCloseBtn = document.getElementById('fs-close-btn');
   const fsPrevBtn = document.getElementById('fs-prev-btn');
   const fsNextBtn = document.getElementById('fs-next-btn');
-  const fsWingBadge = document.getElementById('fs-wing-badge');
   const fsAnimIndicator = document.getElementById('fs-anim-indicator');
   const fsImage = document.getElementById('fs-image');
   const fsArtworkFrame = document.getElementById('fs-artwork-frame');
   const fsOpusTitle = document.getElementById('fs-opus-title');
   const fsCriticText = document.getElementById('fs-critic-text');
-  const fsCategoryPills = document.getElementById('fs-category-pills');
   const fsStage = document.getElementById('fs-stage');
 
   // Initialize
   function init() {
     applyTheme(state.theme);
     setupEvents();
-    renderFsCategoryPills();
     filterItems();
   }
 
@@ -219,22 +172,18 @@
   // Filtrare și Motor de Căutare
   function filterItems() {
     const q = state.searchQuery.trim().toLowerCase();
-    const cat = state.activeFilter;
 
     state.filteredItems = state.items.filter(item => {
-      const matchCat = (cat === 'all') || (item.categories && item.categories.includes(cat));
-      if (!matchCat) return false;
-
       if (!q) return true;
 
-      const inId = item.id.toLowerCase().includes(q);
+      const rawId = (item.id || '').toLowerCase();
+      const formattedId = ('757 ' + (item.id || '').replace('-', ' ')).toLowerCase();
       const inTitle = item.title && item.title.toLowerCase().includes(q);
-      const inCat = item.category_name && item.category_name.toLowerCase().includes(q);
       const inCritic = item.critic_note && item.critic_note.toLowerCase().includes(q);
       const inCurator = item.curatorial_note && item.curatorial_note.toLowerCase().includes(q);
       const inTags = item.visual_tags && item.visual_tags.some(t => t.toLowerCase().includes(q));
 
-      return inId || inTitle || inCat || inCritic || inCurator || inTags;
+      return rawId.includes(q) || formattedId.includes(q) || inTitle || inCritic || inCurator || inTags;
     });
 
     state.currentPage = 1;
@@ -244,13 +193,16 @@
   // Card HTML Generator (With Physical 3D Hanging Rig)
   function renderCardHtml(item, globalIdx) {
     const thumbSrc = `data/web-images/${item.thumbnail_file}`;
+    const rawId = item.id || `ART-${String(globalIdx + 1).padStart(4, '0')}`;
+    const formattedId = rawId.replace('-', ' ');
+    const displayId = `757 ${formattedId}`;
     return `
-      <article class="art-card" data-idx="${globalIdx}" role="button" tabindex="0" aria-label="Deschide ${item.title}">
+      <article class="art-card" data-idx="${globalIdx}" role="button" tabindex="0" aria-label="Deschide ${displayId}">
         <!-- 1. Pictura înrămată pe perete (Fără suprapuneri) -->
         <div class="art-frame">
           <div class="card-specular-glare"></div>
           <div class="art-media">
-            <img src="${thumbSrc}" alt="${item.alt_text}" loading="lazy" decoding="async">
+            <img src="${thumbSrc}" alt="${item.alt_text || displayId}" loading="lazy" decoding="async">
           </div>
         </div>
 
@@ -269,17 +221,13 @@
           </svg>
         </div>
 
-        <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+        <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
         <div class="art-hanging-tag">
           <div class="tag-eyelets">
             <span class="eyelet left"></span>
             <span class="eyelet right"></span>
           </div>
-          <div class="art-meta-row">
-            <span class="art-cat-name">${item.category_name}</span>
-          </div>
-          <h3 class="art-card-title">${item.title}</h3>
-          <p class="art-critic-snippet">${item.critic_note}</p>
+          <h3 class="art-card-title">${displayId}</h3>
         </div>
       </article>
     `;
@@ -295,19 +243,11 @@
     if (total === 0) {
       grid.innerHTML = `
         <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; color: var(--text-muted); font-family: var(--font-mono);">
-          <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">Nicio operă nu corespunde filtrelor selectate.</p>
-          <p style="font-size: 0.8rem;">Încercați să resetați căutarea sau alegeți altă categorie.</p>
+          <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">Nicio operă nu corespunde căutării.</p>
+          <p style="font-size: 0.8rem;">Încercați să resetați căutarea.</p>
         </div>
       `;
       paginationContainer.style.display = 'none';
-      return;
-    }
-
-    // View: 5 Săli / Curated Wings
-    if (state.currentView === 'wings') {
-      renderWingsView();
-      paginationContainer.style.display = 'none';
-      attachCardEvents();
       return;
     }
 
@@ -324,48 +264,6 @@
     }
 
     attachCardEvents();
-  }
-
-  // Render 5 Curated Wings Mode
-  function renderWingsView() {
-    const wingsHtml = CURATED_WINGS.map(wing => {
-      const wingItems = state.filteredItems.filter(it => it.categories && it.categories.includes(wing.id));
-      if (wingItems.length === 0) return '';
-
-      const itemsHtml = wingItems.map(item => {
-        const globalIdx = state.filteredItems.indexOf(item);
-        return renderCardHtml(item, globalIdx);
-      }).join('');
-
-      return `
-        <section class="gallery-wing" data-wing-id="${wing.id}">
-          <header class="wing-header">
-            <div class="wing-header-top">
-              <span class="wing-roman-badge">${wing.badge}</span>
-              <button class="btn-wing-fullscreen" data-wing-cat="${wing.id}" title="Lansează ${wing.badge} în Fullscreen Experiențial">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
-                <span>Experiență Fullscreen ${wing.badge}</span>
-              </button>
-            </div>
-            <h2 class="wing-title">${wing.title}</h2>
-            <p class="wing-curatorial-desc">${wing.description}</p>
-          </header>
-          <div class="wing-artworks-grid">
-            ${itemsHtml}
-          </div>
-        </section>
-      `;
-    }).join('');
-
-    grid.innerHTML = `<div class="gallery-wings-container">${wingsHtml}</div>`;
-
-    grid.querySelectorAll('.btn-wing-fullscreen').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const catId = btn.getAttribute('data-wing-cat');
-        openLuxuryFullscreen(catId);
-      });
-    });
   }
 
   // Atașare click carduri, taste și fizică de înclinare 3D
@@ -463,15 +361,14 @@
     if (idx < 0 || idx >= state.filteredItems.length) return;
     state.modalIndex = idx;
     const item = state.filteredItems[idx];
+    const rawId = item.id || `ART-${String(idx + 1).padStart(4, '0')}`;
+    const displayId = `757 ${rawId.replace('-', ' ')}`;
 
     if (modalId) modalId.textContent = '';
     if (modalTitle) modalTitle.textContent = '';
-    if (modalCategory) modalCategory.textContent = item.category_name;
 
     const plaqueTitle = document.getElementById('modal-plaque-title');
-    if (plaqueTitle) plaqueTitle.textContent = item.title;
-    const plaqueWing = document.getElementById('modal-plaque-wing');
-    if (plaqueWing) plaqueWing.textContent = item.category_name;
+    if (plaqueTitle) plaqueTitle.textContent = displayId;
 
     if (modalCuratorial) {
       modalCuratorial.textContent = item.curatorial_note || item.critic_note || '';
@@ -495,7 +392,7 @@
     resetZoom();
 
     modalImage.src = `data/web-images/${item.image_file}`;
-    modalImage.alt = item.alt_text;
+    modalImage.alt = item.alt_text || displayId;
 
     modal.showModal();
     document.body.style.overflow = 'hidden';
@@ -563,96 +460,36 @@
   }
 
   function nextModalItem() {
-    if (state.currentView === 'wings') {
-      const currentItem = state.filteredItems[state.modalIndex];
-      const wingId = (currentItem && currentItem.categories && currentItem.categories[0]) || CURATED_WINGS[0].id;
-      const wingItems = state.filteredItems.filter(it => it.categories && it.categories.includes(wingId));
-      const currentWingIdx = wingItems.findIndex(it => it.id === currentItem.id);
-      const nextWingIdx = (currentWingIdx + 1) % wingItems.length;
-      const nextItem = wingItems[nextWingIdx];
-      const nextGlobalIdx = state.filteredItems.indexOf(nextItem);
-      openModal(nextGlobalIdx);
-      return;
-    }
-    if (state.modalIndex < state.filteredItems.length - 1) {
-      openModal(state.modalIndex + 1);
-    } else {
-      openModal(0);
-    }
+    if (state.filteredItems.length === 0) return;
+    const nextIdx = (state.modalIndex + 1) % state.filteredItems.length;
+    openModal(nextIdx);
   }
 
   function prevModalItem() {
-    if (state.currentView === 'wings') {
-      const currentItem = state.filteredItems[state.modalIndex];
-      const wingId = (currentItem && currentItem.categories && currentItem.categories[0]) || CURATED_WINGS[0].id;
-      const wingItems = state.filteredItems.filter(it => it.categories && it.categories.includes(wingId));
-      const currentWingIdx = wingItems.findIndex(it => it.id === currentItem.id);
-      const prevWingIdx = (currentWingIdx - 1 + wingItems.length) % wingItems.length;
-      const prevItem = wingItems[prevWingIdx];
-      const prevGlobalIdx = state.filteredItems.indexOf(prevItem);
-      openModal(prevGlobalIdx);
-      return;
-    }
-    if (state.modalIndex > 0) {
-      openModal(state.modalIndex - 1);
-    } else {
-      openModal(state.filteredItems.length - 1);
-    }
+    if (state.filteredItems.length === 0) return;
+    const prevIdx = (state.modalIndex - 1 + state.filteredItems.length) % state.filteredItems.length;
+    openModal(prevIdx);
   }
 
   // =========================================================================
-  // LUXURY FULLSCREEN EXPERIENCE ENGINE (5 BESPOKE ANIMATIONS)
+  // LUXURY FULLSCREEN EXPERIENCE ENGINE
   // =========================================================================
-
-  function renderFsCategoryPills() {
-    if (!fsCategoryPills) return;
-    fsCategoryPills.innerHTML = CURATED_WINGS.map(wing => `
-      <button class="btn-fs-cat-switch fs-cat-pill" data-cat="${wing.id}">
-        <span class="pill-badge">${wing.badge}</span>
-        <span class="pill-name">${wing.title}</span>
-      </button>
-    `).join('');
-
-    fsCategoryPills.querySelectorAll('.btn-fs-cat-switch').forEach(pill => {
-      pill.addEventListener('click', () => {
-        const targetCat = pill.getAttribute('data-cat');
-        openLuxuryFullscreen(targetCat);
-      });
-    });
-  }
 
   function openLuxuryFullscreen(target) {
-    let item = null;
-    let wingId = null;
-
-    if (typeof target === 'string') {
-      // Direct call with category ID (e.g. from pill or wing header button)
-      wingId = target;
-      const wingItems = state.items.filter(it => it.categories && it.categories.includes(wingId));
-      item = wingItems[0] || state.items[0];
-    } else if (typeof target === 'number') {
-      // Call with item index
-      item = state.filteredItems[target] || state.items[target] || state.items[0];
-      wingId = (item && item.categories && item.categories[0]) || CURATED_WINGS[0].id;
+    let idx = 0;
+    if (typeof target === 'number') {
+      idx = target;
     } else if (target && typeof target === 'object') {
-      item = target;
-      wingId = (item && item.categories && item.categories[0]) || CURATED_WINGS[0].id;
-    } else {
-      item = state.items[0];
-      wingId = (item && item.categories && item.categories[0]) || CURATED_WINGS[0].id;
+      idx = state.filteredItems.indexOf(target);
+      if (idx === -1) idx = state.items.indexOf(target);
+      if (idx === -1) idx = 0;
+    } else if (state.modalIndex >= 0) {
+      idx = state.modalIndex;
     }
-
-    if (!item) return;
-
-    const wing = CURATED_WINGS.find(w => w.id === wingId) || CURATED_WINGS[0];
-    const wingItems = state.items.filter(it => it.categories && it.categories.includes(wing.id));
-    
-    let wingIdx = wingItems.findIndex(it => it.id === item.id);
-    if (wingIdx === -1) wingIdx = 0;
+    if (idx < 0 || idx >= state.filteredItems.length) idx = 0;
 
     state.fullscreenActive = true;
-    state.fullscreenWing = wing.id;
-    state.fullscreenWingIndex = wingIdx;
+    state.fullscreenIndex = idx;
 
     // Close modal if open
     if (modal.open) {
@@ -671,43 +508,32 @@
   }
 
   function renderFsCurrentItem() {
-    const wing = CURATED_WINGS.find(w => w.id === state.fullscreenWing) || CURATED_WINGS[0];
-    const wingItems = state.items.filter(it => it.categories && it.categories.includes(wing.id));
-    if (wingItems.length === 0) return;
+    if (state.filteredItems.length === 0) return;
 
-    if (state.fullscreenWingIndex < 0 || state.fullscreenWingIndex >= wingItems.length) {
-      state.fullscreenWingIndex = 0;
+    if (state.fullscreenIndex < 0 || state.fullscreenIndex >= state.filteredItems.length) {
+      state.fullscreenIndex = 0;
     }
 
-    const item = wingItems[state.fullscreenWingIndex];
-
-    // Set Data Category for Bespoke CSS Animation Trigger
-    fsOverlay.setAttribute('data-category', wing.id);
+    const item = state.filteredItems[state.fullscreenIndex];
+    const rawId = item.id || `ART-${String(state.fullscreenIndex + 1).padStart(4, '0')}`;
+    const displayId = `757 ${rawId.replace('-', ' ')}`;
 
     // Update HUD information
-    if (fsWingBadge) fsWingBadge.textContent = wing.badge;
-    if (fsAnimIndicator) fsAnimIndicator.textContent = `Animație: ${wing.animName}`;
-    if (fsOpusTitle) fsOpusTitle.textContent = item.title;
-    if (fsCriticText) fsCriticText.textContent = item.critic_note;
-
-    // Highlight active category pill
-    if (fsCategoryPills) {
-      fsCategoryPills.querySelectorAll('.btn-fs-cat-switch').forEach(pill => {
-        pill.classList.toggle('active', pill.getAttribute('data-cat') === wing.id);
-      });
-    }
+    if (fsOpusTitle) fsOpusTitle.textContent = displayId;
+    if (fsAnimIndicator) fsAnimIndicator.textContent = 'Arhivă Canonică 757';
+    if (fsCriticText) fsCriticText.textContent = item.critic_note || '';
 
     // Load High-Res WebP Image
     fsImage.src = `data/web-images/${item.image_file}`;
-    fsImage.alt = item.alt_text;
+    fsImage.alt = item.alt_text || displayId;
 
     // Re-trigger entrance animation
     fsArtworkFrame.style.animation = 'none';
     void fsArtworkFrame.offsetWidth; // Force reflow
     fsArtworkFrame.style.animation = '';
 
-    // Setup 3D Gyro Mouse Interaction for Assemblages and Monumental
-    setupGyroTilt(wing.id);
+    // Setup 3D Gyro Mouse Interaction
+    setupGyroTilt();
   }
 
   function closeLuxuryFullscreen() {
@@ -725,51 +551,33 @@
   }
 
   function nextFsItem() {
-    const currentWingId = state.fullscreenWing || CURATED_WINGS[0].id;
-    const wingItems = state.items.filter(it => it.categories && it.categories.includes(currentWingId));
-    if (wingItems.length === 0) return;
-
-    state.fullscreenWingIndex = (state.fullscreenWingIndex + 1) % wingItems.length;
+    if (state.filteredItems.length === 0) return;
+    state.fullscreenIndex = (state.fullscreenIndex + 1) % state.filteredItems.length;
     renderFsCurrentItem();
   }
 
   function prevFsItem() {
-    const currentWingId = state.fullscreenWing || CURATED_WINGS[0].id;
-    const wingItems = state.items.filter(it => it.categories && it.categories.includes(currentWingId));
-    if (wingItems.length === 0) return;
-
-    state.fullscreenWingIndex = (state.fullscreenWingIndex - 1 + wingItems.length) % wingItems.length;
+    if (state.filteredItems.length === 0) return;
+    state.fullscreenIndex = (state.fullscreenIndex - 1 + state.filteredItems.length) % state.filteredItems.length;
     renderFsCurrentItem();
   }
 
   // Efect Parallax 3D și Gyro Tilt
   let gyroHandler = null;
 
-  function setupGyroTilt(catId) {
+  function setupGyroTilt() {
     removeGyroTilt();
 
-    if (catId === 'cybernetic-assemblages' || catId === 'monumental-perspectives') {
-      gyroHandler = function (e) {
-        const rect = fsStage.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
+    gyroHandler = function (e) {
+      const rect = fsStage.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      const rotY = x * 16;
+      const rotX = -y * 12;
+      fsArtworkFrame.style.transform = `perspective(1100px) rotateY(${rotY}deg) rotateX(${rotX}deg) translateZ(8px)`;
+    };
 
-        if (catId === 'cybernetic-assemblages') {
-          const rotY = x * 18; // degrees
-          const rotX = -y * 14;
-          fsArtworkFrame.style.transform = `perspective(1100px) rotateY(${rotY}deg) rotateX(${rotX}deg) translateZ(10px)`;
-        } else {
-          // Monumental: dynamic perspective vanishing point shift
-          const shiftX = x * 25;
-          const shiftY = y * 25;
-          fsArtworkFrame.style.transform = `perspective(1200px) translate3d(${shiftX}px, ${shiftY}px, 0px)`;
-        }
-      };
-
-      fsStage.addEventListener('mousemove', gyroHandler);
-    } else {
-      fsArtworkFrame.style.transform = '';
-    }
+    fsStage.addEventListener('mousemove', gyroHandler);
   }
 
   function removeGyroTilt() {
@@ -815,20 +623,6 @@
       searchClear.classList.remove('visible');
       filterItems();
       searchInput.focus();
-    });
-
-    // Category pills
-    catPills.forEach(pill => {
-      pill.addEventListener('click', () => {
-        catPills.forEach(p => {
-          p.classList.remove('active');
-          p.setAttribute('aria-selected', 'false');
-        });
-        pill.classList.add('active');
-        pill.setAttribute('aria-selected', 'true');
-        state.activeFilter = pill.getAttribute('data-filter');
-        filterItems();
-      });
     });
 
     // Hero Portrait Card (ART-0103) Click and Tilt Interaction
@@ -974,10 +768,8 @@
       if (idx !== -1) {
         openModal(idx);
       } else {
-        state.activeFilter = 'all';
-        catPills.forEach(p => p.classList.remove('active'));
-        const allPill = document.querySelector('.cat-pill[data-category="all"]');
-        if (allPill) allPill.classList.add('active');
+        if (searchInput) searchInput.value = '';
+        state.searchQuery = '';
         filterItems();
         idx = state.filteredItems.findIndex(i => i.id === artId);
         if (idx !== -1) openModal(idx);
@@ -1093,9 +885,6 @@
         document.querySelector('.btn-view[data-view="atelier"]').click();
       } else if (e.key === '3') {
         document.querySelector('.btn-view[data-view="ledger"]').click();
-      } else if (e.key === '4') {
-        const wingsBtn = document.querySelector('.btn-view[data-view="wings"]');
-        if (wingsBtn) wingsBtn.click();
       }
     });
   }

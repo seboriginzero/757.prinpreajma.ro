@@ -961,57 +961,10 @@ a {
 
 .gallery-toolbar {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 2.2rem;
-  width: 100%;
-}
-
-.category-pills {
-  display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.65rem;
-  flex-wrap: wrap;
-  padding-bottom: 0.5rem;
-  margin: 0 auto;
+  margin-bottom: 2.2rem;
   width: 100%;
-}
-
-.category-pills::-webkit-scrollbar { display: none; }
-
-.cat-pill {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  padding: 0.6rem 1rem;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all var(--transition-fast);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.cat-pill:hover {
-  border-color: var(--accent-gold);
-  color: var(--text-primary);
-}
-
-.cat-pill.active {
-  background: var(--bg-card);
-  border-color: var(--accent-gold);
-  color: var(--accent-gold);
-  font-weight: 600;
-}
-
-.pill-count {
-  font-size: 0.65rem;
-  opacity: 0.7;
 }
 
 .toolbar-actions {
@@ -1332,12 +1285,13 @@ a {
   background: linear-gradient(160deg, #111319 0%, #07080b 100%);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-sm);
-  padding: 1.3rem 1.4rem 1.4rem;
+  padding: 0.95rem 1.2rem 0.9rem;
   box-shadow: 0 16px 34px -6px rgba(0, 0, 0, 0.7), 0 4px 10px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.12);
   transform-origin: 50% 0%;
   transform-style: preserve-3d;
   transform: perspective(800px) rotateX(2.5deg);
   transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 0.45s cubic-bezier(0.2, 0.9, 0.3, 1), border-color var(--transition-fast);
+  text-align: center;
 }
 
 [data-theme="light"] .art-hanging-tag {
@@ -1451,11 +1405,13 @@ a {
 
 .art-card-title {
   font-family: var(--font-serif);
-  font-size: 1.22rem;
+  font-size: 1.15rem;
   font-weight: 600;
   color: var(--text-primary);
-  margin-top: 0.3rem;
-  letter-spacing: 0.02em;
+  margin: 0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
 }
 
 .art-critic-snippet {
@@ -2405,147 +2361,7 @@ a {
   gap: 1rem;
 }
 
-/* ==========================================================================
-   CELE 5 SĂLI TEMATICE (CURATED WINGS VIEW)
-   ========================================================================== */
-.gallery-container.view-wings {
-  display: block;
-  width: 100%;
-}
 
-.gallery-wings-container {
-  display: flex;
-  flex-direction: column;
-  gap: 5rem;
-  width: 100%;
-}
-
-.gallery-wing {
-  position: relative;
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 3rem 2.5rem 3.5rem;
-  box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.4);
-  transition: border-color var(--transition-normal);
-}
-
-.gallery-wing:hover {
-  border-color: var(--border-hover);
-}
-
-.wing-header {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 2.5rem;
-  padding-bottom: 1.8rem;
-  border-bottom: 1px solid var(--border);
-  gap: 0.8rem;
-  width: 100%;
-}
-
-.wing-header-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.wing-title-group {
-  display: flex;
-  gap: 1.5rem;
-  align-items: flex-start;
-}
-
-.wing-roman-badge {
-  font-family: var(--font-serif);
-  font-size: 3.2rem;
-  font-weight: 700;
-  color: var(--accent-gold);
-  line-height: 1;
-  opacity: 0.9;
-  text-shadow: 0 0 25px rgba(212, 163, 89, 0.35);
-  min-width: 65px;
-}
-
-.wing-heading-block {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-
-.wing-category-tag {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--accent-gold);
-}
-
-.wing-title {
-  font-family: var(--font-serif);
-  font-size: 1.85rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin: 0;
-}
-
-.wing-subtitle-en {
-  font-family: var(--font-sans);
-  font-size: 0.92rem;
-  color: var(--text-muted);
-  font-style: italic;
-}
-
-.wing-curatorial-desc,
-.wing-critic-summary {
-  font-family: var(--font-sans);
-  font-size: 0.98rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  max-width: 800px;
-  margin: 0.3rem 0 0;
-}
-
-.wing-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.btn-wing-fullscreen {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: linear-gradient(135deg, rgba(212, 163, 89, 0.15) 0%, rgba(212, 163, 89, 0.05) 100%);
-  border: 1px solid var(--accent-gold);
-  color: var(--accent-gold);
-  padding: 0.75rem 1.4rem;
-  border-radius: var(--radius-sm);
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.btn-wing-fullscreen:hover {
-  background: var(--accent-gold);
-  color: #0b0c10;
-  box-shadow: 0 0 25px rgba(212, 163, 89, 0.4);
-  transform: translateY(-2px);
-}
-
-.wing-artworks-grid,
-.wing-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 3.5rem 2.2rem;
-}
 
 /* ==========================================================================
    LUXURY FULLSCREEN EXPERIENTIAL OVERLAY (CELE 5 ANIMAȚII)
@@ -2727,28 +2543,7 @@ a {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
-.fs-category-pills {
-  display: flex;
-  gap: 0.5rem;
-}
 
-.btn-fs-cat-switch {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.6);
-  padding: 0.4rem 0.8rem;
-  border-radius: var(--radius-sm);
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.btn-fs-cat-switch.active, .btn-fs-cat-switch:hover {
-  background: rgba(212, 163, 89, 0.2);
-  border-color: var(--accent-gold);
-  color: var(--accent-gold);
-}
 
 /* --------------------------------------------------------------------------
    ANIMAȚIA 1: BIOMECHANICAL OSTEOLOGY ("THE BIOMECHANICAL OSTEO-PULSE")
@@ -3221,22 +3016,7 @@ a {
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
 }
 
-[data-theme="light"] .cat-pill {
-  background: #f8fafc;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  color: #64748b;
-}
 
-[data-theme="light"] .cat-pill:hover {
-  color: #0f172a;
-  border-color: rgba(0, 0, 0, 0.25);
-}
-
-[data-theme="light"] .cat-pill.active {
-  background: #0f172a;
-  color: #ffffff;
-  border-color: #0f172a;
-}
 
 [data-theme="light"] .search-box input {
   background: #ffffff;
@@ -3288,47 +3068,7 @@ a {
   color: #ffffff;
 }
 
-/* 5 Săli (Curated Wings) in Light Theme */
-[data-theme="light"] .gallery-wing {
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.09);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.06);
-}
 
-[data-theme="light"] .gallery-wing:hover {
-  border-color: rgba(0, 0, 0, 0.22);
-}
-
-[data-theme="light"] .wing-header {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-[data-theme="light"] .wing-roman-badge {
-  color: #0f172a;
-  text-shadow: none;
-}
-
-[data-theme="light"] .wing-title {
-  color: #0f172a;
-}
-
-[data-theme="light"] .wing-curatorial-desc {
-  color: #334155;
-}
-
-[data-theme="light"] .btn-wing-fullscreen {
-  background: #0f172a;
-  color: #ffffff;
-  border: 1px solid #0f172a;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-}
-
-[data-theme="light"] .btn-wing-fullscreen:hover {
-  background: #000000;
-  color: #ffffff;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-  transform: translateY(-2px);
-}
 
 /* Modal in Light Theme */
 [data-theme="light"] .luxury-modal::backdrop,
@@ -3668,15 +3408,7 @@ a {
     padding: 1.5rem 0.85rem 3rem;
   }
   .gallery-toolbar {
-    gap: 1.2rem;
     margin-bottom: 1.8rem;
-  }
-  .category-pills {
-    gap: 0.45rem;
-  }
-  .cat-pill {
-    font-size: 0.7rem;
-    padding: 0.45rem 0.75rem;
   }
   .toolbar-actions {
     gap: 1rem;

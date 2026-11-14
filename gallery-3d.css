@@ -182,63 +182,7 @@
   color: #111827 !important;
 }
 
-/* Wing / Room Filter Selector in 3D HUD */
-.spatial-3d-wings {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 3px 6px;
-  border-radius: 20px;
-  overflow-x: auto;
-}
 
-[data-theme="light"] .spatial-3d-wings {
-  background: rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.spatial-wing-btn {
-  background: transparent;
-  border: none;
-  color: var(--text-secondary, #9ca3af);
-  padding: 0.3rem 0.65rem;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.7rem;
-  letter-spacing: 0.04em;
-  border-radius: 14px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all var(--transition-fast, 0.2s);
-}
-
-.spatial-wing-btn:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
-}
-
-[data-theme="light"] .spatial-wing-btn {
-  color: #4b5563;
-}
-
-[data-theme="light"] .spatial-wing-btn:hover {
-  color: #111827;
-  background: rgba(0, 0, 0, 0.06);
-}
-
-.spatial-wing-btn.is-active {
-  background: rgba(212, 163, 89, 0.25);
-  color: var(--accent-gold, #d4a359);
-  font-weight: 700;
-}
-
-[data-theme="light"] .spatial-wing-btn.is-active {
-  background: #111827 !important;
-  color: #ffffff !important;
-  font-weight: 700 !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
 
 /* HUD Action Group */
 .spatial-3d-hud-actions {
@@ -523,20 +467,7 @@
   color: #111827;
 }
 
-.spatial-card-wing {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
-  padding: 0.15rem 0.5rem;
-  border-radius: 4px;
-  background: rgba(212, 163, 89, 0.15);
-  color: var(--accent-gold, #d4a359);
-}
 
-[data-theme="light"] .spatial-card-wing {
-  background: rgba(0, 0, 0, 0.08);
-  color: #111827;
-}
 
 .spatial-card-title {
   font-family: var(--font-serif, 'Cormorant Garamond', Georgia, serif);
@@ -639,9 +570,7 @@
 
 /* Mobile responsiveness for 3D overlay */
 @media (max-width: 899px) {
-  .spatial-3d-wings {
-    display: none;
-  }
+
   .spatial-3d-hud-top {
     height: 58px;
     padding: 0 0.85rem;

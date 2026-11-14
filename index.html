@@ -151,20 +151,9 @@
     </div>
   </section>
 
-  <!-- Gallery Control Center: Filters, Search, Display Modes -->
+  <!-- Gallery Control Center: Search & Display Modes -->
   <main class="gallery-wrapper" id="galerie">
     <div class="gallery-toolbar">
-      
-      <!-- Category Tabs (Cele 5 Direcții Critice) -->
-      <div class="category-pills" role="tablist" aria-label="Filtrare categorii">
-        <button class="cat-pill active" data-filter="all" role="tab" aria-selected="true">Toate Operele</button>
-        <button class="cat-pill" data-filter="biomechanical-osteology" role="tab" aria-selected="false">Anatomie Biomecanică</button>
-        <button class="cat-pill" data-filter="cryptic-totems" role="tab" aria-selected="false">Totemuri Criptice</button>
-        <button class="cat-pill" data-filter="chromatic-expressions" role="tab" aria-selected="false">Studii Cromatice</button>
-        <button class="cat-pill" data-filter="cybernetic-assemblages" role="tab" aria-selected="false">Obiecte Sculpturale</button>
-        <button class="cat-pill" data-filter="monumental-perspectives" role="tab" aria-selected="false">Perspectivă Deconstructivistă</button>
-      </div>
-
       <!-- Action Row: Căutare și Moduri de Afișare -->
       <div class="toolbar-actions">
         <!-- Live Search -->
@@ -173,21 +162,12 @@
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-          <input type="text" id="gallery-search" placeholder="Căutare după ID, tehnică, tag..." aria-label="Căutare în colecție">
+          <input type="text" id="gallery-search" placeholder="Căutare după ID sau tag..." aria-label="Căutare în colecție">
           <button id="search-clear" class="btn-clear" aria-label="Șterge căutarea">&times;</button>
         </div>
 
         <!-- Luxury Display Modes Switcher -->
         <div class="view-modes" aria-label="Moduri de afișare galerie">
-          <button class="btn-view" data-view="wings" title="Cele 5 Săli Tematice (Clasificare Muzeală)">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8">
-              <rect x="2" y="3" width="5.5" height="18" rx="1"></rect>
-              <rect x="9.25" y="3" width="5.5" height="18" rx="1"></rect>
-              <rect x="16.5" y="3" width="5.5" height="18" rx="1"></rect>
-            </svg>
-            <span class="view-label">5 Săli</span>
-          </button>
-
           <button class="btn-view active" data-view="editorial" title="Mod Salon Editorial (Grilă Asimetrică)">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8">
               <rect x="3" y="3" width="7" height="9" rx="1"></rect>
@@ -220,7 +200,7 @@
 
     <!-- Gallery Grid Container -->
     <div class="gallery-container view-editorial" id="gallery-grid">
-        <article class="art-card" data-idx="0" role="button" tabindex="0" aria-label="Deschide ART-0001">
+        <article class="art-card" data-idx="0" role="button" tabindex="0" aria-label="Deschide 757 ART 0001">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -244,20 +224,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Totemuri Criptice și Registre Runic-Arhitecturale</span>
-            </div>
-            <h3 class="art-card-title">ART-0001</h3>
-            <p class="art-critic-snippet">În acest registru, Mugurel Emanuel Manea operează ca un scrib hieratic al unei civilizații hibride. Semnele nu mai cer o lectură fonetică, ci o contemplare a geometriei lor sacre.</p>
+            <h3 class="art-card-title">757 ART 0001</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="1" role="button" tabindex="0" aria-label="Deschide ART-0002">
+        <article class="art-card" data-idx="1" role="button" tabindex="0" aria-label="Deschide 757 ART 0002">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -281,20 +257,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Totemuri Criptice și Registre Runic-Arhitecturale</span>
-            </div>
-            <h3 class="art-card-title">ART-0002</h3>
-            <p class="art-critic-snippet">Verticalitatea operei impune o lectură ascensională, de la materia densă a bazei spre puritatea grafică a registrului superior. Un echilibru desăvârșit între arhaism și futurism.</p>
+            <h3 class="art-card-title">757 ART 0002</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="2" role="button" tabindex="0" aria-label="Deschide ART-0003">
+        <article class="art-card" data-idx="2" role="button" tabindex="0" aria-label="Deschide 757 ART 0003">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -318,20 +290,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Obiecte Sculpturale și Asamblaje Cyber-Surrealiste</span>
-            </div>
-            <h3 class="art-card-title">ART-0003</h3>
-            <p class="art-critic-snippet">Tensiunea lucrării rezidă în antropomorfizarea poetic-violentă a tehnologiei dezafectate. Îmbinarea memoriei biologice cu memoria magnetică generează un totem animat al erei post-industriale.</p>
+            <h3 class="art-card-title">757 ART 0003</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="3" role="button" tabindex="0" aria-label="Deschide ART-0004">
+        <article class="art-card" data-idx="3" role="button" tabindex="0" aria-label="Deschide 757 ART 0004">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -355,20 +323,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Studii Cromatice și Guașă/Acrilic pe Hârtie</span>
-            </div>
-            <h3 class="art-card-title">ART-0004</h3>
-            <p class="art-critic-snippet">Picturalul și grafismul se contopesc aici într-o simbioză fericită: culoarea eliberează forma, în timp ce linia de tuș îi conferă rigoarea unei structuri imuabile.</p>
+            <h3 class="art-card-title">757 ART 0004</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="4" role="button" tabindex="0" aria-label="Deschide ART-0005">
+        <article class="art-card" data-idx="4" role="button" tabindex="0" aria-label="Deschide 757 ART 0005">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -392,20 +356,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Anatomie Biomecanică și Osteologie Tehnologică</span>
-            </div>
-            <h3 class="art-card-title">ART-0005</h3>
-            <p class="art-critic-snippet">Artistul elaborează aici un arhetip al rezistenței: osatura devine bastion, iar mecanismul – scut protector împotriva efemerității biologice.</p>
+            <h3 class="art-card-title">757 ART 0005</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="5" role="button" tabindex="0" aria-label="Deschide ART-0006">
+        <article class="art-card" data-idx="5" role="button" tabindex="0" aria-label="Deschide 757 ART 0006">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -429,20 +389,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Obiecte Sculpturale și Asamblaje Cyber-Surrealiste</span>
-            </div>
-            <h3 class="art-card-title">ART-0006</h3>
-            <p class="art-critic-snippet">Artistul resemnifică deșeul tehnologic printr-o asamblare de o mare sensibilitate compozițională, transformând relicvele industriale într-o entitate sculpturală autonomă cu prezență totemică.</p>
+            <h3 class="art-card-title">757 ART 0006</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="6" role="button" tabindex="0" aria-label="Deschide ART-0007">
+        <article class="art-card" data-idx="6" role="button" tabindex="0" aria-label="Deschide 757 ART 0007">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -466,20 +422,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Totemuri Criptice și Registre Runic-Arhitecturale</span>
-            </div>
-            <h3 class="art-card-title">ART-0007</h3>
-            <p class="art-critic-snippet">Verticalitatea operei impune o lectură ascensională, de la materia densă a bazei spre puritatea grafică a registrului superior. Un echilibru desăvârșit între arhaism și futurism.</p>
+            <h3 class="art-card-title">757 ART 0007</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="7" role="button" tabindex="0" aria-label="Deschide ART-0008">
+        <article class="art-card" data-idx="7" role="button" tabindex="0" aria-label="Deschide 757 ART 0008">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -503,20 +455,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Totemuri Criptice și Registre Runic-Arhitecturale</span>
-            </div>
-            <h3 class="art-card-title">ART-0008</h3>
-            <p class="art-critic-snippet">Compoziția reia tradiția coloanelor nesfârșite și a obeliscurilor ancestrale, translate într-un limbaj cyber-criptic. Registrele acționează ca straturi geologice ale cunoașterii, unde scrisul devine energie pură.</p>
+            <h3 class="art-card-title">757 ART 0008</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="8" role="button" tabindex="0" aria-label="Deschide ART-0009">
+        <article class="art-card" data-idx="8" role="button" tabindex="0" aria-label="Deschide 757 ART 0009">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -540,20 +488,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Anatomie Biomecanică și Osteologie Tehnologică</span>
-            </div>
-            <h3 class="art-card-title">ART-0009</h3>
-            <p class="art-critic-snippet">Artistul elaborează aici un arhetip al rezistenței: osatura devine bastion, iar mecanismul – scut protector împotriva efemerității biologice.</p>
+            <h3 class="art-card-title">757 ART 0009</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="9" role="button" tabindex="0" aria-label="Deschide ART-0010">
+        <article class="art-card" data-idx="9" role="button" tabindex="0" aria-label="Deschide 757 ART 0010">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -577,20 +521,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Anatomie Biomecanică și Osteologie Tehnologică</span>
-            </div>
-            <h3 class="art-card-title">ART-0010</h3>
-            <p class="art-critic-snippet">Privirea este invitată într-un periplu labirintic printre articulații și tendoane metalizate. Lucrarea afirmă o poetică a hibridizării unde tehnologia încetează să fie unealtă și devine substanță ontologică.</p>
+            <h3 class="art-card-title">757 ART 0010</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="10" role="button" tabindex="0" aria-label="Deschide ART-0011">
+        <article class="art-card" data-idx="10" role="button" tabindex="0" aria-label="Deschide 757 ART 0011">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -614,20 +554,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Anatomie Biomecanică și Osteologie Tehnologică</span>
-            </div>
-            <h3 class="art-card-title">ART-0011</h3>
-            <p class="art-critic-snippet">Forța acestei foi rezidă în coerența absolută a logicii interne a formei: mecanismul imaginat pare deplin funcțional, animat de o respirație interioară ce sfidează inerția metalului.</p>
+            <h3 class="art-card-title">757 ART 0011</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="11" role="button" tabindex="0" aria-label="Deschide ART-0012">
+        <article class="art-card" data-idx="11" role="button" tabindex="0" aria-label="Deschide 757 ART 0012">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -651,20 +587,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Anatomie Biomecanică și Osteologie Tehnologică</span>
-            </div>
-            <h3 class="art-card-title">ART-0012</h3>
-            <p class="art-critic-snippet">Prin clarobscurul dramatic și rigoarea axonometrică, lucrarea capătă o dimensiune oraculară, prefigurând o arheologie a formelor viitorului.</p>
+            <h3 class="art-card-title">757 ART 0012</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="12" role="button" tabindex="0" aria-label="Deschide ART-0013">
+        <article class="art-card" data-idx="12" role="button" tabindex="0" aria-label="Deschide 757 ART 0013">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -688,20 +620,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Totemuri Criptice și Registre Runic-Arhitecturale</span>
-            </div>
-            <h3 class="art-card-title">ART-0013</h3>
-            <p class="art-critic-snippet">Compoziția reia tradiția coloanelor nesfârșite și a obeliscurilor ancestrale, translate într-un limbaj cyber-criptic. Registrele acționează ca straturi geologice ale cunoașterii, unde scrisul devine energie pură.</p>
+            <h3 class="art-card-title">757 ART 0013</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="13" role="button" tabindex="0" aria-label="Deschide ART-0014">
+        <article class="art-card" data-idx="13" role="button" tabindex="0" aria-label="Deschide 757 ART 0014">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -725,20 +653,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Totemuri Criptice și Registre Runic-Arhitecturale</span>
-            </div>
-            <h3 class="art-card-title">ART-0014</h3>
-            <p class="art-critic-snippet">Monograma 757 transcende funcția semnăturii: ea funcționează ca o cheie de boltă simbolică ce unifică registrul grafic cu textura suportului într-o emblemă identitară inconfundabilă.</p>
+            <h3 class="art-card-title">757 ART 0014</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="14" role="button" tabindex="0" aria-label="Deschide ART-0015">
+        <article class="art-card" data-idx="14" role="button" tabindex="0" aria-label="Deschide 757 ART 0015">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -762,20 +686,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Anatomie Biomecanică și Osteologie Tehnologică</span>
-            </div>
-            <h3 class="art-card-title">ART-0015</h3>
-            <p class="art-critic-snippet">Forța acestei foi rezidă în coerența absolută a logicii interne a formei: mecanismul imaginat pare deplin funcțional, animat de o respirație interioară ce sfidează inerția metalului.</p>
+            <h3 class="art-card-title">757 ART 0015</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="15" role="button" tabindex="0" aria-label="Deschide ART-0016">
+        <article class="art-card" data-idx="15" role="button" tabindex="0" aria-label="Deschide 757 ART 0016">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -799,20 +719,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Anatomie Biomecanică și Osteologie Tehnologică</span>
-            </div>
-            <h3 class="art-card-title">ART-0016</h3>
-            <p class="art-critic-snippet">Prin clarobscurul dramatic și rigoarea axonometrică, lucrarea capătă o dimensiune oraculară, prefigurând o arheologie a formelor viitorului.</p>
+            <h3 class="art-card-title">757 ART 0016</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="16" role="button" tabindex="0" aria-label="Deschide ART-0017">
+        <article class="art-card" data-idx="16" role="button" tabindex="0" aria-label="Deschide 757 ART 0017">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -836,20 +752,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Anatomie Biomecanică și Osteologie Tehnologică</span>
-            </div>
-            <h3 class="art-card-title">ART-0017</h3>
-            <p class="art-critic-snippet">Artistul elaborează aici un arhetip al rezistenței: osatura devine bastion, iar mecanismul – scut protector împotriva efemerității biologice.</p>
+            <h3 class="art-card-title">757 ART 0017</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="17" role="button" tabindex="0" aria-label="Deschide ART-0018">
+        <article class="art-card" data-idx="17" role="button" tabindex="0" aria-label="Deschide 757 ART 0018">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -873,20 +785,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Anatomie Biomecanică și Osteologie Tehnologică</span>
-            </div>
-            <h3 class="art-card-title">ART-0018</h3>
-            <p class="art-critic-snippet">Privirea este invitată într-un periplu labirintic printre articulații și tendoane metalizate. Lucrarea afirmă o poetică a hibridizării unde tehnologia încetează să fie unealtă și devine substanță ontologică.</p>
+            <h3 class="art-card-title">757 ART 0018</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="18" role="button" tabindex="0" aria-label="Deschide ART-0019">
+        <article class="art-card" data-idx="18" role="button" tabindex="0" aria-label="Deschide 757 ART 0019">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -910,20 +818,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Studii Cromatice și Guașă/Acrilic pe Hârtie</span>
-            </div>
-            <h3 class="art-card-title">ART-0019</h3>
-            <p class="art-critic-snippet">Picturalul și grafismul se contopesc aici într-o simbioză fericită: culoarea eliberează forma, în timp ce linia de tuș îi conferă rigoarea unei structuri imuabile.</p>
+            <h3 class="art-card-title">757 ART 0019</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="19" role="button" tabindex="0" aria-label="Deschide ART-0020">
+        <article class="art-card" data-idx="19" role="button" tabindex="0" aria-label="Deschide 757 ART 0020">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -947,20 +851,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Perspectivă Deconstructivistă și Arhitectură Monumentală</span>
-            </div>
-            <h3 class="art-card-title">ART-0020</h3>
-            <p class="art-critic-snippet">Geometria spațială nu este una statică, ci dinamică, animată de o tensiune arhitecturală care pare gata să se reconfigureze sub ochii noștri.</p>
+            <h3 class="art-card-title">757 ART 0020</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="20" role="button" tabindex="0" aria-label="Deschide ART-0021">
+        <article class="art-card" data-idx="20" role="button" tabindex="0" aria-label="Deschide 757 ART 0021">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -984,20 +884,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Anatomie Biomecanică și Osteologie Tehnologică</span>
-            </div>
-            <h3 class="art-card-title">ART-0021</h3>
-            <p class="art-critic-snippet">Artistul elaborează aici un arhetip al rezistenței: osatura devine bastion, iar mecanismul – scut protector împotriva efemerității biologice.</p>
+            <h3 class="art-card-title">757 ART 0021</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="21" role="button" tabindex="0" aria-label="Deschide ART-0022">
+        <article class="art-card" data-idx="21" role="button" tabindex="0" aria-label="Deschide 757 ART 0022">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -1021,20 +917,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Anatomie Biomecanică și Osteologie Tehnologică</span>
-            </div>
-            <h3 class="art-card-title">ART-0022</h3>
-            <p class="art-critic-snippet">Privirea este invitată într-un periplu labirintic printre articulații și tendoane metalizate. Lucrarea afirmă o poetică a hibridizării unde tehnologia încetează să fie unealtă și devine substanță ontologică.</p>
+            <h3 class="art-card-title">757 ART 0022</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="22" role="button" tabindex="0" aria-label="Deschide ART-0023">
+        <article class="art-card" data-idx="22" role="button" tabindex="0" aria-label="Deschide 757 ART 0023">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -1058,20 +950,16 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Anatomie Biomecanică și Osteologie Tehnologică</span>
-            </div>
-            <h3 class="art-card-title">ART-0023</h3>
-            <p class="art-critic-snippet">Forța acestei foi rezidă în coerența absolută a logicii interne a formei: mecanismul imaginat pare deplin funcțional, animat de o respirație interioară ce sfidează inerția metalului.</p>
+            <h3 class="art-card-title">757 ART 0023</h3>
           </div>
         </article>
-        <article class="art-card" data-idx="23" role="button" tabindex="0" aria-label="Deschide ART-0024">
+        <article class="art-card" data-idx="23" role="button" tabindex="0" aria-label="Deschide 757 ART 0024">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -1095,17 +983,13 @@
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">Anatomie Biomecanică și Osteologie Tehnologică</span>
-            </div>
-            <h3 class="art-card-title">ART-0024</h3>
-            <p class="art-critic-snippet">Prin clarobscurul dramatic și rigoarea axonometrică, lucrarea capătă o dimensiune oraculară, prefigurând o arheologie a formelor viitorului.</p>
+            <h3 class="art-card-title">757 ART 0024</h3>
           </div>
         </article>
     </div>
@@ -1201,7 +1085,6 @@
       <!-- Modal Header -->
       <div class="modal-header">
         <div class="modal-title-group">
-          <span class="modal-cat" id="modal-category">Categorie</span>
         </div>
         
         <div class="modal-header-actions">
@@ -1272,8 +1155,7 @@
             </div>
 
             <div class="plaque-heading-group">
-              <span class="plaque-category-badge" id="modal-plaque-wing">Anatomie Biomecanică</span>
-              <h3 class="plaque-title" id="modal-plaque-title">ART-0001</h3>
+              <h3 class="plaque-title" id="modal-plaque-title">757 ART 0001</h3>
             </div>
 
             <div class="info-section">
@@ -1319,7 +1201,6 @@
           <h4>Navigare Arhivă</h4>
           <ul>
             <li><a href="#galerie">Colecția Completă</a></li>
-            <li><a href="#directii">Cele 5 Axe Estetice</a></li>
             <li><a href="#artist">Despre Artist</a></li>
             <li><a href="#raport">Notă Curatorială</a></li>
           </ul>
@@ -1341,14 +1222,13 @@
     </div>
   </footer>
 
-  <!-- Luxury Fullscreen Experience Overlay (5 Bespoke Classifications) -->
+  <!-- Luxury Fullscreen Experience Overlay -->
   <div class="luxury-fs-overlay fs-overlay" id="luxury-fullscreen-overlay" role="dialog" aria-modal="true" aria-label="Galerie Fullscreen Experiențială">
     <!-- Top HUD -->
     <div class="fs-hud-top">
       <div class="fs-meta-group">
-        <span class="fs-wing-badge" id="fs-wing-badge">SALA I</span>
-        <h2 class="fs-artwork-title" id="fs-opus-title">ART-0001</h2>
-        <span class="fs-anim-indicator" id="fs-anim-indicator">Animație Experiențială</span>
+        <h2 class="fs-artwork-title" id="fs-opus-title">757 ART 0001</h2>
+        <span class="fs-anim-indicator" id="fs-anim-indicator">Arhivă Canonică 757</span>
       </div>
       <div class="fs-controls-top">
         <button class="btn-fs-icon" id="fs-close-btn" title="Închide Fullscreen (Esc)">&times;</button>
@@ -1388,10 +1268,6 @@
 
       <div class="fs-critic-strip">
         <p id="fs-critic-text"></p>
-      </div>
-
-      <div class="fs-category-pills" id="fs-category-pills">
-        <!-- Injected by gallery.js for 5 classifications -->
       </div>
     </div>
   </div>
@@ -1469,8 +1345,7 @@
     <div id="spatial-3d-focus-card" class="spatial-3d-focus-card" aria-hidden="true">
       <button id="spatial-card-dismiss-btn" class="spatial-card-dismiss" title="Revino la explorare 3D">✕</button>
       <div class="spatial-card-header">
-        <span class="spatial-card-id" id="spatial-card-id">ART-0001</span>
-        <span class="spatial-card-wing" id="spatial-card-wing">SALA I</span>
+        <span class="spatial-card-id" id="spatial-card-id">757 ART 0001</span>
       </div>
       <h3 class="spatial-card-title" id="spatial-card-title">Titlu Operă</h3>
       <p class="spatial-card-medium" id="spatial-card-medium">Tehnică mixtă</p>

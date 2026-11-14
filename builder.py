@@ -5,9 +5,6 @@ def rebuild_site():
     with open('data/collection-index.json', 'r', encoding='utf-8') as f:
         items = json.load(f)
 
-    with open('data/categories/taxonomy.json', 'r', encoding='utf-8') as f:
-        categories = json.load(f)
-
     site_content_path = 'data/site-content.json'
     if os.path.exists(site_content_path):
         with open(site_content_path, 'r', encoding='utf-8') as f:
@@ -16,7 +13,6 @@ def rebuild_site():
         sc = {}
 
     gen = sc.get('general', {})
-    hero = sc.get('hero', {})
     art = sc.get('artist', {})
     integ = sc.get('integrity', {})
     foot = sc.get('footer', {})
@@ -28,14 +24,6 @@ def rebuild_site():
     brand_name = gen.get('header_brand_name', '757')
     brand_sub = gen.get('header_brand_sub', 'ATELIER ȘI ARHIVĂ CURATORIALĂ')
     announcement = gen.get('announcement_text', '')
-
-    hero_badge = hero.get('badge', 'CATALOG GENERAL RAȚIONAT')
-    hero_title = hero.get('title', 'Suprarealism Biomecanic <br>și Morfologie Deconstructivistă')
-    hero_lead = hero.get('lead', 'O investigație plastică de o intensă densitate grafică, situată la confluența dintre anatomia biologică, osatura sacră și mecanicismul post-industrial. Structurată în cinci axe estetice fundamentale din creația artistului Mugurel Emanuel Manea.')
-    stat_dig = hero.get('stat_digitized', '')
-    stat_cats = hero.get('stat_categories', '5')
-    stat_posts = hero.get('stat_posts', 'Atelier')
-    stat_clean = hero.get('stat_cleaned', 'Original')
 
     art_name = art.get('name', 'Mugurel Emanuel Manea')
     art_ig = art.get('instagram', '@mugurelemanuelmanea')
@@ -54,33 +42,15 @@ def rebuild_site():
     copy_txt = foot.get('copyright', '© 2026 Mugurel Emanuel Manea (757). Toate drepturile rezervate.')
     tech_txt = foot.get('tech_note', 'Catalog raționat oficial conceput pentru contemplare estetică desăvârșită.')
 
-    # Category counts
-    cat_counts = {}
-    for it in items:
-        for c in it.get('categories', []):
-            cat_counts[c] = cat_counts.get(c, 0) + 1
-
-    # Render category pills (clean, zero artwork counts)
-    pill_html = ['<button class="cat-pill active" data-filter="all" role="tab" aria-selected="true">Toate Operele</button>']
-    for cat in categories:
-        cid = cat['id']
-        cname = cat.get('name_ro', cid)
-        short_name = cname.split(' și ')[0].strip() if ' și ' in cname else cname.split('&')[0].strip()
-        pill_html.append(f'<button class="cat-pill" data-filter="{cid}" role="tab" aria-selected="false">{html.escape(short_name)}</button>')
-    pills_rendered = '\n        '.join(pill_html)
-
     # Pre-render initial 24 artwork cards with 3D hanging rig for instant paint
     initial_cards = []
     for idx, item in enumerate(items[:24]):
         thumb_src = f"data/web-images/{item.get('thumbnail_file', '')}"
         item_id = item.get('id', '')
-        item_title = item.get('title', item_id)
-        if item_title.startswith('Opus 757 — '):
-            item_title = item_id
-        alt_text = item.get('alt_text', 'Biomechanical surrealist artwork by Mugurel Emanuel Manea')
-        cat_name = item.get('category_name', '')
-        critic_note = item.get('critic_note', '')
-        initial_cards.append(f'''        <article class="art-card" data-idx="{idx}" role="button" tabindex="0" aria-label="Deschide {html.escape(item_id)}">
+        formatted_id = item_id.replace('-', ' ')
+        display_title = f"757 {formatted_id}"
+        alt_text = item.get('alt_text', f'Biomechanical surrealist artwork {display_title} by Mugurel Emanuel Manea')
+        initial_cards.append(f'''        <article class="art-card" data-idx="{idx}" role="button" tabindex="0" aria-label="Deschide {html.escape(display_title)}">
           <!-- 1. Pictura înrămată pe perete -->
           <div class="art-frame">
             <div class="card-specular-glare"></div>
@@ -104,17 +74,13 @@ def rebuild_site():
             </svg>
           </div>
 
-          <!-- 3. Plăcuța cu descriere atârnată de sfoară (Efect 3D) -->
+          <!-- 3. Plăcuța atârnată de sfoară (Efect 3D) -->
           <div class="art-hanging-tag">
             <div class="tag-eyelets">
               <span class="eyelet left"></span>
               <span class="eyelet right"></span>
             </div>
-            <div class="art-meta-row">
-              <span class="art-cat-name">{html.escape(cat_name)}</span>
-            </div>
-            <h3 class="art-card-title">{html.escape(item.get('title', item_id))}</h3>
-            <p class="art-critic-snippet">{html.escape(critic_note)}</p>
+            <h3 class="art-card-title">{html.escape(display_title)}</h3>
           </div>
         </article>''')
     initial_cards_rendered = '\n'.join(initial_cards)
@@ -274,15 +240,9 @@ def rebuild_site():
     </div>
   </section>
 
-  <!-- Gallery Control Center: Filters, Search, Display Modes -->
+  <!-- Gallery Control Center: Search & Display Modes -->
   <main class="gallery-wrapper" id="galerie">
     <div class="gallery-toolbar">
-      
-      <!-- Category Tabs (Cele 5 Direcții Critice) -->
-      <div class="category-pills" role="tablist" aria-label="Filtrare categorii">
-        {pills_rendered}
-      </div>
-
       <!-- Action Row: Căutare și Moduri de Afișare -->
       <div class="toolbar-actions">
         <!-- Live Search -->
@@ -291,21 +251,12 @@ def rebuild_site():
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-          <input type="text" id="gallery-search" placeholder="Căutare după ID, tehnică, tag..." aria-label="Căutare în colecție">
+          <input type="text" id="gallery-search" placeholder="Căutare după ID sau tag..." aria-label="Căutare în colecție">
           <button id="search-clear" class="btn-clear" aria-label="Șterge căutarea">&times;</button>
         </div>
 
         <!-- Luxury Display Modes Switcher -->
         <div class="view-modes" aria-label="Moduri de afișare galerie">
-          <button class="btn-view" data-view="wings" title="Cele 5 Săli Tematice (Clasificare Muzeală)">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8">
-              <rect x="2" y="3" width="5.5" height="18" rx="1"></rect>
-              <rect x="9.25" y="3" width="5.5" height="18" rx="1"></rect>
-              <rect x="16.5" y="3" width="5.5" height="18" rx="1"></rect>
-            </svg>
-            <span class="view-label">5 Săli</span>
-          </button>
-
           <button class="btn-view active" data-view="editorial" title="Mod Salon Editorial (Grilă Asimetrică)">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8">
               <rect x="3" y="3" width="7" height="9" rx="1"></rect>
@@ -432,7 +383,6 @@ def rebuild_site():
       <!-- Modal Header -->
       <div class="modal-header">
         <div class="modal-title-group">
-          <span class="modal-cat" id="modal-category">Categorie</span>
         </div>
         
         <div class="modal-header-actions">
@@ -503,8 +453,7 @@ def rebuild_site():
             </div>
 
             <div class="plaque-heading-group">
-              <span class="plaque-category-badge" id="modal-plaque-wing">Anatomie Biomecanică</span>
-              <h3 class="plaque-title" id="modal-plaque-title">ART-0001</h3>
+              <h3 class="plaque-title" id="modal-plaque-title">757 ART 0001</h3>
             </div>
 
             <div class="info-section">
@@ -550,7 +499,6 @@ def rebuild_site():
           <h4>Navigare Arhivă</h4>
           <ul>
             <li><a href="#galerie">Colecția Completă</a></li>
-            <li><a href="#directii">Cele 5 Axe Estetice</a></li>
             <li><a href="#artist">Despre Artist</a></li>
             <li><a href="#raport">Notă Curatorială</a></li>
           </ul>
@@ -572,14 +520,13 @@ def rebuild_site():
     </div>
   </footer>
 
-  <!-- Luxury Fullscreen Experience Overlay (5 Bespoke Classifications) -->
+  <!-- Luxury Fullscreen Experience Overlay -->
   <div class="luxury-fs-overlay fs-overlay" id="luxury-fullscreen-overlay" role="dialog" aria-modal="true" aria-label="Galerie Fullscreen Experiențială">
     <!-- Top HUD -->
     <div class="fs-hud-top">
       <div class="fs-meta-group">
-        <span class="fs-wing-badge" id="fs-wing-badge">SALA I</span>
-        <h2 class="fs-artwork-title" id="fs-opus-title">ART-0001</h2>
-        <span class="fs-anim-indicator" id="fs-anim-indicator">Animație Experiențială</span>
+        <h2 class="fs-artwork-title" id="fs-opus-title">757 ART 0001</h2>
+        <span class="fs-anim-indicator" id="fs-anim-indicator">Arhivă Canonică 757</span>
       </div>
       <div class="fs-controls-top">
         <button class="btn-fs-icon" id="fs-close-btn" title="Închide Fullscreen (Esc)">&times;</button>
@@ -620,10 +567,6 @@ def rebuild_site():
       <div class="fs-critic-strip">
         <p id="fs-critic-text"></p>
       </div>
-
-      <div class="fs-category-pills" id="fs-category-pills">
-        <!-- Injected by gallery.js for 5 classifications -->
-      </div>
     </div>
   </div>
 
@@ -638,7 +581,7 @@ def rebuild_site():
         <span class="spatial-3d-logo">757</span>
         <span class="spatial-3d-divider">/</span>
         <span class="spatial-3d-mode-label" id="spatial-3d-mode-label">TUNEL BIOMECANIC 3D</span>
-        <span class="spatial-3d-counter" id="spatial-3d-counter">167 LUCRĂRI</span>
+        <span class="spatial-3d-counter" id="spatial-3d-counter">{len(items)} LUCRĂRI</span>
       </div>
 
       <div class="spatial-3d-hud-actions">
@@ -700,8 +643,7 @@ def rebuild_site():
     <div id="spatial-3d-focus-card" class="spatial-3d-focus-card" aria-hidden="true">
       <button id="spatial-card-dismiss-btn" class="spatial-card-dismiss" title="Revino la explorare 3D">✕</button>
       <div class="spatial-card-header">
-        <span class="spatial-card-id" id="spatial-card-id">ART-0001</span>
-        <span class="spatial-card-wing" id="spatial-card-wing">SALA I</span>
+        <span class="spatial-card-id" id="spatial-card-id">757 ART 0001</span>
       </div>
       <h3 class="spatial-card-title" id="spatial-card-title">Titlu Operă</h3>
       <p class="spatial-card-medium" id="spatial-card-medium">Tehnică mixtă</p>
