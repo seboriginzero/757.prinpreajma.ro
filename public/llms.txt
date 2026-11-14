@@ -1,23 +1,25 @@
-# 757 — MUGUREL EMANUEL MANEA (bogdan_by757)
-> Arhiva Digitală Oficială de Artă Contemporană & Suprarealism Biomecanic
-> Platformă Multi-Tenant: OriginZero & prinPreajma.ro (Județul Hunedoara - HD)
-> Domenii Oficiale: https://757.prinpreajma.ro/ & https://757.originzero.art/
+# 757 — MUGUREL EMANUEL MANEA
+> Arhivă Curatorială Oficială & Galerie de Artă Biomecanică
+> URL Canonic: https://757.originzero.art/
 
-## Despre Artist & Operă
-- **Artist:** Mugurel Emanuel Manea (cunoscut online și prin semnatura recurentă `757` sau `bogdan_by757`).
-- **Gen:** Suprarealism Biomecanic, Osteologie Tehnologică, Deconstructivism Arhitectural, Cyber-Surrealism.
-- **Colecție:** 167 de opere catalogate și restaurate prudent (curățate de elemente de interfață Instagram).
-- **Simbolistică & Teme:** Fuziunea dintre schelet/vertebre/cranii și pistoane/arcuri/cablaje de titan; registre ierarhice cu glife hermetice și alfabete criptice (`757`, `WRIGHT`, `MYSTERY`); asamblaje fizice de componente hardware (platane de hard disk, lentile, actuatoare).
+## Despre Proiect & Artist
+- **Artist:** Mugurel Emanuel Manea (semnătură emblematică `757`, arhiva `bogdan_by757`).
+- **Gen & Estetică:** Suprarealism Biomecanic, Osteologie Tehnologică, Glife Criptice & Compoziții Monumentale.
+- **Colecție:** Corpus unificat deschis (`ART-0001` .. `ART-000n`) prezentat fără diviziuni rigide sau constrângeri de categorii statice. Fiecare lucrare păstrează trasabilitatea completă către sursa master de atelier și fișa curatorială critică.
 
-## Cele 5 Direcții Curatoriale
-1. **Anatomie Biomecanică & Osteologie Tehnologică** (107 opere) — Explorare viscerală a osaturii organice fuzionate cu vertebre de titan, pistoane pneumatice și cablaje nervoase.
-2. **Totemuri Criptice & Registre Runic-Arhitecturale** (16 opere) — Structuri monolitice stratificate în registre verticale arhaice; glife hermetice, alfabete oculte și monograme recurente.
-3. **Studii Cromatice & Guașă/Acrilic pe Hârtie** (30 opere) — Explorări picturale cu pigmenți minerali (ocru cald, oxid de cupru, teracotă, cobalt, verde celadon).
-4. **Obiecte Sculpturale & Asamblaje Cyber-Surrealiste** (9 opere) — Readymade tehnologic: platane HDD, rulmenți, arcuri industriale, sfere reflectorizante și încălțăminte montată pe amortizoare.
-5. **Perspectivă Deconstructivistă & Arhitectură Monumentală** (5 opere) — Volume arhitecturale masive, planuri secante, axe axonometrice și geometrii labirintice spre puncte de fugă infinite.
+## Arhitectură Digitală & Experiență Vizuală
+- **Simeză Editorială 2D:** Moduri de afișare de înaltă rezoluție (Salon Editorial, Atelier Imersiv 1:1, Catalog Muzeal) cu sistem de atârnare fizic 3D și cartellini simplificate (`757 ART 0001` .. `757 ART 000n`).
+- **Tunelul 3D Biomecanic (Three.js WebGL):** Coridor spațial Z-axis pe pistă de abis, podea cu reflexie infinită (*Infinite Mirror*), cupolă celestă cu spirale logaritmice Fibonacci (*Spira Mirabilis*) și rame duble (lucrare pe față, autoportretul artistului `ART-0103` pe verso).
+- **Monumentul Epilog 757:** Monolit terminal bilingv la capătul coridorului 3D cu mesajul canonic:
+  *This isn’t goodbye. It’s the start of what comes next.*
+  *Acesta nu este un rămas-bun. Este începutul a ceea ce urmează.*
+- **Identitate Canonică Hero:** Portretul canonic `ART-0103` încadrat de șublere de titan cu laser scanner osteo-mecanic pulsatoriu.
 
-## Contact & Curatelă
-- **Website Oficial:** https://757.prinpreajma.ro/
-- **Alias Arhivistic:** https://757.originzero.art/
-- **Integritate:** Fiecare operă păstrează trasabilitatea completă către captura sursă originală și nota critică independentă.
-
+## Legături & Navigare Canonică
+- Rădăcină Canonică: https://757.originzero.art/
+- Simeză Colecție: https://757.originzero.art/#galerie
+- Tunel 3D WebGL: https://757.originzero.art/#3d
+- Monument Epilog 3D: https://757.originzero.art/#3d-epilog
+- Harta Site-ului: https://757.originzero.art/sitemap.xml
+- Directivă Roboți: https://757.originzero.art/robots.txt
+- Documentație LLM: https://757.originzero.art/llms.txt

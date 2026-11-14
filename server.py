@@ -143,7 +143,7 @@ class LuxuryAdminHandler(http.server.SimpleHTTPRequestHandler):
         clean_path = req_path.split('?')[0]
         if clean_path.startswith('/data/web-images/') or clean_path.endswith(('.webp', '.jpg', '.jpeg', '.png', '.svg', '.woff2', '.ttf', '.css', '.js')):
             self.send_header('Cache-Control', 'public, max-age=2592000, immutable')
-        elif clean_path in ['/', '/index.html']:
+        elif clean_path in ['/', '/index.html', '/robots.txt', '/sitemap.xml', '/llms.txt']:
             self.send_header('Cache-Control', 'public, max-age=60, must-revalidate')
 
         super().end_headers()

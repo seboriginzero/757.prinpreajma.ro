@@ -8,7 +8,17 @@
 ## 1. Standardul Canonic Salon Sandy (`STRICT RULE 8`)
 1. **Regula Trailing Slash pe Rădăcină:**
    - Atât în `sitemap.xml`, cât și în eticheta `<link rel="canonical">`, rădăcina folosește **OBLIGATORIU slash final**:
-     `https://757.prinpreajma.ro/` (niciodată fără slash!).
+     `https://757.originzero.art/` (niciodată fără slash!).
+   - Schema.org JSON-LD declară canonic:
+     ```json
+     {
+       "@context": "https://schema.org",
+       "@type": "WebSite",
+       "name": "757",
+       "url": "https://757.originzero.art/"
+     }
+     ```
+   - Fișierul `/llms.txt` reflectă rezumatul arhivelor și URL-ul canonic `https://757.originzero.art/`.
 2. **Paritate 1:1 HTML SSR vs. Headless Chromium WRS (`--dump-dom`):**
    - Atât la prima citire a robotului `Googlebot`, cât și după execuția JavaScript-ului în Chromium, trebuie să existe **exact 1 tag canonical**, identic caracter-cu-caracter cu adresa din `sitemap.xml`.
    - Nicio etichetă canonică duplicată sau divergentă.

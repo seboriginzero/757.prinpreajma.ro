@@ -19,8 +19,8 @@ def rebuild_site():
 
     site_title = gen.get('site_title', '757')
     site_desc = gen.get('site_description', 'SCANNER // DIAGNOSTIC IDENTITATE — Subiect: Ființă umană. Status: Activ. Operează în afara algoritmilor standard. Clasificare: Unicat (exemplar nereplicabil, fără copie de rezervă).')
-    prim_dom = gen.get('primary_domain', 'https://757.prinpreajma.ro')
-    sec_dom = gen.get('secondary_domain', '757.originzero.art')
+    prim_dom = gen.get('primary_domain', 'https://757.originzero.art')
+    sec_dom = gen.get('secondary_domain', '757.prinpreajma.ro')
     brand_name = gen.get('header_brand_name', '757')
     brand_sub = gen.get('header_brand_sub', 'ATELIER ȘI ARHIVĂ CURATORIALĂ')
     announcement = gen.get('announcement_text', '')
@@ -95,6 +95,14 @@ def rebuild_site():
   <title>{html.escape(site_title)}</title>
   <meta name="description" content="{html.escape(site_desc)}">
   <link rel="canonical" href="{prim_dom if prim_dom.endswith('/') else prim_dom + '/'}">
+  <script type="application/ld+json">
+  {{
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "757",
+    "url": "https://757.originzero.art/"
+  }}
+  </script>
   <meta property="og:title" content="{html.escape(site_title)}">
   <meta property="og:description" content="{html.escape(site_desc)}">
   <meta property="og:url" content="{prim_dom if prim_dom.endswith('/') else prim_dom + '/'}">
@@ -136,7 +144,7 @@ def rebuild_site():
     <div class="header-container">
       <div class="brand-group">
         <a href="#hero" class="brand-link">
-          <span class="brand-name">{html.escape(brand_name)}</span>
+          <h1 class="brand-name">{html.escape(brand_name)}</h1>
         </a>
       </div>
 
