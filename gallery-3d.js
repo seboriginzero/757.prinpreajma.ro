@@ -71,7 +71,9 @@
   }
 
   function getTunnelMaxZ() {
-    return getTerminalZ() - 4.5;
+    const isPortrait = typeof window !== 'undefined' && window.innerWidth < 850 && window.innerWidth < window.innerHeight;
+    const offset = isPortrait ? 8.2 : 4.5;
+    return getTerminalZ() - offset;
   }
 
   // DOM Elements
@@ -479,7 +481,7 @@
     ctx.stroke();
 
     // 5. English Message (Clean, Elegant Serif — FĂRĂ GHILIMELE)
-    ctx.font = 'italic 600 66px "Cormorant Garamond", "Cinzel", "Georgia", serif';
+    ctx.font = 'italic 600 58px "Cormorant Garamond", "Cinzel", "Georgia", serif';
     ctx.fillStyle = isLight ? '#0f172a' : '#fcfaf6';
     ctx.fillText('This isn’t goodbye.', cx, 350);
     ctx.fillText('It’s the start of what comes next.', cx, 445);
@@ -488,10 +490,10 @@
     ctx.strokeStyle = isLight ? 'rgba(180, 83, 9, 0.45)' : 'rgba(212, 163, 89, 0.55)';
     ctx.lineWidth = 2.0;
     ctx.beginPath();
-    ctx.moveTo(cx - 440, 575);
+    ctx.moveTo(cx - 380, 575);
     ctx.lineTo(cx - 55, 575);
     ctx.moveTo(cx + 55, 575);
-    ctx.lineTo(cx + 440, 575);
+    ctx.lineTo(cx + 380, 575);
     ctx.stroke();
 
     ctx.fillStyle = isLight ? '#b45309' : '#d4a359';
@@ -499,7 +501,7 @@
     ctx.fillText('Φ', cx, 588);
 
     // 7. Romanian Message (Harmonious Serif Translation — FĂRĂ GHILIMELE)
-    ctx.font = 'italic 500 56px "Cormorant Garamond", "Cinzel", "Georgia", serif';
+    ctx.font = 'italic 500 50px "Cormorant Garamond", "Cinzel", "Georgia", serif';
     ctx.fillStyle = isLight ? '#b45309' : '#d4a359';
     ctx.fillText('Acesta nu este un rămas-bun.', cx, 715);
     ctx.fillText('Este începutul a ceea ce urmează.', cx, 805);
