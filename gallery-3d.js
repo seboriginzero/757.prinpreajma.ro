@@ -79,7 +79,7 @@
   // DOM Elements
   let gallery3dOverlay, canvasContainer;
   let modeLabel, counterLabel, spinBtn, themeBtn, closeBtn;
-  let focusCard, cardId, cardTitle, cardMedium, cardNote, cardDetailBtn, cardBackBtn, cardDismissBtn;
+  let focusCard, cardTitle, cardDetailBtn, cardBackBtn, cardDismissBtn;
   let mobileNav, mobileFwdBtn, mobileBackBtn, mobileLeftBtn, mobileRightBtn, mobileCenterBtn;
 
   // Initialize trigger from header button
@@ -205,10 +205,7 @@
     closeBtn = document.getElementById('spatial-3d-close-btn');
 
     focusCard = document.getElementById('spatial-3d-focus-card');
-    cardId = document.getElementById('spatial-card-id');
     cardTitle = document.getElementById('spatial-card-title');
-    cardMedium = document.getElementById('spatial-card-medium');
-    cardNote = document.getElementById('spatial-card-note');
     cardDetailBtn = document.getElementById('spatial-card-detail-btn');
     cardBackBtn = document.getElementById('spatial-card-back-btn');
     cardDismissBtn = document.getElementById('spatial-card-dismiss-btn');
@@ -1748,30 +1745,14 @@
     }
 
     if (pivot.userData && pivot.userData.isTerminal) {
-      if (cardId) cardId.textContent = '757';
-      if (cardTitle) cardTitle.textContent = 'This isn’t goodbye. It’s the start of what comes next.';
-      if (cardMedium) cardMedium.textContent = 'Acesta nu este un rămas-bun. Este începutul a ceea ce urmează.';
-      if (cardNote) {
-        cardNote.textContent = 'Mesajul de încheiere al Galeriei 3D Spațiale 757. Moștenirea artistică a lui Mugurel Emanuel Manea deschide o poartă spre viitor, continuând dincolo de limitele spațio-temporale ale pânzei.';
-      }
+      if (cardTitle) cardTitle.textContent = '757';
       if (cardDetailBtn) cardDetailBtn.textContent = 'Reia Turul de la Început';
       if (cardBackBtn) cardBackBtn.textContent = 'Rămâi la Epilog';
     } else {
       const rawId = item.id || 'ART-0001';
       const displayId = `757 ${rawId.replace('-', ' ')}`;
 
-      if (cardId) cardId.textContent = displayId;
       if (cardTitle) cardTitle.textContent = displayId;
-      if (cardMedium) {
-        const med = (item.medium_hypothesis && item.medium_hypothesis !== 'unknown')
-          ? item.medium_hypothesis
-          : ((item.medium && item.medium !== 'unknown') ? item.medium : 'Tehnică mixtă pe hârtie');
-        const dim = (item.dimensions && item.dimensions !== 'unknown') ? ` · ${item.dimensions}` : '';
-        cardMedium.textContent = med + dim;
-      }
-      if (cardNote) {
-        cardNote.textContent = item.curatorial_note || item.critic_note || 'Compoziție din arhiva de anatomie biomecanică a artistului Mugurel Emanuel Manea.';
-      }
       if (cardDetailBtn) cardDetailBtn.textContent = 'Examinează în Detaliu';
       if (cardBackBtn) cardBackBtn.textContent = 'Înapoi în Spațiul 3D';
     }
