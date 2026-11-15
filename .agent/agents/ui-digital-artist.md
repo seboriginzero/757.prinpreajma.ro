@@ -36,9 +36,10 @@
 6. **Mecanică de Navigare Fluidă & Responsive:**
    - Navigare inversată pe mouse drag și rotiță de scroll (scroll înainte avansează în profunzimea tunelului).
    - Bară tactilă dedicată pentru mobil (`spatial-3d-mobile-nav`) cu butoane mari de înaintare, retragere, rotire stânga/dreapta și centrare privire.
-7. **Cardul de Inspecție 3D Streamlined (`spatial-3d-focus-card`):**
-   - La click pe o lucrare în tunel, cardul flotant afișează strict titlul canonic centrat (`757 ART XXXX`) și butoanele de acțiune (`Examinează în Detaliu`, `Înapoi în Spațiul 3D`, `✕`).
-   - Zero descrieri, zero tehnici și zero dubluri de identificator; lasă ecranul degajat pentru contemplarea operei.
+7. **Cardul de Inspecție 3D & Modalul de Detaliu Streamlined:**
+   - **Cardul flotant 3D (`spatial-3d-focus-card`):** La click pe o lucrare în tunel, cardul flotant afișează strict titlul canonic centrat (`757 ART XXXX`) și butoanele de acțiune (`Examinează în Detaliu`, `Înapoi în Spațiul 3D`, `✕`).
+   - **Modalul Inspector de Detaliu (`artwork-modal`):** La deschiderea unei lucrări în detaliu, antetul nu duplică titlul; plăcuța suspendată poartă exclusiv numele operei centrat (`757 ART XXXX`) și butoanele de navigare (`← OPERA ANTERIOARĂ`, `OPERA URMĂTOARE →`).
+   - Zero descrieri de tehnică, zero comentarii curatoriale și zero dubluri de identificator; atât pe mobil cât și pe desktop, ecranul este 100% degajat pentru opera de artă.
 
 ---
 

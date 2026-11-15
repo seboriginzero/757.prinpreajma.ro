@@ -456,27 +456,8 @@ def rebuild_site():
               <span class="eyelet right"></span>
             </div>
 
-            <div class="plaque-top-meta">
-              <span class="plaque-stamp">CATALOG GENERAL</span>
-            </div>
-
             <div class="plaque-heading-group">
               <h3 class="plaque-title" id="modal-plaque-title">757 ART 0001</h3>
-            </div>
-
-            <div class="info-section">
-              <span class="info-label">TEHNICĂ ȘI SUPORT</span>
-              <span class="info-val medium-val" id="modal-medium"></span>
-            </div>
-
-            <div class="info-section">
-              <span class="info-label">COMENTARIU CURATORIAL</span>
-              <p class="info-text" id="modal-curatorial"></p>
-            </div>
-
-            <div class="info-section">
-              <span class="info-label">MOTIVE ȘI VECTORI VIZUALI</span>
-              <div class="tag-cloud" id="modal-tags"></div>
             </div>
 
             <!-- Butoane Rapide Navigare Plăcuță -->
@@ -570,10 +551,6 @@ def rebuild_site():
         <button class="btn-fs-icon" id="fs-next-btn" title="Opera Următoare (&rarr;)">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
         </button>
-      </div>
-
-      <div class="fs-critic-strip">
-        <p id="fs-critic-text"></p>
       </div>
     </div>
   </div>

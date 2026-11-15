@@ -52,21 +52,10 @@
   const modalFsTriggerBtn = document.getElementById('modal-fs-trigger-btn');
   const modalPrevBtn = document.getElementById('modal-prev-btn');
   const modalNextBtn = document.getElementById('modal-next-btn');
-  const modalCounterBadge = document.getElementById('modal-counter-badge');
   const modalImage = document.getElementById('modal-image');
   const imageWrapper = document.getElementById('image-wrapper');
   const imageViewport = document.getElementById('image-viewport');
-  const modalTitle = document.getElementById('modal-title');
-  const modalId = document.getElementById('modal-id');
-  const modalCuratorial = document.getElementById('modal-curatorial');
-  const modalCritic = document.getElementById('modal-critic');
-  const modalMedium = document.getElementById('modal-medium');
-  const modalStatus = document.getElementById('modal-status');
-  const modalPost = document.getElementById('modal-post');
-  const modalRatio = document.getElementById('modal-ratio');
-  const modalTags = document.getElementById('modal-tags');
-  const modalSourceFile = document.getElementById('modal-source-file');
-  const modalSourceLink = document.getElementById('modal-source-link');
+  const modalPlaqueTitle = document.getElementById('modal-plaque-title');
 
   // Luxury Fullscreen Overlay Elements
   const fsOverlay = document.getElementById('luxury-fullscreen-overlay');
@@ -77,7 +66,6 @@
   const fsImage = document.getElementById('fs-image');
   const fsArtworkFrame = document.getElementById('fs-artwork-frame');
   const fsOpusTitle = document.getElementById('fs-opus-title');
-  const fsCriticText = document.getElementById('fs-critic-text');
   const fsStage = document.getElementById('fs-stage');
 
   // Initialize
@@ -364,29 +352,7 @@
     const rawId = item.id || `ART-${String(idx + 1).padStart(4, '0')}`;
     const displayId = `757 ${rawId.replace('-', ' ')}`;
 
-    if (modalId) modalId.textContent = '';
-    if (modalTitle) modalTitle.textContent = '';
-
-    const plaqueTitle = document.getElementById('modal-plaque-title');
-    if (plaqueTitle) plaqueTitle.textContent = displayId;
-
-    if (modalCuratorial) {
-      modalCuratorial.textContent = item.curatorial_note || item.critic_note || '';
-    }
-    if (modalCritic) {
-      modalCritic.textContent = item.critic_note || '';
-    }
-    if (modalMedium) {
-      modalMedium.textContent = item.medium_hypothesis || 'Tehnică mixtă pe hârtie';
-    }
-
-    if (modalCounterBadge) {
-      modalCounterBadge.textContent = '';
-    }
-
-    if (modalTags) {
-      modalTags.innerHTML = (item.visual_tags || []).map(t => `<span class="tag">#${t}</span>`).join('');
-    }
+    if (modalPlaqueTitle) modalPlaqueTitle.textContent = displayId;
 
     // Reset zoom state cleanly
     resetZoom();
@@ -521,7 +487,6 @@
     // Update HUD information
     if (fsOpusTitle) fsOpusTitle.textContent = displayId;
     if (fsAnimIndicator) fsAnimIndicator.textContent = 'Arhivă Canonică 757';
-    if (fsCriticText) fsCriticText.textContent = item.critic_note || '';
 
     // Load High-Res WebP Image
     fsImage.src = `data/web-images/${item.image_file}`;
